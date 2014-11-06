@@ -2,9 +2,9 @@
 
 # Installation
 
-> install.packages("devtools")
-> library(devtools)
-> install_github("fmichonneau/ridigbio")
+    install.packages("devtools")
+    library(devtools)
+	install_github("fmichonneau/ridigbio")
 
 # License
 
