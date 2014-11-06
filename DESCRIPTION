@@ -1,0 +1,15 @@
+Package: ridigbio
+Title: What the package does (one line)
+Version: 0.1
+Authors@R: person("Francois", "Michonneau", role=c("aut", "cre"),
+    email="francois.michonneau@gmail.com")
+Description: An interface to iDigBio's API
+Depends:
+    R (>= 3.1.1)
+Imports:
+    httr,
+    jsonlite
+License: MIT + file LICENSE
+LazyData: true
+Suggests:
+    testthat
