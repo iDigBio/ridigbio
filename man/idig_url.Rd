@@ -5,6 +5,9 @@
 \usage{
 idig_url(dev = TRUE)
 }
+\arguments{
+\item{dev}{Should be the beta version of the API be used?}
+}
 \value{
 string for the URL
 }
