@@ -9,9 +9,9 @@
 ##' @title Basic searching of the iDigBio API
 ##' @param query a list containing the information to be searched in iDigBio
 ##' @param fields list of fields that will be contained in the data.frame
-##' @param max_items maximum number of items to attempt to retrieve
-##' @param limit maximum number of records to request
-##' @param offset where to start the search
+##' @param max_items maximum number of results allowed to be retrieved
+##' @param limit maximum number of results returned
+##' @param offset number of results to skip before returning results
 ##' @param ... additional parameters (currently not in use)
 ##' @return a data frame
 ##' @author Francois Michonneau
@@ -26,18 +26,19 @@ idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
                         max_items=100000, limit=0, offset=0, ...) {
   
     stopifnot(inherits(idig_query, "list") && length(idig_query) > 0)
+    
     query <- list(rq=idig_query, offset=offset)
     if (limit > 0){
       query$limit <- limit
     }else{
-      query$limit <- 5000 # as of 11/9/14 this is max records allowed at once
+      query$limit <- max_items # effectivly use iDigBio's max page size
     }
    
     dat <- data.frame()
     item_count <- 1 # trick to get inside loop first time
     
     # loop until we either have all results or all results the user wants
-    while (nrow(dat) < item_count){# && (limit == 0 || nrow(dat) > limit)){
+    while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)){
       search_results <- idig_POST("search", body=query)
       
       # Slight possibility of the number of items changing as we go due to inserts/
@@ -55,9 +56,9 @@ idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
       }
       
       query$offset <- nrow(dat)
-      #if (limit > 0){
-      #  query$limit <- nrow(dat) %% limit
-      #}
+      if (limit > 0){
+        query$limit <- limit - nrow(dat)
+      }
     }
     
     dat
