@@ -22,22 +22,22 @@
 ##' @export
 ##'
 
-idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
-                                        "dwc:specificEpithet", "dwc:decimalLatitude",
-                                        "dwc:decimalLongitude"), 
-                        max_items=100000, limit=0, offset=0, ...) {
+idig_search <- function(idig_query, fields="", max_items=100000, limit=0, 
+                        offset=0, ...) {
   
     stopifnot(inherits(idig_query, "list") && length(idig_query) > 0)
     
     # Construct body of request to API
-    query <- list(rq=idig_query, offset=offset)
+    query <- list(rq=idig_query, offset=offset, fields=fields)
     if (limit > 0){
       query$limit <- limit
     }else{
       query$limit <- max_items # effectivly use iDigBio's max page size
     }
-   
-    item_count <- 1 # trick to get inside loop first time
+    
+    # tricks to get inside loop first time
+    dat <- data.frame()
+    item_count <- 1
 
     # loop until we either have all results or all results the user wants
     while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)){
@@ -79,6 +79,7 @@ fmt_search_txt_to_df <- function(txt) {
   # do so based on column name and insert cols of NA if a new one is inserted? Plyr 
   # rbind.fill() does what we want.
 
+  stopifnot(exists("items", httr::content(txt)))
   search_items <- httr::content(txt)$items  
   
   # Add all indexTerms to df if indexTerms exists
