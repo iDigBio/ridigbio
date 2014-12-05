@@ -21,7 +21,6 @@
 ##' }
 ##' @export
 ##'
-library(plyr)
 
 idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
                                         "dwc:specificEpithet", "dwc:decimalLatitude",
@@ -39,7 +38,7 @@ idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
    
     dat <- data.frame()
     item_count <- 1 # trick to get inside loop first time
-    
+
     # loop until we either have all results or all results the user wants
     while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)){
       search_results <- idig_POST("search", body=query)
@@ -53,9 +52,10 @@ idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
       }
       
       if (nrow(dat) == 0){
-        dat <- fmt_search_txt_to_df(search_results, fields)
+        dat <- fmt_search_txt_to_df(search_results)
       } else {
-        dat <- do.call(rbind, list(dat, fmt_search_txt_to_df(search_results, fields)))
+        dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results))
+        #dat <- do.call(rbind, list(dat, fmt_search_txt_to_df(search_results, fields)))
       }
       
       query$offset <- nrow(dat)
@@ -71,7 +71,7 @@ fmt_search_txt_to_itemCount <- function(txt){
   httr::content(txt)$itemCount
 }
 
-fmt_search_txt_to_df <- function(txt, fields) {
+fmt_search_txt_to_df <- function(txt) {
   # What to do if the number of fields in results doesn't match? rbind isn't going to work.
   # Would like to leave behavior controlled by the API rather than having to pull lists and 
   # match them up here on the client side. But with paging, the cols returned may vary through
@@ -97,7 +97,7 @@ fmt_search_txt_to_df <- function(txt, fields) {
   
   # This is pretty fast but the lapply above is pretty slow (2-3 secs below
   # vs 17-19 sec above for 5000 records)
-  dat <- rbind.fill(dats)
+  dat <- plyr::rbind.fill(dats)
   
   # We didn't type columns, looks like the JSON reader did that for us which is probably
   # ok since the API returns typed JSON. Everything dwc: is quoted as char
