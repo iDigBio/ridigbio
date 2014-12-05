@@ -29,6 +29,7 @@ idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
   
     stopifnot(inherits(idig_query, "list") && length(idig_query) > 0)
     
+    # Construct body of request to API
     query <- list(rq=idig_query, offset=offset)
     if (limit > 0){
       query$limit <- limit
@@ -36,7 +37,6 @@ idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
       query$limit <- max_items # effectivly use iDigBio's max page size
     }
    
-    dat <- data.frame()
     item_count <- 1 # trick to get inside loop first time
 
     # loop until we either have all results or all results the user wants
@@ -55,7 +55,6 @@ idig_search <- function(idig_query, fields=c("dwc:catalogNumber", "dwc:genus",
         dat <- fmt_search_txt_to_df(search_results)
       } else {
         dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results))
-        #dat <- do.call(rbind, list(dat, fmt_search_txt_to_df(search_results, fields)))
       }
       
       query$offset <- nrow(dat)
@@ -106,14 +105,9 @@ fmt_search_txt_to_df <- function(txt) {
   # repetition in the data and perhaps we should let people factor their own columns
   
   
-  # Then add any data terms if data exists
-  
-  #lst_data_full <- lapply(search_items, function(x) x$data)
-  #lst_data <- lapply(lst_data_full, function(x, keep=fields) {
-  #  unlist(x[keep])[keep]
-  #})
-  #dat <- data.frame(do.call("rbind", lst_data))
-  #names(dat) <- fields
+  # Then add any data terms if data exists - After discussion w/ Alex, don't
+  # work with raw data, only indexed terms and make effort to make what's indexed
+  # complete and useful.
   
   dat  
 
