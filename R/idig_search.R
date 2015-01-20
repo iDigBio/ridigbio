@@ -22,7 +22,19 @@
 ##' @export
 ##'
 
-idig_search <- function(idig_query, fields="", max_items=100000, limit=0, 
+DEFAULT_FIELDS = c('uuid',
+                  'occurrenceid',
+                  'catalognumber',
+                  'family',
+                  'genus',
+                  'scientificname',
+                  'geopoint',
+                  'country',
+                  'stateprovince',
+                  'datecollected',
+                  'collector')
+
+idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, limit=0, 
                         offset=0, ...) {
   
     stopifnot(inherits(idig_query, "list") && length(idig_query) > 0)
