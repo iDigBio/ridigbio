@@ -42,15 +42,15 @@ idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, lim
       
   if (!(length(idig_query) > 0)) { stop("idig_query must not be 0 length") }
   
-  if (!(fields == "all" ) && !(inherits(fields, "list"))) {
+  if (!(fields == "all" ) && !(inherits(fields, "character"))) {
     stop("Invalid value for fields")
   }
-  
+
   
     # Construct body of request to API
     query <- list(rq=idig_query, offset=offset)
     
-    if (length(fields) > 0){ # sets fields for both strings and lists
+    if (length(fields) > 1 && inherits(fields, "character")){
       query$fields <- fields
     }
     
