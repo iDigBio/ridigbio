@@ -34,13 +34,26 @@ DEFAULT_FIELDS = c('uuid',
                   'datecollected',
                   'collector')
 
+
 idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, limit=0, 
                         offset=0, ...) {
+  # Validate inputs
+  if (!(inherits(idig_query, "list"))) { stop("idig_query is not a list") }
+      
+  if (!(length(idig_query) > 0)) { stop("idig_query must not be 0 length") }
   
-    stopifnot(inherits(idig_query, "list") && length(idig_query) > 0)
-    
+  if (!(fields == "all" ) && !(inherits(fields, "list"))) {
+    stop("Invalid value for fields")
+  }
+  
+  
     # Construct body of request to API
-    query <- list(rq=idig_query, offset=offset, fields=fields)
+    query <- list(rq=idig_query, offset=offset)
+    
+    if (length(fields) > 0){ # sets fields for both strings and lists
+      query$fields <- fields
+    }
+    
     if (limit > 0){
       query$limit <- limit
     }else{
@@ -68,6 +81,8 @@ idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, lim
       } else {
         dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results))
       }
+      # Need to add a safety here to make sure the parsing adds rows to the df
+      # maybe a stop or return false from the parser if no rows found?
       
       query$offset <- nrow(dat)
       if (limit > 0){
@@ -91,7 +106,13 @@ fmt_search_txt_to_df <- function(txt) {
   # do so based on column name and insert cols of NA if a new one is inserted? Plyr 
   # rbind.fill() does what we want.
 
-  stopifnot(exists("items", httr::content(txt)))
+  # Check returned results for common errors
+  if (!exists("items", httr::content(txt))){
+    stop("Returned results do not contain any content")
+  }
+  
+  #Before continuing to add error handling, let's settle on a pattern.
+  
   search_items <- httr::content(txt)$items  
   
   # Add all indexTerms to df if indexTerms exists
