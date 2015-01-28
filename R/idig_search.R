@@ -90,6 +90,7 @@ idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, lim
       }
     }
     
+    colnames(dat) <- fields
     dat
 }
 
@@ -124,27 +125,28 @@ fmt_search_txt_to_df <- function(txt, fields) {
   for(i in 1:length(search_items)){
     for(ff in 1:length(fields)){
       if (! is.null(search_items[[i]]$indexTerms[[fields[[ff]]]])){
-        print(paste0("indexes ", i , " ", ff))
+        #print(paste0("indexes ", i , " ", ff))
         m[i, ff] <- search_items[[i]]$indexTerms[[fields[[ff]]]]
       }
     }
   }
-  
-  dats <- lapply(lst_index_terms_full, function(x) {
-    # Dataframes can not contain lists and these are returned as lists,
-    # this must be manually maintained in alignment with what the API returns.
-    # The effect of not doing this is a bunch of columns with the contents of
-    # lists as the names. (This behavior is handy for the geopoint field BTW.)
-    x$flags <- NULL
-    x$recordids <- NULL
-    x$mediarecords <- NULL
-    data.frame(x, stringsAsFactors=FALSE) # not doing factors here is a 2x speedup
-    })
-  
-  # This is pretty fast but the lapply above is pretty slow (2-3 secs below
-  # vs 17-19 sec above for 5000 records)
-  dat <- plyr::rbind.fill(dats)
- 
+  data.frame(m, stringsAsFactors=FALSE)  
+
+#  dats <- lapply(lst_index_terms_full, function(x) {
+#    # Dataframes can not contain lists and these are returned as lists,
+#    # this must be manually maintained in alignment with what the API returns.
+#    # The effect of not doing this is a bunch of columns with the contents of
+#    # lists as the names. (This behavior is handy for the geopoint field BTW.)
+#    x$flags <- NULL
+#    x$recordids <- NULL
+#    x$mediarecords <- NULL
+#    data.frame(x, stringsAsFactors=FALSE) # not doing factors here is a 2x speedup
+#    })
+#  
+#  # This is pretty fast but the lapply above is pretty slow (2-3 secs below
+#  # vs 17-19 sec above for 5000 records)
+#  dat <- plyr::rbind.fill(dats)
+
 
 # lapply(search_items, function(x){x$indexTerms[fields]})
 
@@ -160,7 +162,6 @@ fmt_search_txt_to_df <- function(txt, fields) {
   # work with raw data, only indexed terms and make effort to make what's indexed
   # complete and useful.
   
-  dat  
 
 }
 
