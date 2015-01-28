@@ -71,15 +71,15 @@ idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, lim
       # Slight possibility of the number of items changing as we go due to inserts/
       # deletes at iDigBio, put this inside the loop to keep it current
       item_count <- fmt_search_txt_to_itemCount(search_results)
-      if (item_count > max_items){
+      if ((limit == 0 || limit > max_items) && item_count > max_items){
         stop(paste0("Search would return more than ", max_items, 
                     " results. See max_items argument."))
       }
       
       if (nrow(dat) == 0){
-        dat <- fmt_search_txt_to_df(search_results)
+        dat <- fmt_search_txt_to_df(search_results, fields)
       } else {
-        dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results))
+        dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
       }
       # Need to add a safety here to make sure the parsing adds rows to the df
       # maybe a stop or return false from the parser if no rows found?
@@ -97,7 +97,7 @@ fmt_search_txt_to_itemCount <- function(txt){
   httr::content(txt)$itemCount
 }
 
-fmt_search_txt_to_df <- function(txt) {
+fmt_search_txt_to_df <- function(txt, fields) {
   # What to do if the number of fields in results doesn't match? rbind isn't going to work.
   # Would like to leave behavior controlled by the API rather than having to pull lists and 
   # match them up here on the client side. But with paging, the cols returned may vary through
@@ -117,6 +117,19 @@ fmt_search_txt_to_df <- function(txt) {
   
   # Add all indexTerms to df if indexTerms exists
   lst_index_terms_full <- lapply(search_items, function(x) x$indexTerms)
+  
+  # pre-allocate matrix
+  m <- matrix(nrow=length(search_items), ncol=length(fields))
+  
+  for(i in 1:length(search_items)){
+    for(ff in 1:length(fields)){
+      if (! is.null(search_items[[i]]$indexTerms[[fields[[ff]]]])){
+        print(paste0("indexes ", i , " ", ff))
+        m[i, ff] <- search_items[[i]]$indexTerms[[fields[[ff]]]]
+      }
+    }
+  }
+  
   dats <- lapply(lst_index_terms_full, function(x) {
     # Dataframes can not contain lists and these are returned as lists,
     # this must be manually maintained in alignment with what the API returns.
@@ -131,7 +144,11 @@ fmt_search_txt_to_df <- function(txt) {
   # This is pretty fast but the lapply above is pretty slow (2-3 secs below
   # vs 17-19 sec above for 5000 records)
   dat <- plyr::rbind.fill(dats)
-  
+ 
+
+# lapply(search_items, function(x){x$indexTerms[fields]})
+
+
   # We didn't type columns, looks like the JSON reader did that for us which is probably
   # ok since the API returns typed JSON. Everything dwc: is quoted as char
   
