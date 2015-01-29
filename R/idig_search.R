@@ -116,8 +116,6 @@ fmt_search_txt_to_df <- function(txt, fields) {
   
   search_items <- httr::content(txt)$items  
   
-  # Add all indexTerms to df if indexTerms exists
-  lst_index_terms_full <- lapply(search_items, function(x) x$indexTerms)
   
   # pre-allocate matrix
   m <- matrix(nrow=length(search_items), ncol=length(fields))
@@ -132,6 +130,9 @@ fmt_search_txt_to_df <- function(txt, fields) {
   }
   data.frame(m, stringsAsFactors=FALSE)  
 
+#  # Add all indexTerms to df if indexTerms exists
+#  lst_index_terms_full <- lapply(search_items, function(x) x$indexTerms)
+#  
 #  dats <- lapply(lst_index_terms_full, function(x) {
 #    # Dataframes can not contain lists and these are returned as lists,
 #    # this must be manually maintained in alignment with what the API returns.
