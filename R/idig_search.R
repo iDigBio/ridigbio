@@ -1,4 +1,4 @@
-##' Function to query the iDigBio API
+##' Function to query the iDigBio API for specimen records
 ##'
 ##' Currently the query needs to be specified as a list. All matching results are
 ##' returned up to the max_items cap (default 100,000). If more results are 
@@ -6,7 +6,13 @@
 ##' availible if manual paging of results is needed though the max_items cap
 ##' still applies as the item count comes from the results header not the 
 ##' count of actual records in the limit/offset window.
-##' @title Basic searching of the iDigBio API
+##' 
+##' Return is a data.frame containing the requested fields (or the dfault fields).
+##' Only fields from the Elasticsearch index are currently availible, no raw
+##' fields. As such, the columns in the data frame are types however no factors
+##' are built. Attribution and other metadata is attached to the dataframe in the
+##' data.frame's attributes. (I.e. attributes(df))
+##' @title Basic searching of iDigBio records
 ##' @param query a list containing the information to be searched in iDigBio
 ##' @param fields list of fields that will be contained in the data.frame
 ##' @param max_items maximum number of results allowed to be retrieved
@@ -17,7 +23,7 @@
 ##' @author Francois Michonneau
 ##' @examples
 ##' \dontrun{
-##' idig_search(query=list(genus="acer"))
+##' idig_search(rq=list(genus="acer"), limit=10)
 ##' }
 ##' @export
 ##'
@@ -35,12 +41,13 @@ DEFAULT_FIELDS = c('uuid',
                   'collector')
 
 
-idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, limit=0, 
+idig_search <- function(rq, fields=DEFAULT_FIELDS, max_items=100000, limit=0, 
                         offset=0, ...) {
+  #print(paste0(Sys.time(), " started"))
   # Validate inputs
-  if (!(inherits(idig_query, "list"))) { stop("idig_query is not a list") }
+  if (!(inherits(rq, "list"))) { stop("rq is not a list") }
       
-  if (!(length(idig_query) > 0)) { stop("idig_query must not be 0 length") }
+  if (!(length(rq) > 0)) { stop("rq must not be 0 length") }
   
   if (!(fields == "all" ) && !(inherits(fields, "character"))) {
     stop("Invalid value for fields")
@@ -48,7 +55,7 @@ idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, lim
 
   
     # Construct body of request to API
-    query <- list(rq=idig_query, offset=offset)
+    query <- list(rq=rq, offset=offset)
     
     if (length(fields) > 1 && inherits(fields, "character")){
       query$fields <- fields
@@ -67,7 +74,7 @@ idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, lim
     # loop until we either have all results or all results the user wants
     while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)){
       search_results <- idig_POST("search", body=query)
-      
+      #print(paste0(Sys.time(), " completed query"))
       # Slight possibility of the number of items changing as we go due to inserts/
       # deletes at iDigBio, put this inside the loop to keep it current
       item_count <- fmt_search_txt_to_itemCount(search_results)
@@ -79,7 +86,9 @@ idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, lim
       if (nrow(dat) == 0){
         dat <- fmt_search_txt_to_df(search_results, fields)
       } else {
-        dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
+        #dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
+        dat <- rbind(dat, fmt_search_txt_to_df(search_results, fields))
+        #print(paste0(Sys.time(), " completed append"))
       }
       # Need to add a safety here to make sure the parsing adds rows to the df
       # maybe a stop or return false from the parser if no rows found?
@@ -91,6 +100,7 @@ idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, lim
     }
     
     colnames(dat) <- fields
+    #print(paste0(Sys.time(), " completed"))
     dat
 }
 
@@ -99,14 +109,6 @@ fmt_search_txt_to_itemCount <- function(txt){
 }
 
 fmt_search_txt_to_df <- function(txt, fields) {
-  # What to do if the number of fields in results doesn't match? rbind isn't going to work.
-  # Would like to leave behavior controlled by the API rather than having to pull lists and 
-  # match them up here on the client side. But with paging, the cols returned may vary through
-  # the pages of records, can't know the full width of the df by inspecting returned results,
-  # will have to pre-calculate the width. Is there an R way of appending rows that will
-  # do so based on column name and insert cols of NA if a new one is inserted? Plyr 
-  # rbind.fill() does what we want.
-
   # Check returned results for common errors
   if (!exists("items", httr::content(txt))){
     stop("Returned results do not contain any content")
@@ -117,7 +119,11 @@ fmt_search_txt_to_df <- function(txt, fields) {
   search_items <- httr::content(txt)$items  
   
   
-  # pre-allocate matrix
+  # pre-allocated matrix method
+  # This method is on the order of 2-3 seconds/5k records which is about how long
+  # it takes the HTTP response to happen on a 100Mb/s link when asking for 10 fields
+  # optimizing this further will quickly make HTTP the rate limiter. The is.null()
+  # check allows for records that do not have the requested field filled in.
   m <- matrix(nrow=length(search_items), ncol=length(fields))
   
   for(i in 1:length(search_items)){
@@ -128,41 +134,12 @@ fmt_search_txt_to_df <- function(txt, fields) {
       }
     }
   }
-  data.frame(m, stringsAsFactors=FALSE)  
+  #print(paste0(Sys.time(), " completed matrix"))
+  data.frame(m, stringsAsFactors=FALSE)
 
-#  # Add all indexTerms to df if indexTerms exists
-#  lst_index_terms_full <- lapply(search_items, function(x) x$indexTerms)
-#  
-#  dats <- lapply(lst_index_terms_full, function(x) {
-#    # Dataframes can not contain lists and these are returned as lists,
-#    # this must be manually maintained in alignment with what the API returns.
-#    # The effect of not doing this is a bunch of columns with the contents of
-#    # lists as the names. (This behavior is handy for the geopoint field BTW.)
-#    x$flags <- NULL
-#    x$recordids <- NULL
-#    x$mediarecords <- NULL
-#    data.frame(x, stringsAsFactors=FALSE) # not doing factors here is a 2x speedup
-#    })
-#  
-#  # This is pretty fast but the lapply above is pretty slow (2-3 secs below
-#  # vs 17-19 sec above for 5000 records)
-#  dat <- plyr::rbind.fill(dats)
-
-
-# lapply(search_items, function(x){x$indexTerms[fields]})
-
-
-  # We didn't type columns, looks like the JSON reader did that for us which is probably
-  # ok since the API returns typed JSON. Everything dwc: is quoted as char
-  
-  # Add factors - on second thought, factors are not great unless there's a lot of 
-  # repetition in the data and perhaps we should let people factor their own columns
-  
-  
-  # Then add any data terms if data exists - After discussion w/ Alex, don't
-  # work with raw data, only indexed terms and make effort to make what's indexed
-  # complete and useful.
-  
+  # typing columns here? or higher? Return to debating typing columns from search results
+  # because doing this matrix method loses the data types from the json library. Perhaps
+  # we should try doing a pre-allocated data frame so we can keep types?
 
 }
 
