@@ -97,11 +97,20 @@ idig_GET <- function(path, ...) {
 idig_POST <- function(path, body, encode="json", ...) {
 
     stopifnot(inherits(body, "list"))
-    stopifnot(exists("rq", body))
+    #stopifnot(exists("rq", body))
 
     req <- httr::POST(idig_url(), path=paste(idig_version(), path, sep="/"),
                       body=body, encode=encode, ...)
     idig_check(req)
 
     req
+}
+
+
+# Takes list of inputs named by validation rule eg "number":[2, 3] and returns
+# a vector of strings with any validation errors. If the vector is 0 length, 
+# everything is valid.
+idig_validate <- function(inputs){
+  
+  
 }
