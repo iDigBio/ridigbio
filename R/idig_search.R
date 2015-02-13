@@ -28,12 +28,11 @@ DEFAULT_FIELDS = c('uuid',
                   'family',
                   'genus',
                   'scientificname',
-                  'geopoint',
                   'country',
                   'stateprovince',
                   'datecollected',
                   'collector')
-
+# 'geopoint',
 
 idig_search <- function(idig_query, fields=DEFAULT_FIELDS, max_items=100000, limit=0, 
                         offset=0, ...) {
