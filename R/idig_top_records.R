@@ -1,16 +1,16 @@
-idig_toprecords <- function(idig_query=FALSE, fields=FALSE, count=0){
+idig_toprecords <- function(rq=FALSE, top_fields=FALSE, count=0){
   
   # This passes through an empty list to get around idig_POST's requirement that rq be present
   # For full API compatability, the post should be completely empty if the user doesn't specify
   # anything
   query <- list()
   
-  if (idig_query){
-    query$rq <- idig_query
+  if (inherits(rq, "list") && length(rq) > 0){
+    query$rq <- rq
   }
   
-  if (length(fields) > 1 && inherits(fields, "character")){
-    query$fields <- fields
+  if (inherits(top_fields, "character") && length(top_fields) > 0){
+    query$top_fields <- top_fields
   }
 
   if (count > 0){
