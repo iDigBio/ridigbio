@@ -1,4 +1,4 @@
-idig_toprecords <- function(rq=FALSE, top_fields=FALSE, count=0){
+idig_top_records <- function(rq=FALSE, top_fields=FALSE, count=0){
   
   # This passes through an empty list to get around idig_POST's requirement that rq be present
   # For full API compatability, the post should be completely empty if the user doesn't specify
