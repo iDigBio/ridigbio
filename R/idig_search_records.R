@@ -41,7 +41,7 @@ DEFAULT_FIELDS = c('uuid',
                   'collector')
 
 
-idig_search <- function(rq, fields=DEFAULT_FIELDS, max_items=100000, limit=0, 
+idig_search_records <- function(rq, fields=DEFAULT_FIELDS, max_items=100000, limit=0, 
                         offset=0, ...) {
   #print(paste0(Sys.time(), " started"))
   # Validate inputs
