@@ -17,7 +17,7 @@ idig_top_records <- function(rq=FALSE, top_fields=FALSE, count=0){
     query$count <- count
   }
   
-  view_results <- idig_POST("summary/top/basic", body=query)
+  view_results <- idig_POST("summary/top/records", body=query)
   fmt_topbasic_txt_to_list(view_results)
 }
 
