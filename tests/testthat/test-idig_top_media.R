@@ -3,7 +3,7 @@ context("test idig_top_media")
 field <- "recordset"
 most <- "7450a9e3-ef95-4f9e-8260-09b498d2c5e6"
 count <- 11
-version <- "2"
+dqs <- 0
 scientificname <- "acer macrophyllum"
 
 # Default list of top 10 scientific names
@@ -24,10 +24,10 @@ expect_that(top[[field]][[most]][["itemCount"]] > 400 * 1000, is_true())
 expect_that(abs(top$itemCount - all_count) < 1000, is_true())
 
 # Searches
-top <- idig_top_media(mq=list("version"=version), top_fields=c(field),
+top <- idig_top_media(mq=list("dqs"=dqs), top_fields=c(field),
                        count=count)
 expect_that(top, is_a("list"))
-expect_that(top$itemCount < 200 * 1000, is_true())
+expect_that(top$itemCount < all_count, is_true())
 expect_that(top$itemCount > 0, is_true())
 # Save the number of genus records for later tests
 #genus_count <- top$itemCount
