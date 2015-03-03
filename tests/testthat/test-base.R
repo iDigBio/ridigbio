@@ -14,3 +14,14 @@ r <- idig_POST("search", body=fm)
 
 expect_true(all(names(httr::content(r)) %in% c("itemCount", "items", "attribution")))
 expect_true(httr::content(r)$itemCount > 4000 && httr::content(r)$itemCount < 1000000)
+
+## for idig_field_indexes
+context("test idig_field_indexes")
+v <- c("a", "b")
+l <- idig_field_indexes(v)
+expect_that(l$a == "a", is_true())
+expect_that(l$b == "b", is_true())
+v <- c("a", "geopoint")
+l <- idig_field_indexes(v)
+expect_that(l$geopoint.lat, is_equivalent_to(c("geopoint", "lat")))
+expect_that(l$geopoint.lon, is_equivalent_to(c("geopoint", "lon")))
