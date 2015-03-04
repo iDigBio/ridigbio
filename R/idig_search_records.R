@@ -55,6 +55,7 @@ idig_search_records <- function(rq, fields=FALSE, max_items=100000, limit=0,
     stop("Invalid value for fields")
   }
 
-  idig_search(rq, fields, max_items, limit, offset)
+  idig_search(rq=rq, fields=fields, max_items=max_items, limit=limit, 
+              offset=offset)
   
 }

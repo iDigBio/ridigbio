@@ -28,13 +28,13 @@
 ##' @export
 ##'
 
-idig_search <- function(rq, fields=FALSE, max_items=100000, limit=0, 
-                        offset=0) {
+idig_search <- function(type="records", rq, fields=FALSE, max_items=100000, 
+                        limit=0, offset=0) {
   
   # Construct body of request to API
   query <- list(rq=rq, offset=offset)
   
-  if (length(fields) > 1 && inherits(fields, "character")){
+  if (inherits(fields, "character") && length(fields) > 1 ){
     query$fields <- fields
   }
   
@@ -50,7 +50,7 @@ idig_search <- function(rq, fields=FALSE, max_items=100000, limit=0,
   
   # loop until we either have all results or all results the user wants
   while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)){
-    search_results <- idig_POST("search", body=query)
+    search_results <- idig_POST(paste0("search/", type), body=query)
     #print(paste0(Sys.time(), " completed query"))
     # Slight possibility of the number of items changing as we go due to inserts/
     # deletes at iDigBio, put this inside the loop to keep it current
@@ -76,7 +76,8 @@ idig_search <- function(rq, fields=FALSE, max_items=100000, limit=0,
     }
   }
   
-  colnames(dat) <- fields
+  field_indexes <- idig_field_indexes(fields)
+  colnames(dat) <- names(field_indexes)
   #print(paste0(Sys.time(), " completed"))
   dat
 }
@@ -93,29 +94,26 @@ fmt_search_txt_to_df <- function(txt, fields) {
   
   #Before continuing to add error handling, let's settle on a pattern.
   
-  search_items <- httr::content(txt)$items  
-  
+  search_items <- httr::content(txt)$items
   
   # pre-allocated matrix method
   # This method is on the order of 2-3 seconds/5k records which is about how long
   # it takes the HTTP response to happen on a 100Mb/s link when asking for 10 fields
   # optimizing this further will quickly make HTTP the rate limiter. The is.null()
   # check allows for records that do not have the requested field filled in.
-  m <- matrix(nrow=length(search_items), ncol=length(fields))
+  
+  # Translate list of fields into a list of indexes, see doc on this method.
+  field_indexes <- idig_field_indexes(fields)
+  m <- matrix(nrow=length(search_items), ncol=length(field_indexes))
   
   for(i in 1:length(search_items)){
-    for(ff in 1:length(fields)){
-      if (! is.null(search_items[[i]]$indexTerms[[fields[[ff]]]])){
-        #print(paste0("indexes ", i , " ", ff))
-        m[i, ff] <- search_items[[i]]$indexTerms[[fields[[ff]]]]
+    for(f in 1:length(field_indexes)){
+      if (! is.null(search_items[[i]]$indexTerms[[field_indexes[[f]]]])){
+        m[i, f] <- search_items[[i]]$indexTerms[[field_indexes[[f]]]]
       }
     }
   }
-  #print(paste0(Sys.time(), " completed matrix"))
-  data.frame(m, stringsAsFactors=FALSE)
   
-  # typing columns here? or higher? Return to debating typing columns from search results
-  # because doing this matrix method loses the data types from the json library. Perhaps
-  # we should try doing a pre-allocated data frame so we can keep types?
+  data.frame(m, stringsAsFactors=FALSE)
   
 }
