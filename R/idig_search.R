@@ -120,8 +120,6 @@ fmt_search_txt_to_df <- function(txt, fields) {
   # optimizing this further will quickly make HTTP the rate limiter. The is.null()
   # check allows for records that do not have the requested field filled in.
   
-  # Better algorithum: Add banned fields to fields_exclude, then unlist which will
-  # then be safe but return variable width items.fla
   # Translate list of fields into a list of indexes, see doc on this method.
   field_indexes <- idig_field_indexes(fields)
   
