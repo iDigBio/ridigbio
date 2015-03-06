@@ -30,8 +30,8 @@ expect_that(df <- idig_search_records(rq=list("country"="united states")),
             throws_error("max_items"))
 
 # All fields
-# FIXME
-
+df <- idig_search_records(rq=rq, fields="all", limit=10)
+expect_that(ncol(df) > 50, is_true())
 
 # Dataframe w/default fields is formatted properly
 df <- idig_search_records(rq=rq, limit=1)

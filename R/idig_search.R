@@ -34,8 +34,17 @@ idig_search <- function(type="records", rq, fields=FALSE, max_items=100000,
   # Construct body of request to API
   query <- list(rq=rq, offset=offset, sort=c("uuid"))
   
-  if (inherits(fields, "character") && length(fields) > 0 ){
+  # Here Alex says to eat "all" rather than pass it through to the API
+  if (inherits(fields, "character") && fields != "all" 
+             && length(fields) > 0 ){
     query$fields <- fields
+  } else {
+    # When a field parameter is passed then the raw data is already dropped
+    # because it's not a requested field. When no field parameter is passed
+    # then drop it manually since we don't process it anyway.
+    query$fields_exclude <- "data"
+    # Load up all fields possible
+    fields <- names(idig_meta_fields(type=type, subset="indexed"))
   }
   
   if (limit > 0){
