@@ -9,7 +9,7 @@ fields <- c('uuid', 'genus', 'scientificname')
 df <- idig_search_records(rq=rq, limit=6000)
 expect_that(df, is_a("data.frame"))
 expect_that(nrow(df) > 5000, is_true())
-expect_that(which(df$uuid == "d4f6974f-a7d6-4bfb-b70c-4c815b516a0b") > 0, 
+expect_that(which(df$uuid == "00041678-5df1-4a23-ba78-8c12f60af369") > 0, 
             is_true())
 expect_that(min(df$genus) == genus && max(df$genus) == genus, is_true())
 
@@ -32,18 +32,24 @@ expect_that(df <- idig_search_records(rq=list("country"="united states")),
 # All fields
 # FIXME
 
+
 # Dataframe w/default fields is formatted properly
 df <- idig_search_records(rq=rq, limit=1)
 for (i in 1:ncol(df)){
   expect_that(df[[i]], is_a("character"))
 }
 
+# Empty results
+df <- idig_search_records(rq=list("uuid"="nobodyhome"))
+expect_that(nrow(df) == 0, is_true())
+
 # Geopoint and special fields
-df <- idig_search_records(rq=rq, fields=c("uuid", "geopoint", "flags", 
-                                          "mediarecords", "recordids"), limit=10)
-expect_that(max(df$geopoint.lat) > 0, is_true())
-expect_that(max(df$geopoint.lon) > 0, is_true())
-expect_that(is.null(df$flags), is_true())
-expect_that(is.null(df$mediarecords), is_true())
-expect_that(is.null(df$recordids), is_true())
+df <- idig_search_records(rq=list("uuid"="f84faea8-82ac-4f71-b256-6b2be5d1b59d"),
+                          fields=c("uuid", "geopoint", "mediarecords", "flags",
+                          "recordids"), limit=10)
+expect_that(is.null(df[1, "geopoint.lat"]), is_false())
+expect_that(is.null(df[1, "geopoint.lat"]), is_false())
+expect_that(is.null(df[1, "flags"]), is_true())
+expect_that(is.null(df[1, "mediarecords"]), is_true())
+expect_that(is.null(df[1, "recordids"]), is_true())
 

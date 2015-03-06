@@ -29,8 +29,8 @@
 ##'
 
 idig_search_records <- function(rq, fields=FALSE, max_items=100000, limit=0, 
-                        offset=0, ...) {
-  #                     'geopoint',
+                        offset=0, sort=FALSE) {
+
   DEFAULT_FIELDS = c('uuid',
                      'occurrenceid',
                      'catalognumber',
@@ -39,6 +39,7 @@ idig_search_records <- function(rq, fields=FALSE, max_items=100000, limit=0,
                      'scientificname',
                      'country',
                      'stateprovince',
+                     'geopoint',
                      'datecollected',
                      'collector')
 
@@ -56,6 +57,6 @@ idig_search_records <- function(rq, fields=FALSE, max_items=100000, limit=0,
   }
 
   idig_search(rq=rq, fields=fields, max_items=max_items, limit=limit, 
-              offset=offset)
+              offset=offset, sort=sort)
   
 }

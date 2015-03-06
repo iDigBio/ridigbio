@@ -29,12 +29,12 @@
 ##'
 
 idig_search <- function(type="records", rq, fields=FALSE, max_items=100000, 
-                        limit=0, offset=0) {
+                        limit=0, offset=0, sort=FALSE) {
   
   # Construct body of request to API
-  query <- list(rq=rq, offset=offset)
+  query <- list(rq=rq, offset=offset, sort=c("uuid"))
   
-  if (inherits(fields, "character") && length(fields) > 1 ){
+  if (inherits(fields, "character") && length(fields) > 0 ){
     query$fields <- fields
   }
   
@@ -42,6 +42,15 @@ idig_search <- function(type="records", rq, fields=FALSE, max_items=100000,
     query$limit <- limit
   }else{
     query$limit <- max_items # effectivly use iDigBio's max page size
+  }
+  
+  # Default sort by UUID so paging and offset give reproducable results. This
+  # has been benchmarked and appears make things ~20% slower on a gigabit 
+  # connection: 66s for 100,000 limit
+  if (inherits(sort, "character") && length(sort) > 0 ) {
+    query$sort <- c(sort, "uuid")
+  } else {
+    query$sort <- c("uuid")
   }
   
   # tricks to get inside loop first time
@@ -102,16 +111,21 @@ fmt_search_txt_to_df <- function(txt, fields) {
   # optimizing this further will quickly make HTTP the rate limiter. The is.null()
   # check allows for records that do not have the requested field filled in.
   
+  # Better algorithum: Add banned fields to fields_exclude, then unlist which will
+  # then be safe but return variable width items.fla
   # Translate list of fields into a list of indexes, see doc on this method.
   field_indexes <- idig_field_indexes(fields)
-  m <- matrix(nrow=length(search_items), ncol=length(field_indexes))
   
-  for(i in 1:length(search_items)){
+  m <- matrix(nrow=length(search_items), ncol=length(field_indexes))
+  i <- 1
+  while(i <= length(search_items)){
+    flat <- unlist(search_items[[i]]$indexTerms)
     for(f in 1:length(field_indexes)){
-      if (! is.null(search_items[[i]]$indexTerms[[field_indexes[[f]]]])){
-        m[i, f] <- search_items[[i]]$indexTerms[[field_indexes[[f]]]]
+      if (field_indexes[[f]] %in% names(flat)){
+        m[i, f] <- flat[[field_indexes[[f]]]]
       }
     }
+    i <- i + 1
   }
   
   data.frame(m, stringsAsFactors=FALSE)

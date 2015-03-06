@@ -118,16 +118,22 @@ idig_validate <- function(inputs){
 # Some fields returned by the API contain lists or dicts. This function uses
 # a hard coded list of those fields (they are stored in ES with these types
 # so they are known for indexTerms) to generate a list pretty names and indexes
-# to the returned data. R syntax note:
+# to the returned data OR to drop the fields if formating to a fixed number of 
+# columns is not possible. R syntax note:
 # l[["a"]][["b"]] == l$a$b == l[[c("a", "b")]]
+# Note: indexes assume that the returned JSON is unlisted() first.
 idig_field_indexes <- function(fields){
   # looping is old school but keeps the order of fields similar to user input
   l = list()
-  for (i in fields){
-    if (i == "geopoint"){
-      l[[paste0(i, ".lat")]] <- c("geopoint", "lat")
-      l[[paste0(i, ".lon")]] <- c("geopoint", "lon")
-    }else{
+  for (i in fields) {
+    if (i == "flags" ||
+        i == "recordids" ||
+        i == "mediarecords") {
+      next
+    } else if (i == "geopoint") {
+      l[[paste0(i, ".lat")]] <- "geopoint.lat"
+      l[[paste0(i, ".lon")]] <- "geopoint.lon"
+    } else {
       l[[i]] <- i
     }
   }
