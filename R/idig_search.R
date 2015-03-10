@@ -28,11 +28,19 @@
 ##' @export
 ##'
 
-idig_search <- function(type="records", rq, fields=FALSE, max_items=100000, 
+idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, max_items=100000, 
                         limit=0, offset=0, sort=FALSE) {
   
   # Construct body of request to API
-  query <- list(rq=rq, offset=offset, sort=c("uuid"))
+  query <- list(offset=offset, sort=c("uuid"))
+  
+  if (!inherits(rq, "logical")) {
+    query$rq=rq 
+  }
+  
+  if (!inherits(mq, "logical")) {
+    query$mq=mq 
+  }
   
   # Here Alex says to eat "all" rather than pass it through to the API
   if (inherits(fields, "character") && fields != "all" 
