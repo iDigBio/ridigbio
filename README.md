@@ -8,8 +8,8 @@
 
 # Basic usage
 
-    idig_search_records(query=list(genus="acer"))
-    idig_search_records(query=list(family="holothuriidae"))
+    idig_search_records(rq=list(genus="acer"))
+    idig_search_records(rq=list(family="holothuriidae"))
 
 Complete list of terms that can be used is available [here](https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields)
 
