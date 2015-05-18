@@ -23,7 +23,7 @@ fmt_metafields_txt_to_indexed <- function(txt){
 }
 
 fmt_metafields_txt_to_raw <- function(txt){
-  httr::content(txt)[["data"]][["idigbio:data"]]
+  httr::content(txt)[["data"]]
 }
 
 fmt_metafields_txt_to_list <- function(txt){
