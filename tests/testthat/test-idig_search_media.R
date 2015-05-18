@@ -4,22 +4,24 @@ genus <- "cortinarius"
 rq <-list("genus"=genus)
 mq <- list("dqs"=list("type"="range", "gte"=0.2, "lte"=0.4))
 fields <- c('uuid', 'dqs', 'hasSpecimen')
+u <- "000113ce-84d4-467c-9fe3-13191596865e"
+
 
 # Basic search, full results
 df <- idig_search_media(rq=rq, limit=6000)
 expect_that(df, is_a("data.frame"))
 expect_that(nrow(df) > 5000, is_true())
-expect_that(which(df$uuid == "000113ce-84d4-467c-9fe3-13191596865e") > 0, 
+expect_that(which(df$uuid == u) > 0, 
             is_true())
 df <- idig_search_media(rq=rq, mq=mq, limit=6000)
 expect_that(df, is_a("data.frame"))
 expect_that(nrow(df) > 5000, is_true())
-expect_that(which(df$uuid == "e") > 0, 
+expect_that(which(df$uuid == u) > 0, 
             is_true())
 df <- idig_search_media(mq=mq, limit=6000)
 expect_that(df, is_a("data.frame"))
 expect_that(nrow(df) > 5000, is_true())
-expect_that(which(df$uuid == "e") > 0, 
+expect_that(which(df$uuid == u) > 0, 
             is_true())
 
 # Limited results, custom fields
