@@ -94,13 +94,16 @@ idig_GET <- function(path, ...) {
 ##' @param ... additional arguments to be passed to httr::POST
 ##' @return the request (as a list)
 ##' @author Francois Michonneau
-idig_POST <- function(path, body, encode="json", ...) {
+idig_POST <- function(path, body, ...) {
 
     stopifnot(inherits(body, "list"))
     #stopifnot(exists("rq", body))
-
+    
+    # Manually encode so we can use auto_unbox=TRUE, see ticket 
+    # https://github.com/iDigBio/ridigbio/issues/3
+    json <- jsonlite::toJSON(body, auto_unbox=TRUE)
     req <- httr::POST(idig_url(), path=paste(idig_version(), path, sep="/"),
-                      body=body, encode=encode, ...)
+                      body=json, ...)
     idig_check(req)
 
     req
