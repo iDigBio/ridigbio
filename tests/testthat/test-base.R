@@ -2,17 +2,19 @@
 ## for GET
 context("test GET")
 getReq <- list(rq=jsonlite::toJSON(list(family="holothuriidae")))
-r <- idig_GET("search", query=getReq)
+r <- idig_GET("search/records", query=getReq)
 
-expect_true(all(names(httr::content(r)) %in% c("itemCount", "items", "attribution")))
+# Complete list of all top-level fields returned in JSON
+expect_true(all(names(httr::content(r)) %in% c("itemCount", "lastModified", "items", "attribution")))
 expect_true(httr::content(r)$itemCount > 4000 && httr::content(r)$itemCount < 1000000)
 
 ## for POST
 context("test POST")
 fm <- list(rq=list(family="holothuriidae"))
-r <- idig_POST("search", body=fm)
+r <- idig_POST("search/records", body=fm)
 
-expect_true(all(names(httr::content(r)) %in% c("itemCount", "items", "attribution")))
+# Complete list of all top-level fields returned in JSON
+expect_true(all(names(httr::content(r)) %in% c("itemCount", "lastModified", "items", "attribution")))
 expect_true(httr::content(r)$itemCount > 4000 && httr::content(r)$itemCount < 1000000)
 
 ## for idig_field_indexes
