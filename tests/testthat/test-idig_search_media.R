@@ -2,7 +2,7 @@ context("test idig_search_media")
 
 genus <- "cortinarius"
 rq <-list("genus"=genus)
-mq <- list("dqs"=0.25)
+mq <- list("dqs"=list("type"="range", "gte"=0.2, "lte"=0.4))
 fields <- c('uuid', 'dqs', 'hasSpecimen')
 
 # Basic search, full results
@@ -27,7 +27,7 @@ df <- idig_search_media(mq=mq, fields=fields, limit=10)
 expect_that(nrow(df) == 10, is_true())
 expect_that(ncol(df) == length(fields), is_true())
 # Save some UUIDs for later
-second_uuid <- df[["uuid"]][[2]]
+#second_uuid <- df[["uuid"]][[2]]
 
 if (FALSE){
 # Offset
