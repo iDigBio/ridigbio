@@ -19,7 +19,7 @@ all_count <- top$itemCount
 top <- idig_top_media(top_fields=c(field), count=count)
 expect_that(top, is_a("list"))
 expect_that(length(top[[field]]), equals(count))
-expect_that(top[[field]][[most]][["itemCount"]] > 400 * 1000, is_true())
+expect_that(top[[field]][[most]][["itemCount"]] > 10 * 1000, is_true())
 # Still looking at all of iDigBio, assume things are not changing too fast
 expect_that(abs(top$itemCount - all_count) < 1000, is_true())
 
