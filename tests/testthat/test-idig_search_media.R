@@ -2,10 +2,9 @@ context("test idig_search_media")
 
 genus <- "cortinarius"
 rq <-list("genus"=genus)
-mq <- list("dqs":0.25)
+mq <- list("dqs"=0.25)
 fields <- c('uuid', 'dqs', 'hasSpecimen')
 
-&rq={"genus":"cortinarius"}&sort=["uuid"]&limit=10
 # Basic search, full results
 df <- idig_search_media(rq=rq, limit=6000)
 expect_that(df, is_a("data.frame"))
