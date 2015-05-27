@@ -17,6 +17,10 @@ r <- idig_POST("search/records", body=fm)
 expect_true(all(names(httr::content(r)) %in% c("itemCount", "lastModified", "items", "attribution")))
 expect_true(httr::content(r)$itemCount > 4000 && httr::content(r)$itemCount < 1000000)
 
+## 400 errors print messages
+expect_error(idig_search_records(rq=list("asdf"="asdf")), 
+             "HTTP failure: 400")
+
 ## for idig_field_indexes
 context("test idig_field_indexes")
 v <- c("a", "b")

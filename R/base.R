@@ -46,11 +46,12 @@ idig_parse <- function(req) {
 ##' @return nothing. Stops if HTTP code is < 400
 ##' @author Francois Michonneau
 idig_check <- function(req) {
-    if (!req$status_code < 400) {
-    	    msg <- idig_parse(req)$message
-        stop("HTTP failure: ", req$status_code, "\n", msg, call. = FALSE)
-    }
-    idig_check_error(req)
+  if (req$status_code >= 400) {
+    msg <- idig_parse(req)
+    stop("HTTP failure: ", req$status_code, "\n", msg$error, "\n",
+         msg$context, "\n", msg$name, call. = FALSE)
+  }
+  idig_check_error(req)
 }
 
 ##' checks for error messages that can be returned by the API
@@ -61,10 +62,10 @@ idig_check <- function(req) {
 ##' @return nothing. Stops if request contains an error.
 ##' @author Francois Michonneau
 idig_check_error <- function(req) {
-    cont <- httr::content(req)
-    if (is.list(cont) && exists("error", cont)) {
-        stop(paste("Error: ", cont$error, "\n", sep = ""))
-    }
+  cont <- httr::content(req)
+  if (is.list(cont) && exists("error", cont)) {
+    stop(paste("Error: ", cont$error, "\n", sep = ""))
+  }
 }
 
 ##' internal function for GET requests
