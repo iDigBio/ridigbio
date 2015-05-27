@@ -132,7 +132,8 @@ idig_field_indexes <- function(fields){
   for (i in fields) {
     if (i == "flags" ||
         i == "recordids" ||
-        i == "mediarecords") {
+        i == "mediarecords" ||
+        i == "records") {
       next
     } else if (i == "geopoint") {
       l[[paste0(i, ".lat")]] <- "geopoint.lat"
