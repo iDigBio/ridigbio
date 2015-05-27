@@ -32,6 +32,8 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, max_it
                         limit=0, offset=0, sort=FALSE) {
   
   # Construct body of request to API
+  # Force sorting by UUID so that paging will be reliable ie the 25,000th item 
+  # is always the 25,000th item even when requesting the 6th page.
   query <- list(offset=offset, sort=c("uuid"))
   
   if (!inherits(rq, "logical")) {
@@ -42,18 +44,17 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, max_it
     query$mq=mq 
   }
   
-  # Here Alex says to eat "all" rather than pass it through to the API
-  if (inherits(fields, "character") && fields != "all" 
-             && length(fields) > 0 ){
-    query$fields <- fields
-  } else {
-    # When a field parameter is passed then the raw data is already dropped
-    # because it's not a requested field. When no field parameter is passed
-    # then drop it manually since we don't process it anyway.
-    query$fields_exclude <- "data"
-    # Load up all fields possible
-    fields <- names(idig_meta_fields(type=type, subset="indexed"))
-  }
+  # Adjust fields to request from the API
+  field_lists <- build_field_lists(fields, type)
+  fields <- field_lists$fields
+  query <- append(query, field_lists$query)
+  
+#  if (!is.null(field_lists$rq_fields)) { 
+#    query$fields <- field_lists$rq_fields
+#  }
+#  if (!is.null(field_lists$rq_fields_exclude)) { 
+#    query$fields <- field_lists$rq_fields_exclude
+#  }
   
   if (limit > 0){
     query$limit <- limit
@@ -145,4 +146,33 @@ fmt_search_txt_to_df <- function(txt, fields) {
   
   data.frame(m, stringsAsFactors=FALSE)
   
+}
+
+
+##' Build fields and fields_exclude for queries.
+##'
+##' Given the desired fields to be returned, intelligently add an exclusion for
+##' the data array if warranted and handle the "all" keyword. Function not 
+##' exported.
+##' @param fields character vector of fields user wants returned
+##' @param type type of records to get fields for
+##' @return list list with fields key for df fields and query key for parameters
+##' to be merged with the query sent
+build_field_lists <- function(fields, type) {
+  ret <- list()
+  ret$query = list()
+  # Here Alex says to eat "all" rather than pass it through to the API
+  if (inherits(fields, "character") && fields != "all" && length(fields) > 0 ){
+    ret$fields <- fields
+    ret$query$fields <- fields
+  } else {
+    # When a field parameter is passed then the un-requested raw data is 
+    # already dropped because it's not a requested field. When no field 
+    # parameter is passed then drop it manually since by default we will not 
+    # return data fields and this saves significant transfer.
+    ret$query$fields_exclude <- "data"
+    # Load up all fields possible
+    ret$fields <- names(idig_meta_fields(type=type, subset="indexed"))
+  }
+  ret
 }
