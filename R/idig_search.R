@@ -131,15 +131,16 @@ fmt_search_txt_to_df <- function(txt, fields) {
   
   # Translate list of fields into a list of indexes, see doc on this method.
   field_indexes <- idig_field_indexes(fields)
+  l_field_indexes <- length(field_indexes)
   
   m <- matrix(nrow=length(search_items), ncol=length(field_indexes))
   i <- 1
   while(i <= length(search_items)){
-    flat <- unlist(search_items[[i]]$indexTerms)
-    for(f in 1:length(field_indexes)){
-      if (field_indexes[[f]] %in% names(flat)){
-        m[i, f] <- flat[[field_indexes[[f]]]]
-      }
+    flat <- list("indexTerms"=unlist(search_items[[i]][["indexTerms"]]),
+                 "data"=unlist(search_items[[i]][["data"]]))
+    for(f in 1:l_field_indexes){
+      # Silently ignore the case when the returned data has a field unset
+      try(m[i, f] <- flat[[field_indexes[[f]]]], silent=TRUE)
     }
     i <- i + 1
   }

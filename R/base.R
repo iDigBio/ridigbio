@@ -119,13 +119,15 @@ idig_validate <- function(inputs){
   
 }
 
-# Some fields returned by the API contain lists or dicts. This function uses
-# a hard coded list of those fields (they are stored in ES with these types
-# so they are known for indexTerms) to generate a list pretty names and indexes
-# to the returned data OR to drop the fields if formating to a fixed number of 
-# columns is not possible. R syntax note:
-# l[["a"]][["b"]] == l$a$b == l[[c("a", "b")]]
-# Note: indexes assume that the returned JSON is unlisted() first.
+##' Some fields returned by the API contain lists or dicts. This function uses
+##' a hard coded list of those fields (they are stored in ES with these types
+##' so they are known for indexTerms) to generate a list pretty names and 
+##' indexes to the returned data OR to drop the fields if formating to a fixed
+##' number of columns is not possible. R syntax note:
+##'   l[["a"]][["b"]] == l$a$b == l[[c("a", "b")]]
+##' Note: indexes assume that the returned JSON is unlisted() first and that 
+##' indexTerms and data lists are packed into a list with the keys "indexTerms"
+##' and "data".
 idig_field_indexes <- function(fields){
   # looping is old school but keeps the order of fields similar to user input
   l = list()
@@ -138,8 +140,10 @@ idig_field_indexes <- function(fields){
     } else if (i == "geopoint") {
       l[[paste0(i, ".lat")]] <- "geopoint.lat"
       l[[paste0(i, ".lon")]] <- "geopoint.lon"
+    } else if (substr(i, 1, 5) == "data."){
+      l[[i]] <- c("data", substring(i, 6))
     } else {
-      l[[i]] <- i
+      l[[i]] <- c("indexTerms", i)
     }
   }
   l
