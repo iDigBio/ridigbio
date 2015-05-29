@@ -2,7 +2,7 @@ context("test idig_search_records")
 
 genus <- "acer"
 rq <-list("genus"=genus)
-fields <- c('uuid', 'genus', 'scientificname')
+fields <- c('uuid', 'genus', 'scientificname', 'data.dwc:occurrenceID')
 
 
 # Basic search, full results
@@ -17,6 +17,8 @@ expect_that(min(df$genus) == genus && max(df$genus) == genus, is_true())
 df <- idig_search_records(rq=rq, fields=fields, limit=10)
 expect_that(nrow(df) == 10, is_true())
 expect_that(ncol(df) == length(fields), is_true())
+expect_that(!is.null(df[1, "uuid"]), is_true())
+expect_that(!is.null(df[1, "data.dwc:occurrenceID"]), is_true())
 # Save some UUIDs for later
 second_uuid <- df[["uuid"]][[2]]
 
