@@ -138,8 +138,8 @@ idig_field_indexes <- function(fields){
         i == "records") {
       next
     } else if (i == "geopoint") {
-      l[[paste0(i, ".lat")]] <- "geopoint.lat"
-      l[[paste0(i, ".lon")]] <- "geopoint.lon"
+      l[[paste0(i, ".lat")]] <- c("indexTerms", "geopoint.lat")
+      l[[paste0(i, ".lon")]] <- c("indexTerms", "geopoint.lon")
     } else if (substr(i, 1, 5) == "data."){
       l[[i]] <- c("data", substring(i, 6))
     } else {
