@@ -1,14 +1,14 @@
-idig_top_records <- function(rq=FALSE, top_fields=FALSE, count=0){
-  
+idig_top_records <- function(rq=FALSE, top_fields=FALSE, count=0, ...){
+
   # This passes through an empty list to get around idig_POST's requirement that rq be present
   # For full API compatability, the post should be completely empty if the user doesn't specify
   # anything
   query <- list()
-  
+
   if (inherits(rq, "list") && length(rq) > 0){
     query$rq <- rq
   }
-  
+
   if (inherits(top_fields, "character") && length(top_fields) > 0){
     query$top_fields <- top_fields
   }
@@ -16,8 +16,8 @@ idig_top_records <- function(rq=FALSE, top_fields=FALSE, count=0){
   if (count > 0){
     query$count <- count
   }
-  
-  view_results <- idig_POST("summary/top/records", body=query)
+
+  view_results <- idig_POST("summary/top/records", body=query, ...)
   fmt_topbasic_txt_to_list(view_results)
 }
 
