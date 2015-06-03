@@ -1,10 +1,10 @@
-##' base URL for the API
+##' Return base URL for the API calls.
 ##'
-##' Not exported.
+##' Defaults to use beta URL. Not exported.
 ##' @title base URL
 ##' @return string for the URL
-##' @author Francois Michonneau
 ##' @param dev Should be the beta version of the API be used?
+##' @author Francois Michonneau
 idig_url <- function(dev=TRUE) {
     if (dev) {
         "http://beta-search.idigbio.org"
@@ -13,9 +13,9 @@ idig_url <- function(dev=TRUE) {
     }
 }
 
-##' version number to use for the API
+##' Return the version number to use for the API calls.
 ##'
-##' current default is "v2". Not exported.
+##' The current default is "v2". Not exported.
 ##' @title API version
 ##' @param version optional argument giving the version of the API to use
 ##' @return string for the version to use
@@ -25,7 +25,7 @@ idig_version <- function(version="v2") {
     version
 }
 
-##' parses output of successful query to return a list
+##' Parses output of successful query to return a list.
 ##'
 ##' Not exported.
 ##' @title parse successfully returned request
@@ -38,12 +38,13 @@ idig_parse <- function(req) {
     jsonlite::fromJSON(txt, simplifyVector=FALSE)
 }
 
-##' checks for HTTP codes
+##' Checks for HTTP error codes and JSON errors.
 ##'
-##' Part 1 of the error checking process. Not exported.
+##' Part 1 of the error checking process. This part handles HTTP error codes and
+##' then calls part 2 which handles JSON errors in the responses. Not exported.
 ##' @title check HTTP code
 ##' @param req the returned request
-##' @return nothing. Stops if HTTP code is < 400
+##' @return nothing. Stops if HTTP code is >= 400
 ##' @author Francois Michonneau
 idig_check <- function(req) {
   if (req$status_code >= 400) {
@@ -54,9 +55,10 @@ idig_check <- function(req) {
   idig_check_error(req)
 }
 
-##' checks for error messages that can be returned by the API
+##' Checks for error messages that can be returned by the API in JSON.
 ##'
-##' Part 2 of the error checking process. Not exported.
+##' Part 2 of the error checking process. Checks the JSON response for error 
+##' messages and stops if any are found. Not exported.
 ##' @title Check is the request returned an error.
 ##' @param req the returned request
 ##' @return nothing. Stops if request contains an error.
@@ -68,10 +70,10 @@ idig_check_error <- function(req) {
   }
 }
 
-##' internal function for GET requests
+##' Internal function for GET requests.
 ##'
-##' Generates a GET request and performs the checks on what is
-##' returned. Not exported.
+##' Generates a GET request and performs the checks on what is returned. Not 
+##' exported.
 ##' @title internal GET request
 ##' @param path endpoint
 ##' @param ... additional arguments to be passed to httr::GET
@@ -83,14 +85,13 @@ idig_GET <- function(path, ...) {
     req
 }
 
-
-##' internal function for POST requests
+##' Internal function for POST requests.
 ##'
-##' Generates a POST request and performs the checks on what is
-##' returned. Not exported.
+##' Generates a POST request and performs the checks on what is returned. Not 
+##' exported.
 ##' @title internal POST request
 ##' @param path endpoint
-##' @param body a named list inside a list named "rq"
+##' @param body a list of parameters for the endpoint
 ##' @param encode the API wants "json"
 ##' @param ... additional arguments to be passed to httr::POST
 ##' @return the request (as a list)
@@ -110,15 +111,16 @@ idig_POST <- function(path, body, ...) {
     req
 }
 
-
-# Takes list of inputs named by validation rule eg "number":[2, 3] and returns
-# a vector of strings with any validation errors. If the vector is 0 length, 
-# everything is valid.
+##' Stub function for validating parameters.
+##' 
+##' Takes list of inputs named by validation rule eg "number":[2, 3] and returns
+##' a vector of strings with any validation errors. If the vector is 0 length, 
+##' everything is valid.
 idig_validate <- function(inputs){
-  
-  
 }
 
+##' Format list of field names and indexes.
+##' 
 ##' Some fields returned by the API contain lists or dicts. This function uses
 ##' a hard coded list of those fields (they are stored in ES with these types
 ##' so they are known for indexTerms) to generate a list pretty names and 
@@ -128,6 +130,12 @@ idig_validate <- function(inputs){
 ##' Note: indexes assume that the returned JSON is unlisted() first and that 
 ##' indexTerms and data lists are packed into a list with the keys "indexTerms"
 ##' and "data". Not exported.
+##' @title format field names
+##' @param fields list of field names supplied by user
+##' @return a list indexed by field name with two values: "data", a list of 
+##' field names from data and "indexTerms", a list of field names from 
+##' indexTerms
+##' @author Matthew Collins
 idig_field_indexes <- function(fields){
   # looping is old school but keeps the order of fields similar to user input
   l = list()
