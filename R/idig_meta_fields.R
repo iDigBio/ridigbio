@@ -1,3 +1,4 @@
+##' @export
 idig_meta_fields <- function(type="records", subset=FALSE){
   
   # This passes through an empty list to get around idig_POST's requirement that rq be present

@@ -1,6 +1,6 @@
 ##' base URL for the API
 ##'
-##' Not exported
+##' Not exported.
 ##' @title base URL
 ##' @return string for the URL
 ##' @author Francois Michonneau
@@ -15,7 +15,7 @@ idig_url <- function(dev=TRUE) {
 
 ##' version number to use for the API
 ##'
-##' current default is "v2". Function not exported.
+##' current default is "v2". Not exported.
 ##' @title API version
 ##' @param version optional argument giving the version of the API to use
 ##' @return string for the version to use
@@ -27,7 +27,7 @@ idig_version <- function(version="v2") {
 
 ##' parses output of successful query to return a list
 ##'
-##' not exported
+##' Not exported.
 ##' @title parse successfully returned request
 ##' @param req the returned request
 ##' @return a list
@@ -40,7 +40,7 @@ idig_parse <- function(req) {
 
 ##' checks for HTTP codes
 ##'
-##' Part 1 of the error checking process. not exported.
+##' Part 1 of the error checking process. Not exported.
 ##' @title check HTTP code
 ##' @param req the returned request
 ##' @return nothing. Stops if HTTP code is < 400
@@ -56,7 +56,7 @@ idig_check <- function(req) {
 
 ##' checks for error messages that can be returned by the API
 ##'
-##' Part 2 of the error checking process. not exported.
+##' Part 2 of the error checking process. Not exported.
 ##' @title Check is the request returned an error.
 ##' @param req the returned request
 ##' @return nothing. Stops if request contains an error.
@@ -71,7 +71,7 @@ idig_check_error <- function(req) {
 ##' internal function for GET requests
 ##'
 ##' Generates a GET request and performs the checks on what is
-##' returned.
+##' returned. Not exported.
 ##' @title internal GET request
 ##' @param path endpoint
 ##' @param ... additional arguments to be passed to httr::GET
@@ -87,7 +87,7 @@ idig_GET <- function(path, ...) {
 ##' internal function for POST requests
 ##'
 ##' Generates a POST request and performs the checks on what is
-##' returned
+##' returned. Not exported.
 ##' @title internal POST request
 ##' @param path endpoint
 ##' @param body a named list inside a list named "rq"
@@ -127,7 +127,7 @@ idig_validate <- function(inputs){
 ##'   l[["a"]][["b"]] == l$a$b == l[[c("a", "b")]]
 ##' Note: indexes assume that the returned JSON is unlisted() first and that 
 ##' indexTerms and data lists are packed into a list with the keys "indexTerms"
-##' and "data".
+##' and "data". Not exported.
 idig_field_indexes <- function(fields){
   # looping is old school but keeps the order of fields similar to user input
   l = list()

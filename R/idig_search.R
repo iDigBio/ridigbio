@@ -11,7 +11,7 @@
 ##' Only fields from the Elasticsearch index are currently availible, no raw
 ##' fields. As such, the columns in the data frame are types however no factors
 ##' are built. Attribution and other metadata is attached to the dataframe in the
-##' data.frame's attributes. (I.e. attributes(df))
+##' data.frame's attributes. (I.e. attributes(df)) Not exported.
 ##' @title Basic searching of iDigBio records
 ##' @param query a list containing the information to be searched in iDigBio
 ##' @param fields list of fields that will be contained in the data.frame
@@ -25,7 +25,6 @@
 ##' \dontrun{
 ##' idig_search(rq=list(genus="acer"), limit=10)
 ##' }
-##' @export
 ##'
 
 idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, max_items=100000, 

@@ -1,3 +1,4 @@
+##' @export
 idig_top_media <- function(rq=FALSE, mq=FALSE, top_fields=FALSE, count=0){
   
   # This passes through an empty list to get around idig_POST's requirement that rq be present

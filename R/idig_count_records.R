@@ -1,3 +1,4 @@
+##' @export
 idig_count_records <- function(rq=FALSE){
   
   # This passes through an empty list to get around idig_POST's requirement that rq be present
