@@ -152,8 +152,10 @@ fmt_search_txt_to_df <- function(txt, fields) {
 ##' Build fields and fields_exclude for queries.
 ##'
 ##' Given the desired fields to be returned, intelligently add an exclusion for
-##' the data array if warranted and handle the "all" keyword. Function not 
-##' exported.
+##' the data array if warranted and handle the "all" keyword. And do so without 
+##' setting both fields and fields_exclude due to fact that the API will return 
+##' wrong results if are passed. This is still posssible if the user 
+##' deliberately sets both. Not exported.
 ##' @param fields character vector of fields user wants returned
 ##' @param type type of records to get fields for
 ##' @return list list with fields key for df fields and query key for parameters
