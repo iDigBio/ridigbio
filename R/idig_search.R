@@ -2,8 +2,8 @@
 ##'
 ##' This function is wrapped for media an specimen record searches and not
 ##' eexported.
-##' 
-##' Currently the query needs to be specified as a list. All matching results 
+##'
+##' Currently the query needs to be specified as a list. All matching results
 ##' are returned up to the max_items cap (default 100,000). If more results are
 ##' wanted, the max_items can be passed as an option. Limit and offset are
 ##' availible if manual paging of results is needed though the max_items cap
@@ -11,7 +11,7 @@
 ##' count of actual records in the limit/offset window.
 ##'
 ##' Return is a data.frame containing the requested fields (or the dfault
-##' fields). The columns in the data frame are types however no factors are 
+##' fields). The columns in the data frame are types however no factors are
 ##' built. Attribution and other metadata is attached to the dataframe in the
 ##' data.frame's attributes. (I.e. attributes(df)) Not exported.
 ##' @title Basic searching of iDigBio records
@@ -23,17 +23,16 @@
 ##' -safe)
 ##' @param limit maximum number of results returned
 ##' @param offset number of results to skip before returning results
-##' @param sort vector of fields to use for sorting, if paging always include 
+##' @param sort vector of fields to use for sorting, if paging always include
 ##' UUID to get reliable record order
 ##' @param ... additional parameters
 ##' @return a data frame
 ##' @author Francois Michonneau
+##' @export
 ##' @examples
 ##' \dontrun{
 ##' idig_search(rq=list(genus="acer"), limit=10)
 ##' }
-##'
-
 idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, max_items=100000,
                         limit=0, offset=0, sort=FALSE, ...) {
 
@@ -159,9 +158,9 @@ fmt_search_txt_to_df <- function(txt, fields) {
 ##' Build fields and fields_exclude for queries.
 ##'
 ##' Given the desired fields to be returned, intelligently add an exclusion for
-##' the data array if warranted and handle the "all" keyword. And do so without 
-##' setting both fields and fields_exclude due to fact that the API will return 
-##' wrong results if are passed. This is still posssible if the user 
+##' the data array if warranted and handle the "all" keyword. And do so without
+##' setting both fields and fields_exclude due to fact that the API will return
+##' wrong results if are passed. This is still posssible if the user
 ##' deliberately sets both. Not exported.
 ##' @param fields character vector of fields user wants returned
 ##' @param type type of records to get fields for
