@@ -8,17 +8,22 @@ idig_search_records(rq, fields = FALSE, max_items = 1e+05, limit = 0,
   offset = 0, sort = FALSE, ...)
 }
 \arguments{
-\item{fields}{list of fields that will be contained in the data.frame}
+\item{rq}{iDigBio record query in nested list format}
 
-\item{max_items}{maximum number of results allowed to be retrieved}
+\item{fields}{vector of fields that will be contained in the data.frame,
+limited set returned by default, use "all" to get all indexed fields}
+
+\item{max_items}{maximum number of results allowed to be retrieved (fail
+-safe)}
 
 \item{limit}{maximum number of results returned}
 
 \item{offset}{number of results to skip before returning results}
 
-\item{...}{additional parameters (currently not in use)}
+\item{sort}{vector of fields to use for sorting, if paging always include
+UUID to get reliable record order}
 
-\item{query}{a list containing the information to be searched in iDigBio}
+\item{...}{additional parameters}
 }
 \value{
 a data frame
@@ -27,18 +32,17 @@ a data frame
 Function to query the iDigBio API for specimen records
 }
 \details{
-Currently the query needs to be specified as a list. All matching results are
-returned up to the max_items cap (default 100,000). If more results are
+Currently the query needs to be specified as a list. All matching results
+are returned up to the max_items cap (default 100,000). If more results are
 wanted, the max_items can be passed as an option. Limit and offset are
 availible if manual paging of results is needed though the max_items cap
 still applies as the item count comes from the results header not the
 count of actual records in the limit/offset window.
 
-Return is a data.frame containing the requested fields (or the dfault fields).
-Only fields from the Elasticsearch index are currently availible, no raw
-fields. As such, the columns in the data frame are types however no factors
-are built. Attribution and other metadata is attached to the dataframe in the
-data.frame's attributes. (I.e. attributes(df))
+Return is a data.frame containing the requested fields (or the default
+fields). The columns in the data frame are types however no factors are
+built. Attribution and other metadata is attached to the dataframe in the
+data.frame's attributes. (I.e. attributes(df)) Not exported.
 }
 \examples{
 \dontrun{
@@ -46,6 +50,6 @@ idig_search(rq=list(genus="acer"), limit=10)
 }
 }
 \author{
-Francois Michonneau
+Matthew Collins
 }
 

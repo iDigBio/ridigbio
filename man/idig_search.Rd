@@ -32,7 +32,7 @@ UUID to get reliable record order}
 a data frame
 }
 \description{
-Function to query the iDigBio API for specimen records
+Function to query the iDigBio API for records
 }
 \details{
 This function is wrapped for media an specimen record searches and not
@@ -45,10 +45,10 @@ availible if manual paging of results is needed though the max_items cap
 still applies as the item count comes from the results header not the
 count of actual records in the limit/offset window.
 
-Return is a data.frame containing the requested fields (or the dfault
+Return is a data.frame containing the requested fields (or the default
 fields). The columns in the data frame are types however no factors are
 built. Attribution and other metadata is attached to the dataframe in the
-data.frame's attributes. (I.e. attributes(df)) Not exported.
+data.frame's attributes. (I.e. attributes(df))
 }
 \examples{
 \dontrun{

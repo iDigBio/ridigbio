@@ -2,7 +2,7 @@
 % Please edit documentation in R/idig_count_media.R
 \name{idig_count_media}
 \alias{idig_count_media}
-\title{count media endpoint}
+\title{Count media endpoint}
 \usage{
 idig_count_media(rq = FALSE, mq = FALSE, ...)
 }

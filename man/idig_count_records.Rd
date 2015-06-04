@@ -2,7 +2,7 @@
 % Please edit documentation in R/idig_count_records.R
 \name{idig_count_records}
 \alias{idig_count_records}
-\title{count record endpoint}
+\title{Count record endpoint}
 \usage{
 idig_count_records(rq = FALSE, ...)
 }
