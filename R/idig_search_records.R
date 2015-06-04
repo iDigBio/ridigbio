@@ -28,8 +28,8 @@
 ##' \dontrun{
 ##' idig_search(rq=list(genus="acer"), limit=10)
 ##' }
+##' @export
 ##'
-
 
 idig_search_records <- function(rq, fields=FALSE, max_items=100000, limit=0,
                         offset=0, sort=FALSE, ...) {

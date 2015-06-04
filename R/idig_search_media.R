@@ -30,6 +30,7 @@
 ##' idig_search_media(rq=list(genus="acer"), fields=c("uuid", 
 ##' "data.ac:accessURI"), limit=10)
 ##' }
+##' @export
 ##'
 idig_search_media <- function(mq=FALSE, rq=FALSE, fields=FALSE, 
                               max_items=100000, limit=0, offset=0, sort=FALSE,

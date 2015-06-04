@@ -110,10 +110,21 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     }
   }
 
+  # Set column names, built df from matrix so they're missing
   field_indexes <- idig_field_indexes(fields)
   colnames(dat) <- names(field_indexes)
+  
+  # Metadata as attributes on the df
+  a <- attributes(dat)
+  a[["itemCount"]] <- item_count
+  a[["attribution"]] <- fmt_search_txt_to_attribution(search_results)
+  attributes(dat) <- a
   #print(paste0(Sys.time(), " completed"))
   dat
+}
+
+fmt_search_txt_to_attribution <- function(txt){
+  httr::content(txt)[["attribution"]]
 }
 
 fmt_search_txt_to_itemCount <- function(txt){
