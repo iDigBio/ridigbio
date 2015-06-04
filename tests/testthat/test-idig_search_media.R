@@ -23,6 +23,8 @@ expect_that(df, is_a("data.frame"))
 expect_that(nrow(df) > 5000, is_true())
 expect_that(which(df$uuid == u) > 0, 
             is_true())
+expect_that(attributes(df)[["itemCount"]] > 5000, is_true())
+expect_that(length(attributes(df)[["attribution"]]) > 2 , is_true())
 
 # Limited results, custom fields
 df <- idig_search_media(mq=mq, fields=fields, limit=10)

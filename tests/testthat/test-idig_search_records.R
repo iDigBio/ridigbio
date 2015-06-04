@@ -9,6 +9,8 @@ fields <- c('uuid', 'genus', 'scientificname', 'data.dwc:occurrenceID')
 df <- idig_search_records(rq=rq, limit=6000)
 expect_that(df, is_a("data.frame"))
 expect_that(nrow(df) > 5000, is_true())
+expect_that(attributes(df)[["itemCount"]] > 5000, is_true())
+expect_that(length(attributes(df)[["attribution"]]) > 2 , is_true())
 expect_that(which(df$uuid == "00041678-5df1-4a23-ba78-8c12f60af369") > 0, 
             is_true())
 expect_that(min(df$genus) == genus && max(df$genus) == genus, is_true())
