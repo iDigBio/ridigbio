@@ -9,7 +9,7 @@ idig_POST(path, body, ...)
 \arguments{
 \item{path}{endpoint}
 
-\item{body}{a named list inside a list named "rq"}
+\item{body}{a list of parameters for the endpoint}
 
 \item{...}{additional arguments to be passed to httr::POST}
 
@@ -19,11 +19,11 @@ idig_POST(path, body, ...)
 the request (as a list)
 }
 \description{
-internal function for POST requests
+Internal function for POST requests.
 }
 \details{
-Generates a POST request and performs the checks on what is
-returned. Not exported.
+Generates a POST request and performs the checks on what is returned. Not
+exported.
 }
 \author{
 Francois Michonneau

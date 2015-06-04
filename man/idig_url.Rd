@@ -13,10 +13,10 @@ idig_url(dev = TRUE)
 string for the URL
 }
 \description{
-base URL for the API
+Return base URL for the API calls.
 }
 \details{
-Not exported.
+Defaults to use beta URL. Not exported.
 }
 \author{
 Francois Michonneau

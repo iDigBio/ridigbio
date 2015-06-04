@@ -13,10 +13,10 @@ idig_version(version = "v2")
 string for the version to use
 }
 \description{
-version number to use for the API
+Return the version number to use for the API calls.
 }
 \details{
-current default is "v2". Not exported.
+The current default is "v2". Not exported.
 }
 \author{
 Francois Michonneau

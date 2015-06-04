@@ -2,7 +2,7 @@
 ##' 
 ##' Quickly return a count of the specimen records matching the query(s) 
 ##' provided.
-##' @title count record endpoint
+##' @title Count record endpoint
 ##' @param rq iDigBio record query in nested list format
 ##' @param ... additional parameters
 ##' @return count of specimen records matching the query(s)

@@ -10,13 +10,14 @@ idig_check(req)
 \item{req}{the returned request}
 }
 \value{
-nothing. Stops if HTTP code is < 400
+nothing. Stops if HTTP code is >= 400
 }
 \description{
-checks for HTTP codes
+Checks for HTTP error codes and JSON errors.
 }
 \details{
-Part 1 of the error checking process. Not exported.
+Part 1 of the error checking process. This part handles HTTP error codes and
+then calls part 2 which handles JSON errors in the responses. Not exported.
 }
 \author{
 Francois Michonneau

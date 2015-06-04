@@ -2,19 +2,22 @@
 % Please edit documentation in R/base.R
 \name{idig_field_indexes}
 \alias{idig_field_indexes}
-\title{Some fields returned by the API contain lists or dicts. This function uses
-a hard coded list of those fields (they are stored in ES with these types
-so they are known for indexTerms) to generate a list pretty names and
-indexes to the returned data OR to drop the fields if formating to a fixed
-number of columns is not possible. R syntax note:
-  l[["a"]][["b"]] == l$a$b == l[[c("a", "b")]]
-Note: indexes assume that the returned JSON is unlisted() first and that
-indexTerms and data lists are packed into a list with the keys "indexTerms"
-and "data". Not exported.}
+\title{format field names}
 \usage{
 idig_field_indexes(fields)
 }
+\arguments{
+\item{fields}{list of field names supplied by user}
+}
+\value{
+a list indexed by field name with two values: "data", a list of
+field names from data and "indexTerms", a list of field names from
+indexTerms
+}
 \description{
+Format list of field names and indexes.
+}
+\details{
 Some fields returned by the API contain lists or dicts. This function uses
 a hard coded list of those fields (they are stored in ES with these types
 so they are known for indexTerms) to generate a list pretty names and
@@ -24,5 +27,8 @@ number of columns is not possible. R syntax note:
 Note: indexes assume that the returned JSON is unlisted() first and that
 indexTerms and data lists are packed into a list with the keys "indexTerms"
 and "data". Not exported.
+}
+\author{
+Matthew Collins
 }
 

@@ -1,7 +1,7 @@
 ##' Count media records matching a query.
 ##' 
 ##' Quickly return a count of the media records matching the query(s) provided.
-##' @title count media endpoint
+##' @title Count media endpoint
 ##' @param rq iDigBio record query in nested list format
 ##' @param mq iDigBio media query in nested list format
 ##' @param ... additional parameters

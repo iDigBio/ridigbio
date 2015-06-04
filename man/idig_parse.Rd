@@ -13,7 +13,7 @@ idig_parse(req)
 a list
 }
 \description{
-parses output of successful query to return a list
+Parses output of successful query to return a list.
 }
 \details{
 Not exported.

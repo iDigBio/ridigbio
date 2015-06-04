@@ -15,11 +15,11 @@ idig_GET(path, ...)
 the request (as a list)
 }
 \description{
-internal function for GET requests
+Internal function for GET requests.
 }
 \details{
-Generates a GET request and performs the checks on what is
-returned. Not exported.
+Generates a GET request and performs the checks on what is returned. Not
+exported.
 }
 \author{
 Francois Michonneau

@@ -1,4 +1,4 @@
-##' Function to query the iDigBio API for specimen records
+##' Function to query the iDigBio API for records
 ##'
 ##' This function is wrapped for media an specimen record searches and not
 ##' eexported.
@@ -10,7 +10,7 @@
 ##' still applies as the item count comes from the results header not the
 ##' count of actual records in the limit/offset window.
 ##'
-##' Return is a data.frame containing the requested fields (or the dfault
+##' Return is a data.frame containing the requested fields (or the default
 ##' fields). The columns in the data frame are types however no factors are 
 ##' built. Attribution and other metadata is attached to the dataframe in the
 ##' data.frame's attributes. (I.e. attributes(df)) Not exported.
@@ -34,8 +34,8 @@
 ##' }
 ##'
 
-idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, max_items=100000,
-                        limit=0, offset=0, sort=FALSE, ...) {
+idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, 
+                        max_items=100000, limit=0, offset=0, sort=FALSE, ...) {
 
   # Construct body of request to API
   # Force sorting by UUID so that paging will be reliable ie the 25,000th item
@@ -85,7 +85,7 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, max_it
   while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)){
     search_results <- idig_POST(paste0("search/", type), body=query, ...)
     #print(paste0(Sys.time(), " completed query"))
-    # Slight possibility of the number of items changing as we go due to inserts/
+    # Slight possibility of the number of items changing as we go due to inserts
     # deletes at iDigBio, put this inside the loop to keep it current
     item_count <- fmt_search_txt_to_itemCount(search_results)
     if ((limit == 0 || limit > max_items) && item_count > max_items){
@@ -96,7 +96,8 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, max_it
     if (nrow(dat) == 0){
       dat <- fmt_search_txt_to_df(search_results, fields)
     } else {
-      #dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
+      #dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, 
+      # fields))
       dat <- rbind(dat, fmt_search_txt_to_df(search_results, fields))
       #print(paste0(Sys.time(), " completed append"))
     }
@@ -130,10 +131,11 @@ fmt_search_txt_to_df <- function(txt, fields) {
   search_items <- httr::content(txt)$items
 
   # pre-allocated matrix method
-  # This method is on the order of 2-3 seconds/5k records which is about how long
-  # it takes the HTTP response to happen on a 100Mb/s link when asking for 10 fields
-  # optimizing this further will quickly make HTTP the rate limiter. The is.null()
-  # check allows for records that do not have the requested field filled in.
+  # This method is on the order of 2-3 seconds/5k records which is about how 
+  # long it takes the HTTP response to happen on a 100Mb/s link when asking for 
+  # 10 fields optimizing this further will quickly make HTTP the rate limiter. 
+  # The is.null() check allows for records that do not have the requested field 
+  # filled in.
 
   # Translate list of fields into a list of indexes, see doc on this method.
   field_indexes <- idig_field_indexes(fields)

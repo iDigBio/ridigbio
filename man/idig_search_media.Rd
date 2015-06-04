@@ -5,7 +5,7 @@
 \title{Basic searching of iDigBio media}
 \usage{
 idig_search_media(mq = FALSE, rq = FALSE, fields = FALSE,
-  max_items = 1e+05, limit = 0, offset = 0, sort = FALSE)
+  max_items = 1e+05, limit = 0, offset = 0, sort = FALSE, ...)
 }
 \arguments{
 \item{fields}{list of fields that will be contained in the data.frame}
@@ -16,9 +16,9 @@ idig_search_media(mq = FALSE, rq = FALSE, fields = FALSE,
 
 \item{offset}{number of results to skip before returning results}
 
-\item{query}{a list containing the information to be searched in iDigBio}
-
 \item{...}{additional parameters (currently not in use)}
+
+\item{query}{a list containing the information to be searched in iDigBio}
 }
 \value{
 a data frame
