@@ -1,24 +1,31 @@
 ##' Function to query the iDigBio API for specimen records
 ##'
-##' Currently the query needs to be specified as a list. All matching results are
-##' returned up to the max_items cap (default 100,000). If more results are
+##' This function is wrapped for media an specimen record searches and not
+##' eexported.
+##' 
+##' Currently the query needs to be specified as a list. All matching results 
+##' are returned up to the max_items cap (default 100,000). If more results are
 ##' wanted, the max_items can be passed as an option. Limit and offset are
 ##' availible if manual paging of results is needed though the max_items cap
 ##' still applies as the item count comes from the results header not the
 ##' count of actual records in the limit/offset window.
 ##'
-##' Return is a data.frame containing the requested fields (or the dfault fields).
-##' Only fields from the Elasticsearch index are currently availible, no raw
-##' fields. As such, the columns in the data frame are types however no factors
-##' are built. Attribution and other metadata is attached to the dataframe in the
+##' Return is a data.frame containing the requested fields (or the dfault
+##' fields). The columns in the data frame are types however no factors are 
+##' built. Attribution and other metadata is attached to the dataframe in the
 ##' data.frame's attributes. (I.e. attributes(df)) Not exported.
 ##' @title Basic searching of iDigBio records
-##' @param query a list containing the information to be searched in iDigBio
-##' @param fields list of fields that will be contained in the data.frame
-##' @param max_items maximum number of results allowed to be retrieved
+##' @param type string type of records to query, defaults to "records"
+##' @param mq iDigBio media query in nested list format
+##' @param rq iDigBio record query in nested list format
+##' @param fields vector of fields that will be contained in the data.frame
+##' @param max_items maximum number of results allowed to be retrieved (fail
+##' -safe)
 ##' @param limit maximum number of results returned
 ##' @param offset number of results to skip before returning results
-##' @param ... additional parameters (currently not in use)
+##' @param sort vector of fields to use for sorting, if paging always include 
+##' UUID to get reliable record order
+##' @param ... additional parameters
 ##' @return a data frame
 ##' @author Francois Michonneau
 ##' @examples
