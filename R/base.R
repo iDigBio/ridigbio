@@ -92,10 +92,10 @@ idig_GET <- function(path, ...) {
 ##' @title internal POST request
 ##' @param path endpoint
 ##' @param body a list of parameters for the endpoint
-##' @param encode the API wants "json"
 ##' @param ... additional arguments to be passed to httr::POST
 ##' @return the request (as a list)
 ##' @author Francois Michonneau
+##' 
 idig_POST <- function(path, body, ...) {
 
     stopifnot(inherits(body, "list"))
@@ -115,7 +115,12 @@ idig_POST <- function(path, body, ...) {
 ##' 
 ##' Takes list of inputs named by validation rule eg "number":[2, 3] and returns
 ##' a vector of strings with any validation errors. If the vector is 0 length, 
-##' everything is valid.
+##' everything is valid. Not exported.
+##' @title validate fields
+##' @param inputs list of inputs to validate
+##' @return boolean
+##' @author Matthew Collins
+##' 
 idig_validate <- function(inputs){
 }
 

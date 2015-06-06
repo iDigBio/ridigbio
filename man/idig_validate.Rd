@@ -2,13 +2,25 @@
 % Please edit documentation in R/base.R
 \name{idig_validate}
 \alias{idig_validate}
-\title{Stub function for validating parameters.}
+\title{validate fields}
 \usage{
 idig_validate(inputs)
 }
+\arguments{
+\item{inputs}{list of inputs to validate}
+}
+\value{
+boolean
+}
 \description{
+Stub function for validating parameters.
+}
+\details{
 Takes list of inputs named by validation rule eg "number":[2, 3] and returns
 a vector of strings with any validation errors. If the vector is 0 length,
-everything is valid.
+everything is valid. Not exported.
+}
+\author{
+Matthew Collins
 }
 

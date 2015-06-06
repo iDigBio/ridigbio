@@ -12,8 +12,6 @@ idig_POST(path, body, ...)
 \item{body}{a list of parameters for the endpoint}
 
 \item{...}{additional arguments to be passed to httr::POST}
-
-\item{encode}{the API wants "json"}
 }
 \value{
 the request (as a list)
