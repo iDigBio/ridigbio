@@ -22,8 +22,8 @@ defaults to "all" which is all indexed fields}
 
 \item{offset}{number of results to skip before returning results}
 
-\item{sort}{vector of fields to use for sorting, if paging always include
-UUID to get reliable record order}
+\item{sort}{vector of fields to use for sorting, UUID is always appended to
+make paging safe}
 
 \item{...}{additional parameters}
 }
@@ -34,22 +34,24 @@ a data frame
 Function to query the iDigBio API for media records
 }
 \details{
-Currently the query needs to be specified as a list. All matching results
-are returned up to the max_items cap (default 100,000). If more results are
-wanted, the max_items can be passed as an option. Limit and offset are
-availible if manual paging of results is needed though the max_items cap
-still applies as the item count comes from the results header not the
-count of actual records in the limit/offset window.
+Also see \code{\link{idig_search_records}} for the full examples of all the
+parameters related to searching iDigBio.
 
-Return is a data.frame containing the requested fields (or the default
-fields). The columns in the data frame are types however no factors are
-built. Attribution and other metadata is attached to the dataframe in the
-data.frame's attributes. (I.e. attributes(df)) Not exported.
+Wraps \code{\link{idig_search}} to provide defaults specific to searching
+media records. Using this function instead of \code{\link{idig_search}}
+directly is recommened. Record queries and media queries objects are allowed
+(rq and mq parameters) and media records returned will match the
+requirements of both.
+
+This function defaults to returning all indexed media record fields.
 }
 \examples{
 \dontrun{
-idig_search_media(rq=list(genus="acer"), fields=c("uuid",
-"data.ac:accessURI"), limit=10)
+# Searching for media using a query on related specimen information - first
+# 10 media records with image URIs related to a specimen in the genus Acer:
+df <- idig_search_media(rq=list(genus="acer"),
+                        mq=list("data.ac:accessURI"=list("type"="exists")),
+                        fields=c("uuid","data.ac:accessURI"), limit=10)
 }
 }
 \author{

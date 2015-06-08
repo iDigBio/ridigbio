@@ -1,19 +1,14 @@
-##' Function to query the iDigBio API for records
+##' Base function to query the iDigBio API
 ##'
-##' This function is wrapped for media an specimen record searches and not
-##' eexported.
+##' This function is wrapped for media and specimen record searches. Please
+##' consider using \code{\link{idig_search_media}} or 
+##' \code{\link{idig_search_records}} instead as they supply nice defaults to 
+##' this function depending on the type of records desired.
+##' 
+##' Fuller documentation of parameters is in the 
+##' \code{\link{idig_search_records}} function's help.
 ##'
-##' Currently the query needs to be specified as a list. All matching results
-##' are returned up to the max_items cap (default 100,000). If more results are
-##' wanted, the max_items can be passed as an option. Limit and offset are
-##' availible if manual paging of results is needed though the max_items cap
-##' still applies as the item count comes from the results header not the
-##' count of actual records in the limit/offset window.
-##'
-##' Return is a data.frame containing the requested fields (or the default
-##' fields). The columns in the data frame are types however no factors are 
-##' built. Attribution and other metadata is attached to the dataframe in the
-##' data.frame's attributes. (I.e. attributes(df))
+##' Exported to facilitate wrapping this package in other packages.
 ##' @title Basic searching of iDigBio records
 ##' @param type string type of records to query, defaults to "records"
 ##' @param mq iDigBio media query in nested list format
@@ -23,24 +18,25 @@
 ##' -safe)
 ##' @param limit maximum number of results returned
 ##' @param offset number of results to skip before returning results
-##' @param sort vector of fields to use for sorting, if paging always include
-##' UUID to get reliable record order
+##' @param sort vector of fields to use for sorting, UUID is always appended to 
+##' make paging safe
 ##' @param ... additional parameters
 ##' @return a data frame
 ##' @author Francois Michonneau
 ##' @export
 ##' @examples
 ##' \dontrun{
-##' idig_search(rq=list(genus="acer"), limit=10)
+##' # Ten media records related to genus Acer specimens
+##' idig_search(type="media", rq=list(genus="acer"), limit=10)
 ##' }
 ##'
 idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, 
                         max_items=100000, limit=0, offset=0, sort=FALSE, ...) {
   # Construct body of request to API
-  # Force sorting by UUID so that paging will be reliable ie the 25,000th item
-  # is always the 25,000th item even when requesting the 6th page.
   query <- list(offset=offset)
 
+  # Force sorting by UUID so that paging will be reliable ie the 25,000th item
+  # is always the 25,000th item even when requesting the 6th page.
   if (!inherits(sort, "logical")) {
     query[["sort"]] <- c(sort, "uuid")
   }else{

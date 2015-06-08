@@ -2,7 +2,7 @@
 % Please edit documentation in R/idig_search_records.R
 \name{idig_search_records}
 \alias{idig_search_records}
-\title{Basic searching of iDigBio records}
+\title{Searching of iDigBio records}
 \usage{
 idig_search_records(rq, fields = FALSE, max_items = 1e+05, limit = 0,
   offset = 0, sort = FALSE, ...)
@@ -20,8 +20,8 @@ limited set returned by default, use "all" to get all indexed fields}
 
 \item{offset}{number of results to skip before returning results}
 
-\item{sort}{vector of fields to use for sorting, if paging always include
-UUID to get reliable record order}
+\item{sort}{vector of fields to use for sorting, UUID is always appended to
+make paging safe}
 
 \item{...}{additional parameters}
 }
@@ -32,21 +32,78 @@ a data frame
 Function to query the iDigBio API for specimen records
 }
 \details{
-Currently the query needs to be specified as a list. All matching results
-are returned up to the max_items cap (default 100,000). If more results are
-wanted, the max_items can be passed as an option. Limit and offset are
-availible if manual paging of results is needed though the max_items cap
-still applies as the item count comes from the results header not the
-count of actual records in the limit/offset window.
+Wraps \code{\link{idig_search}} to provide defaults specific to searching
+specimen records. Using this function instead of \code{\link{idig_search}}
+directly is recommened.
+
+Queries need to be specified as a nested list structure that will serialize
+to an iDigBio query object's JSON as expected by the iDigBio API:
+\url{https://github.com/iDigBio/idigbio-search-api/wiki/Query-Format}
+
+As an example, the first sample query looks like this in JSON in the API
+documentation:
+\preformatted{
+{
+  "scientificname": {
+    "type": "exists"
+  },
+  "family": "asteraceae"
+}
+}
+
+To rewrite this in R for use as the rq parameter to
+\code{idig_search_records} or \code{idig_search_media}, it would look like
+this:
+\preformatted{
+rq <- list("scientificname"=list("type"="exists"), "family"="asteraceae")
+}
+See the Examples section below for more samples of simpler and more complex
+queries. Please refer to the API documentation for the full functionality
+availible in queries.
+
+All matching results are returned up to the max_items cap (default 100,000).
+If more results are wanted, a higher max_items can be passed as an option.
+This API loads records 5,000 at a time using HTTP so performance with large
+sets of data is not very good. Expect result sets over 50,000 records to
+take tens of minutes. You can use the \code{\link{idig_count_records}} or
+\code{\link{idig_count_media}} functions to find out how many records a
+query will return; these are fast.
+
+The iDigBio API will only return 5,000 records at a time but this function
+will automatically page through the results and return them all. Limit
+and offset are availible if manual paging of results is needed though the
+max_items cap still applies. The item count comes from the results header
+not the count of actual records in the limit/offset window.
 
 Return is a data.frame containing the requested fields (or the default
-fields). The columns in the data frame are types however no factors are
+fields). The columns in the data frame are untyped and no factors are pre-
 built. Attribution and other metadata is attached to the dataframe in the
-data.frame's attributes. (I.e. attributes(df)) Not exported.
+data.frame's attributes. (I.e. \code{attributes(df)})
 }
 \examples{
 \dontrun{
+# Simple example of retriving records in a genus:
 idig_search(rq=list(genus="acer"), limit=10)
+
+# This complex query shows that booleans passed to the API are represented
+# as strings in R, fields used in the query don't have to be returned, and
+# the syntax for accessing raw data fields:
+idig_search(rq=list("hasImage"="true", genus="acer"),
+            fields=c("uuid", "data.dwc:preparations"), limit=100)
+
+# "field"="values" actually searches the entire text of a field for the
+# value, it is not an exact match. Searching inside a raw data field for a
+# string:
+
+idig_search(rq=list("data.dwc:dynamicProperties"="parasite"),
+            fields=c("uuid", "data.dwc:dynamicProperties"), limit=100)
+
+# Retriving a data.frame for use with MaxEnt. Notice geopoint is expanded
+# to two columns in the data.frame: gepoint.lat and geopoint.lon:
+idig_search(rq=list(genus="acer"), fields=c("uuid", "geopoint"), limit=10)
+write.csv(df[c("uuid", "geopoint.lon", "geopoint.lat")],
+          file="acer_occurrences.csv", row.names=FALSE)
+
 }
 }
 \author{

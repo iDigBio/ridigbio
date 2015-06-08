@@ -23,8 +23,8 @@ idig_search(type = "records", mq = FALSE, rq = FALSE, fields = FALSE,
 
 \item{offset}{number of results to skip before returning results}
 
-\item{sort}{vector of fields to use for sorting, if paging always include
-UUID to get reliable record order}
+\item{sort}{vector of fields to use for sorting, UUID is always appended to
+make paging safe}
 
 \item{...}{additional parameters}
 }
@@ -32,27 +32,23 @@ UUID to get reliable record order}
 a data frame
 }
 \description{
-Function to query the iDigBio API for records
+Base function to query the iDigBio API
 }
 \details{
-This function is wrapped for media an specimen record searches and not
-eexported.
+This function is wrapped for media and specimen record searches. Please
+consider using \code{\link{idig_search_media}} or
+\code{\link{idig_search_records}} instead as they supply nice defaults to
+this function depending on the type of records desired.
 
-Currently the query needs to be specified as a list. All matching results
-are returned up to the max_items cap (default 100,000). If more results are
-wanted, the max_items can be passed as an option. Limit and offset are
-availible if manual paging of results is needed though the max_items cap
-still applies as the item count comes from the results header not the
-count of actual records in the limit/offset window.
+Fuller documentation of parameters is in the
+\code{\link{idig_search_records}} function's help.
 
-Return is a data.frame containing the requested fields (or the default
-fields). The columns in the data frame are types however no factors are
-built. Attribution and other metadata is attached to the dataframe in the
-data.frame's attributes. (I.e. attributes(df))
+Exported to facilitate wrapping this package in other packages.
 }
 \examples{
 \dontrun{
-idig_search(rq=list(genus="acer"), limit=10)
+# Ten media records related to genus Acer specimens
+idig_search(type="media", rq=list(genus="acer"), limit=10)
 }
 }
 \author{
