@@ -54,8 +54,9 @@ for (i in 1:ncol(df)){
 }
 
 # Empty results
-df <- idig_search_records(rq=list("uuid"="nobodyhome"))
+df <- idig_search_records(rq=list("uuid"="nobodyhome"), fields=fields)
 expect_that(nrow(df) == 0, is_true())
+expect_that(ncol(df) == length(fields), is_true())
 
 # Geopoint and special fields
 df <- idig_search_records(rq=list("uuid"="f84faea8-82ac-4f71-b256-6b2be5d1b59d"),
