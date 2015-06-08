@@ -36,7 +36,9 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   query <- list(offset=offset)
 
   # Force sorting by UUID so that paging will be reliable ie the 25,000th item
-  # is always the 25,000th item even when requesting the 6th page.
+  # is always the 25,000th item even when requesting the 6th page. This
+  # has been benchmarked and appears make things ~20% slower on a gigabit
+  # connection: 66s for 100,000 limit
   if (!inherits(sort, "logical")) {
     query[["sort"]] <- c(sort, "uuid")
   }else{
@@ -67,15 +69,6 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     query$limit <- limit
   }else{
     query$limit <- max_items # effectivly use iDigBio's max page size
-  }
-
-  # Default sort by UUID so paging and offset give reproducable results. This
-  # has been benchmarked and appears make things ~20% slower on a gigabit
-  # connection: 66s for 100,000 limit
-  if (inherits(sort, "character") && length(sort) > 0 ) {
-    query$sort <- c(sort, "uuid")
-  } else {
-    query$sort <- c("uuid")
   }
 
   # tricks to get inside loop first time
