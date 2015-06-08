@@ -39,8 +39,14 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   # Construct body of request to API
   # Force sorting by UUID so that paging will be reliable ie the 25,000th item
   # is always the 25,000th item even when requesting the 6th page.
-  query <- list(offset=offset, sort=c("uuid"))
+  query <- list(offset=offset)
 
+  if (!inherits(sort, "logical")) {
+    query[["sort"]] <- c(sort, "uuid")
+  }else{
+    query[["sort"]] <- c("uuid")
+  }
+  
   if (!inherits(rq, "logical")) {
     query$rq=rq
   }

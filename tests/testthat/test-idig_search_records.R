@@ -2,7 +2,7 @@ context("test idig_search_records")
 
 genus <- "acer"
 rq <-list("genus"=genus)
-fields <- c('uuid', 'genus', 'scientificname', 'data.dwc:occurrenceID')
+fields <- c('uuid', 'genus', 'specificepithet', 'data.dwc:occurrenceID')
 
 
 # Basic search, full results
@@ -21,13 +21,23 @@ expect_that(nrow(df) == 10, is_true())
 expect_that(ncol(df) == length(fields), is_true())
 expect_that(!is.null(df[1, "uuid"]), is_true())
 expect_that(!is.null(df[1, "data.dwc:occurrenceID"]), is_true())
-# Save some UUIDs for later
+# Save a UUID for offset
 second_uuid <- df[["uuid"]][[2]]
 
-# Offset - FIXME: need to do ordering by UUID testing
+# Offset
 df <- idig_search_records(rq=rq, fields=fields, limit=1, offset=1)
 expect_that(nrow(df) == 1, is_true())
 expect_that(df[["uuid"]][[1]] == second_uuid, is_true())
+
+# Sorting
+df <- idig_search_records(rq=rq, fields=fields, limit=1)
+expect_that(substr(df[["uuid"]], 1, 2) == "00", is_true())
+# coincidence of the data at the moment
+expect_that(substr(df[["specificepithet"]], 1, 1) > "m", is_true())
+df <- idig_search_records(rq=rq, fields=fields, limit=1, 
+                          sort="specificepithet")
+expect_that(substr(df[["uuid"]], 1, 2) == "00", is_false())
+expect_that(substr(df[["specificepithet"]], 1, 1) < "m", is_true())
 
 # Max items
 expect_that(df <- idig_search_records(rq=list("country"="united states")),
