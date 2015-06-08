@@ -1,6 +1,7 @@
 Package: ridigbio
 Title: Interface to the iDigBio data API
 Version: 0.2
+Date: 2015-06-08
 Authors@R: c(person("Francois", "Michonneau", role=c("aut", "cre"),
   email="francois.michonneau@gmail.com"),
   person("Matthew", "Collins", role="aut",
@@ -10,7 +11,9 @@ Description: An interface to iDigBio's search API that allows downloading
   such as the metadata end points return lists of information. iDigBio is a US
   project focused on digitizing and serving museum specimen collections on the
   web.
+URL: https://github.com/iDigBio/ridigbio
 BugReports: https://github.com/iDigBio/ridigbio/issues
+Maintainer: Matthew Collins <mcollins@acis.ufl.edu>
 Depends:
   R (>= 3.0.1)
 Imports:
