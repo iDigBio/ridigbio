@@ -1,11 +1,11 @@
 ##' Base function to query the iDigBio API
 ##'
 ##' This function is wrapped for media and specimen record searches. Please
-##' consider using \code{\link{idig_search_media}} or 
-##' \code{\link{idig_search_records}} instead as they supply nice defaults to 
+##' consider using \code{\link{idig_search_media}} or
+##' \code{\link{idig_search_records}} instead as they supply nice defaults to
 ##' this function depending on the type of records desired.
-##' 
-##' Fuller documentation of parameters is in the 
+##'
+##' Fuller documentation of parameters is in the
 ##' \code{\link{idig_search_records}} function's help.
 ##'
 ##' Exported to facilitate wrapping this package in other packages.
@@ -18,7 +18,7 @@
 ##' -safe)
 ##' @param limit maximum number of results returned
 ##' @param offset number of results to skip before returning results
-##' @param sort vector of fields to use for sorting, UUID is always appended to 
+##' @param sort vector of fields to use for sorting, UUID is always appended to
 ##' make paging safe
 ##' @param ... additional parameters
 ##' @return a data frame
@@ -30,7 +30,7 @@
 ##' idig_search(type="media", rq=list(genus="acer"), limit=10)
 ##' }
 ##'
-idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE, 
+idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
                         max_items=100000, limit=0, offset=0, sort=FALSE, ...) {
   # Construct body of request to API
   query <- list(offset=offset)
@@ -44,7 +44,7 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   }else{
     query[["sort"]] <- c("uuid")
   }
-  
+
   if (!inherits(rq, "logical")) {
     query$rq=rq
   }
@@ -107,7 +107,7 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   # Set column names, built df from matrix so they're missing
   field_indexes <- idig_field_indexes(fields)
   colnames(dat) <- names(field_indexes)
-  
+
   # Metadata as attributes on the df
   a <- attributes(dat)
   a[["itemCount"]] <- item_count
@@ -136,30 +136,29 @@ fmt_search_txt_to_df <- function(txt, fields) {
   search_items <- httr::content(txt)$items
 
   # pre-allocated matrix method
-  # This method is on the order of 2-3 seconds/5k records which is about how 
-  # long it takes the HTTP response to happen on a 100Mb/s link when asking for 
-  # 10 fields optimizing this further will quickly make HTTP the rate limiter. 
-  # The is.null() check allows for records that do not have the requested field 
+  # This method is on the order of 2-3 seconds/5k records which is about how
+  # long it takes the HTTP response to happen on a 100Mb/s link when asking for
+  # 10 fields optimizing this further will quickly make HTTP the rate limiter.
+  # The is.null() check allows for records that do not have the requested field
   # filled in.
 
   # Translate list of fields into a list of indexes, see doc on this method.
   field_indexes <- idig_field_indexes(fields)
-  l_field_indexes <- length(field_indexes)
 
-  m <- matrix(nrow=length(search_items), ncol=length(field_indexes))
-  i <- 1
-  while(i <= length(search_items)){
-    flat <- list("indexTerms"=unlist(search_items[[i]][["indexTerms"]]),
-                 "data"=unlist(search_items[[i]][["data"]]))
-    for(f in 1:l_field_indexes){
-      # Silently ignore the case when the returned data has a field unset
-      try(m[i, f] <- flat[[field_indexes[[f]]]], silent=TRUE)
-    }
-    i <- i + 1
+  if (length(search_items) > 0) {
+      flat_search_it <- lapply(search_items, function(x) {
+          res <- x[["indexTerms"]][names(field_indexes)]
+          names(res) <- names(field_indexes)
+          res[sapply(res, is.null)] <- NA
+          as.character(res)
+      })
+      res <- do.call("rbind", flat_search_it)
+      res <- data.frame(res, stringsAsFactors = FALSE)
+  } else {
+      res <- matrix(nrow=length(search_items), ncol=length(field_indexes))
+      res <- data.frame(res, stringsAsFactors = FALSE)
   }
-
-  data.frame(m, stringsAsFactors=FALSE)
-
+  res
 }
 
 

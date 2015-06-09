@@ -11,9 +11,9 @@ expect_that(df, is_a("data.frame"))
 expect_that(nrow(df) > 5000, is_true())
 expect_that(attributes(df)[["itemCount"]] > 5000, is_true())
 expect_that(length(attributes(df)[["attribution"]]) > 2 , is_true())
-expect_that(which(df$uuid == "00041678-5df1-4a23-ba78-8c12f60af369") > 0, 
+expect_that(which(df$uuid == "00041678-5df1-4a23-ba78-8c12f60af369") > 0,
             is_true())
-expect_that(min(df$genus) == genus && max(df$genus) == genus, is_true())
+expect_true(all(df$genus == genus))
 
 # Limited results, custom fields
 df <- idig_search_records(rq=rq, fields=fields, limit=10)
@@ -34,7 +34,7 @@ df <- idig_search_records(rq=rq, fields=fields, limit=1)
 expect_that(substr(df[["uuid"]], 1, 2) == "00", is_true())
 # coincidence of the data at the moment
 expect_that(substr(df[["specificepithet"]], 1, 1) > "m", is_true())
-df <- idig_search_records(rq=rq, fields=fields, limit=1, 
+df <- idig_search_records(rq=rq, fields=fields, limit=1,
                           sort="specificepithet")
 expect_that(substr(df[["uuid"]], 1, 2) == "00", is_false())
 expect_that(substr(df[["specificepithet"]], 1, 1) < "m", is_true())
@@ -67,4 +67,3 @@ expect_that(is.null(df[1, "geopoint.lat"]), is_false())
 expect_that(is.null(df[1, "flags"]), is_true())
 expect_that(is.null(df[1, "mediarecords"]), is_true())
 expect_that(is.null(df[1, "recordids"]), is_true())
-
