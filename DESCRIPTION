@@ -23,3 +23,4 @@ License: MIT + file LICENSE
 LazyData: true
 Suggests:
   testthat
+Repository: CRAN
