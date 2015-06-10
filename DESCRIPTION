@@ -1,12 +1,12 @@
 Package: ridigbio
-Title: Interface to the iDigBio data API
+Title: Interface to the iDigBio Data API
 Version: 0.2
 Date: 2015-06-08
 Authors@R: c(person("Francois", "Michonneau", role=c("aut", "cre"),
   email="francois.michonneau@gmail.com"),
   person("Matthew", "Collins", role="aut",
   email="mcollins@acis.ufl.edu"))
-Description: An interface to iDigBio's search API that allows downloading 
+Description: An interface to iDigBio's search API that allows downloading
   specimen records. Searches are returned as a data.frame. Other functions
   such as the metadata end points return lists of information. iDigBio is a US
   project focused on digitizing and serving museum specimen collections on the
