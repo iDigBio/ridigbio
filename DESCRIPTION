@@ -1,11 +1,13 @@
 Package: ridigbio
 Title: Interface to the iDigBio Data API
-Version: 0.2
-Date: 2015-06-08
-Authors@R: c(person("Francois", "Michonneau", role=c("aut", "cre"),
+Version: 0.2.1
+Date: 2015-06-11
+Authors@R: c(person("Francois", "Michonneau", role=c("aut", "cph"),
   email="francois.michonneau@gmail.com"),
-  person("Matthew", "Collins", role="aut",
-  email="mcollins@acis.ufl.edu"))
+  person("Matthew", "Collins", role=c("aut", "cre"),
+  email="mcollins@acis.ufl.edu"),
+  person("Scott", "Chamberlain", role="ctb",
+  email="myrmecocystus@gmail.com"))
 Description: An interface to iDigBio's search API that allows downloading
   specimen records. Searches are returned as a data.frame. Other functions
   such as the metadata end points return lists of information. iDigBio is a US
@@ -13,7 +15,6 @@ Description: An interface to iDigBio's search API that allows downloading
   web.
 URL: https://github.com/iDigBio/ridigbio
 BugReports: https://github.com/iDigBio/ridigbio/issues
-Maintainer: Matthew Collins <mcollins@acis.ufl.edu>
 Depends:
   R (>= 3.0.1)
 Imports:
