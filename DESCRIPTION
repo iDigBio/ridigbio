@@ -12,7 +12,7 @@ Description: An interface to iDigBio's search API that allows downloading
   specimen records. Searches are returned as a data.frame. Other functions
   such as the metadata end points return lists of information. iDigBio is a US
   project focused on digitizing and serving museum specimen collections on the
-  web. See https://www.idigbio.org for information on iDigBio.
+  web. See <https://www.idigbio.org> for information on iDigBio.
 URL: https://github.com/iDigBio/ridigbio
 BugReports: https://github.com/iDigBio/ridigbio/issues
 Depends:
