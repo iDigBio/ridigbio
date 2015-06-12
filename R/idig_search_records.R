@@ -71,9 +71,8 @@
 ##' idig_search(rq=list("hasImage"="true", genus="acer"), 
 ##'             fields=c("uuid", "data.dwc:preparations"), limit=100)
 ##' 
-##' # "field"="values" actually searches the entire text of a field for the 
-##' # value, it is not an exact match. Searching inside a raw data field for a
-##' # string:
+##' # Searching inside a raw data field for a string, note that raw data fields
+##' # are searched as full text, indexed fields are search with exact matches:
 ##' 
 ##' idig_search(rq=list("data.dwc:dynamicProperties"="parasite"), 
 ##'             fields=c("uuid", "data.dwc:dynamicProperties"), limit=100)
