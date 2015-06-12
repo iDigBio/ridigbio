@@ -1,6 +1,6 @@
 Package: ridigbio
 Title: Interface to the iDigBio Data API
-Version: 0.2.2
+Version: 0.2.3
 Date: 2015-06-11
 Authors@R: c(person("Francois", "Michonneau", role=c("aut", "cph"),
   email="francois.michonneau@gmail.com"),
