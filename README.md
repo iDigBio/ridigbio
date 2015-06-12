@@ -2,9 +2,7 @@
 
 # Installation
 
-    install.packages("devtools")
-    library(devtools)
-    install_github("idigbio/ridigbio")
+    install.packages("ridigbio")
 
 # Basic usage
 
