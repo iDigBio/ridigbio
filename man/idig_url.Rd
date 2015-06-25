@@ -4,7 +4,7 @@
 \alias{idig_url}
 \title{base URL}
 \usage{
-idig_url(dev = TRUE)
+idig_url(dev = FALSE)
 }
 \arguments{
 \item{dev}{Should be the beta version of the API be used?}

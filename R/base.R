@@ -5,7 +5,7 @@
 ##' @return string for the URL
 ##' @param dev Should be the beta version of the API be used?
 ##' @author Francois Michonneau
-idig_url <- function(dev=TRUE) {
+idig_url <- function(dev=FALSE) {
     if (dev) {
         "http://beta-search.idigbio.org"
     } else {
