@@ -63,23 +63,24 @@
 ##' @examples
 ##' \dontrun{
 ##' # Simple example of retriving records in a genus:
-##' idig_search(rq=list(genus="acer"), limit=10)
+##' idig_search_records(rq=list(genus="acer"), limit=10)
 ##' 
 ##' # This complex query shows that booleans passed to the API are represented
 ##' # as strings in R, fields used in the query don't have to be returned, and
 ##' # the syntax for accessing raw data fields:
-##' idig_search(rq=list("hasImage"="true", genus="acer"), 
-##'             fields=c("uuid", "data.dwc:preparations"), limit=100)
+##' idig_search_records(rq=list("hasImage"="true", genus="acer"), 
+##'             fields=c("uuid", "data.dwc:verbatimLatitude"), limit=100)
 ##' 
 ##' # Searching inside a raw data field for a string, note that raw data fields
 ##' # are searched as full text, indexed fields are search with exact matches:
 ##' 
-##' idig_search(rq=list("data.dwc:dynamicProperties"="parasite"), 
+##' idig_search_records(rq=list("data.dwc:dynamicProperties"="parasite"), 
 ##'             fields=c("uuid", "data.dwc:dynamicProperties"), limit=100)
 ##' 
 ##' # Retriving a data.frame for use with MaxEnt. Notice geopoint is expanded
 ##' # to two columns in the data.frame: gepoint.lat and geopoint.lon:
-##' idig_search(rq=list(genus="acer"), fields=c("uuid", "geopoint"), limit=10)
+##' df <- idig_search_records(rq=list(genus="acer", geopoint=list(type="exists")), 
+##'           fields=c("uuid", "geopoint"), limit=10)
 ##' write.csv(df[c("uuid", "geopoint.lon", "geopoint.lat")], 
 ##'           file="acer_occurrences.csv", row.names=FALSE)
 ##'           
