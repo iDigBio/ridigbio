@@ -32,7 +32,8 @@ expect_that(length(attributes(df)[["attribution"]]) > 2 , is_true())
 df <- idig_search_media(mq=mq, fields=fields, limit=10)
 expect_that(nrow(df) == 10, is_true())
 expect_that(ncol(df) == length(fields), is_true())
-expect_that(!is.null(df[1, "uuid"]), is_true())
-expect_that(!is.null(df[1, "data.ac:accessURI"]), is_true())
+expect_that(!is.null(df[1, "uuid"]) && df[1, "uuid"] != "NA" , is_true())
+expect_that(!is.null(df[1, "data.ac:accessURI"]) && df[1, "data.ac:accessURI"]
+            != "NA", is_true())
 # Save some UUIDs for later
 #second_uuid <- df[["uuid"]][[2]]
