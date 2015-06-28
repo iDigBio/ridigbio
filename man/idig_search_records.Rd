@@ -99,7 +99,7 @@ idig_search_records(rq=list("data.dwc:dynamicProperties"="parasite"),
 
 # Retriving a data.frame for use with MaxEnt. Notice geopoint is expanded
 # to two columns in the data.frame: gepoint.lat and geopoint.lon:
-idig_search_records(rq=list(genus="acer", geopoint=list(type="exists")),
+df <- idig_search_records(rq=list(genus="acer", geopoint=list(type="exists")),
           fields=c("uuid", "geopoint"), limit=10)
 write.csv(df[c("uuid", "geopoint.lon", "geopoint.lat")],
           file="acer_occurrences.csv", row.names=FALSE)

@@ -71,8 +71,14 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     query$limit <- max_items # effectivly use iDigBio's max page size
   }
 
+  field_indexes <- idig_field_indexes(fields)
+  #colnames(dat) <- field_indexes[["names"]]
+  
   # tricks to get inside loop first time
-  dat <- data.frame()
+  m <- matrix(nrow=0, ncol=length(fields))
+  #    res <- data.frame(res, stringsAsFactors = FALSE)
+  dat <- data.frame(m, stringsAsFactors=False)
+  colnames(dat) <- fields
   item_count <- 1
 
   # loop until we either have all results or all results the user wants
@@ -87,14 +93,14 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
                   " results. See max_items argument."))
     }
 
-    if (nrow(dat) == 0){
-      dat <- fmt_search_txt_to_df(search_results, fields)
-    } else {
+    #if (nrow(dat) == 0){
+    #  dat <- fmt_search_txt_to_df(search_results, fields)
+    #} else {
       #dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, 
       # fields))
-      dat <- rbind(dat, fmt_search_txt_to_df(search_results, fields))
+      dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
       #print(paste0(Sys.time(), " completed append"))
-    }
+    #}
     # Need to add a safety here to make sure the parsing adds rows to the df
     # maybe a stop or return false from the parser if no rows found?
 
@@ -104,10 +110,12 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     }
   }
 
-  # Set column names, built df from matrix so they're missing
-  field_indexes <- idig_field_indexes(fields)
-  colnames(dat) <- names(field_indexes)
+  # Set column names, built df with unlist()'s so they're missing
+  #field_indexes <- idig_field_indexes(fields)
+  #colnames(dat) <- field_indexes[["names"]]
 
+
+  
   # Metadata as attributes on the df
   a <- attributes(dat)
   a[["itemCount"]] <- item_count
@@ -133,8 +141,20 @@ fmt_search_txt_to_df <- function(txt, fields) {
 
   #Before continuing to add error handling, let's settle on a pattern.
 
-  search_items <- httr::content(txt)$items
+  search_items <- jsonlite::fromJSON(httr::content(txt, as="text"))[["items"]]
+  res <- data.frame(search_items[["indexTerms"]], 
+                    search_items[["data"]])
 
+  # Fixup geopoint into two fields for convenience
+  # Not doing this inside here means the rbind.fill function seems to pack
+  # list fields into nested lists in the last record of the first df made. It's 
+  # weird. Would be nicer to do this outside the paging loop otherwise.
+  if ("geopoint" %in% colnames(res)){
+    res[["geopoint_lon"]] <- res[["geopoint"]][[1]]
+    res[["geopoint_lat"]] <- res[["geopoint"]][[2]]
+    res$geopoint <- NULL
+  }
+  
   # pre-allocated matrix method
   # This method is on the order of 2-3 seconds/5k records which is about how
   # long it takes the HTTP response to happen on a 100Mb/s link when asking for
@@ -143,21 +163,30 @@ fmt_search_txt_to_df <- function(txt, fields) {
   # filled in.
 
   # Translate list of fields into a list of indexes, see doc on this method.
-  field_indexes <- idig_field_indexes(fields)
+#  field_indexes <- idig_field_indexes(fields)
 
-  if (length(search_items) > 0) {
-      flat_search_it <- lapply(search_items, function(x) {
-          res <- x[["indexTerms"]][names(field_indexes)]
-          names(res) <- names(field_indexes)
-          res[sapply(res, is.null)] <- NA
-          as.character(res)
-      })
-      res <- do.call("rbind", flat_search_it)
-      res <- data.frame(res, stringsAsFactors = FALSE)
-  } else {
-      res <- matrix(nrow=length(search_items), ncol=length(field_indexes))
-      res <- data.frame(res, stringsAsFactors = FALSE)
-  }
+  
+#  # This falls down because geopoint is 2 fields if it exists and 1 if not
+#  if (length(search_items) > 0) {
+#    flat_search_it <- lapply(search_items, function(x) {
+#      res <- c(x[["indexTerms"]][field_indexes[["indexTerms"]]], 
+#               x[["data"]][field_indexes[["data"]]])
+#      #res <- x[["indexTerms"]][names(field_indexes)]
+#      #names(res) <- names(field_indexes)
+#
+#      
+#      res[sapply(res, is.null)] <- NA
+#      res <- unlist(res)
+#      #names(res) <- names(field_indexes[["names"]])
+#      #as.character(res)
+#      res
+#    })
+#    res <- do.call("rbind", flat_search_it)
+#    res <- data.frame(res, stringsAsFactors = FALSE)
+#  } else {
+#    res <- matrix(nrow=length(search_items), ncol=length(field_indexes[["names"]]))
+#    res <- data.frame(res, stringsAsFactors = FALSE)
+#  }
   res
 }
 

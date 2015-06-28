@@ -160,4 +160,7 @@ idig_field_indexes <- function(fields){
     }
   }
   l
+  list("names"=c("uuid", "geopoint.lon", "geopoint.lat"), 
+       "indexTerms"=c("uuid", "geopoint"), 
+       "data"=c())
 }
