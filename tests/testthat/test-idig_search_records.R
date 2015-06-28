@@ -63,9 +63,9 @@ expect_that(ncol(df) == length(fields), is_true())
 df <- idig_search_records(rq=list("uuid"="f84faea8-82ac-4f71-b256-6b2be5d1b59d"),
                           fields=c("uuid", "geopoint", "mediarecords", "flags",
                           "recordids"), limit=10)
-expect_that(!is.null(df[1, "geopoint.lat"]) && df[1, "geopoint.lat"] != "NA", 
+expect_that(!is.null(df[1, "geopoint_lat"]) && df[1, "geopoint_lat"] != "NA", 
             is_true())
-expect_that(!is.null(df[1, "geopoint.lon"]) && df[1, "geopoint.lon"] != "NA", 
+expect_that(!is.null(df[1, "geopoint_lon"]) && df[1, "geopoint_lon"] != "NA", 
             is_true())
 expect_that(is.null(df[1, "flags"]), is_true())
 expect_that(is.null(df[1, "mediarecords"]), is_true())
