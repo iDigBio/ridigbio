@@ -230,5 +230,14 @@ build_field_lists <- function(fields, type) {
     # Load up all fields possible
     ret$fields <- names(idig_meta_fields(type=type, subset="indexed"))
   }
+  
+  # Fixup geopoint into two fields. There is also a parallel fixup inside the
+  # fmt_search_txt_to_df() function. Preserve field order that the user 
+  # specified.
+  if ("geopoint" %in% ret[["fields"]]){
+    i <- match("geopoint", ret[["fields"]])
+    ret[["fields"]][[i]] <- "geopoint.lon"
+    ret[["fields"]] <- append(ret[["fields"]], "geopoint.lat", i)
+  }
   ret
 }
