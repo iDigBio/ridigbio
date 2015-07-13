@@ -141,26 +141,26 @@ idig_validate <- function(inputs){
 ##' field names from data and "indexTerms", a list of field names from 
 ##' indexTerms
 ##' @author Matthew Collins
-idig_field_indexes <- function(fields){
-  # looping is old school but keeps the order of fields similar to user input
-  l = list()
-  for (i in fields) {
-    if (i == "flags" ||
-        i == "recordids" ||
-        i == "mediarecords" ||
-        i == "records") {
-      next
-    } else if (i == "geopoint") {
-      l[[paste0(i, ".lat")]] <- c("indexTerms", "geopoint.lat")
-      l[[paste0(i, ".lon")]] <- c("indexTerms", "geopoint.lon")
-    } else if (substr(i, 1, 5) == "data."){
-      l[[i]] <- c("data", substring(i, 6))
-    } else {
-      l[[i]] <- c("indexTerms", i)
-    }
-  }
-  l
-  list("names"=c("uuid", "geopoint.lon", "geopoint.lat"), 
-       "indexTerms"=c("uuid", "geopoint"), 
-       "data"=c())
-}
+#idig_field_indexes <- function(fields){
+#  # looping is old school but keeps the order of fields similar to user input
+#  l = list()
+#  for (i in fields) {
+#    if (i == "flags" ||
+#        i == "recordids" ||
+#        i == "mediarecords" ||
+#        i == "records") {
+#      next
+#    } else if (i == "geopoint") {
+#      l[[paste0(i, ".lat")]] <- c("indexTerms", "geopoint.lat")
+#      l[[paste0(i, ".lon")]] <- c("indexTerms", "geopoint.lon")
+#    } else if (substr(i, 1, 5) == "data."){
+#      l[[i]] <- c("data", substring(i, 6))
+#    } else {
+#      l[[i]] <- c("indexTerms", i)
+#    }
+#  }
+#  l
+#  list("names"=c("uuid", "geopoint.lon", "geopoint.lat"), 
+#       "indexTerms"=c("uuid", "geopoint"), 
+#       "data"=c())
+#}

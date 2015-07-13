@@ -71,7 +71,7 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     query$limit <- max_items # effectivly use iDigBio's max page size
   }
 
-  field_indexes <- idig_field_indexes(fields)
+  #field_indexes <- idig_field_indexes(fields)
   #colnames(dat) <- field_indexes[["names"]]
   
   # tricks to get inside loop first time
@@ -143,15 +143,27 @@ fmt_search_txt_to_df <- function(txt, fields) {
 
   search_items <- jsonlite::fromJSON(httr::content(txt, as="text"))[["items"]]
   res <- data.frame(search_items[["indexTerms"]], 
-                    search_items[["data"]])
+                    search_items[["data"]], stringsAsFactors=FALSE)
 
+  # Append "data." to the data field names. Also, for some reason ":" gets 
+  # changed to "." in the data field names when making the df. Need the if
+  # statements because helpfully paste0("str", NULL) => "str".
+  n <- c()
+  if (length(names(search_items[["indexTerms"]])) > 0){
+    n <- c(n, names(search_items[["indexTerms"]]))
+  }
+  if (length(names(search_items[["data"]])) > 0){
+    n <- c(n, paste0("data.", names(search_items[["data"]])))
+  }
+  colnames(res) <- n
+  
   # Fixup geopoint into two fields for convenience
-  # Not doing this inside here means the rbind.fill function seems to pack
+  # Doing this inside here because the rbind.fill function seems to pack
   # list fields into nested lists in the last record of the first df made. It's 
   # weird. Would be nicer to do this outside the paging loop otherwise.
   if ("geopoint" %in% colnames(res)){
-    res[["geopoint_lon"]] <- res[["geopoint"]][[1]]
-    res[["geopoint_lat"]] <- res[["geopoint"]][[2]]
+    res[["geopoint.lon"]] <- res[["geopoint"]][[1]]
+    res[["geopoint.lat"]] <- res[["geopoint"]][[2]]
     res$geopoint <- NULL
   }
   
