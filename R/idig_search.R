@@ -58,22 +58,12 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   fields <- field_lists$fields
   query <- append(query, field_lists$query)
 
-#  if (!is.null(field_lists$rq_fields)) {
-#    query$fields <- field_lists$rq_fields
-#  }
-#  if (!is.null(field_lists$rq_fields_exclude)) {
-#    query$fields <- field_lists$rq_fields_exclude
-#  }
-
   if (limit > 0){
     query$limit <- limit
   }else{
     query$limit <- max_items # effectivly use iDigBio's max page size
   }
 
-  #field_indexes <- idig_field_indexes(fields)
-  #colnames(dat) <- field_indexes[["names"]]
-  
   # tricks to get inside loop first time
   m <- matrix(nrow=0, ncol=length(fields))
   #    res <- data.frame(res, stringsAsFactors = FALSE)
@@ -93,16 +83,7 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
                   " results. See max_items argument."))
     }
 
-    #if (nrow(dat) == 0){
-    #  dat <- fmt_search_txt_to_df(search_results, fields)
-    #} else {
-      #dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, 
-      # fields))
-      dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
-      #print(paste0(Sys.time(), " completed append"))
-    #}
-    # Need to add a safety here to make sure the parsing adds rows to the df
-    # maybe a stop or return false from the parser if no rows found?
+    dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
 
     query$offset <- nrow(dat)
     if (limit > 0){
@@ -110,18 +91,12 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     }
   }
 
-  # Set column names, built df with unlist()'s so they're missing
-  #field_indexes <- idig_field_indexes(fields)
-  #colnames(dat) <- field_indexes[["names"]]
-
-
-  
   # Metadata as attributes on the df
   a <- attributes(dat)
   a[["itemCount"]] <- item_count
   a[["attribution"]] <- fmt_search_txt_to_attribution(search_results)
   attributes(dat) <- a
-  #print(paste0(Sys.time(), " completed"))
+
   dat
 }
 
@@ -166,39 +141,7 @@ fmt_search_txt_to_df <- function(txt, fields) {
     res[["geopoint.lat"]] <- res[["geopoint"]][[2]]
     res$geopoint <- NULL
   }
-  
-  # pre-allocated matrix method
-  # This method is on the order of 2-3 seconds/5k records which is about how
-  # long it takes the HTTP response to happen on a 100Mb/s link when asking for
-  # 10 fields optimizing this further will quickly make HTTP the rate limiter.
-  # The is.null() check allows for records that do not have the requested field
-  # filled in.
 
-  # Translate list of fields into a list of indexes, see doc on this method.
-#  field_indexes <- idig_field_indexes(fields)
-
-  
-#  # This falls down because geopoint is 2 fields if it exists and 1 if not
-#  if (length(search_items) > 0) {
-#    flat_search_it <- lapply(search_items, function(x) {
-#      res <- c(x[["indexTerms"]][field_indexes[["indexTerms"]]], 
-#               x[["data"]][field_indexes[["data"]]])
-#      #res <- x[["indexTerms"]][names(field_indexes)]
-#      #names(res) <- names(field_indexes)
-#
-#      
-#      res[sapply(res, is.null)] <- NA
-#      res <- unlist(res)
-#      #names(res) <- names(field_indexes[["names"]])
-#      #as.character(res)
-#      res
-#    })
-#    res <- do.call("rbind", flat_search_it)
-#    res <- data.frame(res, stringsAsFactors = FALSE)
-#  } else {
-#    res <- matrix(nrow=length(search_items), ncol=length(field_indexes[["names"]]))
-#    res <- data.frame(res, stringsAsFactors = FALSE)
-#  }
   res
 }
 
