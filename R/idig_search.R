@@ -67,7 +67,7 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   # tricks to get inside loop first time
   m <- matrix(nrow=0, ncol=length(fields))
   #    res <- data.frame(res, stringsAsFactors = FALSE)
-  dat <- data.frame(m, stringsAsFactors=False)
+  dat <- data.frame(m, stringsAsFactors=FALSE)
   colnames(dat) <- fields
   item_count <- 1
 
