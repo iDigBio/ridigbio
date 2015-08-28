@@ -16,4 +16,4 @@ expect_that(num > 10 * 1000, is_true())
 
 num <- idig_count_media(mq=list("dqs"=dqs))
 expect_that(num, is_a("integer"))
-expect_that(num > 400 * 1000, is_true())
+expect_that(num > 1000, is_true())

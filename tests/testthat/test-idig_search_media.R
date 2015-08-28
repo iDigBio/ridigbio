@@ -5,7 +5,7 @@ context("test idig_search_media")
 
 genus <- "cortinarius"
 rq <-list("genus"=genus)
-mq <- list("dqs"=list("type"="range", "gte"=0.2, "lte"=0.4))
+mq <- list("dqs"=list("type"="range", "gte"=0.2, "lte"=0.8))
 fields <- c('uuid', 'dqs', 'hasSpecimen', 'data.ac:accessURI')
 u <- "000113ce-84d4-467c-9fe3-13191596865e"
 
