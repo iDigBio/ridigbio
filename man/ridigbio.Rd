@@ -36,6 +36,14 @@ documenation first with \code{?idig_search_records} is recommended.
 This package does not yet provide an interface to the mapping or the
 download APIs.
 }
+
+\section{Citing}{
+
+
+To cite the ridigbio package in your work, please use the following format:
+
+Michonneau F, Collins M, Chamberlain SA (2016). ridigbio: An interface to iDigBio's search API that allows downloading specimen records. R package version 0.3.2. https://github.com/iDigBio/ridigbio
+}
 \author{
 Francois Michonneau \email{francois.michonneau@gmail.com}
 
