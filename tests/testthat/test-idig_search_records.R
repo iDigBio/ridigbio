@@ -26,14 +26,14 @@ test_that("limited results, custom fields works", {
   expect_that(!is.null(df[1, "uuid"]) && df[1, "uuid"] != "NA", is_true())
   expect_that(!is.null(df[1, "data.dwc:occurrenceID"]) && 
                 df[1, "data.dwc:occurrenceID"] != "NA", is_true())
-  # Save a UUID for offset
-  second_uuid <- df[["uuid"]][[2]]
 })
 
 test_that("offset works", {
   testthat::skip_on_cran()
+  df <- idig_search_records(rq=rq, fields=fields, limit=2, offset=0)
+  second_uuid <- df[["uuid"]][[2]]
+  
   df <- idig_search_records(rq=rq, fields=fields, limit=1, offset=1)
-
   expect_that(nrow(df) == 1, is_true())
   expect_that(df[["uuid"]][[1]] == second_uuid, is_true())
 })
