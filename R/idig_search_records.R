@@ -101,7 +101,8 @@ idig_search_records <- function(rq, fields=FALSE, max_items=100000, limit=0,
                      'stateprovince',
                      'geopoint',
                      'datecollected',
-                     'collector')
+                     'collector',
+                     'recordset')
 
   # Validate inputs
   if (!(inherits(rq, "list"))) { stop("rq is not a list") }
