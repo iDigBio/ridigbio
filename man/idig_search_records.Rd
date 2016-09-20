@@ -57,6 +57,30 @@ this:
 \preformatted{
 rq <- list("scientificname"=list("type"="exists"), "family"="asteraceae")
 }
+
+An example of a more complex JSON query
+
+{```
+
+  "geopoint": {
+    "type": "geo_bounding_box",
+    "top_left": {
+      "lat": 19.23,
+      "lon": -130
+    },
+    "bottom_right": {
+      "lat": -45.1119,
+      "lon": 179.99999
+    }
+  }
+}
+```
+To rewrite this in R for use as the rq parameter to
+\code{idig_search_records} or \code{idig_search_media}, it would look like
+this:
+\preformatted{
+rq <- list(geopoint=list(type="geo_bounding_box", top_left=list(lat=19.23, lon=-130), bottom_right= list(lat=-45.1119, lon= 179.99999)))
+}
 See the Examples section below for more samples of simpler and more complex
 queries. Please refer to the API documentation for the full functionality
 availible in queries.
@@ -103,6 +127,7 @@ df <- idig_search_records(rq=list(genus="acer", geopoint=list(type="exists")),
           fields=c("uuid", "geopoint"), limit=10)
 write.csv(df[c("uuid", "geopoint.lon", "geopoint.lat")],
           file="acer_occurrences.csv", row.names=FALSE)
+
 
 }
 }
