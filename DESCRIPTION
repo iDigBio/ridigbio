@@ -9,7 +9,9 @@ Authors@R: c(person("Francois", "Michonneau", role=c("aut", "cph"),
   person("Scott", "Chamberlain", role="ctb",
   email="myrmecocystus@gmail.com"),
   person("Kevin", "Love", role="ctb",
-  email="klove@flmnh.ufl.edu"))
+  email="klove@flmnh.ufl.edu"),
+  person("Hem Nalini", "Morzaria-Luna", role="ctb",
+  email="hemnalin.morzarialuna@noaa.gov"))
 Description: An interface to iDigBio's search API that allows downloading
   specimen records. Searches are returned as a data.frame. Other functions
   such as the metadata end points return lists of information. iDigBio is a US
