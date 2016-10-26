@@ -11,7 +11,7 @@ If R says the package is unavailable, you may not have set a CRAN mirror. You ca
     chooseCRANmirror()
 	
 If R says that a binary package is not available, your version of R may be too old. Please 
-review the versions of R that CRAN has built packages for on the [CRAN ridigbio package page.](http://cran.r-project.org/web/packages/ridigbio/index.html)
+review the versions of R that CRAN has built packages for on the [CRAN ridigbio package page.]( https://cran.r-project.org/package=ridigbio)
 You can download the source package and install manually if there is no package built for 
 your version of R. You may also need to install any dependencies.
 
