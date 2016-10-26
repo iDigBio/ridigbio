@@ -55,7 +55,9 @@ To rewrite this in R for use as the rq parameter to
 \code{idig_search_records} or \code{idig_search_media}, it would look like
 this:
 \preformatted{
-rq <- list("scientificname"=list("type"="exists"), "family"="asteraceae")
+rq <- list("scientificname"=list("type"="exists"), 
+           "family"="asteraceae"
+           )
 }
 An example of a more complex JSON query with nested structures:
 \preformatted{
