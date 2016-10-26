@@ -48,9 +48,9 @@ idig_parse <- function(req) {
 ##' @author Francois Michonneau
 idig_check <- function(req) {
   if (req$status_code >= 400) {
-    msg <- idig_parse(req)
-    stop("HTTP failure: ", req$status_code, "\n", msg$error, "\n",
-         msg$context, "\n", msg$name, call. = FALSE)
+    msg <- substr(req, 1, 200)
+    stop("HTTP failure: ", req$status_code, "\n",
+         "Error message from API server: ", msg, call. = FALSE)
   }
   idig_check_error(req)
 }
