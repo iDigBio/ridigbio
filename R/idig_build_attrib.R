@@ -15,7 +15,7 @@
 ##' @export
 idig_build_attrib <- function(dat){
   dat$count <- 1
-  datAgg <- aggregate(count ~ recordset, data = dat,sum)
+  datAgg <- stats::aggregate(count ~ recordset, data = dat,sum)
   datAt <- attributes(dat)
   dx <- data.frame(stringsAsFactors = FALSE)
   for (i in seq(1,length(datAt$attribution))){
