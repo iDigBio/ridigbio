@@ -14,8 +14,8 @@
 ##' @param mq iDigBio media query in nested list format
 ##' @param rq iDigBio record query in nested list format
 ##' @param fields vector of fields that will be contained in the data.frame
-##' @param max_items maximum number of results allowed to be retrieved (fail
-##' -safe)
+##' @param max_items CURRENTLY IGNORED, SEE ISSUE #33 maximum number of results 
+##' allowed to be retrieved (fail-safe)
 ##' @param limit maximum number of results returned
 ##' @param offset number of results to skip before returning results
 ##' @param sort vector of fields to use for sorting, UUID is always appended to
@@ -32,6 +32,7 @@
 ##'
 idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
                         max_items=100000, limit=0, offset=0, sort=FALSE, ...) {
+  
   # Construct body of request to API
   query <- list(offset=offset)
 
@@ -64,6 +65,20 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     query$limit <- max_items # effectivly use iDigBio's max page size
   }
 
+  
+  # Now that limit is known, we can do this check.
+  # Don't let people ask for more than 100k results. This is combined with the 
+  # later check to make sure the actual result size is less than 100k. Refer to 
+  # issue #33 (https://github.com/iDigBio/ridigbio/issues/33)
+  # for a discussion about Elastic Search and the API's limits on results in
+  # their current implimentation.
+  if (max_items > 100000 || (query$offset + query$limit) > 100000){
+    stop(paste0("You have requested more than 100,000 ",
+                " results. This functionality is currently disabled.",
+                " Please see https://github.com/iDigBio/ridigbio/issues/33"))
+  }  
+  
+  
   # tricks to get inside loop first time
   m <- matrix(nrow=0, ncol=length(fields))
   #    res <- data.frame(res, stringsAsFactors = FALSE)
@@ -78,11 +93,13 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
     # Slight possibility of the number of items changing as we go due to inserts
     # deletes at iDigBio, put this inside the loop to keep it current
     item_count <- fmt_search_txt_to_itemCount(search_results)
-    if ((limit == 0 || limit > max_items) && item_count > max_items){
-      stop(paste0("Search would return more than ", max_items,
-                  " results. See max_items argument."))
-    }
 
+    if ((limit == 0 || limit > max_items) && item_count > max_items){
+      stop(paste0("Search would return more than 100,000",
+                  " results. This functionality is currently disabled.",
+                  " Please see https://github.com/iDigBio/ridigbio/issues/33"))
+    }
+    
     dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
 
     query$offset <- nrow(dat)

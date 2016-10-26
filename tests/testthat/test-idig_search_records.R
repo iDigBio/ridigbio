@@ -53,11 +53,27 @@ test_that("sorting works", {
   expect_that(substr(df[["specificepithet"]], 1, 1) < "m", is_true())
 })
 
-test_that("max items is thrown for large queries", {
+test_that("max items disabled is thrown for large queries", {
   testthat::skip_on_cran()
   
   expect_that(df <- idig_search_records(rq=list("country"="united states")),
-            throws_error("max_items"))
+            throws_error("disabled"))
+})
+
+test_that("max items disabled is thrown for windows past 100k", {
+  testthat::skip_on_cran()
+  
+  expect_that(df <- idig_search_records(rq=list("country"="united states"),
+                                        offset=99000, limit=2000),
+              throws_error("disabled"))
+})
+
+test_that("can get the 100000th result", {
+  testthat::skip_on_cran()
+  
+  df <- idig_search_records(rq=list("country"="united states"),
+            limit=1, offset=99999)
+  expect_that(nrow(df) == 1, is_true())
 })
 
 test_that("all fields returns a lot of fields", {
