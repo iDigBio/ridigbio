@@ -24,7 +24,7 @@ idig_build_attrib <- function(dat){
       uuid <- datAt$attribution[[i]]$uuid
       itemCount <- datAgg$count[datAgg$recordset == datAt$attribution[[i]]$uuid]
       rows <- cbind(data.frame(collection,stringsAsFactors = FALSE),data.frame(uuid,stringsAsFactors = FALSE),data.frame(itemCount,stringsAsFactors = FALSE))
-      dx <- plyr::rbind.fill(dx,rows)
+      dx <- dplyr::bind_rows(dx,rows)
     }
 
   }
