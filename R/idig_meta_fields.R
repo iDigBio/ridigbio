@@ -28,7 +28,7 @@ idig_meta_fields <- function(type="records", subset=FALSE, ...){
 
 fmt_metafields_txt_to_indexed <- function(txt){
   f <- httr::content(txt)
-  f[-match("data", names(f))]
+  f[-match(c("data", "indexData"), names(f))]
 }
 
 fmt_metafields_txt_to_raw <- function(txt){

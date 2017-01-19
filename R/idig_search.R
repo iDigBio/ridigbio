@@ -186,7 +186,7 @@ build_field_lists <- function(fields, type) {
     # already dropped because it's not a requested field. When no field
     # parameter is passed then drop it manually since by default we will not
     # return data fields and this saves significant transfer.
-    ret$query$fields_exclude <- "data"
+    ret$query$fields_exclude <- c("data", "indexData")
     # Load up all fields possible
     ret$fields <- names(idig_meta_fields(type=type, subset="indexed"))
   }
