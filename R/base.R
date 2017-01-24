@@ -104,8 +104,9 @@ idig_POST <- function(path, body, ...) {
     # Manually encode so we can use auto_unbox=TRUE, see ticket 
     # https://github.com/iDigBio/ridigbio/issues/3
     json <- jsonlite::toJSON(body, auto_unbox=TRUE)
-    req <- httr::POST(idig_url(), path=paste(idig_version(), path, sep="/"),
-                      body=json, ...)
+    req <- httr::POST(idig_url(), path=paste("v2", path, sep="/"),
+                      body=json, httr::accept_json(), 
+                      httr::content_type_json(), ...)
     idig_check(req)
 
     req
