@@ -100,7 +100,7 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
                   " Please see https://github.com/iDigBio/ridigbio/issues/33"))
     }
     
-    dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
+    dat <- dplyr::bind_rows(dat, fmt_search_txt_to_df(search_results, fields))
 
     query$offset <- nrow(dat)
     if (limit > 0){
