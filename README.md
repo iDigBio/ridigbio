@@ -17,7 +17,7 @@ your version of R. You may also need to install any dependencies.
 
     install.packages("ridigbio", type="source")
 
-On Linux, you may encounter an error during the installation process if you do not have `libcurl` installed. Installing libcurl will vary between distributions, but on Ubuntu you can install the latest version via:
+On Linux, you may encounter an error during the installation process if you do not have `libcurl` installed. The method for installing libcurl will vary between distributions, but on Ubuntu you can install the latest version via:
 
     sudo apt install libcurl4
 # Basic usage
