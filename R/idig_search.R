@@ -99,20 +99,25 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
                   " results. This functionality is currently disabled.",
                   " Please see https://github.com/iDigBio/ridigbio/issues/33"))
     }
-    
-    dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
 
-    query$offset <- nrow(dat)
+    dat[[i]] <- fmt_search_txt_to_df(search_results, fields)
+    n_res <- n_res + nrow(dat[[i]])
+
+    query$offset <- n_res
     if (limit > 0){
-      query$limit <- limit - nrow(dat)
+      query$limit <- limit - n_res
     }
+    i <- i + 1
   }
 
+    dat_template <- data.frame(rep(list(logical(0)), length(fields)),
+                               stringsAsFactors = FALSE)
+    names(dat_template) <- fields
+    dat <- dplyr::bind_rows(dat_template, dat)
+
   # Metadata as attributes on the df
-  a <- attributes(dat)
-  a[["itemCount"]] <- item_count
-  a[["attribution"]] <- fmt_search_txt_to_attribution(search_results)
-  attributes(dat) <- a
+  attr(dat, "itemCount") <- item_count
+  attr(dat, "attribution") <- fmt_search_txt_to_attribution(search_results)
 
   dat
 }
