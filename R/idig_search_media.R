@@ -43,15 +43,15 @@ idig_search_media <- function(mq=FALSE, rq=FALSE, fields=FALSE,
   # Validate inputs
   #if (!(inherits(rq, "list"))) { stop("rq is not a list") }
 
-  if (!(length(rq) > 0) && !(length(rq) > 0)) {
+  if (!(length(rq) > 0) & !(length(rq) > 0)) {
     stop("mq or rq must not be 0 length")
   }
 
-  if (inherits(fields, "logical") && fields == FALSE) {
+  if (inherits(fields, "logical") & fields == FALSE) {
     fields <- DEFAULT_FIELDS
   }
 
-  if (!(fields == "all" ) && !(inherits(fields, "character"))) {
+  if (!(fields == "all" ) & !(inherits(fields, "character"))) {
     stop("Invalid value for fields")
   }
 

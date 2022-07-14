@@ -14,11 +14,11 @@ idig_count_media <- function(rq=FALSE, mq=FALSE, ...){
   # empty if the user doesn't specify anything
   query <- list()
 
-  if (inherits(rq, "list") && length(rq) > 0){
+  if (inherits(rq, "list") & length(rq) > 0){
     query$rq <- rq
   }
 
-  if (inherits(mq, "list") && length(mq) > 0){
+  if (inherits(mq, "list") & length(mq) > 0){
     query$mq <- mq
   }
 

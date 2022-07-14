@@ -87,14 +87,14 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   item_count <- 1
 
   # loop until we either have all results or all results the user wants
-  while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)){
+  while (nrow(dat) < item_count & (limit == 0 | nrow(dat) < limit)){
     search_results <- idig_POST(paste0("search/", type), body=query, ...)
     #print(paste0(Sys.time(), " completed query"))
     # Slight possibility of the number of items changing as we go due to inserts
     # deletes at iDigBio, put this inside the loop to keep it current
     item_count <- fmt_search_txt_to_itemCount(search_results)
 
-    if ((limit == 0 || limit > max_items) && item_count > max_items){
+    if ((limit == 0 | limit > max_items) & item_count > max_items){
       stop(paste0("Search would return more than 100,000",
                   " results. This functionality is currently disabled.",
                   " Please see https://github.com/iDigBio/ridigbio/issues/33"))
@@ -178,7 +178,7 @@ build_field_lists <- function(fields, type) {
   ret <- list()
   ret$query = list()
   # Here Alex says to eat "all" rather than pass it through to the API
-  if (inherits(fields, "character") && fields != "all" && length(fields) > 0 ){
+  if (inherits(fields, "character") & !("all" %in% fields) & length(fields) > 0 ){
     ret$fields <- fields
     ret$query$fields <- fields
   } else {

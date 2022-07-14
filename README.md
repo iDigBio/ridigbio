@@ -23,7 +23,7 @@ On Linux, you may encounter an error during the installation process if you do n
 # Basic usage
 
     library("ridigbio")
-    idig_search_records(rq=list(genus="acer"))
+    idig_search_records(rq=list(genus="galax"))
     idig_search_records(rq=list(family="holothuriidae"), limit=1000)
 
 Complete list of terms that can be used is available [here](https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields)
