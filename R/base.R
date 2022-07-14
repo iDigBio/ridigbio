@@ -65,7 +65,7 @@ idig_check <- function(req) {
 ##' @author Francois Michonneau
 idig_check_error <- function(req) {
   cont <- httr::content(req)
-  if (is.list(cont) && exists("error", cont)) {
+  if (is.list(cont) & exists("error", cont)) {
     stop(paste("Error: ", cont$error, "\n", sep = ""))
   }
 }

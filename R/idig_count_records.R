@@ -14,7 +14,7 @@ idig_count_records <- function(rq=FALSE, ...){
   # empty if the user doesn't specify anything
   query <- list()
 
-  if (inherits(rq, "list") && length(rq) > 0){
+  if (inherits(rq, "list") & length(rq) > 0){
     query$rq <- rq
   }
 
