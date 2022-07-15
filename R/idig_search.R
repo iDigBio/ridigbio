@@ -178,7 +178,8 @@ build_field_lists <- function(fields, type) {
   ret <- list()
   ret$query = list()
   # Here Alex says to eat "all" rather than pass it through to the API
-  if (inherits(fields, "character") && fields != "all" && length(fields) > 0 ){
+  fields_eq_all = length(fields) == 1 && fields == "all"
+  if (inherits(fields, "character") && !fields_eq_all && length(fields) > 0 ){
     ret$fields <- fields
     ret$query$fields <- fields
   } else {

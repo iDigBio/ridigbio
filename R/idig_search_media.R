@@ -51,7 +51,9 @@ idig_search_media <- function(mq=FALSE, rq=FALSE, fields=FALSE,
     fields <- DEFAULT_FIELDS
   }
 
-  if (!(fields == "all" ) && !(inherits(fields, "character"))) {
+  fields_eq_all = (length(fields) == 1 && fields == "all")
+  fields_are_char = inherits(fields, "character")
+  if (!fields_eq_all && !fields_are_char) {
     stop("Invalid value for fields")
   }
 

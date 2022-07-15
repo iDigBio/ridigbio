@@ -143,7 +143,8 @@ idig_search_records <- function(rq, fields=FALSE, max_items=100000, limit=0,
     fields <- DEFAULT_FIELDS
   }
 
-  if (!(fields == "all" ) && !(inherits(fields, "character"))) {
+  fields_eq_all = length(fields) == 1 && fields == "all"
+  if (!fields_eq_all && !(inherits(fields, "character"))) {
     stop("Invalid value for fields")
   }
 
