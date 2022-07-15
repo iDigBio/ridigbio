@@ -14,9 +14,8 @@ test_that("full results for rq searches return", {
   df <- idig_search_media(rq=rq, limit=6000)
   
   expect_that(df, is_a("data.frame"))
-  expect_that(nrow(df) > 5000, is_true())
-  expect_that(which(df$uuid == u) > 0, 
-              is_true())
+  expect_true(nrow(df) > 5000)
+  expect_true(which(df$uuid == u) > 0)
 })
 
 test_that("full results for rq & mq queries together return",{
@@ -24,9 +23,8 @@ test_that("full results for rq & mq queries together return",{
   df <- idig_search_media(rq=rq, mq=mq, limit=6000)
   
   expect_that(df, is_a("data.frame"))
-  expect_that(nrow(df) > 5000, is_true())
-  expect_that(which(df$uuid == u) > 0, 
-              is_true())
+  expect_true(nrow(df) > 5000)
+  expect_true(which(df$uuid == u) > 0)
 })
 
 test_that("full results for mq queries return", {
@@ -34,19 +32,18 @@ test_that("full results for mq queries return", {
   df <- idig_search_media(mq=mq, limit=6000)
   
   expect_that(df, is_a("data.frame"))
-  expect_that(nrow(df) > 5000, is_true())
-  expect_that(which(df$uuid == u) > 0, 
-              is_true())
-  expect_that(attributes(df)[["itemCount"]] > 5000, is_true())
-  expect_that(length(attributes(df)[["attribution"]]) > 2 , is_true())
+  expect_true(nrow(df) > 5000)
+  expect_true(which(df$uuid == u) > 0)
+  expect_true(attributes(df)[["itemCount"]] > 5000)
+  expect_true(length(attributes(df)[["attribution"]]) > 2)
 })
 
 test_that("limits and custom fields return", {
   testthat::skip_on_cran()
   df <- idig_search_media(mq=mq, fields=fields, limit=10)
   
-  expect_that(nrow(df) == 10, is_true())
-  expect_that(ncol(df) == length(fields), is_true())
+  expect_true(nrow(df) == 10)
+  expect_true(ncol(df) == length(fields))
   expect_true(any(!is.null(df[["uuid"]])) && 
               any(df[["uuid"]] != "NA"))
   expect_true(any(!is.null(df[["data.ac:accessURI"]])) && 

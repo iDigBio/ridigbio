@@ -12,7 +12,7 @@ test_that("default list of top 10 scientific names returns", {
   
   expect_that(top, is_a("list"))
   expect_that(length(top$scientificname), equals(10))
-  expect_that(top$itemCount > 20 * 1000 * 1000, is_true())
+  expect_true(top$itemCount > 20 * 1000 * 1000)
   
   # Save the number of records in all iDigBio for later tests
   #all_count <- top$itemCount
@@ -24,7 +24,7 @@ test_that("field and number of tops work", {
   
   expect_that(top, is_a("list"))
   expect_that(length(top[[field]]), equals(count))
-  expect_that(top[[field]][[most]][["itemCount"]] > 1000 * 1000, is_true())
+  expect_true(top[[field]][[most]][["itemCount"]] > 1000 * 1000)
 
   # Deprecating this since Alex changed the erorr behavior to tell you when
   # JSON is bad or field unknown, no longer just spits out all iDigBio
@@ -38,7 +38,7 @@ test_that("record searches work", {
                          count=count)
   
   expect_that(top, is_a("list"))
-  expect_that(top$itemCount < 200 * 1000, is_true())
+  expect_true(top$itemCount < 200 * 1000)
   
   # Save the number of genus records for later tests
   #genus_count <- top$itemCount
@@ -51,6 +51,6 @@ test_that("multiple fields return nested results", {
   
   expect_that(top, is_a("list"))
   #expect_that(abs(top$itemCount - genus_count) < 100, is_true())
-  expect_that(top[[field]][[most]][["scientificname"]][[scientificname]][["itemCount"]]
-              > 1000, is_true())
+  expect_true(top[[field]][[most]][["scientificname"]][[scientificname]][["itemCount"]]
+              > 1000)
 })

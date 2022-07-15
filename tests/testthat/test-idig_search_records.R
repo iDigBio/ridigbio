@@ -9,11 +9,10 @@ test_that("basic search, full results works", {
   df <- idig_search_records(rq=rq, limit=6000)
   
   expect_that(df, is_a("data.frame"))
-  expect_that(nrow(df) > 5000, is_true())
-  expect_that(attributes(df)[["itemCount"]] > 5000, is_true())
-  expect_that(length(attributes(df)[["attribution"]]) > 2 , is_true())
-  expect_that(which(df$uuid == "00041678-5df1-4a23-ba78-8c12f60af369") > 0,
-            is_true())
+  expect_true(nrow(df) > 5000)
+  expect_true(attributes(df)[["itemCount"]] > 5000)
+  expect_true(length(attributes(df)[["attribution"]]) > 2)
+  expect_true(which(df$uuid == "00041678-5df1-4a23-ba78-8c12f60af369") > 0)
   expect_true(all(df$genus == genus))
 })
 
@@ -21,11 +20,11 @@ test_that("limited results, custom fields works", {
   testthat::skip_on_cran()
   df <- idig_search_records(rq=rq, fields=fields, limit=10)
   
-  expect_that(nrow(df) == 10, is_true())
-  expect_that(ncol(df) == length(fields), is_true())
-  expect_that(!is.null(df[1, "uuid"]) && df[1, "uuid"] != "NA", is_true())
-  expect_that(!is.null(df[1, "data.dwc:occurrenceID"]) && 
-                df[1, "data.dwc:occurrenceID"] != "NA", is_true())
+  expect_true(nrow(df) == 10)
+  expect_true(ncol(df) == length(fields))
+  expect_true(!is.null(df[1, "uuid"]) && df[1, "uuid"] != "NA")
+  expect_true(!is.null(df[1, "data.dwc:occurrenceID"]) && 
+                df[1, "data.dwc:occurrenceID"] != "NA")
 })
 
 test_that("offset works", {
@@ -35,22 +34,22 @@ test_that("offset works", {
   second_uuid <- df[["uuid"]][[2]]
 
   df <- idig_search_records(rq=rq, fields=fields, limit=1, offset=1)
-  expect_that(nrow(df) == 1, is_true())
-  expect_that(df[["uuid"]][[1]] == second_uuid, is_true())
+  expect_true(nrow(df) == 1)
+  expect_true(df[["uuid"]][[1]] == second_uuid)
 })
 
 test_that("sorting works", {
   testthat::skip_on_cran()
   df <- idig_search_records(rq=rq, fields=fields, limit=1)
   
-  expect_that(substr(df[["uuid"]], 1, 2) == "00", is_true())
+  expect_true(substr(df[["uuid"]], 1, 2) == "00")
   # coincidence of the data at the moment
-  expect_that(substr(df[["specificepithet"]], 1, 1) > "m", is_true())
+  expect_true(substr(df[["specificepithet"]], 1, 1) > "m")
 
   df <- idig_search_records(rq=rq, fields=fields, limit=1,
                           sort="specificepithet")
-  expect_that(substr(df[["uuid"]], 1, 2) == "00", is_false())
-  expect_that(substr(df[["specificepithet"]], 1, 1) < "m", is_true())
+  expect_false(substr(df[["uuid"]], 1, 2) == "00")
+  expect_true(substr(df[["specificepithet"]], 1, 1) < "m")
 })
 
 test_that("max items disabled is thrown for large queries", {
@@ -73,14 +72,14 @@ test_that("can get the 100000th result", {
   
   df <- idig_search_records(rq=list("country"="united states"),
             limit=1, offset=99999)
-  expect_that(nrow(df) == 1, is_true())
+  expect_true(nrow(df) == 1)
 })
 
 test_that("all fields returns a lot of fields", {
   testthat::skip_on_cran()
   df <- idig_search_records(rq=rq, fields="all", limit=10)
   
-  expect_that(ncol(df) > 50, is_true())
+  expect_true(ncol(df) > 50)
 })
 
 # Dataframe w/default fields is formatted properly including NA's as chr 
@@ -95,8 +94,8 @@ test_that("empty results return empty df with correct columns", {
   testthat::skip_on_cran()
   df <- idig_search_records(rq=list("uuid"="nobodyhome"), fields=fields)
   
-  expect_that(nrow(df) == 0, is_true())
-  expect_that(ncol(df) == length(fields), is_true())
+  expect_true(nrow(df) == 0)
+  expect_true(ncol(df) == length(fields))
 })
 
 test_that("geopoint and special fields are expanded or excluded as appropriate", {
@@ -105,10 +104,10 @@ test_that("geopoint and special fields are expanded or excluded as appropriate",
   df <- idig_search_records(rq=list("uuid"="f84faea8-82ac-4f71-b256-6b2be5d1b59d"),
                             fields=fields_special, limit=10)
   
-  expect_that(ncol(df) == length(fields_special) + 1, is_true())
-  expect_that(inherits(df[1, "geopoint.lon"], "numeric"), is_true())
-  expect_that(inherits(df[1, "geopoint.lat"], "numeric"), is_true())
-  expect_that(inherits(df[1, "flags"], "list"), is_true())
-  expect_that(inherits(df[1, "mediarecords"], "list"), is_true())
-  expect_that(inherits(df[1, "recordids"], "list"), is_true())
+  expect_true(ncol(df) == length(fields_special) + 1)
+  expect_true(inherits(df[1, "geopoint.lon"], "numeric"))
+  expect_true(inherits(df[1, "geopoint.lat"], "numeric"))
+  expect_true(inherits(df[1, "flags"], "list"))
+  expect_true(inherits(df[1, "mediarecords"], "list"))
+  expect_true(inherits(df[1, "recordids"], "list"))
 })

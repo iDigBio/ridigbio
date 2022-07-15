@@ -13,7 +13,7 @@ test_that("default list of top 10 scientific names returns", {
   expect_that(top, is_a("list"))
   #FIXME: Alex should be changing the default summary to hasSpecimen soon
   #expect_that(length(top[["hasSpecimen"]]), equals(2))
-  expect_that(top$itemCount > 4 * 1000 * 1000, is_true())
+  expect_true(top$itemCount > 4 * 1000 * 1000)
   
   # Save the number of media in all iDigBio for later tests
   #all_count <- top$itemCount
@@ -25,7 +25,7 @@ test_that("specifying field and number of tops works", {
   
   expect_that(top, is_a("list"))
   expect_that(length(top[[field]]), equals(count))
-  expect_that(top[[field]][[most]][["itemCount"]] > 10 * 1000, is_true())
+  expect_true(top[[field]][[most]][["itemCount"]] > 10 * 1000)
   
   # Deprecating this since Alex changed the erorr behavior to tell you when
   # JSON is bad or field unknown, no longer just spits out all iDigBio
@@ -40,7 +40,7 @@ test_that("searches work", {
   
   expect_that(top, is_a("list"))
   #expect_that(top$itemCount < all_count, is_true())
-  expect_that(top$itemCount > 0, is_true())
+  expect_true(top$itemCount > 0)
 })
 
 

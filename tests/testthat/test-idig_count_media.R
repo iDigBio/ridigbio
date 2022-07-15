@@ -8,8 +8,8 @@ test_that("all media records is a large number", {
   num <- idig_count_media()
   
   expect_that(num, is_a("integer"))
-  expect_that((num - num) == 0, is_true())
-  expect_that(num > 4 * 1000 * 1000, is_true())
+  expect_true((num - num) == 0)
+  expect_true(num > 4 * 1000 * 1000)
 })
 
 test_that("rq searches on the endpoint is a small number", {
@@ -17,7 +17,7 @@ test_that("rq searches on the endpoint is a small number", {
   num <- idig_count_media(rq=list("recordset"=recordset))
   
   expect_that(num, is_a("integer"))
-  expect_that(num > 10 * 1000, is_true())
+  expect_true(num > 10 * 1000)
 })
 
 test_that("mq searches on the endpoint is a small number", {
@@ -25,5 +25,5 @@ test_that("mq searches on the endpoint is a small number", {
   num <- idig_count_media(mq=list("dqs"=dqs))
   
   expect_that(num, is_a("integer"))
-  expect_that(num > 1000, is_true())
+  expect_true(num > 1000)
 })
