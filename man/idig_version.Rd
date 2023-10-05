@@ -21,4 +21,3 @@ The current default is "v2". Not exported.
 \author{
 Francois Michonneau
 }
-

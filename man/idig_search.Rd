@@ -4,8 +4,17 @@
 \alias{idig_search}
 \title{Basic searching of iDigBio records}
 \usage{
-idig_search(type = "records", mq = FALSE, rq = FALSE, fields = FALSE,
-  max_items = 1e+05, limit = 0, offset = 0, sort = FALSE, ...)
+idig_search(
+  type = "records",
+  mq = FALSE,
+  rq = FALSE,
+  fields = FALSE,
+  max_items = 1e+05,
+  limit = 0,
+  offset = 0,
+  sort = FALSE,
+  ...
+)
 }
 \arguments{
 \item{type}{string type of records to query, defaults to "records"}
@@ -16,7 +25,7 @@ idig_search(type = "records", mq = FALSE, rq = FALSE, fields = FALSE,
 
 \item{fields}{vector of fields that will be contained in the data.frame}
 
-\item{max_items}{CURRENTLY IGNORED, SEE ISSUE #33 maximum number of results 
+\item{max_items}{CURRENTLY IGNORED, SEE ISSUE #33 maximum number of results
 allowed to be retrieved (fail-safe)}
 
 \item{limit}{maximum number of results returned}
@@ -55,4 +64,3 @@ idig_search(type="media", rq=list(genus="acer"), limit=10)
 \author{
 Francois Michonneau
 }
-

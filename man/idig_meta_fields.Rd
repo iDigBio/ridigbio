@@ -25,4 +25,3 @@ Return a list of media or specimen fields that are contained in iDigBio.
 \author{
 Matthew Collins
 }
-

@@ -13,8 +13,8 @@ test_that("all records is a large number", {
 
 test_that("rq searches on the endpoint is a small number", {
   testthat::skip_on_cran()
-  num <- idig_count_records(rq=list("recordset"=recordset))
-  
+  num <- idig_count_records(rq = list("recordset" = recordset))
+
   expect_that(num, is_a("integer"))
   expect_true(num > 400 * 1000)
 })

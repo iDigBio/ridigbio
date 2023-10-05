@@ -16,10 +16,9 @@ nothing. Stops if request contains an error.
 Checks for error messages that can be returned by the API in JSON.
 }
 \details{
-Part 2 of the error checking process. Checks the JSON response for error 
+Part 2 of the error checking process. Checks the JSON response for error
 messages and stops if any are found. Not exported.
 }
 \author{
 Francois Michonneau
 }
-

@@ -1,17 +1,20 @@
 Package: ridigbio
 Title: Interface to the iDigBio Data API
-Version: 0.3.5
-Date: 2017-02-16
-Authors@R: c(person("Francois", "Michonneau", role=c("aut", "cph"),
+Version: 0.3.6
+Date: 2023-10-03
+Encoding: UTF-8
+Authors@R: c(person("Francois", "Michonneau", comment="Original Author", role=c("aut", "cph"),
   email="francois.michonneau@gmail.com"),
-  person("Matthew", "Collins", role=c("aut", "cre"),
+  person("Matthew", "Collins", comment="Original Author", role=c("aut"),
   email="mcollins@acis.ufl.edu"),
   person("Scott", "Chamberlain", role="ctb",
   email="myrmecocystus@gmail.com"),
   person("Kevin", "Love", role="ctb",
   email="klove@flmnh.ufl.edu"),
   person("Hem Nalini", "Morzaria-Luna", role="ctb",
-  email="hemnalin.morzarialuna@noaa.gov"))
+  email="hemnalin.morzarialuna@noaa.gov"),
+  person("Jesse Bennett", comment="Maintainer", role=c("cre"),
+  email="j3553@ufl.edu"))
 Description: An interface to iDigBio's search API that allows downloading
   specimen records. Searches are returned as a data.frame. Other functions
   such as the metadata end points return lists of information. iDigBio is a US
@@ -31,4 +34,4 @@ LazyData: true
 Suggests:
   testthat
 Repository: CRAN
-RoxygenNote: 5.0.1
+RoxygenNote: 7.2.3

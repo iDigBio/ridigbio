@@ -22,14 +22,13 @@ nested list of field values with counts of specimen records
 Top specimen records summaries.
 }
 \details{
-Summarize the count of specimen records in iDigBio according to unique 
-values in the fields passed. This operates similarly to a SELECT DISTINCT 
-count(field_name) query in SQL. When multiple fields are passed, the 
-summaries are nested eg fields=c("country", "genus") would result in 
-counting the top 10 genera in each of the top 10 countries for a total of 
+Summarize the count of specimen records in iDigBio according to unique
+values in the fields passed. This operates similarly to a SELECT DISTINCT
+count(field_name) query in SQL. When multiple fields are passed, the
+summaries are nested eg fields=c("country", "genus") would result in
+counting the top 10 genera in each of the top 10 countries for a total of
 100 counts.
 }
 \author{
 Matthew Collins
 }
-

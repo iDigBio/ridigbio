@@ -18,10 +18,9 @@ the request (as a list)
 Internal function for GET requests.
 }
 \details{
-Generates a GET request and performs the checks on what is returned. Not 
+Generates a GET request and performs the checks on what is returned. Not
 exported.
 }
 \author{
 Francois Michonneau
 }
-

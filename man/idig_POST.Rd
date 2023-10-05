@@ -20,10 +20,9 @@ the request (as a list)
 Internal function for POST requests.
 }
 \details{
-Generates a POST request and performs the checks on what is returned. Not 
+Generates a POST request and performs the checks on what is returned. Not
 exported.
 }
 \author{
 Francois Michonneau
 }
-

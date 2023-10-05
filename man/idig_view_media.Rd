@@ -23,4 +23,3 @@ View all information about a specific media record.
 \author{
 Matthew Collins
 }
-

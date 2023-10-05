@@ -18,10 +18,9 @@ count of specimen records matching the query(s)
 Count specimen records matching a query.
 }
 \details{
-Quickly return a count of the specimen records matching the query(s) 
+Quickly return a count of the specimen records matching the query(s)
 provided.
 }
 \author{
 Matthew Collins
 }
-

@@ -1,5 +1,8 @@
-##' Display startup message while in beta
-##' 
+##' Display startup message
+##'@title onAttach
+##'@param ... additional parameters
+##'@export
+##'@keywords internal 
 .onAttach <- function(...) {
-  #packageStartupMessage("ridigbio works against the BETA API! Please report errors at https://github.com/iDigBio/ridigbio/issues")
+  #packageStartupMessage("ridigbio works against the API! Please report errors at https://github.com/iDigBio/ridigbio/issues")
 }

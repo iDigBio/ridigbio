@@ -12,8 +12,8 @@ test_that("records field list returns", {
 
 test_that("records indexed subset returns", {
   testthat::skip_on_cran()
-  f <- idig_meta_fields(subset="indexed")
-  
+  f <- idig_meta_fields(subset = "indexed")
+
   expect_null(f[["data"]])
   expect_null(f[["indexData"]])
   expect_true(f[["uuid"]][["type"]] == "string")
@@ -21,15 +21,15 @@ test_that("records indexed subset returns", {
 
 test_that("records raw subset returns", {
   testthat::skip_on_cran()
-  f <- idig_meta_fields(subset="raw")
-  
+  f <- idig_meta_fields(subset = "raw")
+
   expect_null(f[["uuid"]])
   expect_true(f[["dwc:occurrenceID"]][["type"]] == "string")
 })
 
 test_that("media list returns", {
   testthat::skip_on_cran()
-  f <- idig_meta_fields(type="media")
+  f <- idig_meta_fields(type = "media")
 
   expect_that(f, is_a("list"))
   expect_that(f[["data"]], is_a("list"))
@@ -39,8 +39,8 @@ test_that("media list returns", {
 
 test_that("media indexed subset returns", {
   testthat::skip_on_cran()
-  f <- idig_meta_fields(type="media", subset="indexed")
-  
+  f <- idig_meta_fields(type = "media", subset = "indexed")
+
   expect_null(f[["data"]])
   expect_null(f[["indexData"]])
   expect_true(f[["uuid"]][["type"]] == "string")
@@ -48,8 +48,8 @@ test_that("media indexed subset returns", {
 
 test_that("media raw subset returns", {
   testthat::skip_on_cran()
-  f <- idig_meta_fields(type="media", subset="raw")
-  
+  f <- idig_meta_fields(type = "media", subset = "raw")
+
   expect_null(f[["uuid"]])
   expect_true(f[["ac:accessURI"]][["type"]] == "string")
 })

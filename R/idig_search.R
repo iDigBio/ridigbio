@@ -14,7 +14,7 @@
 ##' @param mq iDigBio media query in nested list format
 ##' @param rq iDigBio record query in nested list format
 ##' @param fields vector of fields that will be contained in the data.frame
-##' @param max_items CURRENTLY IGNORED, SEE ISSUE #33 maximum number of results 
+##' @param max_items CURRENTLY IGNORED, SEE ISSUE #33 maximum number of results
 ##' allowed to be retrieved (fail-safe)
 ##' @param limit maximum number of results returned
 ##' @param offset number of results to skip before returning results
@@ -30,11 +30,10 @@
 ##' idig_search(type="media", rq=list(genus="acer"), limit=10)
 ##' }
 ##'
-idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
-                        max_items=100000, limit=0, offset=0, sort=FALSE, ...) {
-  
+idig_search <- function(type = "records", mq = FALSE, rq = FALSE, fields = FALSE,
+                        max_items = 100000, limit = 0, offset = 0, sort = FALSE, ...) {
   # Construct body of request to API
-  query <- list(offset=offset)
+  query <- list(offset = offset)
 
   # Force sorting by UUID so that paging will be reliable ie the 25,000th item
   # is always the 25,000th item even when requesting the 6th page. This
@@ -42,16 +41,16 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   # connection: 66s for 100,000 limit
   if (!inherits(sort, "logical")) {
     query[["sort"]] <- c(sort, "uuid")
-  }else{
+  } else {
     query[["sort"]] <- c("uuid")
   }
 
   if (!inherits(rq, "logical")) {
-    query$rq=rq
+    query$rq <- rq
   }
 
   if (!inherits(mq, "logical")) {
-    query$mq=mq
+    query$mq <- mq
   }
 
   # Adjust fields to request from the API
@@ -59,51 +58,55 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   fields <- field_lists$fields
   query <- append(query, field_lists$query)
 
-  if (limit > 0){
+  if (limit > 0) {
     query$limit <- limit
-  }else{
+  } else {
     query$limit <- max_items # effectivly use iDigBio's max page size
   }
 
-  
+
   # Now that limit is known, we can do this check.
-  # Don't let people ask for more than 100k results. This is combined with the 
-  # later check to make sure the actual result size is less than 100k. Refer to 
+  # Don't let people ask for more than 100k results. This is combined with the
+  # later check to make sure the actual result size is less than 100k. Refer to
   # issue #33 (https://github.com/iDigBio/ridigbio/issues/33)
   # for a discussion about Elastic Search and the API's limits on results in
   # their current implimentation.
-  if (max_items > 100000 || (query$offset + query$limit) > 100000){
-    stop(paste0("You have requested more than 100,000 ",
-                " results. This functionality is currently disabled.",
-                " Please see https://github.com/iDigBio/ridigbio/issues/33"))
-  }  
-  
-  
+  if (max_items > 100000 || (query$offset + query$limit) > 100000) {
+    stop(paste0(
+      "You have requested more than 100,000 ",
+      " results. This functionality is currently disabled.",
+      " Please see https://github.com/iDigBio/ridigbio/issues/33"
+    ))
+  }
+
+
   # tricks to get inside loop first time
-  m <- matrix(nrow=0, ncol=length(fields))
+  m <- matrix(nrow = 0, ncol = length(fields))
   #    res <- data.frame(res, stringsAsFactors = FALSE)
-  dat <- data.frame(m, stringsAsFactors=FALSE)
+  dat <- data.frame(m, stringsAsFactors = FALSE)
   colnames(dat) <- fields
   item_count <- 1
 
   # loop until we either have all results or all results the user wants
-  while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)){
-    search_results <- idig_POST(paste0("search/", type), body=query, ...)
-    #print(paste0(Sys.time(), " completed query"))
+  while (nrow(dat) < item_count && (limit == 0 || nrow(dat) < limit)) {
+    search_results <- idig_POST(paste0("search/", type), body = query, ...)
+    # print(paste0(Sys.time(), " completed query"))
     # Slight possibility of the number of items changing as we go due to inserts
     # deletes at iDigBio, put this inside the loop to keep it current
     item_count <- fmt_search_txt_to_itemCount(search_results)
 
-    if ((limit == 0 || limit > max_items) && item_count > max_items){
-      stop(paste0("Search would return more than 100,000",
-                  " results. This functionality is currently disabled.",
-                  " Please see https://github.com/iDigBio/ridigbio/issues/33"))
+    if ((limit == 0 || limit > max_items) && item_count > max_items) {
+      stop(paste0(
+        "Search would return more than 100,000",
+        " results. This functionality is currently disabled.",
+        " Please see https://github.com/iDigBio/ridigbio/issues/33"
+      ))
     }
-    
+
     dat <- plyr::rbind.fill(dat, fmt_search_txt_to_df(search_results, fields))
 
     query$offset <- nrow(dat)
-    if (limit > 0){
+    if (limit > 0) {
       query$limit <- limit - nrow(dat)
     }
   }
@@ -117,43 +120,45 @@ idig_search <- function(type="records", mq=FALSE, rq=FALSE, fields=FALSE,
   dat
 }
 
-fmt_search_txt_to_attribution <- function(txt){
+fmt_search_txt_to_attribution <- function(txt) {
   httr::content(txt)[["attribution"]]
 }
 
-fmt_search_txt_to_itemCount <- function(txt){
+fmt_search_txt_to_itemCount <- function(txt) {
   httr::content(txt)$itemCount
 }
 
 fmt_search_txt_to_df <- function(txt, fields) {
   # Check returned results for common errors
-  if (!exists("items", httr::content(txt))){
+  if (!exists("items", httr::content(txt))) {
     stop("Returned results do not contain any content")
   }
 
-  #Before continuing to add error handling, let's settle on a pattern.
+  # Before continuing to add error handling, let's settle on a pattern.
 
-  search_items <- jsonlite::fromJSON(httr::content(txt, as="text"))[["items"]]
-  res <- data.frame(search_items[["indexTerms"]], 
-                    search_items[["data"]], stringsAsFactors=FALSE)
+  search_items <- jsonlite::fromJSON(httr::content(txt, as = "text"))[["items"]]
+  res <- data.frame(search_items[["indexTerms"]],
+    search_items[["data"]],
+    stringsAsFactors = FALSE
+  )
 
-  # Append "data." to the data field names. Also, for some reason ":" gets 
+  # Append "data." to the data field names. Also, for some reason ":" gets
   # changed to "." in the data field names when making the df. Need the if
   # statements because helpfully paste0("str", NULL) => "str".
   n <- c()
-  if (length(names(search_items[["indexTerms"]])) > 0){
+  if (length(names(search_items[["indexTerms"]])) > 0) {
     n <- c(n, names(search_items[["indexTerms"]]))
   }
-  if (length(names(search_items[["data"]])) > 0){
+  if (length(names(search_items[["data"]])) > 0) {
     n <- c(n, paste0("data.", names(search_items[["data"]])))
   }
   colnames(res) <- n
-  
+
   # Fixup geopoint into two fields for convenience
   # Doing this inside here because the rbind.fill function seems to pack
-  # list fields into nested lists in the last record of the first df made. It's 
+  # list fields into nested lists in the last record of the first df made. It's
   # weird. Would be nicer to do this outside the paging loop otherwise.
-  if ("geopoint" %in% colnames(res)){
+  if ("geopoint" %in% colnames(res)) {
     res[["geopoint.lon"]] <- res[["geopoint"]][[1]]
     res[["geopoint.lat"]] <- res[["geopoint"]][[2]]
     res$geopoint <- NULL
@@ -176,10 +181,10 @@ fmt_search_txt_to_df <- function(txt, fields) {
 ##' to be merged with the query sent
 build_field_lists <- function(fields, type) {
   ret <- list()
-  ret$query = list()
+  ret$query <- list()
   # Here Alex says to eat "all" rather than pass it through to the API
-  fields_eq_all = length(fields) == 1 && fields == "all"
-  if (inherits(fields, "character") && !fields_eq_all && length(fields) > 0 ){
+  fields_eq_all <- length(fields) == 1 && fields == "all"
+  if (inherits(fields, "character") && !fields_eq_all && length(fields) > 0) {
     ret$fields <- fields
     ret$query$fields <- fields
   } else {
@@ -189,13 +194,13 @@ build_field_lists <- function(fields, type) {
     # return data fields and this saves significant transfer.
     ret$query$fields_exclude <- c("data", "indexData")
     # Load up all fields possible
-    ret$fields <- names(idig_meta_fields(type=type, subset="indexed"))
+    ret$fields <- names(idig_meta_fields(type = type, subset = "indexed"))
   }
-  
+
   # Fixup geopoint into two fields. There is also a parallel fixup inside the
-  # fmt_search_txt_to_df() function. Preserve field order that the user 
+  # fmt_search_txt_to_df() function. Preserve field order that the user
   # specified.
-  if ("geopoint" %in% ret[["fields"]]){
+  if ("geopoint" %in% ret[["fields"]]) {
     i <- match("geopoint", ret[["fields"]])
     ret[["fields"]][[i]] <- "geopoint.lon"
     ret[["fields"]] <- append(ret[["fields"]], "geopoint.lat", i)

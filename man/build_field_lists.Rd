@@ -22,4 +22,3 @@ setting both fields and fields_exclude due to fact that the API will return
 wrong results if are passed. This is still posssible if the user
 deliberately sets both. Not exported.
 }
-

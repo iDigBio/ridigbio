@@ -17,9 +17,9 @@ Function to build attribution dataframe from a query to the iDigBio API
 }
 \details{
 This function differs from the attribution metadata that is attached to the
-dataframe returned by the idig_search_* methods. It summarizes the record 
+dataframe returned by the idig_search_* methods. It summarizes the record
 sets used by records in the dataframe, not the record sets that have records
-that match the query sent to iDigBio. This is useful if only part of the 
+that match the query sent to iDigBio. This is useful if only part of the
 records for a query are downloaded, for example with the limit and offset
 parameters.
 
@@ -28,4 +28,3 @@ Exported.
 \author{
 Kevin Love
 }
-

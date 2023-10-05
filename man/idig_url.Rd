@@ -21,4 +21,3 @@ Defaults to use beta URL. Not exported.
 \author{
 Francois Michonneau
 }
-

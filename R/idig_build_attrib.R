@@ -1,9 +1,9 @@
 ##' Function to build attribution dataframe from a query to the iDigBio API
 ##'
 ##' This function differs from the attribution metadata that is attached to the
-##' dataframe returned by the idig_search_* methods. It summarizes the record 
+##' dataframe returned by the idig_search_* methods. It summarizes the record
 ##' sets used by records in the dataframe, not the record sets that have records
-##' that match the query sent to iDigBio. This is useful if only part of the 
+##' that match the query sent to iDigBio. This is useful if only part of the
 ##' records for a query are downloaded, for example with the limit and offset
 ##' parameters.
 ##'
@@ -13,20 +13,19 @@
 ##' @return a data frame
 ##' @author Kevin Love
 ##' @export
-idig_build_attrib <- function(dat){
+idig_build_attrib <- function(dat) {
   dat$count <- 1
-  datAgg <- stats::aggregate(count ~ recordset, data = dat,sum)
+  datAgg <- stats::aggregate(count ~ recordset, data = dat, sum)
   datAt <- attributes(dat)
   dx <- data.frame(stringsAsFactors = FALSE)
-  for (i in seq(1,length(datAt$attribution))){
+  for (i in seq(1, length(datAt$attribution))) {
     if (datAt$attribution[[i]]$uuid %in% dat$recordset) {
       collection <- datAt$attribution[[i]]$name
       uuid <- datAt$attribution[[i]]$uuid
       itemCount <- datAgg$count[datAgg$recordset == datAt$attribution[[i]]$uuid]
-      rows <- cbind(data.frame(collection,stringsAsFactors = FALSE),data.frame(uuid,stringsAsFactors = FALSE),data.frame(itemCount,stringsAsFactors = FALSE))
-      dx <- plyr::rbind.fill(dx,rows)
+      rows <- cbind(data.frame(collection, stringsAsFactors = FALSE), data.frame(uuid, stringsAsFactors = FALSE), data.frame(itemCount, stringsAsFactors = FALSE))
+      dx <- plyr::rbind.fill(dx, rows)
     }
-
   }
   dx
 }

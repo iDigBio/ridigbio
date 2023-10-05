@@ -21,4 +21,3 @@ Not exported.
 \author{
 Francois Michonneau
 }
-

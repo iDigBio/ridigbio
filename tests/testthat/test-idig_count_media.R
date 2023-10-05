@@ -6,7 +6,7 @@ dqs <- 0
 test_that("all media records is a large number", {
   testthat::skip_on_cran()
   num <- idig_count_media()
-  
+
   expect_that(num, is_a("integer"))
   expect_true((num - num) == 0)
   expect_true(num > 4 * 1000 * 1000)
@@ -14,16 +14,16 @@ test_that("all media records is a large number", {
 
 test_that("rq searches on the endpoint is a small number", {
   testthat::skip_on_cran()
-  num <- idig_count_media(rq=list("recordset"=recordset))
-  
+  num <- idig_count_media(rq = list("recordset" = recordset))
+
   expect_that(num, is_a("integer"))
   expect_true(num > 10 * 1000)
 })
 
 test_that("mq searches on the endpoint is a small number", {
   testthat::skip_on_cran()
-  num <- idig_count_media(mq=list("dqs"=dqs))
-  
+  num <- idig_count_media(mq = list("dqs" = dqs))
+
   expect_that(num, is_a("integer"))
   expect_true(num > 1000)
 })

@@ -4,15 +4,23 @@
 \alias{idig_search_media}
 \title{Searching of iDigBio media records}
 \usage{
-idig_search_media(mq = FALSE, rq = FALSE, fields = FALSE,
-  max_items = 1e+05, limit = 0, offset = 0, sort = FALSE, ...)
+idig_search_media(
+  mq = FALSE,
+  rq = FALSE,
+  fields = FALSE,
+  max_items = 1e+05,
+  limit = 0,
+  offset = 0,
+  sort = FALSE,
+  ...
+)
 }
 \arguments{
 \item{mq}{iDigBio media query in nested list format}
 
 \item{rq}{iDigBio record query in nested list format}
 
-\item{fields}{vector of fields that will be contained in the data.frame, 
+\item{fields}{vector of fields that will be contained in the data.frame,
 defaults to "all" which is all indexed fields}
 
 \item{max_items}{maximum number of results allowed to be retrieved (fail
@@ -22,7 +30,7 @@ defaults to "all" which is all indexed fields}
 
 \item{offset}{number of results to skip before returning results}
 
-\item{sort}{vector of fields to use for sorting, UUID is always appended to 
+\item{sort}{vector of fields to use for sorting, UUID is always appended to
 make paging safe}
 
 \item{...}{additional parameters}
@@ -34,27 +42,26 @@ a data frame
 Function to query the iDigBio API for media records
 }
 \details{
-Also see \code{\link{idig_search_records}} for the full examples of all the 
+Also see \code{\link{idig_search_records}} for the full examples of all the
 parameters related to searching iDigBio.
 
-Wraps \code{\link{idig_search}} to provide defaults specific to searching 
-media records. Using this function instead of \code{\link{idig_search}} 
+Wraps \code{\link{idig_search}} to provide defaults specific to searching
+media records. Using this function instead of \code{\link{idig_search}}
 directly is recommened. Record queries and media queries objects are allowed
-(rq and mq parameters) and media records returned will match the 
+(rq and mq parameters) and media records returned will match the
 requirements of both.
 
 This function defaults to returning all indexed media record fields.
 }
 \examples{
 \dontrun{
-# Searching for media using a query on related specimen information - first 
+# Searching for media using a query on related specimen information - first
 # 10 media records with image URIs related to a specimen in the genus Acer:
-df <- idig_search_media(rq=list(genus="acer"), 
-                        mq=list("data.ac:accessURI"=list("type"="exists")), 
+df <- idig_search_media(rq=list(genus="acer"),
+                        mq=list("data.ac:accessURI"=list("type"="exists")),
                         fields=c("uuid","data.ac:accessURI"), limit=10)
 }
 }
 \author{
 Matthew Collins
 }
-

@@ -23,4 +23,3 @@ View all information about a specific specimen record.
 \author{
 Matthew Collins
 }
-

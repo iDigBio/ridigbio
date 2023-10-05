@@ -25,4 +25,3 @@ Quickly return a count of the media records matching the query(s) provided.
 \author{
 Matthew Collins
 }
-

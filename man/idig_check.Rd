@@ -22,4 +22,3 @@ then calls part 2 which handles JSON errors in the responses. Not exported.
 \author{
 Francois Michonneau
 }
-
