@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/iDigBio/ridigbio.png?branch=master)](https://travis-ci.org/iDigBio/ridigbio)
+[![Build Status](https://api.travis-ci.com/iDigBio/ridigbio.svg?branch=master)](https://app.travis-ci.com/github/iDigBio/ridigbio)
 
 # Installation
 
