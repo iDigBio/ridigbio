@@ -130,7 +130,10 @@ idig_search_records <- function(rq, fields = FALSE, max_items = 100000, limit = 
     "country",
     "stateprovince",
     "geopoint",
-    "datecollected",
+    "data.dwc:eventDate", 
+    "data.dwc:year", 
+    "data.dwc:month",
+    "data.dwc:day",
     "collector",
     "recordset"
   )
