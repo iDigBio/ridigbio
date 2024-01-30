@@ -28,6 +28,21 @@ On Linux, you may encounter an error during the installation process if you do n
 
 Complete list of terms that can be used is available [here](https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields)
 
+### **IMPORTANT: API Changes**
+
+# API Update as of 0.3.8
+
+Default fields have been changed to accomodate data users regarding dates found in the field "datecollected".
+We will no longer be providing this field to users by default and will instead be returning the following fields:
+
+data.dwc:eventDate
+data.dwc:year
+data.dwc:month
+data.dwc:day
+
+Please be advised that these fields are in a text only format and will need to be sorted another way as addressed in
+[this issue](https://github.com/iDigBio/ridigbio/issues/44).
+
 # License
 
 MIT

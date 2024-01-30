@@ -30,6 +30,7 @@ Other contributors:
   \item Scott Chamberlain \email{myrmecocystus@gmail.com} [contributor]
   \item Kevin Love \email{klove@flmnh.ufl.edu} [contributor]
   \item Hem Nalini Morzaria-Luna \email{hemnalin.morzarialuna@noaa.gov} [contributor]
+  \item Shelly Gaynor \email{michellegaynor@ufl.edu} [contributor]
 }
 
 }

@@ -1,7 +1,7 @@
 Package: ridigbio
 Title: Interface to the iDigBio Data API
-Version: 0.3.7
-Date: 2023-10-03
+Version: 0.3.8
+Date: 2024-1-30
 Encoding: UTF-8
 Authors@R: c(person("Francois", "Michonneau", comment="Original Author", role=c("aut", "cph"),
   email="francois.michonneau@gmail.com"),
@@ -13,6 +13,8 @@ Authors@R: c(person("Francois", "Michonneau", comment="Original Author", role=c(
   email="klove@flmnh.ufl.edu"),
   person("Hem Nalini", "Morzaria-Luna", role="ctb",
   email="hemnalin.morzarialuna@noaa.gov"),
+  person("Shelly", "Gaynor", role="ctb",
+  email="michellegaynor@ufl.edu"),
   person("Jesse Bennett", comment="Maintainer", role=c("cre"),
   email="j3553@ufl.edu"))
 Description: An interface to iDigBio's search API that allows downloading

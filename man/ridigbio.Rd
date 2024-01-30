@@ -21,6 +21,23 @@ United States institutions. It also holds nearly 5 million images of these
 specimens.
 }
 
+\section{API Updates}{
+
+API Update as of 0.3.8:
+
+Default fields have been changed to accomodate data users regarding dates found in the field "datecollected".
+We will no longer be providing this field to users by default and will instead be returning the following fields:
+
+data.dwc:eventDate
+data.dwc:year
+data.dwc:month
+data.dwc:day
+
+Please be advised that these fields are in a text only format and will need to be sorted another way as addressed in:
+\url{https://github.com/iDigBio/ridigbio/issues/44}
+
+}
+
 \section{Getting Started}{
 
 
@@ -40,7 +57,7 @@ download APIs.
 
 To cite the ridigbio package in your work, please use the following format:
 
-Michonneau F, Collins M, Chamberlain SA (2016). ridigbio: An interface to iDigBio's search API that allows downloading specimen records. R package version 0.3.7. https://github.com/iDigBio/ridigbio
+Michonneau F, Collins M, Chamberlain SA (2016). ridigbio: An interface to iDigBio's search API that allows downloading specimen records. R package version 0.3.8. https://github.com/iDigBio/ridigbio
 }
 
 \author{
