@@ -13,7 +13,7 @@ Authors@R: c(person("Francois", "Michonneau", comment="Original Author", role=c(
   email="klove@flmnh.ufl.edu"),
   person("Hem Nalini", "Morzaria-Luna", role="ctb",
   email="hemnalin.morzarialuna@noaa.gov"),
-  person("Shelly", "Gaynor", role="ctb",
+  person("Michelle L.", "Gaynor", role="ctb",
   email="michellegaynor@ufl.edu"),
   person("Jesse Bennett", comment="Maintainer", role=c("cre"),
   email="j3553@ufl.edu"))
