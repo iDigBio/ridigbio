@@ -28,6 +28,21 @@ On Linux, you may encounter an error during the installation process if you do n
 
 Complete list of terms that can be used is available [here](https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields)
 
+### **IMPORTANT: R Function Changes**
+
+Default fields returned to users have been updated to return research-grade fields. *ridigbio* use to returns datecollected by default, which we do not recommend to be used in scientific research. When a data provider does not provide a full date in the Darwin Core [eventDate](https://dwc.tdwg.org/list/#dwc_eventDate) field, this complete value or the missing parts (i.e., month and/or day) are randomly generated and thus may lack any real meaning. The generated dates are difficult to detect, as they are randomly distributed. We are currently working to modify our ingestion pipeline to avoid randomly generating dates. However, dates remain an issue across biodiversity aggregators and the solution is not clear (see [GBIF for example](https://discourse.gbif.org/t/please-share-your-dates-correctly/3824/5)).
+
+
+To prevent user misuse of this term, we will no longer be providing the `datecollected` field by default and will instead be returning the following fields:
+
+data.dwc:eventDate
+data.dwc:year
+data.dwc:month
+data.dwc:day
+
+Please be advised that these fields are in a text only format and will need to be sorted another way as addressed in
+[this issue](https://github.com/iDigBio/ridigbio/issues/44).
+
 # License
 
 MIT

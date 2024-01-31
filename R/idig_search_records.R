@@ -88,7 +88,23 @@
 ##' @param sort vector of fields to use for sorting, UUID is always appended to
 ##' make paging safe
 ##' @param ... additional parameters
-##' @return a data frame
+##' @return a data frame with fields requested or the following default fields:
+##'   * UUID: Unique identifier assigned by iDigBio.
+##'   * [occurrenceID](https://dwc.tdwg.org/list/#dwc_occurrenceID)
+##'   * [catalognumber](http://rs.tdwg.org/dwc/terms/catalogNumber)
+##'   * [family](http://rs.tdwg.org/dwc/terms/family) - may be reassigned by iDigBio
+##'   * [genus](https://dwc.tdwg.org/list/#dwc_genus) - may be reassigned by iDigBio
+##'   * [scientificname](http://rs.tdwg.org/dwc/terms/scientificName) - may be reassigned by iDigBio
+##'   * [country](http://rs.tdwg.org/dwc/terms/country) - may be modified by iDigBio
+##'   * [stateprovince](http://rs.tdwg.org/dwc/terms/stateProvince)
+##'   * geopoint
+##'   * [data.dwc:eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)
+##'   * [data.dwc:year](https://dwc.tdwg.org/list/#dwc_year)
+##'   * [data.dwc:month](https://dwc.tdwg.org/list/#dwc_month)
+##'   * [data.dwc:day](https://dwc.tdwg.org/list/#dwc_day)
+##'   * collector
+##'   * recordset: Assigned by iDigBio
+##'   
 ##' @author Matthew Collins
 ##' @examples
 ##' \dontrun{
@@ -130,7 +146,10 @@ idig_search_records <- function(rq, fields = FALSE, max_items = 100000, limit = 
     "country",
     "stateprovince",
     "geopoint",
-    "datecollected",
+    "data.dwc:eventDate",
+    "data.dwc:year",
+    "data.dwc:month",
+    "data.dwc:day",
     "collector",
     "recordset"
   )

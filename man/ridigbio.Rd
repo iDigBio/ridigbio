@@ -40,7 +40,7 @@ download APIs.
 
 To cite the ridigbio package in your work, please use the following format:
 
-Michonneau F, Collins M, Chamberlain SA (2016). ridigbio: An interface to iDigBio's search API that allows downloading specimen records. R package version 0.3.7. https://github.com/iDigBio/ridigbio
+Michonneau F, Collins M, Chamberlain SA (2016). ridigbio: An interface to iDigBio's search API that allows downloading specimen records. R package version 0.3.8. https://github.com/iDigBio/ridigbio
 }
 
 \author{

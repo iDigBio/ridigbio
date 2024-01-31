@@ -33,7 +33,22 @@ make paging safe}
 \item{...}{additional parameters}
 }
 \value{
-a data frame
+a data frame with fields requested or the following default fields:
+  * UUID: Unique identifier assigned by iDigBio.
+  * [occurrenceID](https://dwc.tdwg.org/list/#dwc_occurrenceID)
+  * [catalognumber](http://rs.tdwg.org/dwc/terms/catalogNumber)
+  * [family](http://rs.tdwg.org/dwc/terms/family) - may be reassigned by iDigBio
+  * [genus](https://dwc.tdwg.org/list/#dwc_genus) - may be reassigned by iDigBio
+  * [scientificname](http://rs.tdwg.org/dwc/terms/scientificName) - may be reassigned by iDigBio
+  * [country](http://rs.tdwg.org/dwc/terms/country) - may be modified by iDigBio
+  * [stateprovince](http://rs.tdwg.org/dwc/terms/stateProvince)
+  * geopoint
+  * [data.dwc:eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)
+  * [data.dwc:year](https://dwc.tdwg.org/list/#dwc_year)
+  * [data.dwc:month](https://dwc.tdwg.org/list/#dwc_month)
+  * [data.dwc:day](https://dwc.tdwg.org/list/#dwc_day)
+  * collector
+  * recordset: Assigned by iDigBio
 }
 \description{
 Function to query the iDigBio API for specimen records
