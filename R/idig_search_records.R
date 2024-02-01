@@ -79,10 +79,12 @@
 ##' data.frame's attributes. (I.e. \code{attributes(df)})
 ##' @title Searching of iDigBio records
 ##' @param rq iDigBio record query in nested list format
-##' @param fields vector of fields that will be contained in the data.frame,
-##' limited set returned by default, use "all" to get all indexed fields
-##' @param max_items maximum number of results allowed to be retrieved (fail
-##' -safe)
+##' @param fields Vector of fields that will be contained in the data.frame,
+##' limited set returned by default, use "all" to get all indexed fields.
+##' Some of the avaliable fields are listed [here](https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields).
+##' All potential fields can be found with the `idig_meta_fields()` function.
+##' @param max_items Maximum number of results allowed to be retrieved (fail
+##' -safe).
 ##' @param limit maximum number of results returned
 ##' @param offset number of results to skip before returning results
 ##' @param sort vector of fields to use for sorting, UUID is always appended to
