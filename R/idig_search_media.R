@@ -22,7 +22,30 @@
 ##' @param sort vector of fields to use for sorting, UUID is always appended to
 ##' make paging safe
 ##' @param ... additional parameters
-##' @return a data frame
+##' @return a data frame with fields requested or the following default fields:
+##'   * [accessuri](https://ac.tdwg.org/termlist/#ac_accessURI)
+##'   * datemodified: Date last modified, which is assigned by iDigBio.
+##'   * dqs: Data quality score assigned by iDigBio.
+##'   * etag: Tag assigned by iDigBio.
+##'   * flags: Data quality flag assigned by iDigBio.
+##'   * [format](http://purl.org/dc/terms/format)
+##'   * hasSpecimen: TRUE or FALSE, indicates if there is an associated record for this media.
+##'   * [licenselogourl](https://ac.tdwg.org/termlist/#ac_licenseLogoURL)
+##'   * mediatype: Media object type.
+##'   * [modified](http://purl.org/dc/terms/modified)
+##'   * recordids: List of UUID for associated records.
+##'   * records: UUID for the associated record.
+##'   * recordset: Record set ID assigned by iDigBio.
+##'   * [rights](http://purl.org/dc/terms/rights)
+##'   * [tag](http://rs.tdwg.org/ac/terms/tag) 
+##'   * [type](http://purl.org/dc/terms/type)
+##'   * uuid: Unique identifier assigned by iDigBio.
+##'   * version: Media record version assigned by iDigBio.
+##'   * [webstatement](https://developer.adobe.com/xmp/docs/XMPNamespaces/xmpRights/) 
+##'   * xpixels: As defined by EXIF, x dimension in pixel.
+##'   * ypixels: As defined by EXIF,y dimension in pixels.
+##' 
+##' 
 ##' @author Matthew Collins
 ##' @examples
 ##' \dontrun{
