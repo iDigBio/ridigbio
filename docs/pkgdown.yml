@@ -1,0 +1,11 @@
+pandoc: 3.1.1
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  BasicUsage: BasicUsage.html
+  Fields: Fields.html
+last_built: 2024-02-09T23:27Z
+urls:
+  reference: http://idigbio.github.io/ridigbio/reference
+  article: http://idigbio.github.io/ridigbio/articles
+
