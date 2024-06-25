@@ -7,6 +7,5 @@ navbar:
     - reference
     - articles
     right: search
-
-
-
+ params:
+    ganalytics: G-87H3DWSJHN
