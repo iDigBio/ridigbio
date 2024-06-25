@@ -26,29 +26,6 @@ On Linux, you may encounter an error during the installation process if you do n
     idig_search_records(rq=list(genus="galax"))
     idig_search_records(rq=list(family="holothuriidae"), limit=1000)
 
-Complete list of terms that can be used is available [here](https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields). However, this only contains a subset of the fields. To see all raw fields available with the record API, you can run the following:
-
-    record_fields <- idig_meta_fields(type = "records", subset = "raw")
-    rfall <- data.frame(matrix(ncol = 3, nrow = 0))
-    for(i in 1:length(record_fields)){
-      if(length(record_fields[[i]]) == 2){
-        rf <- data.frame(matrix(ncol = 3, nrow = 0))
-        rf[1, 1] <-  names(record_fields[i])
-        rf[1, 2] <-  (record_fields[[i]])$type
-        rf[1, 3] <-  (record_fields[[i]])$fieldName
-        rfall <- rbind(rfall, rf)
-      }else{
-        sub <- record_fields[[i]]
-        for(j in 1:length(sub)){
-          rf <- data.frame(matrix(ncol = 3, nrow = 0))
-          rf[1, 1] <-  names(sub[j])
-          rf[1, 2] <-  (sub[[j]])$type
-          rf[1, 3] <-  (sub[[j]])$fieldName
-          rfall <- rbind(rfall, rf)
-        }
-      }
-    }
-    colnames(rfall) <- c("name", "type", "fieldName")
    
 # Recent updates
 

@@ -1,11 +1,12 @@
 url: http://idigbio.github.io/ridigbio/
 template:
   bootstrap: 5
+  params:
+    ganalytics: G-87H3DWSJHN
 navbar:
   structure:
     left:
     - reference
     - articles
     right: search
- params:
-    ganalytics: G-87H3DWSJHN
+
