@@ -2,10 +2,15 @@ pandoc: 3.1.13
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  BadCoordinateID: BadCoordinateID.html
   BasicUsage: BasicUsage.html
-  Demoridigbio: Demoridigbio.html
   Fields: Fields.html
-last_built: 2024-06-25T14:55Z
+  FindTissue: FindTissue.html
+  IDDataFlags: IDDataFlags.html
+  MediaAPIDemo: MediaAPIDemo.html
+  ModifiedDataID: ModifiedDataID.html
+  RecordAPIDemo: RecordAPIDemo.html
+last_built: 2024-07-02T19:31Z
 urls:
   reference: http://idigbio.github.io/ridigbio/reference
   article: http://idigbio.github.io/ridigbio/articles

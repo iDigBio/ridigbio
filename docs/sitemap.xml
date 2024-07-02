@@ -7,6 +7,9 @@
     <loc>http://idigbio.github.io/ridigbio/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>http://idigbio.github.io/ridigbio/articles/BadCoordinateID.html</loc>
+  </url>
+  <url>
     <loc>http://idigbio.github.io/ridigbio/articles/BasicUsage.html</loc>
   </url>
   <url>
@@ -16,6 +19,21 @@
     <loc>http://idigbio.github.io/ridigbio/articles/Fields.html</loc>
   </url>
   <url>
+    <loc>http://idigbio.github.io/ridigbio/articles/FindTissue.html</loc>
+  </url>
+  <url>
+    <loc>http://idigbio.github.io/ridigbio/articles/IDDataFlags.html</loc>
+  </url>
+  <url>
+    <loc>http://idigbio.github.io/ridigbio/articles/MediaAPIDemo.html</loc>
+  </url>
+  <url>
+    <loc>http://idigbio.github.io/ridigbio/articles/ModifiedDataID.html</loc>
+  </url>
+  <url>
+    <loc>http://idigbio.github.io/ridigbio/articles/RecordAPIDemo.html</loc>
+  </url>
+  <url>
     <loc>http://idigbio.github.io/ridigbio/articles/index.html</loc>
   </url>
   <url>
@@ -23,6 +41,9 @@
   </url>
   <url>
     <loc>http://idigbio.github.io/ridigbio/index.html</loc>
+  </url>
+  <url>
+    <loc>http://idigbio.github.io/ridigbio/news/index.html</loc>
   </url>
   <url>
     <loc>http://idigbio.github.io/ridigbio/reference/build_field_lists.html</loc>

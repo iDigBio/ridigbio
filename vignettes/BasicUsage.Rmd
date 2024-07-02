@@ -9,10 +9,17 @@ vignette: >
 
 The ridigbio package can be used to obtain records from [iDigBio](https://www.idigbio.org/) API's, including both the [Search API](https://github.com/idigbio/idigbio-search-api/wiki) and the [Media APIs](https://www.idigbio.org/wiki/index.php/IDigBio_API#Record_.26_Media_APIs). 
 
+## General Overview   
+
+In this demo we will cover how to:
+
+1. Install `ridigbio`
+2. Search for records with  `idig_search_records()`
+3. Search for media records with `idig_search_media()`
 
 ## Getting Started
 
-First, you must install the ridigbio package. If you are new to R and R studio, please refer to our QUBES module to get started (Introduction to R with Biodiversity Data, doi:[10.25334/84FC-TE88](doi.org/10.25334/84FC-TE88)).
+First, you must install the ridigbio package. If you are new to R and R studio, please refer to our QUBES module to get started: Introduction to R with Biodiversity Data, [doi:10.25334/84FC-TE88](htpps://www.doi.org/10.25334/84FC-TE88) .
 
 The lastest version of our R package can be installed via CRAN. 
 ```{r eval=FALSE, include=TRUE}
@@ -132,7 +139,7 @@ When fields are not specified, default columns include the following:
 | ypixels | as defined by EXIF,y dimension in pixels  |
  
 
-## More ways to search 
+### More ways to search 
 
 The media search above retained `r nrow(galax_media)` rows, however some of these observations do not have information in the `accessuri` field. To only obtain records with `acessuri`, we indicate we only want records where `data.ac:accessURI` exist, by setting `mq`, or media query, as followed:
 ```{r}

@@ -40,7 +40,7 @@
     
     <a class="navbar-brand me-2" href="index.html">ridigbio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,9 +56,17 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="articles/BasicUsage.html">Introduction to ridigbio</a>
-    <a class="dropdown-item" href="articles/Demoridigbio.html">Demo of ridigbio</a>
+    <a class="dropdown-item" href="articles/RecordAPIDemo.html">Record API Demo</a>
+    <a class="dropdown-item" href="articles/MediaAPIDemo.html">Media API Demo</a>
     <a class="dropdown-item" href="articles/Fields.html">Fields in ridigbio</a>
+    <a class="dropdown-item" href="articles/FindTissue.html">Tissue Samples Locator Demo</a>
+    <a class="dropdown-item" href="articles/ModifiedDataID.html">Identification of Modified Data</a>
+    <a class="dropdown-item" href="articles/BadCoordinateID.html">Identification of Suspicious Coordinates</a>
+    <a class="dropdown-item" href="articles/IDDataFlags.html">Identification of Data Flags</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -72,48 +80,59 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="ridigbio-">ridigbio <img src="reference/figures/ridigbioLogo4.png" align="right" alt="" width="200"><a class="anchor" aria-label="anchor" href="#ridigbio-"></a>
 </h1></div>
-<p>This should automatically install the package from a CRAN mirror if you have one configured:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ridigbio"</span>)</span></code></pre></div>
+<p><a href="https://app.travis-ci.com/github/iDigBio/ridigbio" class="external-link"><img src="https://api.travis-ci.com/iDigBio/ridigbio.svg?branch=master" alt="Build Status"></a></p>
+<p><strong>ridigbio</strong> is an R package to access <a href="https://www.idigbio.org/" class="external-link">iDigBio</a> (Integrated Digitized Biocollections).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>ridigbio is avaliable via <a href="https://cran.r-project.org/" class="external-link">CRAN</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ridigbio"</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="error-messages">Error Messages<a class="anchor" aria-label="anchor" href="#error-messages"></a>
+</h3>
 <p>If R says the package is unavailable, you may not have set a CRAN mirror. You can do so with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">chooseCRANmirror</span>()</span></code></pre></div>
-<p>If R says that a binary package is not available, your version of R may be too old. Please review the versions of R that CRAN has built packages for on the <a href="https://cran.r-project.org/package=ridigbio" class="external-link">CRAN ridigbio package page.</a> You can download the source package and install manually if there is no package built for your version of R. You may also need to install any dependencies.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ridigbio"</span>, <span class="at">type=</span><span class="st">"source"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/chooseCRANmirror.html" class="external-link">chooseCRANmirror</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>If R says that a binary package is not available, your version of R may be too old. Please review the versions of R that CRAN has built packages for on the <a href="https://cran.r-project.org/package=ridigbio" class="external-link">CRAN ridigbio package page.</a></p>
+<p>You can download the source package and install manually if there is no package built for your version of R. You may also need to install any dependencies.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ridigbio"</span>, type<span class="op">=</span><span class="st">"source"</span><span class="op">)</span></span></code></pre></div>
 <p>On Linux, you may encounter an error during the installation process if you do not have <code>libcurl</code> installed. The method for installing libcurl will vary between distributions, but on Ubuntu you can install the latest version via:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>sudo apt install libcurl4</span></code></pre></div>
+<pre><code>sudo apt install libcurl4</code></pre>
+</div>
+</div>
+<div class="section level2">
+<h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h2>
+<p>There are several articles that can help get you started:</p>
+<ul>
+<li><a href="http://idigbio.github.io/ridigbio/articles/BasicUsage.html">Introduction to ridigbio</a></li>
+<li><a href="http://idigbio.github.io/ridigbio/articles/RecordAPIDemo.html">Record API Demo</a></li>
+<li><a href="http://idigbio.github.io/ridigbio/articles/MediaAPIDemo.html">Media API Demo</a></li>
+<li><a href="http://idigbio.github.io/ridigbio/articles/Fields.html">Fields in ridigibio</a></li>
+<li><a href="http://idigbio.github.io/ridigbio/articles/FindTissue.html">Tissue Samples Locator Demo</a></li>
+<li><a href="http://idigbio.github.io/ridigbio/articles/ModifiedDataID.html">Identification of Modified Data</a></li>
+<li><a href="http://idigbio.github.io/ridigbio/articles/BadCoordinateID.html">Identification of Suspicious Coordinates</a></li>
+<li><a href="http://idigbio.github.io/ridigbio/articles/IDDataFlags.html">Identification of Data Flags</a></li>
+</ul>
+<p>Most iDigBio users are interested in downloading occurrence records:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/iDigBio/ridigbio" class="external-link">"ridigbio"</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/idig_search_records.html">idig_search_records</a></span><span class="op">(</span>rq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>genus<span class="op">=</span><span class="st">"galax"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/idig_search_records.html">idig_search_records</a></span><span class="op">(</span>rq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>family<span class="op">=</span><span class="st">"diapensiaceae"</span><span class="op">)</span>, limit<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level1">
-<h1 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
-</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ridigbio"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">idig_search_records</span>(<span class="at">rq=</span><span class="fu">list</span>(<span class="at">genus=</span><span class="st">"galax"</span>))</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">idig_search_records</span>(<span class="at">rq=</span><span class="fu">list</span>(<span class="at">family=</span><span class="st">"holothuriidae"</span>), <span class="at">limit=</span><span class="dv">1000</span>)</span></code></pre></div>
-</div>
-<div class="section level1">
-<h1 id="recent-updates">Recent updates<a class="anchor" aria-label="anchor" href="#recent-updates"></a>
+<h1 id="meta">Meta<a class="anchor" aria-label="anchor" href="#meta"></a>
 </h1>
 <ul>
-<li>
-<p>Default fields returned to users have been updated to return research-grade fields. Previously, we returned the <code>datecollected</code> field by default, which we do not recommend to be used in scientific research.</p>
-<ul>
-<li>What is <code>datecollected</code>? This is a field created during the data ingestion process. When a data provider does not provide a full date in the Darwin Core <a href="https://dwc.tdwg.org/list/#dwc_eventDate" class="external-link">eventDate</a> field, this complete value or the missing parts (i.e., month and/or day) are randomly generated and thus may lack any real meaning. The generated dates are difficult to detect, as they are randomly distributed. We are currently working to modify our ingestion pipeline to avoid randomly generating dates. However, dates remain an issue across biodiversity aggregators and the solution is not clear (see <a href="https://discourse.gbif.org/t/please-share-your-dates-correctly/3824/5" class="external-link">GBIF for example</a>).</li>
-<li>To prevent user misuse of this term, we will no longer be providing the <code>datecollected</code> field by default and will instead be returning the following fields: <code>c("data.dwc:eventDate", "data.dwc:year",  "data.dwc:month", "data.dwc:day")</code>.
-<ul>
-<li>Please be advised that these fields are not in date format. Instead, all dates will be text strings. There are many ways to convert these to dates, for example, see <a href="https://github.com/nataliepatten/gatoRs/blob/main/R/remove_duplicates.R" class="external-link">gatoRs remove_duplicate function</a> or <a href="https://github.com/iDigBio/ridigbio/issues/44#issuecomment-1889897604" class="external-link">ridigbio proposed solution here</a>.</li>
+<li>9Please report any bugs or issues.](<a href="https://github.com/iDigBio/ridigbio/issues" class="external-link uri">https://github.com/iDigBio/ridigbio/issues</a>)</li>
+<li>License: MIT</li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>Additional documentation has been added to streamline data use.</p></li>
-</ul>
-</div>
-<div class="section level1">
-<h1 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
-</h1>
-<p>MIT</p>
 </div>
 
   </main><aside class="col-md-3"><div class="links">
@@ -152,12 +171,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://app.travis-ci.com/github/iDigBio/ridigbio" class="external-link"><img src="https://api.travis-ci.com/iDigBio/ridigbio.svg?branch=master" alt="Build Status"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>

@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ridigbio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,9 +31,17 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/BasicUsage.html">Introduction to ridigbio</a>
-    <a class="dropdown-item" href="../articles/Demoridigbio.html">Demo of ridigbio</a>
+    <a class="dropdown-item" href="../articles/RecordAPIDemo.html">Record API Demo</a>
+    <a class="dropdown-item" href="../articles/MediaAPIDemo.html">Media API Demo</a>
     <a class="dropdown-item" href="../articles/Fields.html">Fields in ridigbio</a>
+    <a class="dropdown-item" href="../articles/FindTissue.html">Tissue Samples Locator Demo</a>
+    <a class="dropdown-item" href="../articles/ModifiedDataID.html">Identification of Modified Data</a>
+    <a class="dropdown-item" href="../articles/BadCoordinateID.html">Identification of Suspicious Coordinates</a>
+    <a class="dropdown-item" href="../articles/IDDataFlags.html">Identification of Data Flags</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -49,9 +57,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="all-functions">All functions<a class="anchor" aria-label="anchor" href="#all-functions"></a></h2>
+      <h2 id="accessing-the-record-api">Accessing the Record API<a class="anchor" aria-label="anchor" href="#accessing-the-record-api"></a></h2>
       
-      
+      <p class="section-desc"></p><p>Obtain, count, summarize, and view specimen records.</p>
 
       
     </div><div id="" class="section level2">
@@ -61,10 +69,98 @@
 
       <dl><dt>
           
+          <code><a href="idig_search_records.html">idig_search_records()</a></code> 
+        </dt>
+        <dd>Searching of iDigBio records</dd>
+      </dl><dl><dt>
+          
+          <code><a href="idig_count_records.html">idig_count_records()</a></code> 
+        </dt>
+        <dd>Count record endpoint</dd>
+      </dl><dl><dt>
+          
+          <code><a href="idig_top_records.html">idig_top_records()</a></code> 
+        </dt>
+        <dd>Top records endpoint</dd>
+      </dl><dl><dt>
+          
+          <code><a href="idig_view_records.html">idig_view_records()</a></code> 
+        </dt>
+        <dd>view specimen endpoint</dd>
+      </dl></div><div class="section level2">
+      <h2 id="accessing-the-media-api">Accessing the Media API<a class="anchor" aria-label="anchor" href="#accessing-the-media-api"></a></h2>
+      
+      <p class="section-desc"></p><p>Obtain, count, summarize, and view media records.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="idig_search_media.html">idig_search_media()</a></code> 
+        </dt>
+        <dd>Searching of iDigBio media records</dd>
+      </dl><dl><dt>
+          
+          <code><a href="idig_count_media.html">idig_count_media()</a></code> 
+        </dt>
+        <dd>Count media endpoint</dd>
+      </dl><dl><dt>
+          
+          <code><a href="idig_top_media.html">idig_top_media()</a></code> 
+        </dt>
+        <dd>Top media endpoint</dd>
+      </dl><dl><dt>
+          
+          <code><a href="idig_view_media.html">idig_view_media()</a></code> 
+        </dt>
+        <dd>view media endpoint</dd>
+      </dl></div><div class="section level2">
+      <h2 id="other-helpful-functions">Other Helpful Functions<a class="anchor" aria-label="anchor" href="#other-helpful-functions"></a></h2>
+      
+      <p class="section-desc"></p><p>Search, identify fields, and identify the API version with these functions.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="idig_search.html">idig_search()</a></code> 
+        </dt>
+        <dd>Basic searching of iDigBio records</dd>
+      </dl><dl><dt>
+          
           <code><a href="build_field_lists.html">build_field_lists()</a></code> 
         </dt>
         <dd>Build fields and fields_exclude for queries.</dd>
       </dl><dl><dt>
+          
+          <code><a href="idig_meta_fields.html">idig_meta_fields()</a></code> 
+        </dt>
+        <dd>meta fields endpoint</dd>
+      </dl><dl><dt>
+          
+          <code><a href="idig_version.html">idig_version()</a></code> 
+        </dt>
+        <dd>API version</dd>
+      </dl></div><div class="section level2">
+      <h2 id="internal-functions">Internal Functions<a class="anchor" aria-label="anchor" href="#internal-functions"></a></h2>
+      
+      <p class="section-desc"></p><p>Functions that are used to streamline the above functions.</p>
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
           
           <code><a href="idig_GET.html">idig_GET()</a></code> 
         </dt>
@@ -91,49 +187,9 @@
         <dd>Check is the request returned an error.</dd>
       </dl><dl><dt>
           
-          <code><a href="idig_count_media.html">idig_count_media()</a></code> 
-        </dt>
-        <dd>Count media endpoint</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_count_records.html">idig_count_records()</a></code> 
-        </dt>
-        <dd>Count record endpoint</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_meta_fields.html">idig_meta_fields()</a></code> 
-        </dt>
-        <dd>meta fields endpoint</dd>
-      </dl><dl><dt>
-          
           <code><a href="idig_parse.html">idig_parse()</a></code> 
         </dt>
         <dd>parse successfully returned request</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_search.html">idig_search()</a></code> 
-        </dt>
-        <dd>Basic searching of iDigBio records</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_search_media.html">idig_search_media()</a></code> 
-        </dt>
-        <dd>Searching of iDigBio media records</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_search_records.html">idig_search_records()</a></code> 
-        </dt>
-        <dd>Searching of iDigBio records</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_top_media.html">idig_top_media()</a></code> 
-        </dt>
-        <dd>Top media endpoint</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_top_records.html">idig_top_records()</a></code> 
-        </dt>
-        <dd>Top records endpoint</dd>
       </dl><dl><dt>
           
           <code><a href="idig_url.html">idig_url()</a></code> 
@@ -146,26 +202,12 @@
         <dd>validate fields</dd>
       </dl><dl><dt>
           
-          <code><a href="idig_version.html">idig_version()</a></code> 
-        </dt>
-        <dd>API version</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_view_media.html">idig_view_media()</a></code> 
-        </dt>
-        <dd>view media endpoint</dd>
-      </dl><dl><dt>
-          
-          <code><a href="idig_view_records.html">idig_view_records()</a></code> 
-        </dt>
-        <dd>view specimen endpoint</dd>
-      </dl><dl><dt>
-          
           <code><a href="ridigbio.html">ridigbio</a></code> 
         </dt>
         <dd>Retrieve data from the iDigBio specimen data repository.</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

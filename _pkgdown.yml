@@ -3,10 +3,60 @@ template:
   bootstrap: 5
   params:
     ganalytics: G-87H3DWSJHN
+reference:
+- title: Accessing the Record API
+  desc: |
+    Obtain, count, summarize, and view specimen records.
+  contents:
+  - idig_search_records
+  - idig_count_records
+  - idig_top_records
+  - idig_view_records
+- title: Accessing the Media API
+  desc: |
+    Obtain, count, summarize, and view media records.
+  contents:
+   - idig_search_media
+   - idig_count_media
+   - idig_top_media
+   - idig_view_media
+- title: Other Helpful Functions
+  desc: |
+    Search, identify fields, and identify the API version with these functions.
+  contents:
+    - idig_search
+    - build_field_lists
+    - idig_meta_fields
+    - idig_version
+- title: Internal Functions
+  desc: |
+    Functions that are used to streamline the above functions.
+  contents:
+  - idig_GET
+  - idig_POST
+  - idig_build_attrib
+  - idig_check
+  - idig_check_error
+  - idig_parse
+  - idig_url
+  - idig_validate
+  - ridigbio
+articles:
+- title: Articles
+  navbar: ~
+  contents:
+  - BasicUsage
+  - RecordAPIDemo
+  - MediaAPIDemo
+  - Fields
+  - FindTissue
+  - ModifiedDataID
+  - BadCoordinateID
+  - IDDataFlags
 navbar:
   structure:
     left:
     - reference
     - articles
+    - news
     right: search
-

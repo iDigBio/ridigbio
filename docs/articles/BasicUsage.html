@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ridigbio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,9 +48,17 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/BasicUsage.html">Introduction to ridigbio</a>
-    <a class="dropdown-item" href="../articles/Demoridigbio.html">Demo of ridigbio</a>
+    <a class="dropdown-item" href="../articles/RecordAPIDemo.html">Record API Demo</a>
+    <a class="dropdown-item" href="../articles/MediaAPIDemo.html">Media API Demo</a>
     <a class="dropdown-item" href="../articles/Fields.html">Fields in ridigbio</a>
+    <a class="dropdown-item" href="../articles/FindTissue.html">Tissue Samples Locator Demo</a>
+    <a class="dropdown-item" href="../articles/ModifiedDataID.html">Identification of Modified Data</a>
+    <a class="dropdown-item" href="../articles/BadCoordinateID.html">Identification of Suspicious Coordinates</a>
+    <a class="dropdown-item" href="../articles/IDDataFlags.html">Identification of Data Flags</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -82,11 +90,25 @@
 and the <a href="https://www.idigbio.org/wiki/index.php/IDigBio_API#Record_.26_Media_APIs" class="external-link">Media
 APIs</a>.</p>
 <div class="section level2">
+<h2 id="general-overview">General Overview<a class="anchor" aria-label="anchor" href="#general-overview"></a>
+</h2>
+<p>In this demo we will cover how to:</p>
+<ol style="list-style-type: decimal">
+<li>Install <code>ridigbio</code>
+</li>
+<li>Search for records with <code><a href="../reference/idig_search_records.html">idig_search_records()</a></code>
+</li>
+<li>Search for media records with <code><a href="../reference/idig_search_media.html">idig_search_media()</a></code>
+</li>
+</ol>
+</div>
+<div class="section level2">
 <h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
 <p>First, you must install the ridigbio package. If you are new to R and
-R studio, please refer to our QUBES module to get started (Introduction
-to R with Biodiversity Data, <a href="doi:%5B10.25334/84FC-TE88" class="uri">doi:[10.25334/84FC-TE88</a>](doi.org/10.25334/84FC-TE88)).</p>
+R studio, please refer to our QUBES module to get started: Introduction
+to R with Biodiversity Data, <a href="htpps://www.doi.org/10.25334/84FC-TE88">doi:10.25334/84FC-TE88</a>
+.</p>
 <p>The lastest version of our R package can be installed via CRAN.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ridigbio"</span><span class="op">)</span></span></code></pre></div>
@@ -360,10 +382,9 @@ downloads with Media downloads</td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section level2">
-<h2 id="more-ways-to-search-1">More ways to search<a class="anchor" aria-label="anchor" href="#more-ways-to-search-1"></a>
-</h2>
+<div class="section level3">
+<h3 id="more-ways-to-search-1">More ways to search<a class="anchor" aria-label="anchor" href="#more-ways-to-search-1"></a>
+</h3>
 <p>The media search above retained 339 rows, however some of these
 observations do not have information in the <code>accessuri</code>
 field. To only obtain records with <code>acessuri</code>, we indicate we
@@ -373,6 +394,7 @@ only want records where <code>data.ac:accessURI</code> exist, by setting
 <code class="sourceCode R"><span><span class="va">galax_media2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/idig_search_media.html">idig_search_media</a></span><span class="op">(</span>rq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>scientificname<span class="op">=</span><span class="st">"Galax urceolata"</span><span class="op">)</span>,</span>
 <span>                                  mq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"data.ac:accessURI"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"type"</span><span class="op">=</span><span class="st">"exists"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Now we have 325 observations with <code>accessuri</code>!</p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

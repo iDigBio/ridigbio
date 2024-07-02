@@ -13,6 +13,17 @@ library(ridigbio)
 
 There are many fields that can be obtained via the Search and Media API. This tutorial is meant to aid in identifying these fields. 
 
+## General Overview  
+
+In this demo we will cover how to:
+
+1. Identifying both raw and indexed record fields with `idig_meta_fields()`
+2. Downloading fields of interest with `idig_search_records()`
+3. Identifying both raw and indexed media record fields with ` idig_meta_fields()`
+4. Downloading fields of interest with `idig_search_media()`
+
+
+
 ## Search API Fields 
 
 To identify the raw, or verbatim, fields available with the Search API, you can run the following: 
@@ -86,12 +97,13 @@ rfall[238,]
 rfalli[69,]
 ```
 
-### Retain records with these fields
+### Retain records with these fields 
+ 
 To obtain records with these fields with the `idig_search_records()` function, you simply list the  `fields` arugument as equal to these fields. 
 
 ```{r}
 out <- idig_search_records(rq=list(scientificname="Galax urceolata"), 
-                           fields = rfall$fieldName[1:88])
+                           fields = rfall$fieldName)
 ```
 
 ## Media Record API Fields  
@@ -156,3 +168,12 @@ Note, all index fields associated with the Media Record API are returned by defa
 mfalli$name
 ```
 
+
+### Retain records with these fields 
+ 
+To obtain records with these fields with the `idig_search_media()` function, you simply list the  `fields` arugument as equal to these fields. 
+
+```{r}
+out <- idig_search_media(rq=list(scientificname="Galax urceolata"), 
+                           fields = mfalli$fieldName)
+```

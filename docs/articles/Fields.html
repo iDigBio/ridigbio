@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">ridigbio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,9 +48,17 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/BasicUsage.html">Introduction to ridigbio</a>
-    <a class="dropdown-item" href="../articles/Demoridigbio.html">Demo of ridigbio</a>
+    <a class="dropdown-item" href="../articles/RecordAPIDemo.html">Record API Demo</a>
+    <a class="dropdown-item" href="../articles/MediaAPIDemo.html">Media API Demo</a>
     <a class="dropdown-item" href="../articles/Fields.html">Fields in ridigbio</a>
+    <a class="dropdown-item" href="../articles/FindTissue.html">Tissue Samples Locator Demo</a>
+    <a class="dropdown-item" href="../articles/ModifiedDataID.html">Identification of Modified Data</a>
+    <a class="dropdown-item" href="../articles/BadCoordinateID.html">Identification of Suspicious Coordinates</a>
+    <a class="dropdown-item" href="../articles/IDDataFlags.html">Identification of Data Flags</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -80,6 +88,25 @@
     
 <p>There are many fields that can be obtained via the Search and Media
 API. This tutorial is meant to aid in identifying these fields.</p>
+<div class="section level2">
+<h2 id="general-overview">General Overview<a class="anchor" aria-label="anchor" href="#general-overview"></a>
+</h2>
+<p>In this demo we will cover how to:</p>
+<ol style="list-style-type: decimal">
+<li>Identifying both raw and indexed record fields with
+<code><a href="../reference/idig_meta_fields.html">idig_meta_fields()</a></code>
+</li>
+<li>Downloading fields of interest with
+<code><a href="../reference/idig_search_records.html">idig_search_records()</a></code>
+</li>
+<li>Identifying both raw and indexed media record fields with
+<code><a href="../reference/idig_meta_fields.html">idig_meta_fields()</a></code>
+</li>
+<li>Downloading fields of interest with
+<code><a href="../reference/idig_search_media.html">idig_search_media()</a></code>
+</li>
+</ol>
+</div>
 <div class="section level2">
 <h2 id="search-api-fields">Search API Fields<a class="anchor" aria-label="anchor" href="#search-api-fields"></a>
 </h2>
@@ -161,7 +188,7 @@ scientificName can be found in both the raw and index fields.</p>
 <code>fields</code> arugument as equal to these fields.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/idig_search_records.html">idig_search_records</a></span><span class="op">(</span>rq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>scientificname<span class="op">=</span><span class="st">"Galax urceolata"</span><span class="op">)</span>, </span>
-<span>                           fields <span class="op">=</span> <span class="va">rfall</span><span class="op">$</span><span class="va">fieldName</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">88</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<span>                           fields <span class="op">=</span> <span class="va">rfall</span><span class="op">$</span><span class="va">fieldName</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -234,6 +261,16 @@ function.</p>
 <span><span class="co">## [13] "recordset"      "rights"         "tag"            "type"          </span></span>
 <span><span class="co">## [17] "uuid"           "version"        "webstatement"   "xpixels"       </span></span>
 <span><span class="co">## [21] "ypixels"</span></span></code></pre>
+<div class="section level3">
+<h3 id="retain-records-with-these-fields-1">Retain records with these fields<a class="anchor" aria-label="anchor" href="#retain-records-with-these-fields-1"></a>
+</h3>
+<p>To obtain records with these fields with the
+<code><a href="../reference/idig_search_media.html">idig_search_media()</a></code> function, you simply list the
+<code>fields</code> arugument as equal to these fields.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/idig_search_media.html">idig_search_media</a></span><span class="op">(</span>rq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>scientificname<span class="op">=</span><span class="st">"Galax urceolata"</span><span class="op">)</span>, </span>
+<span>                           fields <span class="op">=</span> <span class="va">mfalli</span><span class="op">$</span><span class="va">fieldName</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
