@@ -87,7 +87,7 @@ mediaurl_external
 
 We can use the download URLs that we assembled in the step above to go and download each media file. For clarity, we will place files in two different folders, based on whether we downloaded them from the iDigBio server or an external server. We will name each file based on its unique identifier.
 
-``` {r message=FALSE}
+```{undefined eval=FALSE, include=TRUE}
 # Create new directories to save media files in
 dir.create("jpgs_idigbio")
 dir.create("jpgs_external")
