@@ -61,5 +61,5 @@ idig_search_records(rq=list(family="diapensiaceae"), limit=1000)
 
 # Meta
 
-* 9Please report any bugs or issues.](https://github.com/iDigBio/ridigbio/issues)
+* [Please report any bugs or issues.](https://github.com/iDigBio/ridigbio/issues)
 * License: MIT
