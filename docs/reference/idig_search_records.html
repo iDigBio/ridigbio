@@ -82,13 +82,15 @@
 
 
 <dt>fields</dt>
-<dd><p>vector of fields that will be contained in the data.frame,
-limited set returned by default, use "all" to get all indexed fields</p></dd>
+<dd><p>Vector of fields that will be contained in the data.frame,
+limited set returned by default, use "all" to get all indexed fields.
+Some of the avaliable fields are listed <a href="https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields" class="external-link">here</a>.
+All potential fields can be found with the <code><a href="idig_meta_fields.html">idig_meta_fields()</a></code> function.</p></dd>
 
 
 <dt>max_items</dt>
-<dd><p>maximum number of results allowed to be retrieved (fail
--safe)</p></dd>
+<dd><p>Maximum number of results allowed to be retrieved (fail
+-safe).</p></dd>
 
 
 <dt>limit</dt>
@@ -112,23 +114,23 @@ make paging safe</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>a data frame with fields requested or the following default fields:
-  * UUID: Unique identifier assigned by iDigBio.
-  * [occurrenceID](https://dwc.tdwg.org/list/#dwc_occurrenceID)
-  * [catalognumber](http://rs.tdwg.org/dwc/terms/catalogNumber)
-  * [family](http://rs.tdwg.org/dwc/terms/family) - may be reassigned by iDigBio
-  * [genus](https://dwc.tdwg.org/list/#dwc_genus) - may be reassigned by iDigBio
-  * [scientificname](http://rs.tdwg.org/dwc/terms/scientificName) - may be reassigned by iDigBio
-  * [country](http://rs.tdwg.org/dwc/terms/country) - may be modified by iDigBio
-  * [stateprovince](http://rs.tdwg.org/dwc/terms/stateProvince)
-  * geopoint
-  * [data.dwc:eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)
-  * [data.dwc:year](https://dwc.tdwg.org/list/#dwc_year)
-  * [data.dwc:month](https://dwc.tdwg.org/list/#dwc_month)
-  * [data.dwc:day](https://dwc.tdwg.org/list/#dwc_day)
-  * collector
-  * recordset: Assigned by iDigBio</p>
-    </div>
+<p>A data frame with fields requested or the following default fields:</p><ul><li><p>UUID: Unique identifier assigned by iDigBio.</p></li>
+<li><p><a href="https://dwc.tdwg.org/list/#dwc_occurrenceID" class="external-link">occurrenceID</a></p></li>
+<li><p><a href="http://rs.tdwg.org/dwc/terms/catalogNumber" class="external-link">catalognumber</a></p></li>
+<li><p><a href="http://rs.tdwg.org/dwc/terms/family" class="external-link">family</a> - may be reassigned by iDigBio</p></li>
+<li><p><a href="https://dwc.tdwg.org/list/#dwc_genus" class="external-link">genus</a> - may be reassigned by iDigBio</p></li>
+<li><p><a href="http://rs.tdwg.org/dwc/terms/scientificName" class="external-link">scientificname</a> - may be reassigned by iDigBio</p></li>
+<li><p><a href="http://rs.tdwg.org/dwc/terms/country" class="external-link">country</a> - may be modified by iDigBio</p></li>
+<li><p><a href="http://rs.tdwg.org/dwc/terms/stateProvince" class="external-link">stateprovince</a></p></li>
+<li><p>geopoint: Assigned by iDigBio.</p></li>
+<li><p><a href="https://dwc.tdwg.org/list/#dwc_eventDate" class="external-link">data.dwc:eventDate</a></p></li>
+<li><p><a href="https://dwc.tdwg.org/list/#dwc_year" class="external-link">data.dwc:year</a></p></li>
+<li><p><a href="https://dwc.tdwg.org/list/#dwc_month" class="external-link">data.dwc:month</a></p></li>
+<li><p><a href="https://dwc.tdwg.org/list/#dwc_day" class="external-link">data.dwc:day</a></p></li>
+<li><p>datecollected: May be reassigned by iDigBio, <a href="https://github.com/iDigBio/idb-backend/issues/229" class="external-link">see more here</a></p></li>
+<li><p>collector: Assigned by iDigBio.</p></li>
+<li><p>recordset: Assigned by iDigBio.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Wraps <code><a href="idig_search.html">idig_search</a></code> to provide defaults specific to searching
@@ -235,7 +237,7 @@ data.frame's attributes. (I.e. <code>attributes(df)</code>)</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Francois Michonneau, Matthew Collins, Jesse Bennett.</p>
+  <p></p><p>Developed by Francois Michonneau, Matthew Collins, Michelle L. Gaynor, Jesse Bennett.</p>
 </div>
 
 <div class="pkgdown-footer-right">

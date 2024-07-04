@@ -90,23 +90,25 @@
 ##' @param sort vector of fields to use for sorting, UUID is always appended to
 ##' make paging safe
 ##' @param ... additional parameters
-##' @return a data frame with fields requested or the following default fields:
-##'   * UUID: Unique identifier assigned by iDigBio.
-##'   * [occurrenceID](https://dwc.tdwg.org/list/#dwc_occurrenceID)
-##'   * [catalognumber](http://rs.tdwg.org/dwc/terms/catalogNumber)
-##'   * [family](http://rs.tdwg.org/dwc/terms/family) - may be reassigned by iDigBio
-##'   * [genus](https://dwc.tdwg.org/list/#dwc_genus) - may be reassigned by iDigBio
-##'   * [scientificname](http://rs.tdwg.org/dwc/terms/scientificName) - may be reassigned by iDigBio
-##'   * [country](http://rs.tdwg.org/dwc/terms/country) - may be modified by iDigBio
-##'   * [stateprovince](http://rs.tdwg.org/dwc/terms/stateProvince)
-##'   * geopoint
-##'   * [data.dwc:eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)
-##'   * [data.dwc:year](https://dwc.tdwg.org/list/#dwc_year)
-##'   * [data.dwc:month](https://dwc.tdwg.org/list/#dwc_month)
-##'   * [data.dwc:day](https://dwc.tdwg.org/list/#dwc_day)
-##'   * collector
-##'   * recordset: Assigned by iDigBio
-##'   
+##' @return A data frame with fields requested or the following default fields:
+##' \itemize{
+##' \item{UUID: Unique identifier assigned by iDigBio.}   
+##' \item{[occurrenceID](https://dwc.tdwg.org/list/#dwc_occurrenceID)}  
+##' \item{[catalognumber](http://rs.tdwg.org/dwc/terms/catalogNumber)}   
+##' \item{[family](http://rs.tdwg.org/dwc/terms/family) - may be reassigned by iDigBio}   
+##' \item{[genus](https://dwc.tdwg.org/list/#dwc_genus) - may be reassigned by iDigBio}   
+##' \item{[scientificname](http://rs.tdwg.org/dwc/terms/scientificName) - may be reassigned by iDigBio}   
+##' \item{[country](http://rs.tdwg.org/dwc/terms/country) - may be modified by iDigBio}   
+##' \item{[stateprovince](http://rs.tdwg.org/dwc/terms/stateProvince) }   
+##' \item{geopoint: Assigned by iDigBio.}     
+##' \item{[data.dwc:eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)}   
+##' \item{[data.dwc:year](https://dwc.tdwg.org/list/#dwc_year)}   
+##' \item{[data.dwc:month](https://dwc.tdwg.org/list/#dwc_month)}   
+##' \item{[data.dwc:day](https://dwc.tdwg.org/list/#dwc_day)}   
+##' \item{datecollected: May be reassigned by iDigBio, [see more here](https://github.com/iDigBio/idb-backend/issues/229)}   
+##' \item{collector: Assigned by iDigBio.}      
+##' \item{recordset: Assigned by iDigBio.}   
+##' }  
 ##' @author Matthew Collins
 ##' @examples
 ##' \dontrun{

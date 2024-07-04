@@ -9,10 +9,10 @@ Retrieve data from the iDigBio specimen data repository.
 \section{About}{
 
 
-ridigbio provides an interface to the iDigBio data API described here: 
+ridigbio provides an interface to the iDigBio data API described here:
 \url{https://www.idigbio.org/wiki/index.php/IDigBio_API}. With this package
-you can retrieve specimen and media records from the iDigBio data 
-repository. The iDigBio portal \url{https://portal.idigbio.org/} uses the 
+you can retrieve specimen and media records from the iDigBio data
+repository. The iDigBio portal \url{https://portal.idigbio.org/} uses the
 same API so you should be able to retrieve the same information as shown in
 the portal.
 
@@ -31,7 +31,7 @@ documenation first with \code{?idig_search_records} is recommended.
 \section{Limitations}{
 
 
-This package does not yet provide an interface to the mapping or the 
+This package does not yet provide an interface to the mapping or the
 download APIs.
 }
 

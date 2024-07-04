@@ -17,11 +17,13 @@ idig_search_records(
 \arguments{
 \item{rq}{iDigBio record query in nested list format}
 
-\item{fields}{vector of fields that will be contained in the data.frame,
-limited set returned by default, use "all" to get all indexed fields}
+\item{fields}{Vector of fields that will be contained in the data.frame,
+limited set returned by default, use "all" to get all indexed fields.
+Some of the avaliable fields are listed \href{https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields}{here}.
+All potential fields can be found with the \code{idig_meta_fields()} function.}
 
-\item{max_items}{maximum number of results allowed to be retrieved (fail
--safe)}
+\item{max_items}{Maximum number of results allowed to be retrieved (fail
+-safe).}
 
 \item{limit}{maximum number of results returned}
 
@@ -33,22 +35,25 @@ make paging safe}
 \item{...}{additional parameters}
 }
 \value{
-a data frame with fields requested or the following default fields:
-  * UUID: Unique identifier assigned by iDigBio.
-  * [occurrenceID](https://dwc.tdwg.org/list/#dwc_occurrenceID)
-  * [catalognumber](http://rs.tdwg.org/dwc/terms/catalogNumber)
-  * [family](http://rs.tdwg.org/dwc/terms/family) - may be reassigned by iDigBio
-  * [genus](https://dwc.tdwg.org/list/#dwc_genus) - may be reassigned by iDigBio
-  * [scientificname](http://rs.tdwg.org/dwc/terms/scientificName) - may be reassigned by iDigBio
-  * [country](http://rs.tdwg.org/dwc/terms/country) - may be modified by iDigBio
-  * [stateprovince](http://rs.tdwg.org/dwc/terms/stateProvince)
-  * geopoint
-  * [data.dwc:eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)
-  * [data.dwc:year](https://dwc.tdwg.org/list/#dwc_year)
-  * [data.dwc:month](https://dwc.tdwg.org/list/#dwc_month)
-  * [data.dwc:day](https://dwc.tdwg.org/list/#dwc_day)
-  * collector
-  * recordset: Assigned by iDigBio
+A data frame with fields requested or the following default fields:
+\itemize{
+\item{UUID: Unique identifier assigned by iDigBio.}
+\item{\href{https://dwc.tdwg.org/list/#dwc_occurrenceID}{occurrenceID}}
+\item{\href{http://rs.tdwg.org/dwc/terms/catalogNumber}{catalognumber}}
+\item{\href{http://rs.tdwg.org/dwc/terms/family}{family} - may be reassigned by iDigBio}
+\item{\href{https://dwc.tdwg.org/list/#dwc_genus}{genus} - may be reassigned by iDigBio}
+\item{\href{http://rs.tdwg.org/dwc/terms/scientificName}{scientificname} - may be reassigned by iDigBio}
+\item{\href{http://rs.tdwg.org/dwc/terms/country}{country} - may be modified by iDigBio}
+\item{\href{http://rs.tdwg.org/dwc/terms/stateProvince}{stateprovince} }
+\item{geopoint: Assigned by iDigBio.}
+\item{\href{https://dwc.tdwg.org/list/#dwc_eventDate}{data.dwc:eventDate}}
+\item{\href{https://dwc.tdwg.org/list/#dwc_year}{data.dwc:year}}
+\item{\href{https://dwc.tdwg.org/list/#dwc_month}{data.dwc:month}}
+\item{\href{https://dwc.tdwg.org/list/#dwc_day}{data.dwc:day}}
+\item{datecollected: May be reassigned by iDigBio, \href{https://github.com/iDigBio/idb-backend/issues/229}{see more here}}
+\item{collector: Assigned by iDigBio.}
+\item{recordset: Assigned by iDigBio.}
+}
 }
 \description{
 Function to query the iDigBio API for specimen records

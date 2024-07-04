@@ -13,7 +13,7 @@ Authors@R: c(person("Francois", "Michonneau", comment="Original Author", role=c(
   email="klove@flmnh.ufl.edu"),
   person("Hem Nalini", "Morzaria-Luna", role="ctb",
   email="hemnalin.morzarialuna@noaa.gov"),
-  person("Michelle L.", "Gaynor", role="ctb",
+  person("Michelle L.", "Gaynor", role=c("ctb", "aut"),
   email="michellegaynor@ufl.edu"),
   person("Jesse Bennett", comment="Maintainer", role=c("cre"),
   email="j3553@ufl.edu"))
@@ -36,4 +36,5 @@ LazyData: true
 Suggests:
   testthat
 Repository: CRAN
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
+Roxygen: list(markdown = TRUE)

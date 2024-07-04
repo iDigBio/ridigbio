@@ -58,7 +58,7 @@ When fields are not specified, default columns include the following:
 | stateprovince |name of the next smaller administrative region than country, http://rs.tdwg.org/dwc/terms/stateProvince|
 | geopoint.lon | equivalent to decimalLongitude, 	http://rs.tdwg.org/dwc/terms/decimalLongitude|
 | geopoint.lat | equivalent to decimalLatitude,http://rs.tdwg.org/dwc/terms/decimalLatitude |
-| datecollected | equivalent to eventDate, https://dwc.tdwg.org/terms/#dwc:eventDate) |
+| datecollected | [Modified field and could lack biological meaning](https://github.com/iDigBio/idb-backend/issues/229) |
 | data.dwc:eventDate | equivalent to eventDate, https://dwc.tdwg.org/list/#dwc_eventDate |
 | data.dwc:year | year of collection event, https://dwc.tdwg.org/list/#dwc_year |
 | data.dwc:month | month of collection event, https://dwc.tdwg.org/list/#dwc_month |
