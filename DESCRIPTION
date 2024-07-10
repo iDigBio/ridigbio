@@ -30,18 +30,18 @@ Imports:
   stats,
   plyr,
   httr,
-  jsonlite
+  jsonlite,
+  leaflet,
+  kableExtra,
+  tidyverse
 License: MIT + file LICENSE
 LazyData: true
 Suggests:
-    testthat,
-    markdown,
-    knitr,
-    utils,
-    rmarkdown,
-    leaflet,
-    kableExtra,
-    tidyverse
+  testthat,
+  markdown,
+  knitr,
+  utils,
+  rmarkdown
 VignetteBuilder: knitr
 Repository: CRAN
 RoxygenNote: 7.3.1

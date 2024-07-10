@@ -127,3 +127,11 @@ idig_POST <- function(path, body, ...) {
 ##'
 idig_validate <- function(inputs) {
 }
+
+##' Stub function for passing import checks
+#| eval: false
+ignore_unused_imports <- function() {
+  leaflet::`%>%`()
+  kableExtra::kable()
+  tidyverse::tidyverse_logo()
+}
