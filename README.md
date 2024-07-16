@@ -57,7 +57,6 @@ library("ridigbio")
 idig_search_records(rq=list(genus="galax"))
 idig_search_records(rq=list(family="diapensiaceae"), limit=1000)
 ```
-  
 
 # Meta
 
