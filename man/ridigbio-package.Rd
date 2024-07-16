@@ -3,7 +3,6 @@
 \docType{package}
 \name{ridigbio-package}
 \alias{ridigbio-package}
-\alias{_PACKAGE}
 \title{ridigbio: Interface to the iDigBio Data API}
 \description{
 An interface to iDigBio's search API that allows downloading specimen records. Searches are returned as a data.frame. Other functions such as the metadata end points return lists of information. iDigBio is a US project focused on digitizing and serving museum specimen collections on the web. See \url{https://www.idigbio.org} for information on iDigBio.
@@ -12,6 +11,7 @@ An interface to iDigBio's search API that allows downloading specimen records. S
 Useful links:
 \itemize{
   \item \url{https://github.com/iDigBio/ridigbio}
+  \item \url{http://idigbio.github.io/ridigbio/}
   \item Report bugs at \url{https://github.com/iDigBio/ridigbio/issues}
 }
 
@@ -23,6 +23,7 @@ Authors:
 \itemize{
   \item Francois Michonneau \email{francois.michonneau@gmail.com} (Original Author) [copyright holder]
   \item Matthew Collins \email{mcollins@acis.ufl.edu} (Original Author)
+  \item Michelle L. Gaynor \email{michellegaynor@ufl.edu} [contributor]
 }
 
 Other contributors:
@@ -30,7 +31,6 @@ Other contributors:
   \item Scott Chamberlain \email{myrmecocystus@gmail.com} [contributor]
   \item Kevin Love \email{klove@flmnh.ufl.edu} [contributor]
   \item Hem Nalini Morzaria-Luna \email{hemnalin.morzarialuna@noaa.gov} [contributor]
-  \item Michelle L. Gaynor \email{michellegaynor@ufl.edu} [contributor]
 }
 
 }

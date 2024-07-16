@@ -16,7 +16,8 @@ boolean
 Stub function for validating parameters.
 }
 \details{
-Takes list of inputs named by validation rule eg "number":[2, 3] and returns
+Takes list of inputs named by validation rule eg:
+\verb{number:[2, 3]} and returns
 a vector of strings with any validation errors. If the vector is 0 length,
 everything is valid. Not exported.
 }
