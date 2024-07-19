@@ -20,7 +20,6 @@ In this demo we will cover how to:
 ## Load Packages
 
 ```{r message=FALSE}
-install.packages('tidyverse',repos = "http://cran.us.r-project.org")
 # Load core libraries; install these packages if you have not already
 library(ridigbio)
 library(tidyverse)
@@ -85,7 +84,7 @@ records[1:50,] %>%
 
 If a data provider wants to fix these records in a local collection management system, it might be useful to have them in a CSV format rather than only in R. Here is how we can save our results as a CSV:
 
-```{r}
+```{r eval=FALSE, include=TRUE}
 # Save `records` as a CSV for reintegration into a local collection management
 # system
 write_csv(records, "records.csv")

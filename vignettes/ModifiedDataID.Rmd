@@ -23,7 +23,6 @@ In this demo we will cover how to:
 ## Load Packages  
 
 ```{r message=FALSE}
-install.packages('tidyverse',repos = "http://cran.us.r-project.org")
 # Load core libraries; install these packages if you have not already
 library(ridigbio)
 library(tidyverse)

@@ -5,6 +5,8 @@ vignette: >
   %\VignetteIndexEntry{Media API Demo}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+resource_files:
+  - vignettes/jpgs_idigbio/0000b146-6fd2-4a6a-bf78-9e709cc995e9.jpg       
 ---
 
 
@@ -21,7 +23,6 @@ In this demo we will cover how to:
 ## Load Packages
 
 ```{r message=FALSE}
-install.packages('tidyverse',repos = "http://cran.us.r-project.org")
 # Load core libraries; install these packages if you have not already
 library(ridigbio)
 library(tidyverse)
