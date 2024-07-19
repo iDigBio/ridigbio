@@ -17,13 +17,11 @@ idig_search_records(
 \arguments{
 \item{rq}{iDigBio record query in nested list format}
 
-\item{fields}{Vector of fields that will be contained in the data.frame,
-limited set returned by default, use "all" to get all indexed fields.
-Some of the avaliable fields are listed \href{https://github.com/iDigBio/idigbio-search-api/wiki/Index-Fields#record-query-fields}{here}.
-All potential fields can be found with the \code{idig_meta_fields()} function.}
+\item{fields}{vector of fields that will be contained in the data.frame,
+limited set returned by default, use "all" to get all indexed fields}
 
-\item{max_items}{Maximum number of results allowed to be retrieved (fail
--safe).}
+\item{max_items}{maximum number of results allowed to be retrieved (fail
+-safe)}
 
 \item{limit}{maximum number of results returned}
 
