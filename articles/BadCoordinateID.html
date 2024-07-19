@@ -5,13 +5,18 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="ridigbio">
 <title>Identification of Suspicious Coordinates • ridigbio</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Identification of Suspicious Coordinates">
-<!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-87H3DWSJHN"></script><script>
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Identification of Suspicious Coordinates">
+<meta property="og:description" content="ridigbio">
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-87H3DWSJHN"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -21,62 +26,65 @@
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
-
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
     <a class="navbar-brand me-2" href="../index.html">ridigbio</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.9</small>
 
-
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="active nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/BasicUsage.html">Introduction to ridigbio</a></li>
-    <li><a class="dropdown-item" href="../articles/RecordAPIDemo.html">Record API Demo</a></li>
-    <li><a class="dropdown-item" href="../articles/MediaAPIDemo.html">Media API Demo</a></li>
-    <li><a class="dropdown-item" href="../articles/Fields.html">Fields in ridigbio</a></li>
-    <li><a class="dropdown-item" href="../articles/FindTissue.html">Tissue Samples Locator Demo</a></li>
-    <li><a class="dropdown-item" href="../articles/ModifiedDataID.html">Identification of Modified Data</a></li>
-    <li><a class="dropdown-item" href="../articles/BadCoordinateID.html">Identification of Suspicious Coordinates</a></li>
-    <li><a class="dropdown-item" href="../articles/IDDataFlags.html">Identification of Data Flags</a></li>
-  </ul>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/BasicUsage.html">Introduction to ridigbio</a>
+    <a class="dropdown-item" href="../articles/RecordAPIDemo.html">Record API Demo</a>
+    <a class="dropdown-item" href="../articles/MediaAPIDemo.html">Media API Demo</a>
+    <a class="dropdown-item" href="../articles/Fields.html">Fields in ridigbio</a>
+    <a class="dropdown-item" href="../articles/FindTissue.html">Tissue Samples Locator Demo</a>
+    <a class="dropdown-item" href="../articles/ModifiedDataID.html">Identification of Modified Data</a>
+    <a class="dropdown-item" href="../articles/BadCoordinateID.html">Identification of Suspicious Coordinates</a>
+    <a class="dropdown-item" href="../articles/IDDataFlags.html">Identification of Data Flags</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
-<ul class="navbar-nav">
-<li class="nav-item"><form class="form-inline" role="search">
- <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
-</form></li>
-      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav"></ul>
 </div>
 
-
+    
   </div>
 </nav><div class="container template-article">
 
 
 
 <script src="BadCoordinateID_files/kePrint-0.0.1/kePrint.js"></script><link href="BadCoordinateID_files/lightable-0.0.1/lightable.css" rel="stylesheet">
-<link href="BadCoordinateID_files/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<link href="BadCoordinateID_files/htmltools-fill-0.5.8/fill.css" rel="stylesheet">
 <script src="BadCoordinateID_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="BadCoordinateID_files/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="BadCoordinateID_files/leaflet-1.3.1/leaflet.js"></script><link href="BadCoordinateID_files/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="BadCoordinateID_files/proj4-2.6.2/proj4.min.js"></script><script src="BadCoordinateID_files/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="BadCoordinateID_files/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
 <script src="BadCoordinateID_files/leaflet-binding-2.2.2/leaflet.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Identification of Suspicious Coordinates</h1>
+      <img src="" class="logo" alt=""><h1>Identification of Suspicious Coordinates</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/iDigBio/ridigbio/blob/main/vignettes/BadCoordinateID.Rmd" class="external-link"><code>vignettes/BadCoordinateID.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/iDigBio/ridigbio/blob/HEAD/vignettes/BadCoordinateID.Rmd" class="external-link"><code>vignettes/BadCoordinateID.Rmd</code></a></small>
       <div class="d-none name"><code>BadCoordinateID.Rmd</code></div>
     </div>
 
@@ -104,8 +112,7 @@ for more information about iDigBio’s data quality flags.</p>
 <h2 id="load-packages-">Load Packages.<a class="anchor" aria-label="anchor" href="#load-packages-"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'tidyverse'</span>,repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span></span>
-<span><span class="co"># Load core libraries; install these packages if you have not already</span></span>
+<code class="sourceCode R"><span><span class="co"># Load core libraries; install these packages if you have not already</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/iDigBio/ridigbio" class="external-link">ridigbio</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -2161,8 +2168,8 @@ quality flag “rev_geocode_flip_lat_sign.”</p>
 data quality flag is telling us. For example, in the map below you can
 see the effect of accidentally reversing the latitude on three example
 georeferenced specimen records.</p>
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[-1.07,1.07,-1.13,1.13,-1.07,1.07,-1.07,1.07,4.13,-4.13],[-69.52,-69.52,34.55,34.55,-69.52,-69.52,-69.52,-69.52,-69.90000000000001,-69.90000000000001],10,null,null,{"interactive":true,"className":"","stroke":false,"color":["#D7191C","#D7191C","#FDAE61","#FDAE61","#FFFFBF","#FFFFBF","#ABDDA4","#ABDDA4","#2B83BA","#2B83BA"],"weight":1,"opacity":0.5,"fill":true,"fillColor":["#D7191C","#D7191C","#FDAE61","#FDAE61","#FFFFBF","#FFFFBF","#ABDDA4","#ABDDA4","#2B83BA","#2B83BA"],"fillOpacity":100},null,null,["aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = -1.13, 34.55","provider_coords = 1.13, 34.55","aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = 4.13, -69.9","provider_coords = -4.13, -69.9"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#D7191C","#FDAE61","#FFFFBF","#ABDDA4","#2B83BA"],"labels":["04af5298-a987-474e-991c-c333c873c7e6","050dde64-2647-4e70-9a46-417ebe968410","052373a4-68cd-4dcc-8ed3-6a66b8a58fef","06a8595e-5d1d-4e33-a7f8-0b48e2d7b78c","0a857a04-8f52-4a23-af22-a3251e1e6e80"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"factor","title":"Specimen Records","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[-4.13,4.13],"lng":[-69.90000000000001,34.55]}},"evals":[],"jsHooks":[]}</script>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-6b3699911cbca71235ee" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-6b3699911cbca71235ee">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[-1.07,1.07,-1.13,1.13,-1.07,1.07,-1.07,1.07,4.13,-4.13],[-69.52,-69.52,34.55,34.55,-69.52,-69.52,-69.52,-69.52,-69.90000000000001,-69.90000000000001],10,null,null,{"interactive":true,"className":"","stroke":false,"color":["#D7191C","#D7191C","#FDAE61","#FDAE61","#FFFFBF","#FFFFBF","#ABDDA4","#ABDDA4","#2B83BA","#2B83BA"],"weight":1,"opacity":0.5,"fill":true,"fillColor":["#D7191C","#D7191C","#FDAE61","#FDAE61","#FFFFBF","#FFFFBF","#ABDDA4","#ABDDA4","#2B83BA","#2B83BA"],"fillOpacity":100},null,null,["aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = -1.13, 34.55","provider_coords = 1.13, 34.55","aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = 4.13, -69.9","provider_coords = -4.13, -69.9"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#D7191C","#FDAE61","#FFFFBF","#ABDDA4","#2B83BA"],"labels":["04af5298-a987-474e-991c-c333c873c7e6","050dde64-2647-4e70-9a46-417ebe968410","052373a4-68cd-4dcc-8ed3-6a66b8a58fef","06a8595e-5d1d-4e33-a7f8-0b48e2d7b78c","0a857a04-8f52-4a23-af22-a3251e1e6e80"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"factor","title":"Specimen Records","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[-4.13,4.13],"lng":[-69.90000000000001,34.55]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="summarize-and-explore-data">Summarize and explore data<a class="anchor" aria-label="anchor" href="#summarize-and-explore-data"></a>
@@ -2243,26 +2250,28 @@ specimen records have been flagged with.</p>
 <span>       fill <span class="op">=</span> <span class="st">"flag category"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="BadCoordinateID_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Francois Michonneau, Matthew Collins, Michelle L. Gaynor, Jesse Bennett.</p>
+  <p></p>
+<p>Developed by Francois Michonneau, Matthew Collins, Michelle L. Gaynor, Jesse Bennett.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer>
 </div>
 
+  
 
-
-
+  
 
   </body>
 </html>
