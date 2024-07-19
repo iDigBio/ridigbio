@@ -16,18 +16,18 @@ reference:
   desc: |
     Obtain, count, summarize, and view media records.
   contents:
-   - idig_search_media
-   - idig_count_media
-   - idig_top_media
-   - idig_view_media
+  - idig_search_media
+  - idig_count_media
+  - idig_top_media
+  - idig_view_media
 - title: Other Helpful Functions
   desc: |
     Search, identify fields, and identify the API version with these functions.
   contents:
-    - idig_search
-    - build_field_lists
-    - idig_meta_fields
-    - idig_version
+  - idig_search
+  - build_field_lists
+  - idig_meta_fields
+  - idig_version
 - title: Internal Functions
   desc: |
     Functions that are used to streamline the above functions.
@@ -40,6 +40,7 @@ reference:
   - idig_parse
   - idig_url
   - idig_validate
+  - ignore_unused_imports
   - ridigbio
 articles:
 - title: Articles
@@ -60,3 +61,4 @@ navbar:
     - articles
     - news
     right: search
+
