@@ -19,7 +19,7 @@ In this demo we will cover how to:
 
 ## Getting Started
 
-First, you must install the ridigbio package. If you are new to R and R studio, please refer to our QUBES module to get started: Introduction to R with Biodiversity Data, [doi:10.25334/84FC-TE88](htpps://www.doi.org/10.25334/84FC-TE88) .
+First, you must install the ridigbio package. If you are new to R and R studio, please refer to our QUBES module to get started: Introduction to R with Biodiversity Data, [doi:10.25334/84FC-TE88](https://www.doi.org/10.25334/84FC-TE88) .
 
 The lastest version of our R package can be installed via CRAN. 
 ```{r eval=FALSE, include=TRUE}
@@ -49,21 +49,21 @@ When fields are not specified, default columns include the following:
 | Column | Description |
 | ----------- | ----------- |
 | uuid | Universally Unique IDentifier assigned by iDigBio  |
-| occurrenceid |identifier for the occurrence, 	http://rs.tdwg.org/dwc/terms/occurrenceID| 
-| catalognumber |identifier for the record within the collection, http://rs.tdwg.org/dwc/terms/catalogNumber|
-| family | scientific name of the family, http://rs.tdwg.org/dwc/terms/family|
-| genus | scientific name of the genus, http://rs.tdwg.org/dwc/terms/genus |
-| scientificname | scientific name, http://rs.tdwg.org/dwc/terms/scientificName |
-| country | country, 	http://rs.tdwg.org/dwc/terms/country |
-| stateprovince |name of the next smaller administrative region than country, http://rs.tdwg.org/dwc/terms/stateProvince|
-| geopoint.lon | equivalent to decimalLongitude, 	http://rs.tdwg.org/dwc/terms/decimalLongitude|
-| geopoint.lat | equivalent to decimalLatitude,http://rs.tdwg.org/dwc/terms/decimalLatitude |
+| occurrenceid |identifier for the occurrence, 	https://rs.tdwg.org/dwc/terms/occurrenceID| 
+| catalognumber |identifier for the record within the collection, https://rs.tdwg.org/dwc/terms/catalogNumber|
+| family | scientific name of the family, https://rs.tdwg.org/dwc/terms/family|
+| genus | scientific name of the genus, https://rs.tdwg.org/dwc/terms/genus |
+| scientificname | scientific name, https://rs.tdwg.org/dwc/terms/scientificName |
+| country | country, 	https://rs.tdwg.org/dwc/terms/country |
+| stateprovince |name of the next smaller administrative region than country, https://rs.tdwg.org/dwc/terms/stateProvince|
+| geopoint.lon | equivalent to decimalLongitude, 	https://rs.tdwg.org/dwc/terms/decimalLongitude|
+| geopoint.lat | equivalent to decimalLatitude,https://rs.tdwg.org/dwc/terms/decimalLatitude |
 | datecollected | [Modified field and could lack biological meaning](https://github.com/iDigBio/idb-backend/issues/229) |
 | data.dwc:eventDate | equivalent to eventDate, https://dwc.tdwg.org/list/#dwc_eventDate |
 | data.dwc:year | year of collection event, https://dwc.tdwg.org/list/#dwc_year |
 | data.dwc:month | month of collection event, https://dwc.tdwg.org/list/#dwc_month |
 | data.dwc:day | day of collection event | (https://dwc.tdwg.org/list/#dwc_day |
-| collector | equivalent to recordedBy,	http://rs.tdwg.org/dwc/terms/recordedBy |
+| collector | equivalent to recordedBy,	https://rs.tdwg.org/dwc/terms/recordedBy |
 | recordset | indicates the iDigBio recordset the observation belongs too! |
 
 
@@ -121,17 +121,17 @@ When fields are not specified, default columns include the following:
 | dqs | data quality score assigned by iDigBio |
 | etag | tag assigned by iDigBio |
 | flags | data quality flag assigned by iDigBio |
-| format | media format, http://purl.org/dc/terms/format |
+| format | media format, https://purl.org/dc/terms/format |
 | hasSpecimen | TRUE or FALSE, indicates if there is an associated record for this media |
 | licenselogourl  | media license, https://ac.tdwg.org/termlist/#ac_licenseLogoURL) |
 | mediatype  | media object type |
-| modified | date modified, http://purl.org/dc/terms/modified  |
+| modified | date modified, https://purl.org/dc/terms/modified  |
 | recordids | list of UUID for associated records |
 |  records  | UUID for the associated record. Use this field to connect Record downloads with Media downloads |
 |  recordset  | indicates the iDigBio recordset the observation belongs too! |
-| rights | media rights, http://purl.org/dc/terms/rights  |
-| tag  | general keywords or tags, http://rs.tdwg.org/ac/terms/tag  |
-| type | media type, http://purl.org/dc/terms/type |
+| rights | media rights, https://purl.org/dc/terms/rights  |
+| tag  | general keywords or tags, https://rs.tdwg.org/ac/terms/tag  |
+| type | media type, https://purl.org/dc/terms/type |
 |  uuid | Universally Unique IDentifier assigned by iDigBio  |
 | version  | media record version assigned by iDigBio |
 | webstatement  | media rights, https://developer.adobe.com/xmp/docs/XMPNamespaces/xmpRights/ | 

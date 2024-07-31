@@ -1,18 +1,21 @@
 ---
 title: Record API Demo
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette: 
+    md_extensions: 
+      - "-autolink_bare_uris"
 vignette: >
   %\VignetteIndexEntry{Record API Demo}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Code here written by [Erica Krimmel](https://orcid.org/0000-0003-3192-0080) for a workshop at the [2020 Digital Data conference](https://bit.ly/DigiData4).
+Code here written by [Erica Krimmel](https://orcid.org/0000-0003-3192-0080) for a workshop at the [2020 Digital Data conference](https://www.idigbio.org/wiki/index.php/4th_Annual_Digital_Data_Conference,_Indiana_University).
 
 
 ## General Overview  
 
-You can use the [iDigBio API](https://github.com/idigbio/idigbio-search-api/wiki) to find specimen records using the same search parameters available in the [iDigBio Portal](https://www.idigbio.org/portal/search). Wrappers like [ridigbio](https://cran.r-project.org/web/packages/ridigbio/index.html), which we are covering in this demo, provide a simple way to use the iDigBio API in the context of your research pipeline. If you already use, or are considering using, R for data exploration or analysis, it makes sense to bring data into R directly from iDigBio via the API. In this demo we will cover a brief overview of fundamental functions in the ridigbio package that you can use to make your research pipeline more reproducible.
+You can use the [iDigBio API](https://github.com/idigbio/idigbio-search-api/wiki) to find specimen records using the same search parameters available in the [iDigBio Portal](https://www.idigbio.org/portal/search). Wrappers like [ridigbio](https://cran.r-project.org/package=ridigbio), which we are covering in this demo, provide a simple way to use the iDigBio API in the context of your research pipeline. If you already use, or are considering using, R for data exploration or analysis, it makes sense to bring data into R directly from iDigBio via the API. In this demo we will cover a brief overview of fundamental functions in the ridigbio package that you can use to make your research pipeline more reproducible.
 
 In this demo we will cover how to:
 
@@ -33,7 +36,7 @@ library(kableExtra)
 
 ## Write a query to search for specimens using `idig_search_records`
 
-When you use an interface like the iDigBio Portal, you are already writing a query to search for specimens. If you are new to coding, it can be helpful to begin by figuring out your query in a user-friendly interface such as the Portal, then translating it to code in R once you understand what you want to search for. One of the hardest parts of using ridigbio to search for specimen records is know what the field you want to search is named. The iDigBio API provides a list of field names [here](https://search.idigbio.org/v2/meta/fields/records), but you will need to reference other sources, like [documentation for the Darwin Core standard](https://dwc.tdwg.org/terms/), to understand what kind of information these fields typically contain.
+When you use an interface like the iDigBio Portal, you are already writing a query to search for specimens. If you are new to coding, it can be helpful to begin by figuring out your query in a user-friendly interface such as the Portal, then translating it to code in R once you understand what you want to search for. One of the hardest parts of using ridigbio to search for specimen records is know what the field you want to search is named. The iDigBio API provides a list of field names [here](https://www.idigbio.org/content/idigbio-search-api-fields), but you will need to reference other sources, like [documentation for the Darwin Core standard](https://dwc.tdwg.org/terms/), to understand what kind of information these fields typically contain.
 
 ```{r}
 # Let's start with a simple search introducing the primary arguments for the
@@ -69,6 +72,26 @@ knitr::kable(records_1A) %>%
 records_1B <- idig_search_records(
   rq = list(genus = "shortia"))
 
+records_1B$occurrenceid <- if_else(grepl("^http://", records_1B$occurrenceid),
+  gsub("^http://", "", records_1B$occurrenceid),
+  records_1B$occurrenceid
+)
+
+records_1B$occurrenceid <- if_else(grepl("data.biodiversitydata.nl/naturalis", records_1B$occurrenceid),
+  gsub("data.biodiversitydata.nl/naturalis", "bioportal.naturalis.nl/nl", records_1B$occurrenceid),
+  records_1B$occurrenceid
+)
+
+records_1B$occurrenceid <- if_else(grepl("https://grbio.org/cool", records_1B$occurrenceid),
+  gsub("https://grbio.org/cool", "grbio.org/cool", records_1B$occurrenceid),
+  records_1B$occurrenceid
+)
+
+records_1B$occurrenceid <- if_else(grepl("https://biocol.org", records_1B$occurrenceid),
+  gsub("https://biocol.org", "biocol.org", records_1B$occurrenceid),
+  records_1B$occurrenceid
+)
+
 # Display the data frame we just created above in a nice pretty table for HTML
 knitr::kable(records_1B) %>% 
     kable_styling(bootstrap_options = 
@@ -103,6 +126,11 @@ records_2B <- idig_search_records(
           geopoint = list(type="exists")),
   fields = "all",
   limit = 10)
+
+records_2B$institutionid <- if_else(grepl("^http://", records_2B$institutionid),
+  gsub("^http://", "https://", records_2B$institutionid),
+  records_2B$institutionid
+)
 
 # Display the data frame we just created above in a nice pretty table for HTML
 knitr::kable(records_2B) %>% 

@@ -11,7 +11,7 @@ An interface to iDigBio's search API that allows downloading specimen records. S
 Useful links:
 \itemize{
   \item \url{https://github.com/iDigBio/ridigbio}
-  \item \url{http://idigbio.github.io/ridigbio/}
+  \item \url{https://idigbio.github.io/ridigbio/}
   \item Report bugs at \url{https://github.com/iDigBio/ridigbio/issues}
 }
 
