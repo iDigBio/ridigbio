@@ -34,7 +34,7 @@ library(kableExtra)
 
 ## Write a query to search for specimen records
 
-First, let's find all the specimen records from a given recordset, e.g. all of the records published by a single collection. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf). In this example, we want to start by searching for specimens from the [Invertebrate Paleontology collection](https://www.idigbio.org/portal/recordsets/5082e6c8-8f5b-4bf6-a930-e3e6de7bf6fb) at the Natural History Museum of Los Angeles.
+First, let's find all the specimen records from a given recordset, e.g. all of the records published by a single collection. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/package=ridigbio/ridigbio.pdf). In this example, we want to start by searching for specimens from the [Invertebrate Paleontology collection](https://www.idigbio.org/portal/recordsets/5082e6c8-8f5b-4bf6-a930-e3e6de7bf6fb) at the Natural History Museum of Los Angeles.
 
 ```{r}
 # Edit the value after `recordset` to search for data from a different collection

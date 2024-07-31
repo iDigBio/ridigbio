@@ -92,12 +92,12 @@
 ##' \itemize{
 ##' \item{UUID: Unique identifier assigned by iDigBio.}   
 ##' \item{[occurrenceID](https://dwc.tdwg.org/list/#dwc_occurrenceID)}  
-##' \item{[catalognumber](http://rs.tdwg.org/dwc/terms/catalogNumber)}   
-##' \item{[family](http://rs.tdwg.org/dwc/terms/family) - may be reassigned by iDigBio}   
+##' \item{[catalognumber](https://rs.tdwg.org/dwc/terms/catalogNumber)}   
+##' \item{[family](https://rs.tdwg.org/dwc/terms/family) - may be reassigned by iDigBio}   
 ##' \item{[genus](https://dwc.tdwg.org/list/#dwc_genus) - may be reassigned by iDigBio}   
-##' \item{[scientificname](http://rs.tdwg.org/dwc/terms/scientificName) - may be reassigned by iDigBio}   
-##' \item{[country](http://rs.tdwg.org/dwc/terms/country) - may be modified by iDigBio}   
-##' \item{[stateprovince](http://rs.tdwg.org/dwc/terms/stateProvince) }   
+##' \item{[scientificname](https://rs.tdwg.org/dwc/terms/scientificName) - may be reassigned by iDigBio}   
+##' \item{[country](https://rs.tdwg.org/dwc/terms/country) - may be modified by iDigBio}   
+##' \item{[stateprovince](https://rs.tdwg.org/dwc/terms/stateProvince) }   
 ##' \item{geopoint: Assigned by iDigBio.}     
 ##' \item{[data.dwc:eventDate](https://dwc.tdwg.org/list/#dwc_eventDate)}   
 ##' \item{[data.dwc:year](https://dwc.tdwg.org/list/#dwc_year)}   

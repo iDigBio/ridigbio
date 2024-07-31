@@ -37,12 +37,12 @@ A data frame with fields requested or the following default fields:
 \itemize{
 \item{UUID: Unique identifier assigned by iDigBio.}
 \item{\href{https://dwc.tdwg.org/list/#dwc_occurrenceID}{occurrenceID}}
-\item{\href{http://rs.tdwg.org/dwc/terms/catalogNumber}{catalognumber}}
-\item{\href{http://rs.tdwg.org/dwc/terms/family}{family} - may be reassigned by iDigBio}
+\item{\href{https://rs.tdwg.org/dwc/terms/catalogNumber}{catalognumber}}
+\item{\href{https://rs.tdwg.org/dwc/terms/family}{family} - may be reassigned by iDigBio}
 \item{\href{https://dwc.tdwg.org/list/#dwc_genus}{genus} - may be reassigned by iDigBio}
-\item{\href{http://rs.tdwg.org/dwc/terms/scientificName}{scientificname} - may be reassigned by iDigBio}
-\item{\href{http://rs.tdwg.org/dwc/terms/country}{country} - may be modified by iDigBio}
-\item{\href{http://rs.tdwg.org/dwc/terms/stateProvince}{stateprovince} }
+\item{\href{https://rs.tdwg.org/dwc/terms/scientificName}{scientificname} - may be reassigned by iDigBio}
+\item{\href{https://rs.tdwg.org/dwc/terms/country}{country} - may be modified by iDigBio}
+\item{\href{https://rs.tdwg.org/dwc/terms/stateProvince}{stateprovince} }
 \item{geopoint: Assigned by iDigBio.}
 \item{\href{https://dwc.tdwg.org/list/#dwc_eventDate}{data.dwc:eventDate}}
 \item{\href{https://dwc.tdwg.org/list/#dwc_year}{data.dwc:year}}

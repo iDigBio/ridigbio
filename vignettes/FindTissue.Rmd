@@ -1,6 +1,9 @@
 ---
-title: Tissue Samples Locator Demo
-output: rmarkdown::html_vignette
+title: "Tissue Samples Locator Demo"
+output: 
+  rmarkdown::html_vignette: 
+    md_extensions: 
+      - "-autolink_bare_uris"
 vignette: >
   %\VignetteIndexEntry{Tissue Samples Locator Demo}
   %\VignetteEngine{knitr::rmarkdown}
@@ -31,7 +34,7 @@ library(kableExtra)
 
 ## Write a query to search for specimen records
 
-First, let's find all the specimen records for the species you are interested in. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf). In this example, we want to search for specimens identified as being in one of the following genera: _Manis_, _Rhinolophus_, or _Paguma_.
+First, let's find all the specimen records for the species you are interested in. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/package=ridigbio/ridigbio.pdf). In this example, we want to search for specimens identified as being in one of the following genera: _Manis_, _Rhinolophus_, or _Paguma_.
 
 ```{r}
 # Edit the fields (e.g. `genus`) and values (e.g. "manis") in `list()` 
@@ -155,7 +158,40 @@ collections <- tibble(collection = attr(recordsfiltered, "attribution")) %>%
         na.rm = TRUE) %>% 
   # Restructure data frame so that there is one row per recordset
   group_by(recordset_uuid) %>% 
-  mutate(contact_index = row_number()) %>% 
+  mutate(contact_index = row_number()) %>%
+  mutate(recordset_url = if_else(grepl("^http://", recordset_url),
+    gsub("^http://", "https://", recordset_url),
+    recordset_url
+  )) %>%
+  mutate(recordset_url = if_else(grepl("www.amnh.org/our-research/vertebrate-zoology/mammalogy", recordset_url),
+    gsub("www.amnh.org/our-research/vertebrate-zoology/mammalogy", "www.amnh.org/research/vertebrate-zoology/mammalogy", recordset_url),
+    recordset_url
+  )) %>%
+  mutate(recordset_url = if_else(grepl("www.burkemuseum.org/mammalogy", recordset_url),
+    gsub("www.burkemuseum.org/mammalogy", "www.burkemuseum.org/collections-and-research/biology/mammalogy", recordset_url),
+    recordset_url
+  )) %>%
+  mutate(recordset_url = if_else(grepl("www.nhm.org", recordset_url),
+    gsub("www.nhm.org", "nhm.org", recordset_url),
+    recordset_url
+  )) %>%
+  mutate(recordset_url = if_else(
+    grepl("appl003.lsu.edu/natsci/lmns.nsf/\\$Content/Mammals\\?OpenDocument", recordset_url),
+    gsub("appl003.lsu.edu/natsci/lmns.nsf/\\$Content/Mammals\\?OpenDocument", "appl103.lsu.edu/natsci/Collections/natscicolsearch.nsf/OpenMainPage?OpenAgent&ID=1042", recordset_url),
+    recordset_url
+  )) %>%
+  mutate(recordset_url = if_else(grepl("www.nsrl.ttu.edu/collections/Mammals/index.htm", recordset_url),
+    gsub("www.nsrl.ttu.edu/collections/Mammals/index.htm", "www.depts.ttu.edu/nsrl/collections/mammal.php", recordset_url),
+    recordset_url
+  )) %>%
+  mutate(recordset_url = if_else(grepl("sites01.lsu.edu/wp/mns/research-collections/genetic-resources/", recordset_url),
+    gsub("sites01.lsu.edu/wp/mns/research-collections/genetic-resources/", "appl103.lsu.edu/natsci/Collections/natscicolsearch.nsf/OpenMainPage?OpenAgent&ID=1050", recordset_url),
+    recordset_url
+  )) %>%
+  mutate(recordset_url = if_else(grepl("https://www.msb.unm.edu", recordset_url),
+    gsub("www.msb.unm.edu", "www.msb.unm.edu", recordset_url),
+    recordset_url
+  )) %>%
   pivot_wider(names_from = contact_index,
                 values_from = c(contact_name, contact_role, contact_email)) %>%
   # Include how many records in the data were contributed by each recordset

@@ -43,17 +43,17 @@ A data frame with fields requested or the following default fields:
 \item{dqs: Data quality score assigned by iDigBio.}
 \item{etag: Tag assigned by iDigBio.}
 \item{flags: Data quality flag assigned by iDigBio.}
-\item{\href{http://purl.org/dc/terms/format}{format} }
+\item{\href{https://purl.org/dc/terms/format}{format} }
 \item{hasSpecimen: TRUE or FALSE, indicates if there is an associated record for this media.}
 \item{\href{https://ac.tdwg.org/termlist/#ac_licenseLogoURL}{licenselogourl}}
 \item{mediatype: Media object type.}
-\item{\href{http://purl.org/dc/terms/modified}{modified}}
+\item{\href{https://purl.org/dc/terms/modified}{modified}}
 \item{recordids: List of UUID for associated records.}
 \item{records: UUID for the associated record.}
 \item{recordset: Record set ID assigned by iDigBio.}
-\item{\href{http://purl.org/dc/terms/rights}{rights}}
-\item{\href{http://rs.tdwg.org/ac/terms/tag}{tag}}
-\item{\href{http://purl.org/dc/terms/type}{type}}
+\item{\href{https://purl.org/dc/terms/rights}{rights}}
+\item{\href{https://rs.tdwg.org/ac/terms/tag}{tag}}
+\item{\href{https://purl.org/dc/terms/type}{type}}
 \item{uuid: Unique identifier assigned by iDigBio.}
 \item{version: Media record version assigned by iDigBio.}
 \item{\href{https://developer.adobe.com/xmp/docs/XMPNamespaces/xmpRights/}{webstatement}}

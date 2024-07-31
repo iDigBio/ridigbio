@@ -33,7 +33,7 @@ library(kableExtra)
 
 ## Write a query to search for specimen records
 
-First, you need to find all the media records for which you are interested in downloading media files. Do this using the `idig_search_media` function from the ridigbio package, which allows you to search for media records based on data contained in linked specimen records, like species or collecting locality. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf). In this example, we want to search for images of herbarium specimens of species in the genus _Acer_ that were collected in the United States.
+First, you need to find all the media records for which you are interested in downloading media files. Do this using the `idig_search_media` function from the ridigbio package, which allows you to search for media records based on data contained in linked specimen records, like species or collecting locality. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/package=ridigbio/ridigbio.pdf). In this example, we want to search for images of herbarium specimens of species in the genus _Acer_ that were collected in the United States.
 
 ```{r}
 # Edit the fields (e.g. `genus`) and values (e.g. "manis") in `list()` 
@@ -48,6 +48,19 @@ records <- idig_search_media(rq = list(genus = "acer",
                        "format",
                        "records"),
             limit = 10)
+
+records$accessuri <- if_else(grepl("^http://", records$accessuri),
+  gsub("^http://", "", records$accessuri),
+  records$accessuri
+)
+records$accessuri <- if_else(grepl("https://mam.ansp.org", records$accessuri),
+  gsub("https://mam.ansp.org", "mam.ansp.org", records$accessuri),
+  records$accessuri
+)
+records$accessuri <- if_else(grepl("https://ibss-images.calacademy.org", records$accessuri),
+  gsub("https://ibss-images.calacademy.org", "ibss-images.calacademy.org", records$accessuri),
+  records$accessuri
+)
 ```
 
 The result of the code above is a data frame called `records`:
