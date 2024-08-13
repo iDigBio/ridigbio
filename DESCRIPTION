@@ -33,7 +33,8 @@ Imports:
   jsonlite,
   leaflet,
   kableExtra,
-  tidyverse
+  tidyverse,
+  cowplot
 License: MIT + file LICENSE
 LazyData: true
 Suggests:

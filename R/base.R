@@ -134,4 +134,5 @@ ignore_unused_imports <- function() {
   leaflet::`%>%`()
   kableExtra::kable()
   tidyverse::tidyverse_logo()
+  cowplot::theme_minimal_grid()
 }
