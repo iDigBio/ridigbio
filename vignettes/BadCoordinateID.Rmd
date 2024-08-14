@@ -1,6 +1,7 @@
 ---
 title: Identification of Suspicious Coordinates
 output: rmarkdown::html_vignette
+self_contained: no
 vignette: >
   %\VignetteIndexEntry{Identification of Suspicious Coordinates}
   %\VignetteEngine{knitr::rmarkdown}
