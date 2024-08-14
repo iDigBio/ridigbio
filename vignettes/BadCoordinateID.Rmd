@@ -20,11 +20,6 @@ In this demo we will cover how to:
 
 ## Load Packages.
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(knitr)
-```
-
 ```{r message=FALSE}
 # Load core libraries; install these packages if you have not already
 library(ridigbio)
