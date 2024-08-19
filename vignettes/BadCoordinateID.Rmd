@@ -4,6 +4,7 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Identification of Suspicious Coordinates}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 Code here written by [Erica Krimmel](https://orcid.org/0000-0003-3192-0080). Code here is modified from [original](https://github.com/ekrimmel/idigbio-api-dq-geo) given in a presentation at the 2019 ADBC Summit in Gainesville, FL.
