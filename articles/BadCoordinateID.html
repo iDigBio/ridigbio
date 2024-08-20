@@ -112,7 +112,9 @@ for more information about iDigBio’s data quality flags.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load libraries for visualizing geographic data</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="write-a-query-to-search-for-specimen-records">Write a query to search for specimen records<a class="anchor" aria-label="anchor" href="#write-a-query-to-search-for-specimen-records"></a>
@@ -121,7 +123,7 @@ for more information about iDigBio’s data quality flags.</p>
 we are interested in. Do this using the <code>idig_search_records</code>
 function from the <code>ridigbio</code> package. You can learn more
 about this function from the <a href="https://github.com/iDigBio/idigbio-search-api/wiki" class="external-link">iDigBio API
-documentation</a> and <a href="https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf" class="external-link">ridigbio
+documentation</a> and <a href="https://cran.r-project.org/package=ridigbio/ridigbio.pdf" class="external-link">ridigbio
 documentation</a>. In this example, we want to start by searching for
 specimens flagged with “rev_geocode_corrected.”</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -2160,7 +2162,7 @@ quality flag “rev_geocode_flip_lat_sign.”</p>
 data quality flag is telling us. For example, in the map below you can
 see the effect of accidentally reversing the latitude on three example
 georeferenced specimen records.</p>
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:100%;height:432.632880098888px;"></div>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircleMarkers","args":[[-1.07,1.07,-1.13,1.13,-1.07,1.07,-1.07,1.07,4.13,-4.13],[-69.52,-69.52,34.55,34.55,-69.52,-69.52,-69.52,-69.52,-69.90000000000001,-69.90000000000001],10,null,null,{"interactive":true,"className":"","stroke":false,"color":["#D7191C","#D7191C","#FDAE61","#FDAE61","#FFFFBF","#FFFFBF","#ABDDA4","#ABDDA4","#2B83BA","#2B83BA"],"weight":1,"opacity":0.5,"fill":true,"fillColor":["#D7191C","#D7191C","#FDAE61","#FDAE61","#FFFFBF","#FFFFBF","#ABDDA4","#ABDDA4","#2B83BA","#2B83BA"],"fillOpacity":100},null,null,["aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = -1.13, 34.55","provider_coords = 1.13, 34.55","aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = -1.07, -69.52","provider_coords = 1.07, -69.52","aggregator_coords = 4.13, -69.9","provider_coords = -4.13, -69.9"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#D7191C","#FDAE61","#FFFFBF","#ABDDA4","#2B83BA"],"labels":["04af5298-a987-474e-991c-c333c873c7e6","050dde64-2647-4e70-9a46-417ebe968410","052373a4-68cd-4dcc-8ed3-6a66b8a58fef","06a8595e-5d1d-4e33-a7f8-0b48e2d7b78c","0a857a04-8f52-4a23-af22-a3251e1e6e80"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"factor","title":"Specimen Records","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[-4.13,4.13],"lng":[-69.90000000000001,34.55]}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
@@ -2207,7 +2209,7 @@ been flagged as “rev_geocode_corrected” by iDigBio. <em>As an aside,
 although this graph highlights the number of specimen records with data
 quality issues, these represent only 0.01% of the total specimen records
 published by LACM.</em></p>
-<p><img src="BadCoordinateID_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p><img src="plot.png" width="700px"></p>
 <p>We can also explore what <em>other</em> data quality flags these
 specimen records have been flagged with.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -2228,7 +2230,7 @@ specimen records have been flagged with.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">category</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Visualize associated data quality flags</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">df_flagAssoc</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">flags</span>, <span class="op">-</span><span class="va">percent</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">percent</span>, fill <span class="op">=</span> <span class="va">category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">graph_spmByColl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">df_flagAssoc</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">flags</span>, <span class="op">-</span><span class="va">percent</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">percent</span>, fill <span class="op">=</span> <span class="va">category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
 <span>        axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">75</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
@@ -2240,7 +2242,7 @@ specimen records have been flagged with.</p>
 <span>       y <span class="op">=</span> <span class="st">"% specimen records"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"LACM records flagged for geo-coordinate issues are also flagged for..."</span>,</span>
 <span>       fill <span class="op">=</span> <span class="st">"flag category"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="BadCoordinateID_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
+<p><img src="plot2.png" width="700px"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

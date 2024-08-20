@@ -109,7 +109,7 @@
 interested in. Do this using the <code>idig_search_records</code>
 function from the <code>ridigbio</code> package. You can learn more
 about this function from the <a href="https://github.com/iDigBio/idigbio-search-api/wiki" class="external-link">iDigBio API
-documentation</a> and <a href="https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf" class="external-link">ridigbio
+documentation</a> and <a href="https://cran.r-project.org/package=ridigbio/ridigbio.pdf" class="external-link">ridigbio
 documentation</a>. In this example, we want to search for specimens
 identified as being in one of the following genera: <em>Manis</em>,
 <em>Rhinolophus</em>, or <em>Paguma</em>.</p>
@@ -17065,7 +17065,40 @@ contact using our results.</p>
 <span>        na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="co"># Restructure data frame so that there is one row per recordset</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">recordset_uuid</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>contact_index <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>contact_index <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>recordset_url <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="st">"https://"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="va">recordset_url</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>recordset_url <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"www.amnh.org/our-research/vertebrate-zoology/mammalogy"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"www.amnh.org/our-research/vertebrate-zoology/mammalogy"</span>, <span class="st">"www.amnh.org/research/vertebrate-zoology/mammalogy"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="va">recordset_url</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>recordset_url <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"www.burkemuseum.org/mammalogy"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"www.burkemuseum.org/mammalogy"</span>, <span class="st">"www.burkemuseum.org/collections-and-research/biology/mammalogy"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="va">recordset_url</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>recordset_url <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"www.nhm.org"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"www.nhm.org"</span>, <span class="st">"nhm.org"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="va">recordset_url</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>recordset_url <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"appl003.lsu.edu/natsci/lmns.nsf/\\$Content/Mammals\\?OpenDocument"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"appl003.lsu.edu/natsci/lmns.nsf/\\$Content/Mammals\\?OpenDocument"</span>, <span class="st">"appl103.lsu.edu/natsci/Collections/natscicolsearch.nsf/OpenMainPage?OpenAgent&amp;ID=1042"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="va">recordset_url</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>recordset_url <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"www.nsrl.ttu.edu/collections/Mammals/index.htm"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"www.nsrl.ttu.edu/collections/Mammals/index.htm"</span>, <span class="st">"www.depts.ttu.edu/nsrl/collections/mammal.php"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="va">recordset_url</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>recordset_url <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"sites01.lsu.edu/wp/mns/research-collections/genetic-resources/"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"sites01.lsu.edu/wp/mns/research-collections/genetic-resources/"</span>, <span class="st">"appl103.lsu.edu/natsci/Collections/natscicolsearch.nsf/OpenMainPage?OpenAgent&amp;ID=1050"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="va">recordset_url</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>recordset_url <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"https://www.msb.unm.edu"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"www.msb.unm.edu"</span>, <span class="st">"www.msb.unm.edu"</span>, <span class="va">recordset_url</span><span class="op">)</span>,</span>
+<span>    <span class="va">recordset_url</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">contact_index</span>,</span>
 <span>                values_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">contact_name</span>, <span class="va">contact_role</span>, <span class="va">contact_email</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># Include how many records in the data were contributed by each recordset</span></span>
@@ -17204,7 +17237,7 @@ cb790bee-26da-40ed-94e0-d179618f9bd4
 AMNH Mammal Collections
 </td>
 <td style="text-align:left;">
-<a href="http://www.amnh.org/our-research/vertebrate-zoology/mammalogy" class="external-link uri">http://www.amnh.org/our-research/vertebrate-zoology/mammalogy</a>
+<a href="https://www.amnh.org/research/vertebrate-zoology/mammalogy" class="external-link uri">https://www.amnh.org/research/vertebrate-zoology/mammalogy</a>
 </td>
 <td style="text-align:left;">
 Tom Trombone
@@ -17429,7 +17462,7 @@ NA
 Museum of Comparative Zoology, Harvard University
 </td>
 <td style="text-align:left;">
-<a href="http://mczbase.mcz.harvard.edu/" class="external-link uri">http://mczbase.mcz.harvard.edu/</a>
+<a href="https://mczbase.mcz.harvard.edu/" class="external-link uri">https://mczbase.mcz.harvard.edu/</a>
 </td>
 <td style="text-align:left;">
 Paul J. Morris
@@ -17542,7 +17575,7 @@ fb4a4330-9124-4013-a0e1-af42ee20cd16
 KUBI Mammalogy Collection
 </td>
 <td style="text-align:left;">
-<a href="http://biodiversity.ku.edu/mammalogy/collections" class="external-link uri">http://biodiversity.ku.edu/mammalogy/collections</a>
+<a href="https://biodiversity.ku.edu/mammalogy/collections" class="external-link uri">https://biodiversity.ku.edu/mammalogy/collections</a>
 </td>
 <td style="text-align:left;">
 Andrew Bentley
@@ -17655,7 +17688,7 @@ NA
 LACM Vertebrate Collection
 </td>
 <td style="text-align:left;">
-<a href="http://www.nhm.org/" class="external-link uri">http://www.nhm.org/</a>
+<a href="https://nhm.org/" class="external-link uri">https://nhm.org/</a>
 </td>
 <td style="text-align:left;">
 William Mertz
@@ -17992,7 +18025,7 @@ NA
 TTU Mammals Collection
 </td>
 <td style="text-align:left;">
-<a href="http://www.nsrl.ttu.edu/collections/Mammals/index.htm" class="external-link uri">http://www.nsrl.ttu.edu/collections/Mammals/index.htm</a>
+<a href="https://www.depts.ttu.edu/nsrl/collections/mammal.php" class="external-link uri">https://www.depts.ttu.edu/nsrl/collections/mammal.php</a>
 </td>
 <td style="text-align:left;">
 Heath Garner
@@ -18105,7 +18138,7 @@ NA
 MSB Mammal Collection (Arctos)
 </td>
 <td style="text-align:left;">
-<a href="http://www.msb.unm.edu/mammals" class="external-link uri">http://www.msb.unm.edu/mammals</a>
+<a href="https://www.msb.unm.edu/mammals" class="external-link uri">https://www.msb.unm.edu/mammals</a>
 </td>
 <td style="text-align:left;">
 Joseph Cook
@@ -18218,7 +18251,7 @@ fcbcb214-cd62-4453-af56-b4b49161a261
 MVZ Mammal Collection (Arctos)
 </td>
 <td style="text-align:left;">
-<a href="http://mvz.berkeley.edu/Mammal_Collection.html" class="external-link uri">http://mvz.berkeley.edu/Mammal_Collection.html</a>
+<a href="https://mvz.berkeley.edu/Mammal_Collection.html" class="external-link uri">https://mvz.berkeley.edu/Mammal_Collection.html</a>
 </td>
 <td style="text-align:left;">
 Chris Conroy
@@ -18444,7 +18477,7 @@ NA
 UWBM Mammalogy Collection (Arctos)
 </td>
 <td style="text-align:left;">
-<a href="http://www.burkemuseum.org/mammalogy" class="external-link uri">http://www.burkemuseum.org/mammalogy</a>
+<a href="https://www.burkemuseum.org/collections-and-research/biology/mammalogy" class="external-link uri">https://www.burkemuseum.org/collections-and-research/biology/mammalogy</a>
 </td>
 <td style="text-align:left;">
 Jeff Bradley
@@ -18557,7 +18590,7 @@ NA
 Biodiversity Research and Teaching Collections - TCWC Vertebrates
 </td>
 <td style="text-align:left;">
-<a href="http://brtc.tamu.edu" class="external-link uri">http://brtc.tamu.edu</a>
+<a href="https://brtc.tamu.edu" class="external-link uri">https://brtc.tamu.edu</a>
 </td>
 <td style="text-align:left;">
 Heather Prestridge
@@ -18782,7 +18815,7 @@ a986ff36-22a2-46a5-ac82-513b6fa90423
 LSUMZ Mammal Tissues
 </td>
 <td style="text-align:left;">
-<a href="http://sites01.lsu.edu/wp/mns/research-collections/genetic-resources/" class="external-link uri">http://sites01.lsu.edu/wp/mns/research-collections/genetic-resources/</a>
+<a href="https://appl103.lsu.edu/natsci/Collections/natscicolsearch.nsf/OpenMainPage?OpenAgent&amp;ID=1050" class="external-link uri">https://appl103.lsu.edu/natsci/Collections/natscicolsearch.nsf/OpenMainPage?OpenAgent&amp;ID=1050</a>
 </td>
 <td style="text-align:left;">
 Donna Dittmann
@@ -18895,7 +18928,7 @@ c6969e30-ca21-4576-954d-9c0e052bdde9
 LSUMZ Mammals Collection
 </td>
 <td style="text-align:left;">
-<a href="http://appl003.lsu.edu/natsci/lmns.nsf/%24Content/Mammals?OpenDocument" class="external-link uri">http://appl003.lsu.edu/natsci/lmns.nsf/$Content/Mammals?OpenDocument</a>
+<a href="https://appl103.lsu.edu/natsci/Collections/natscicolsearch.nsf/OpenMainPage?OpenAgent&amp;ID=1042" class="external-link uri">https://appl103.lsu.edu/natsci/Collections/natscicolsearch.nsf/OpenMainPage?OpenAgent&amp;ID=1042</a>
 </td>
 <td style="text-align:left;">
 Jake Esselstyn
@@ -19008,7 +19041,7 @@ b4d4e884-a2ef-4967-b4cb-2072fc465eaf
 UAM Mammal Collection (Arctos)
 </td>
 <td style="text-align:left;">
-<a href="http://www.uaf.edu/museum/collections/mammal/" class="external-link uri">http://www.uaf.edu/museum/collections/mammal/</a>
+<a href="https://www.uaf.edu/museum/collections/mammal/" class="external-link uri">https://www.uaf.edu/museum/collections/mammal/</a>
 </td>
 <td style="text-align:left;">
 Link Olson

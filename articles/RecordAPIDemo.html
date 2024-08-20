@@ -79,21 +79,21 @@
     
     
 <p>Code here written by <a href="https://orcid.org/0000-0003-3192-0080" class="external-link">Erica Krimmel</a> for a
-workshop at the <a href="https://bit.ly/DigiData4" class="external-link">2020 Digital Data
-conference</a>.</p>
+workshop at the <a href="https://www.idigbio.org/wiki/index.php/4th_Annual_Digital_Data_Conference,_Indiana_University" class="external-link">2020
+Digital Data conference</a>.</p>
 <div class="section level2">
 <h2 id="general-overview">General Overview<a class="anchor" aria-label="anchor" href="#general-overview"></a>
 </h2>
 <p>You can use the <a href="https://github.com/idigbio/idigbio-search-api/wiki" class="external-link">iDigBio
 API</a> to find specimen records using the same search parameters
 available in the <a href="https://www.idigbio.org/portal/search" class="external-link">iDigBio
-Portal</a>. Wrappers like <a href="https://cran.r-project.org/web/packages/ridigbio/index.html" class="external-link">ridigbio</a>,
-which we are covering in this demo, provide a simple way to use the
-iDigBio API in the context of your research pipeline. If you already
-use, or are considering using, R for data exploration or analysis, it
-makes sense to bring data into R directly from iDigBio via the API. In
-this demo we will cover a brief overview of fundamental functions in the
-ridigbio package that you can use to make your research pipeline more
+Portal</a>. Wrappers like <a href="https://cran.r-project.org/package=ridigbio" class="external-link">ridigbio</a>, which
+we are covering in this demo, provide a simple way to use the iDigBio
+API in the context of your research pipeline. If you already use, or are
+considering using, R for data exploration or analysis, it makes sense to
+bring data into R directly from iDigBio via the API. In this demo we
+will cover a brief overview of fundamental functions in the ridigbio
+package that you can use to make your research pipeline more
 reproducible.</p>
 <p>In this demo we will cover how to:</p>
 <ol style="list-style-type: decimal">
@@ -130,7 +130,7 @@ interface such as the Portal, then translating it to code in R once you
 understand what you want to search for. One of the hardest parts of
 using ridigbio to search for specimen records is know what the field you
 want to search is named. The iDigBio API provides a list of field names
-<a href="https://search.idigbio.org/v2/meta/fields/records" class="external-link">here</a>,
+<a href="https://www.idigbio.org/content/idigbio-search-api-fields" class="external-link">here</a>,
 but you will need to reference other sources, like <a href="https://dwc.tdwg.org/terms/" class="external-link">documentation for the Darwin Core
 standard</a>, to understand what kind of information these fields
 typically contain.</p>
@@ -390,6 +390,26 @@ georgia
 <span><span class="co"># see what the defaults for the other arguments look like</span></span>
 <span><span class="va">records_1B</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/idig_search_records.html">idig_search_records</a></span><span class="op">(</span></span>
 <span>  rq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>genus <span class="op">=</span> <span class="st">"shortia"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="st">""</span>, <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span><span class="op">)</span>,</span>
+<span>  <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"data.biodiversitydata.nl/naturalis"</span>, <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"data.biodiversitydata.nl/naturalis"</span>, <span class="st">"bioportal.naturalis.nl/nl"</span>, <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span><span class="op">)</span>,</span>
+<span>  <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"https://grbio.org/cool"</span>, <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"https://grbio.org/cool"</span>, <span class="st">"grbio.org/cool"</span>, <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span><span class="op">)</span>,</span>
+<span>  <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"https://biocol.org"</span>, <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"https://biocol.org"</span>, <span class="st">"biocol.org"</span>, <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span><span class="op">)</span>,</span>
+<span>  <span class="va">records_1B</span><span class="op">$</span><span class="va">occurrenceid</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Display the data frame we just created above in a nice pretty table for HTML</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">records_1B</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -804,7 +824,7 @@ f0174bc9-0cca-450e-a941-655d80040139
 024b0d26-3119-41a7-a7f7-098e265c74f3
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3ff8ef81e-e4b5-449e-8ba6-84bb1075688f" class="external-link uri">http://n2t.net/ark:/65665/3ff8ef81e-e4b5-449e-8ba6-84bb1075688f</a>
+n2t.net/ark:/65665/3ff8ef81e-e4b5-449e-8ba6-84bb1075688f
 </td>
 <td style="text-align:left;">
 us 144944
@@ -1760,7 +1780,7 @@ powell, robert w., jr.
 0b229c58-9ca3-42f6-b670-07a13287c166
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/wag.1259451" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/wag.1259451</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/wag.1259451" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/wag.1259451</a>
 </td>
 <td style="text-align:left;">
 wag.1259451
@@ -1860,7 +1880,7 @@ NA
 0d3d7938-e92e-49f2-bb7f-c3b148d87fcf
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630919" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630919</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630919" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630919</a>
 </td>
 <td style="text-align:left;">
 l.2630919
@@ -2290,7 +2310,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
+1961
 </td>
 <td style="text-align:left;">
 NA
@@ -2299,7 +2319,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
+l.k. clarke
 </td>
 <td style="text-align:left;">
 21b563bc-70c2-46d5-bce8-2489db2db3d8
@@ -2310,7 +2330,7 @@ NA
 1038e691-ce6b-4241-870d-9220f6c209bd
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/39b1dfebe-d4e8-4773-88d3-9b9fded300cb" class="external-link uri">http://n2t.net/ark:/65665/39b1dfebe-d4e8-4773-88d3-9b9fded300cb</a>
+n2t.net/ark:/65665/39b1dfebe-d4e8-4773-88d3-9b9fded300cb
 </td>
 <td style="text-align:left;">
 us 1384352
@@ -2461,7 +2481,7 @@ e34cf41b-196c-4199-85d5-4d2ca5954b09
 13474a88-8a2f-4f64-8e8d-f33eb77ee02c
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3c5f3b8c2-2e44-422e-bd5b-9549f40e8ab9" class="external-link uri">http://n2t.net/ark:/65665/3c5f3b8c2-2e44-422e-bd5b-9549f40e8ab9</a>
+n2t.net/ark:/65665/3c5f3b8c2-2e44-422e-bd5b-9549f40e8ab9
 </td>
 <td style="text-align:left;">
 us 2617625
@@ -2512,7 +2532,7 @@ a6eee223-cf3b-4079-8bb2-b77dad8cae9d
 134c8ffd-e5f3-4d88-aa28-f08ec326b808
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/u.1292046" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/u.1292046</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/u.1292046" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/u.1292046</a>
 </td>
 <td style="text-align:left;">
 u.1292046
@@ -3305,8 +3325,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-<ol start="23" style="list-style-type: lower-alpha"><li><ol style="list-style-type: lower-alpha"><li>jones
-</li></ol></li></ol>
+jones, w.a. jr.
 </td>
 <td style="text-align:left;">
 264c48ec-8636-451f-a7e0-74131bc6f84c
@@ -3317,7 +3336,7 @@ NA
 160e2ac1-452d-4238-a5b2-5dda659f1fad
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/336e4d96d-bcf3-418a-93e5-ef240a2a58f1" class="external-link uri">http://n2t.net/ark:/65665/336e4d96d-bcf3-418a-93e5-ef240a2a58f1</a>
+n2t.net/ark:/65665/336e4d96d-bcf3-418a-93e5-ef240a2a58f1
 </td>
 <td style="text-align:left;">
 us 2099115
@@ -3769,7 +3788,7 @@ NA
 1c400c84-56e7-44a3-9168-c60d00a06e75
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519681" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519681</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519681
 </td>
 <td style="text-align:left;">
 p04519681
@@ -3919,7 +3938,7 @@ a4e6033a-d1eb-46d3-869d-7c0328f09aa7
 1e0b6573-ff8d-4c91-8d4c-0cd428c9f985
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899519" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899519</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p06899519
 </td>
 <td style="text-align:left;">
 p06899519
@@ -3969,7 +3988,7 @@ NA
 1e63154b-eb5d-4b6f-b11b-3c6d4ac5bc96
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/35f8d4654-9dbb-4653-988b-66b016e4b40c" class="external-link uri">http://n2t.net/ark:/65665/35f8d4654-9dbb-4653-988b-66b016e4b40c</a>
+n2t.net/ark:/65665/35f8d4654-9dbb-4653-988b-66b016e4b40c
 </td>
 <td style="text-align:left;">
 us 2998570
@@ -4369,10 +4388,60 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
+21ac811a-741d-42fe-9b50-6363fb8426f2
+</td>
+<td style="text-align:left;">
+eb7a805f-5961-42d9-8df1-18dbc0346b3d
+</td>
+<td style="text-align:left;">
+dov0087166
+</td>
+<td style="text-align:left;">
+diapensiaceae
+</td>
+<td style="text-align:left;">
+shortia
+</td>
+<td style="text-align:left;">
+shortia galacifolia
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+south carolina
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+910eadc8-8131-428c-b28a-91d0e2890f1d
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 21e2160f-a488-4af9-b178-988415c44f83
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630920" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630920</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630920" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630920</a>
 </td>
 <td style="text-align:left;">
 l.2630920
@@ -4823,7 +4892,7 @@ steven r. hill
 2834ab27-2c52-4af5-ad11-e3888d6aab10
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3800a208d-e20a-40f8-aa4b-d960c59e8daf" class="external-link uri">http://n2t.net/ark:/65665/3800a208d-e20a-40f8-aa4b-d960c59e8daf</a>
+n2t.net/ark:/65665/3800a208d-e20a-40f8-aa4b-d960c59e8daf
 </td>
 <td style="text-align:left;">
 us 89288
@@ -4873,7 +4942,7 @@ a6eee223-cf3b-4079-8bb2-b77dad8cae9d
 28ac72a1-e6d4-43db-ac99-b86ac8110d2d
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3e91a430d-9f18-4945-8749-47c09f7acbbb" class="external-link uri">http://n2t.net/ark:/65665/3e91a430d-9f18-4945-8749-47c09f7acbbb</a>
+n2t.net/ark:/65665/3e91a430d-9f18-4945-8749-47c09f7acbbb
 </td>
 <td style="text-align:left;">
 us 89290
@@ -5726,7 +5795,7 @@ NA
 2fdd90c5-aa0f-40c1-acc7-90cb4ce6730c
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p00714229" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p00714229</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p00714229
 </td>
 <td style="text-align:left;">
 p00714229
@@ -5769,6 +5838,56 @@ tschonoski
 </td>
 <td style="text-align:left;">
 616857b7-f952-44ef-9b6f-576dc1e65b51
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+300656da-f3c2-49c1-872a-b156edf3429f
+</td>
+<td style="text-align:left;">
+2560f0be-8b70-464a-8abf-4ab6331bdcc1
+</td>
+<td style="text-align:left;">
+dov0087165
+</td>
+<td style="text-align:left;">
+diapensiaceae
+</td>
+<td style="text-align:left;">
+shortia
+</td>
+<td style="text-align:left;">
+shortia galacifolia
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+south carolina
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+910eadc8-8131-428c-b28a-91d0e2890f1d
 </td>
 </tr>
 <tr>
@@ -5826,7 +5945,7 @@ NA
 30cd2dde-5b95-426e-943c-88df01a20b08
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/35238efaf-de6b-4c1b-b6f4-7faa0c49b2da" class="external-link uri">http://n2t.net/ark:/65665/35238efaf-de6b-4c1b-b6f4-7faa0c49b2da</a>
+n2t.net/ark:/65665/35238efaf-de6b-4c1b-b6f4-7faa0c49b2da
 </td>
 <td style="text-align:left;">
 us 225474
@@ -5926,7 +6045,7 @@ a4e6033a-d1eb-46d3-869d-7c0328f09aa7
 32674a4c-ba28-4f63-ad5c-e97eac7b52ca
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630912" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630912</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630912" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630912</a>
 </td>
 <td style="text-align:left;">
 l.2630912
@@ -6077,7 +6196,7 @@ hyams, mordecai e.
 3323b5a1-2807-44e4-8564-b5ada9d3ac2b
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519687" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519687</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519687
 </td>
 <td style="text-align:left;">
 p04519687
@@ -6377,7 +6496,7 @@ hill, s. r.
 35803f90-ab8d-47d1-bcd0-eae268da08d6
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3da38ca94-b1f4-487f-bfe2-5c7c7eea435e" class="external-link uri">http://n2t.net/ark:/65665/3da38ca94-b1f4-487f-bfe2-5c7c7eea435e</a>
+n2t.net/ark:/65665/3da38ca94-b1f4-487f-bfe2-5c7c7eea435e
 </td>
 <td style="text-align:left;">
 us 89286
@@ -6579,7 +6698,7 @@ NA
 36c94bf8-82b6-439d-868b-9c8e9202d886
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899518" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899518</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p06899518
 </td>
 <td style="text-align:left;">
 p06899518
@@ -6629,7 +6748,7 @@ NA
 377c1677-856a-4053-afe7-e8e6b47923dc
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/318503e56-7a50-4b0d-ae70-860cd4360ecc" class="external-link uri">http://n2t.net/ark:/65665/318503e56-7a50-4b0d-ae70-860cd4360ecc</a>
+n2t.net/ark:/65665/318503e56-7a50-4b0d-ae70-860cd4360ecc
 </td>
 <td style="text-align:left;">
 us 2243566
@@ -6980,7 +7099,7 @@ boufford, david e.; wood, emily w.; lai, m. j.
 3ba308b7-060e-4a04-889d-513582e4ff20
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519685" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519685</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519685
 </td>
 <td style="text-align:left;">
 p04519685
@@ -7080,7 +7199,7 @@ buchanan, jessica
 3c0cfc50-5e42-44e7-8df9-13c72d5cfe33
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519724" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519724</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519724
 </td>
 <td style="text-align:left;">
 p04519724
@@ -7734,7 +7853,7 @@ NA
 44200256-5df1-4c57-b8a7-8e42ff24c4a4
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/u.1292047" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/u.1292047</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/u.1292047" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/u.1292047</a>
 </td>
 <td style="text-align:left;">
 u.1292047
@@ -7934,7 +8053,7 @@ db6c3db9-1e6d-4def-af29-33aa0339bfa9
 45be8433-1134-479b-9372-59e6d72a8ef3
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3a5e04d4e-d027-44bb-97ca-cf968f8fae7a" class="external-link uri">http://n2t.net/ark:/65665/3a5e04d4e-d027-44bb-97ca-cf968f8fae7a</a>
+n2t.net/ark:/65665/3a5e04d4e-d027-44bb-97ca-cf968f8fae7a
 </td>
 <td style="text-align:left;">
 us 1156586
@@ -8084,7 +8203,7 @@ a2b36fdf-50bc-44ef-a6a4-ca6dc1dc148a
 46998d16-8475-4235-b28d-8cc7e0d23b02
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3c19aae1b-3259-4290-a8b2-8ea565e50a0a" class="external-link uri">http://n2t.net/ark:/65665/3c19aae1b-3259-4290-a8b2-8ea565e50a0a</a>
+n2t.net/ark:/65665/3c19aae1b-3259-4290-a8b2-8ea565e50a0a
 </td>
 <td style="text-align:left;">
 us 3497024
@@ -8235,7 +8354,7 @@ hill, s. r.; h. douglass
 48d51c5b-a999-434f-b207-5e40561af78f
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899517" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899517</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p06899517
 </td>
 <td style="text-align:left;">
 p06899517
@@ -8686,7 +8805,7 @@ alanna sanders
 4af9a9c2-4dc7-4248-9414-b832a443507e
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04571276" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04571276</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04571276
 </td>
 <td style="text-align:left;">
 p04571276
@@ -8736,7 +8855,7 @@ hoang, p.h.&amp;#124;averyanov, l.
 4bf4b4dd-ffad-4419-9465-8c4fb8505080
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519688" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519688</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519688
 </td>
 <td style="text-align:left;">
 p04519688
@@ -8936,7 +9055,7 @@ e34cf41b-196c-4199-85d5-4d2ca5954b09
 4d4a0b43-6d3c-48ab-b8cb-f62894d04463
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/320e4c18a-3e5f-4433-a717-4f4b3cfac34f" class="external-link uri">http://n2t.net/ark:/65665/320e4c18a-3e5f-4433-a717-4f4b3cfac34f</a>
+n2t.net/ark:/65665/320e4c18a-3e5f-4433-a717-4f4b3cfac34f
 </td>
 <td style="text-align:left;">
 us 331991
@@ -9036,7 +9155,7 @@ coker, william
 4e037b80-c9b1-4e61-9c1a-be9ca9d1c3f9
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630918" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630918</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630918" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630918</a>
 </td>
 <td style="text-align:left;">
 l.2630918
@@ -9438,7 +9557,7 @@ NA
 5030a0ca-8de6-4fa0-8225-81f215c78be3
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899515" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899515</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p06899515
 </td>
 <td style="text-align:left;">
 p06899515
@@ -9991,7 +10110,7 @@ NA
 54fe0667-f755-4c89-9d39-56571ecc6f43
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/u.1292045" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/u.1292045</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/u.1292045" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/u.1292045</a>
 </td>
 <td style="text-align:left;">
 u.1292045
@@ -10191,7 +10310,7 @@ mary m. smith
 55869da5-1535-4090-a520-772ff71a1eba
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630917" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630917</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630917" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630917</a>
 </td>
 <td style="text-align:left;">
 l.2630917
@@ -10491,7 +10610,7 @@ NA
 594c0c4f-6a90-46c9-8fd8-d568d318b11d
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630922" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630922</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630922" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630922</a>
 </td>
 <td style="text-align:left;">
 l.2630922
@@ -10941,7 +11060,7 @@ benjamin blackburn
 5b92ddb3-0167-44d7-9343-4324aeeaa991
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/31866798b-476a-41c8-90e6-185d3280c17f" class="external-link uri">http://n2t.net/ark:/65665/31866798b-476a-41c8-90e6-185d3280c17f</a>
+n2t.net/ark:/65665/31866798b-476a-41c8-90e6-185d3280c17f
 </td>
 <td style="text-align:left;">
 us 2037674
@@ -10992,7 +11111,7 @@ a6eee223-cf3b-4079-8bb2-b77dad8cae9d
 5baaaaed-3678-4e91-8c16-e44fcbde17c0
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/34be7b58a-84c6-40f7-bdf6-de864c5fb26d" class="external-link uri">http://n2t.net/ark:/65665/34be7b58a-84c6-40f7-bdf6-de864c5fb26d</a>
+n2t.net/ark:/65665/34be7b58a-84c6-40f7-bdf6-de864c5fb26d
 </td>
 <td style="text-align:left;">
 us 1698712
@@ -11244,7 +11363,7 @@ augustine henry
 5dbd9d7f-054e-4ecb-9346-1e5d8287007b
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/378840f41-bd42-4643-88aa-de33496bf31e" class="external-link uri">http://n2t.net/ark:/65665/378840f41-bd42-4643-88aa-de33496bf31e</a>
+n2t.net/ark:/65665/378840f41-bd42-4643-88aa-de33496bf31e
 </td>
 <td style="text-align:left;">
 us 3646802
@@ -11445,7 +11564,7 @@ NA
 5f788f01-81ac-46b5-8256-7b6a7310aa89
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630914" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630914</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630914" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630914</a>
 </td>
 <td style="text-align:left;">
 l.2630914
@@ -12198,7 +12317,7 @@ beab5209-9628-4d4d-851e-2bc9bb1a0105
 67ad07d9-b052-45bc-b8ec-9433a3989fb9
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519689" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519689</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519689
 </td>
 <td style="text-align:left;">
 p04519689
@@ -12849,7 +12968,7 @@ NA
 6c651056-ec40-45b0-8d30-81acca878aef
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630937" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630937</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630937" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630937</a>
 </td>
 <td style="text-align:left;">
 l.2630937
@@ -13049,7 +13168,7 @@ NA
 6db3b417-392a-4519-8a07-61d8f9c347d0
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3e0d071b8-3c2e-427d-b1d0-9170a5b9dab5" class="external-link uri">http://n2t.net/ark:/65665/3e0d071b8-3c2e-427d-b1d0-9170a5b9dab5</a>
+n2t.net/ark:/65665/3e0d071b8-3c2e-427d-b1d0-9170a5b9dab5
 </td>
 <td style="text-align:left;">
 us 2235494
@@ -13550,7 +13669,7 @@ beab5209-9628-4d4d-851e-2bc9bb1a0105
 73a214fb-8bb6-4974-ad4f-d5d8d684b7ce
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630938" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630938</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630938" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630938</a>
 </td>
 <td style="text-align:left;">
 l.2630938
@@ -13650,7 +13769,7 @@ rozelle, a.
 74f15714-ff45-4634-a9f9-3d2eb84e6da2
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519684" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519684</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519684
 </td>
 <td style="text-align:left;">
 p04519684
@@ -13901,7 +14020,7 @@ NA
 76255819-0b36-42f8-80ea-c477e1678898
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899904" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899904</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p06899904
 </td>
 <td style="text-align:left;">
 p06899904
@@ -14652,7 +14771,7 @@ okutomi, k.
 7b8dd424-3f89-4e39-a1aa-b82adea8a34e
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3f0b0c8c1-e805-4b71-a3b1-0e2b32c96d93" class="external-link uri">http://n2t.net/ark:/65665/3f0b0c8c1-e805-4b71-a3b1-0e2b32c96d93</a>
+n2t.net/ark:/65665/3f0b0c8c1-e805-4b71-a3b1-0e2b32c96d93
 </td>
 <td style="text-align:left;">
 us 1384349
@@ -14753,7 +14872,7 @@ db6c3db9-1e6d-4def-af29-33aa0339bfa9
 7c2c578b-0e0c-4a96-b0f9-f18521274b97
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/38c5bf0f4-a2de-47a1-b2a1-95dff46ab665" class="external-link uri">http://n2t.net/ark:/65665/38c5bf0f4-a2de-47a1-b2a1-95dff46ab665</a>
+n2t.net/ark:/65665/38c5bf0f4-a2de-47a1-b2a1-95dff46ab665
 </td>
 <td style="text-align:left;">
 us 2235597
@@ -15104,7 +15223,7 @@ gradon c. kingsland
 7ef95faa-a92d-442d-a142-188b7718ae3c
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3ae2c6c19-413a-4bc2-be92-14b405913566" class="external-link uri">http://n2t.net/ark:/65665/3ae2c6c19-413a-4bc2-be92-14b405913566</a>
+n2t.net/ark:/65665/3ae2c6c19-413a-4bc2-be92-14b405913566
 </td>
 <td style="text-align:left;">
 us 1384350
@@ -15306,7 +15425,7 @@ NA
 80653e0e-5bd7-4d92-b746-d43e462ef96d
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3240b7afc-8fc8-4684-bd68-900805275fff" class="external-link uri">http://n2t.net/ark:/65665/3240b7afc-8fc8-4684-bd68-900805275fff</a>
+n2t.net/ark:/65665/3240b7afc-8fc8-4684-bd68-900805275fff
 </td>
 <td style="text-align:left;">
 us 2591750a
@@ -15807,7 +15926,7 @@ tateishi, y.
 8472e5cb-aba0-445d-ab1d-18e2509a94a4
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/32ff32df5-18a0-4bd5-bcf6-8714c235f172" class="external-link uri">http://n2t.net/ark:/65665/32ff32df5-18a0-4bd5-bcf6-8714c235f172</a>
+n2t.net/ark:/65665/32ff32df5-18a0-4bd5-bcf6-8714c235f172
 </td>
 <td style="text-align:left;">
 us 2617727
@@ -16155,10 +16274,60 @@ james r. simon
 </tr>
 <tr>
 <td style="text-align:left;">
+86cc9c36-42a5-4b0a-84ab-c7ed912b8599
+</td>
+<td style="text-align:left;">
+e69e385d-628e-44e2-876a-72b0d052d1fb
+</td>
+<td style="text-align:left;">
+dov0087167
+</td>
+<td style="text-align:left;">
+diapensiaceae
+</td>
+<td style="text-align:left;">
+shortia
+</td>
+<td style="text-align:left;">
+shortia galacifolia
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+south carolina
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+910eadc8-8131-428c-b28a-91d0e2890f1d
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 87649c06-0f98-4382-b6fb-92caae3bba88
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p05245631" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p05245631</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p05245631
 </td>
 <td style="text-align:left;">
 p05245631
@@ -16308,7 +16477,7 @@ NA
 89996fb1-6b5f-4053-905e-8a584ce5113f
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630913" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630913</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630913" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630913</a>
 </td>
 <td style="text-align:left;">
 l.2630913
@@ -17714,7 +17883,7 @@ NA
 94b4380b-602e-4ca3-b387-331989571bc2
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/31077d206-8715-4ea6-bcfe-3754655f03ec" class="external-link uri">http://n2t.net/ark:/65665/31077d206-8715-4ea6-bcfe-3754655f03ec</a>
+n2t.net/ark:/65665/31077d206-8715-4ea6-bcfe-3754655f03ec
 </td>
 <td style="text-align:left;">
 us 2752233
@@ -17765,7 +17934,7 @@ a6eee223-cf3b-4079-8bb2-b77dad8cae9d
 9507fb00-1e29-4c38-add6-793e209b99e4
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899908" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899908</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p06899908
 </td>
 <td style="text-align:left;">
 p06899908
@@ -17865,7 +18034,7 @@ NA
 9726a77d-4840-4802-a0ad-553e97c44314
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/u.1292044" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/u.1292044</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/u.1292044" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/u.1292044</a>
 </td>
 <td style="text-align:left;">
 u.1292044
@@ -17965,7 +18134,7 @@ biltmore herbarium
 9aa85968-601a-42fd-827e-649cf0136ca8
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/38b664d83-2d0c-439b-bdb8-4633d7ab0a92" class="external-link uri">http://n2t.net/ark:/65665/38b664d83-2d0c-439b-bdb8-4633d7ab0a92</a>
+n2t.net/ark:/65665/38b664d83-2d0c-439b-bdb8-4633d7ab0a92
 </td>
 <td style="text-align:left;">
 us 91679
@@ -18369,7 +18538,7 @@ h.t. im, j. murata, t. yamaguchi, y. watano &amp; t. kawahara
 a27dc8b7-3c5e-4b2b-a551-8ba3fc851909
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/38b67c9f3-48d5-45c5-9ccc-c06422c94f03" class="external-link uri">http://n2t.net/ark:/65665/38b67c9f3-48d5-45c5-9ccc-c06422c94f03</a>
+n2t.net/ark:/65665/38b67c9f3-48d5-45c5-9ccc-c06422c94f03
 </td>
 <td style="text-align:left;">
 us 2276689
@@ -18472,7 +18641,7 @@ averyanova
 a3478e4d-01c6-42b2-9033-4f5565a8cf3b
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3c4227d5e-29af-41df-ad21-6cb41593623d" class="external-link uri">http://n2t.net/ark:/65665/3c4227d5e-29af-41df-ad21-6cb41593623d</a>
+n2t.net/ark:/65665/3c4227d5e-29af-41df-ad21-6cb41593623d
 </td>
 <td style="text-align:left;">
 us 586091
@@ -18573,7 +18742,7 @@ a4e6033a-d1eb-46d3-869d-7c0328f09aa7
 a4b3a412-dc98-4754-86b2-e6231d29d8bc
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3fbdcbda3-3174-4829-aa9a-467b3a5cd4bd" class="external-link uri">http://n2t.net/ark:/65665/3fbdcbda3-3174-4829-aa9a-467b3a5cd4bd</a>
+n2t.net/ark:/65665/3fbdcbda3-3174-4829-aa9a-467b3a5cd4bd
 </td>
 <td style="text-align:left;">
 us 1384351
@@ -18974,7 +19143,7 @@ batson, jr., wade
 aa223326-7a40-4b39-8e2f-0403e2da97aa
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/309563d58-0cb3-4f35-9f9a-e6a9422abcb3" class="external-link uri">http://n2t.net/ark:/65665/309563d58-0cb3-4f35-9f9a-e6a9422abcb3</a>
+n2t.net/ark:/65665/309563d58-0cb3-4f35-9f9a-e6a9422abcb3
 </td>
 <td style="text-align:left;">
 us 91678
@@ -19075,7 +19244,7 @@ d.b. rosenkrans
 aa3c4586-7e07-48f4-821f-41b77e26d56b
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519680" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519680</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519680
 </td>
 <td style="text-align:left;">
 p04519680
@@ -19376,7 +19545,7 @@ f1cf8457-237e-487a-9d13-5de7d81b9de4
 ac51d302-e981-40aa-a080-6d264ec0d2be
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519682" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519682</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519682
 </td>
 <td style="text-align:left;">
 p04519682
@@ -19615,8 +19784,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-<ol start="23" style="list-style-type: lower-alpha"><li><ol style="list-style-type: lower-alpha"><li>barnes
-</li></ol></li></ol>
+barnes, w.a. (pamplin)
 </td>
 <td style="text-align:left;">
 264c48ec-8636-451f-a7e0-74131bc6f84c
@@ -19878,7 +20046,7 @@ de67ccab-7d04-43b9-8083-81e45f628505
 b36da1b9-0c2f-4f18-b254-8ed8264cac7a
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3f4e2f9ec-4b38-489d-b247-f22e299fe61b" class="external-link uri">http://n2t.net/ark:/65665/3f4e2f9ec-4b38-489d-b247-f22e299fe61b</a>
+n2t.net/ark:/65665/3f4e2f9ec-4b38-489d-b247-f22e299fe61b
 </td>
 <td style="text-align:left;">
 us 2035901
@@ -20481,7 +20649,7 @@ kirino, s.
 b9a691d5-7871-40bb-9f03-6e71450093b9
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630921" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630921</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630921" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630921</a>
 </td>
 <td style="text-align:left;">
 l.2630921
@@ -20581,7 +20749,7 @@ robert w. powell, jr.
 ba28bab8-b35d-4da4-b4a4-28ec96dd73dd
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3990b6b20-7549-4c3e-b7fb-c09ea556d13a" class="external-link uri">http://n2t.net/ark:/65665/3990b6b20-7549-4c3e-b7fb-c09ea556d13a</a>
+n2t.net/ark:/65665/3990b6b20-7549-4c3e-b7fb-c09ea556d13a
 </td>
 <td style="text-align:left;">
 us 338543
@@ -20982,7 +21150,7 @@ NA
 bd3c9e9c-1702-4e64-babe-7d8c0bb50f95
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p00714228" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p00714228</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p00714228
 </td>
 <td style="text-align:left;">
 p00714228
@@ -21233,7 +21401,7 @@ e34cf41b-196c-4199-85d5-4d2ca5954b09
 bed859fe-21bd-4f9a-9d36-1c012b54f0e6
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/wag.1259448" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/wag.1259448</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/wag.1259448" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/wag.1259448</a>
 </td>
 <td style="text-align:left;">
 wag.1259448
@@ -21434,7 +21602,7 @@ robert w. powell, jr.
 c018fd19-a84d-47e8-bff5-8da1875d1593
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04458470" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04458470</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04458470
 </td>
 <td style="text-align:left;">
 p04458470
@@ -21484,7 +21652,7 @@ faurie, u.j.
 c08751a5-abcc-4f53-a33f-5fa2ab1cec3d
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630915" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630915</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630915" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630915</a>
 </td>
 <td style="text-align:left;">
 l.2630915
@@ -21784,7 +21952,7 @@ a2b36fdf-50bc-44ef-a6a4-ca6dc1dc148a
 c1f0feb2-cb93-41d6-a59d-0dde09b4b199
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3f847f573-7f2b-4221-9c19-1d2bcc797c78" class="external-link uri">http://n2t.net/ark:/65665/3f847f573-7f2b-4221-9c19-1d2bcc797c78</a>
+n2t.net/ark:/65665/3f847f573-7f2b-4221-9c19-1d2bcc797c78
 </td>
 <td style="text-align:left;">
 us 2635204
@@ -21924,8 +22092,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-<ol start="23" style="list-style-type: lower-alpha"><li><ol style="list-style-type: lower-alpha"><li>barnes
-</li></ol></li></ol>
+barnes, w.a. (pamplin)
 </td>
 <td style="text-align:left;">
 264c48ec-8636-451f-a7e0-74131bc6f84c
@@ -22538,7 +22705,7 @@ NA
 cad127f4-df7a-4351-8d51-ebf658a838d7
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/33c2c1bfd-66d7-44cd-9295-471fbd116a1d" class="external-link uri">http://n2t.net/ark:/65665/33c2c1bfd-66d7-44cd-9295-471fbd116a1d</a>
+n2t.net/ark:/65665/33c2c1bfd-66d7-44cd-9295-471fbd116a1d
 </td>
 <td style="text-align:left;">
 us 1134961
@@ -22688,7 +22855,7 @@ ddef79ec-043c-4027-9876-c4a298feff6d
 cb9e03bf-5f16-4df9-abb3-41af068f6ce5
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3df07a050-8ef2-4024-9dae-49a50d48c658" class="external-link uri">http://n2t.net/ark:/65665/3df07a050-8ef2-4024-9dae-49a50d48c658</a>
+n2t.net/ark:/65665/3df07a050-8ef2-4024-9dae-49a50d48c658
 </td>
 <td style="text-align:left;">
 us 2094176
@@ -22839,7 +23006,7 @@ walker, a.
 cd742ae0-4453-4ea7-8b58-0cbfcafe17e8
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3167de8b3-07d7-43c4-be60-3fa3f647892f" class="external-link uri">http://n2t.net/ark:/65665/3167de8b3-07d7-43c4-be60-3fa3f647892f</a>
+n2t.net/ark:/65665/3167de8b3-07d7-43c4-be60-3fa3f647892f
 </td>
 <td style="text-align:left;">
 us 1923806
@@ -23142,7 +23309,7 @@ e23109b4-e143-437c-b329-3dff7cb35488
 d0172614-e992-4865-826f-25365c4f680c
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630940" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630940</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630940" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630940</a>
 </td>
 <td style="text-align:left;">
 l.2630940
@@ -23393,7 +23560,7 @@ dendy, jack
 d34aeab2-68df-4e53-83a1-bfc1926f243e
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630939" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630939</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630939" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630939</a>
 </td>
 <td style="text-align:left;">
 l.2630939
@@ -24795,7 +24962,7 @@ robert w. powell, jr.
 e3038adc-6886-415e-ae76-c04803c04d43
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/l.2630916" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/l.2630916</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/l.2630916" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/l.2630916</a>
 </td>
 <td style="text-align:left;">
 l.2630916
@@ -24945,7 +25112,7 @@ wright, henry
 e3cd0c17-829c-45a0-bc0f-3bce48f73127
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/388cd268d-d0a4-43cc-bd93-589377a664f3" class="external-link uri">http://n2t.net/ark:/65665/388cd268d-d0a4-43cc-bd93-589377a664f3</a>
+n2t.net/ark:/65665/388cd268d-d0a4-43cc-bd93-589377a664f3
 </td>
 <td style="text-align:left;">
 us 89287
@@ -25446,7 +25613,7 @@ syuho kirino
 ebfd1d73-14e4-4512-893c-b42c80a237fc
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/3989ef467-dff9-4fcd-ad13-c06c9cb60be5" class="external-link uri">http://n2t.net/ark:/65665/3989ef467-dff9-4fcd-ad13-c06c9cb60be5</a>
+n2t.net/ark:/65665/3989ef467-dff9-4fcd-ad13-c06c9cb60be5
 </td>
 <td style="text-align:left;">
 us 89289
@@ -25496,7 +25663,7 @@ a6eee223-cf3b-4079-8bb2-b77dad8cae9d
 ec5e900f-5b93-4fb6-8e6a-273e363571e3
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899516" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p06899516</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p06899516
 </td>
 <td style="text-align:left;">
 p06899516
@@ -25648,7 +25815,7 @@ NA
 ee02313b-a3b2-4ae8-9b3c-af503d0da529
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/358af4a45-f636-4270-b8be-a3a8f99a7cdb" class="external-link uri">http://n2t.net/ark:/65665/358af4a45-f636-4270-b8be-a3a8f99a7cdb</a>
+n2t.net/ark:/65665/358af4a45-f636-4270-b8be-a3a8f99a7cdb
 </td>
 <td style="text-align:left;">
 us 283922
@@ -26199,7 +26366,7 @@ NA
 f4225017-9d35-4fc2-b5f3-63e6ea8311ce
 </td>
 <td style="text-align:left;">
-<a href="http://n2t.net/ark:/65665/374c1b198-a423-4e78-9d89-cefaacef5715" class="external-link uri">http://n2t.net/ark:/65665/374c1b198-a423-4e78-9d89-cefaacef5715</a>
+n2t.net/ark:/65665/374c1b198-a423-4e78-9d89-cefaacef5715
 </td>
 <td style="text-align:left;">
 NA
@@ -26349,7 +26516,7 @@ e23109b4-e143-437c-b329-3dff7cb35488
 f609bdf0-04f8-4a7b-bfa6-0c96c6dd388f
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519679" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519679</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519679
 </td>
 <td style="text-align:left;">
 p04519679
@@ -26450,7 +26617,7 @@ e34cf41b-196c-4199-85d5-4d2ca5954b09
 f640ad76-a3b5-4235-9405-c75a5f058b6f
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519686" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519686</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519686
 </td>
 <td style="text-align:left;">
 p04519686
@@ -26551,7 +26718,7 @@ e70af26a-fb9e-43ab-96a0-d62a2df37e6d
 f77f711f-8f4a-4c83-a41b-dbfa08be775d
 </td>
 <td style="text-align:left;">
-<a href="https://data.biodiversitydata.nl/naturalis/specimen/amd.69313" class="external-link uri">https://data.biodiversitydata.nl/naturalis/specimen/amd.69313</a>
+<a href="https://bioportal.naturalis.nl/nl/specimen/amd.69313" class="external-link uri">https://bioportal.naturalis.nl/nl/specimen/amd.69313</a>
 </td>
 <td style="text-align:left;">
 amd.69313
@@ -27002,7 +27169,7 @@ d53132e6-7997-4850-8607-4fec5a3f9c3f
 fb6f4e16-7651-4f16-aa85-66c9f1c43e96
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p00714230" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p00714230</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p00714230
 </td>
 <td style="text-align:left;">
 p00714230
@@ -27403,7 +27570,7 @@ NA
 ff9edf74-c3d9-49ac-a5af-ab70957b4a28
 </td>
 <td style="text-align:left;">
-<a href="http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519683" class="external-link uri">http://coldb.mnhn.fr/catalognumber/mnhn/p/p04519683</a>
+coldb.mnhn.fr/catalognumber/mnhn/p/p04519683
 </td>
 <td style="text-align:left;">
 p04519683
@@ -27551,12 +27718,6 @@ ddef79ec-043c-4027-9876-c4a298feff6d
 </tbody>
 </table>
 </div>
-
-
-
-
-
-
 
 
 
@@ -28288,6 +28449,11 @@ edf395ee-e4ec-4b31-82cf-d57066b1159f
 <span>          geopoint <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">"exists"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  fields <span class="op">=</span> <span class="st">"all"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">records_2B</span><span class="op">$</span><span class="va">institutionid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="va">records_2B</span><span class="op">$</span><span class="va">institutionid</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="st">"https://"</span>, <span class="va">records_2B</span><span class="op">$</span><span class="va">institutionid</span><span class="op">)</span>,</span>
+<span>  <span class="va">records_2B</span><span class="op">$</span><span class="va">institutionid</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Display the data frame we just created above in a nice pretty table for HTML</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">records_2B</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -29188,7 +29354,7 @@ NA
 uwbm
 </td>
 <td style="text-align:left;">
-<a href="http://biocol.org/urn:lsid:biocol.org:col:34878" class="external-link uri">http://biocol.org/urn:lsid:biocol.org:col:34878</a>
+<a href="https://biocol.org/urn:lsid:biocol.org:col:34878" class="external-link uri">https://biocol.org/urn:lsid:biocol.org:col:34878</a>
 </td>
 <td style="text-align:left;">
 NA
@@ -29947,7 +30113,7 @@ NA
 ku
 </td>
 <td style="text-align:left;">
-<a href="http://grbio.org/cool/iakn-125z" class="external-link uri">http://grbio.org/cool/iakn-125z</a>
+<a href="https://grbio.org/cool/iakn-125z" class="external-link uri">https://grbio.org/cool/iakn-125z</a>
 </td>
 <td style="text-align:left;">
 NA
@@ -30201,7 +30367,7 @@ NA
 ku
 </td>
 <td style="text-align:left;">
-<a href="http://grbio.org/cool/iakn-125z" class="external-link uri">http://grbio.org/cool/iakn-125z</a>
+<a href="https://grbio.org/cool/iakn-125z" class="external-link uri">https://grbio.org/cool/iakn-125z</a>
 </td>
 <td style="text-align:left;">
 NA
@@ -30455,7 +30621,7 @@ NA
 ku
 </td>
 <td style="text-align:left;">
-<a href="http://grbio.org/cool/iakn-125z" class="external-link uri">http://grbio.org/cool/iakn-125z</a>
+<a href="https://grbio.org/cool/iakn-125z" class="external-link uri">https://grbio.org/cool/iakn-125z</a>
 </td>
 <td style="text-align:left;">
 NA
@@ -32250,7 +32416,7 @@ records, which is the limit for any single iteration of
 <span><span class="co"># This number shows how many records in iDigBio have a value of "fossilspecimen"</span></span>
 <span><span class="co"># as well as geographic coordinate data</span></span>
 <span><span class="va">count_1A</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "3,205,546"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "3,209,582"</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="discover-the-most-frequent-values-for-a-field-using-idig_top_records">Discover the most frequent values for a field using
@@ -32299,7 +32465,7 @@ count
 shortia galacifolia
 </td>
 <td style="text-align:left;">
-363
+366
 </td>
 </tr>
 <tr>

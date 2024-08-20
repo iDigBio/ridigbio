@@ -110,7 +110,7 @@ interested in downloading media files. Do this using the
 allows you to search for media records based on data contained in linked
 specimen records, like species or collecting locality. You can learn
 more about this function from the <a href="https://github.com/iDigBio/idigbio-search-api/wiki" class="external-link">iDigBio API
-documentation</a> and <a href="https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf" class="external-link">ridigbio
+documentation</a> and <a href="https://cran.r-project.org/package=ridigbio/ridigbio.pdf" class="external-link">ridigbio
 documentation</a>. In this example, we want to search for images of
 herbarium specimens of species in the genus <em>Acer</em> that were
 collected in the United States.</p>
@@ -126,7 +126,20 @@ collected in the United States.</p>
 <span>                       <span class="st">"rights"</span>,</span>
 <span>                       <span class="st">"format"</span>,</span>
 <span>                       <span class="st">"records"</span><span class="op">)</span>,</span>
-<span>            limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<span>            limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">records</span><span class="op">$</span><span class="va">accessuri</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="st">""</span>, <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span><span class="op">)</span>,</span>
+<span>  <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">records</span><span class="op">$</span><span class="va">accessuri</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"https://mam.ansp.org"</span>, <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"https://mam.ansp.org"</span>, <span class="st">"mam.ansp.org"</span>, <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span><span class="op">)</span>,</span>
+<span>  <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">records</span><span class="op">$</span><span class="va">accessuri</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"https://ibss-images.calacademy.org"</span>, <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"https://ibss-images.calacademy.org"</span>, <span class="st">"ibss-images.calacademy.org"</span>, <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span><span class="op">)</span>,</span>
+<span>  <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The result of the code above is a data frame called
 <code>records</code>:</p>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
@@ -154,7 +167,7 @@ records
 0000b146-6fd2-4a6a-bf78-9e709cc995e9
 </td>
 <td style="text-align:left;">
-<a href="http://mam.ansp.org/image/CM/Fullsize/345/CM345773.jpg" class="external-link uri">http://mam.ansp.org/image/CM/Fullsize/345/CM345773.jpg</a>
+mam.ansp.org/image/CM/Fullsize/345/CM345773.jpg
 </td>
 <td style="text-align:left;">
 BY-NC-SA
@@ -188,7 +201,7 @@ image/jpeg
 0000d1cd-8211-45c6-8dfa-bd4a9a001aad
 </td>
 <td style="text-align:left;">
-<a href="http://mam.ansp.org/image/TAWES/Fullsize/0005/TAWES0005954.jpg" class="external-link uri">http://mam.ansp.org/image/TAWES/Fullsize/0005/TAWES0005954.jpg</a>
+mam.ansp.org/image/TAWES/Fullsize/0005/TAWES0005954.jpg
 </td>
 <td style="text-align:left;">
 BY-NC-SA
@@ -205,7 +218,7 @@ image/jpeg
 000244a4-6c5c-4e75-9c2e-db585b377935
 </td>
 <td style="text-align:left;">
-<a href="http://ibss-images.calacademy.org:80/static/botany/originals/12/df/12dff2af-8a4b-4845-9964-79152fb7ce71.jpg" class="external-link uri">http://ibss-images.calacademy.org:80/static/botany/originals/12/df/12dff2af-8a4b-4845-9964-79152fb7ce71.jpg</a>
+ibss-images.calacademy.org:80/static/botany/originals/12/df/12dff2af-8a4b-4845-9964-79152fb7ce71.jpg
 </td>
 <td style="text-align:left;">
 CC0
@@ -256,7 +269,7 @@ b0d09b22-e30f-4b89-ab03-d4c863b4727a
 000495be-df5c-4c01-a951-5656a3fe5ef5
 </td>
 <td style="text-align:left;">
-<a href="http://bgbaseserver.eeb.uconn.edu/DATABASEIMAGES/CONN00075691.JPG" class="external-link uri">http://bgbaseserver.eeb.uconn.edu/DATABASEIMAGES/CONN00075691.JPG</a>
+bgbaseserver.eeb.uconn.edu/DATABASEIMAGES/CONN00075691.JPG
 </td>
 <td style="text-align:left;">
 BY-NC-SA
@@ -359,13 +372,13 @@ preference.</p>
 <span><span class="co">## [10] "https://api.idigbio.org/v2/media/000654a2-02f3-4c14-b28a-7567cb55aa57"</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mediaurl_external</span></span></code></pre></div>
-<pre><code><span><span class="co">##  [1] "http://mam.ansp.org/image/CM/Fullsize/345/CM345773.jpg"                                                            </span></span>
+<pre><code><span><span class="co">##  [1] "mam.ansp.org/image/CM/Fullsize/345/CM345773.jpg"                                                                   </span></span>
 <span><span class="co">##  [2] "https://sernecportal.org/imglib/seinet/sernec/NCU_VascularPlants/NCU00418/NCU00418780_01.JPG"                      </span></span>
-<span><span class="co">##  [3] "http://mam.ansp.org/image/TAWES/Fullsize/0005/TAWES0005954.jpg"                                                    </span></span>
-<span><span class="co">##  [4] "http://ibss-images.calacademy.org:80/static/botany/originals/12/df/12dff2af-8a4b-4845-9964-79152fb7ce71.jpg"       </span></span>
+<span><span class="co">##  [3] "mam.ansp.org/image/TAWES/Fullsize/0005/TAWES0005954.jpg"                                                           </span></span>
+<span><span class="co">##  [4] "ibss-images.calacademy.org:80/static/botany/originals/12/df/12dff2af-8a4b-4845-9964-79152fb7ce71.jpg"              </span></span>
 <span><span class="co">##  [5] "https://www.pnwherbaria.org/images/jpeg.php?Image=WTU-V-023351.jpg"                                                </span></span>
 <span><span class="co">##  [6] "https://cch2.org/imglib/cch2/CHSC_VascularPlants/CHSC021/CHSC021794_lg.jpg"                                        </span></span>
-<span><span class="co">##  [7] "http://bgbaseserver.eeb.uconn.edu/DATABASEIMAGES/CONN00075691.JPG"                                                 </span></span>
+<span><span class="co">##  [7] "bgbaseserver.eeb.uconn.edu/DATABASEIMAGES/CONN00075691.JPG"                                                        </span></span>
 <span><span class="co">##  [8] "https://cdn.floridamuseum.ufl.edu/Herbarium/945bc71c-a736-42e2-8b41-7a00bf9529fe"                                  </span></span>
 <span><span class="co">##  [9] "https://data.cyverse.org/dav-anon/iplant/projects/magnoliagrandiFLORA/images/specimens/MISS0038464/MISS0038464.JPG"</span></span>
 <span><span class="co">## [10] "https://api.idigbio.org/v2/media/793b0495f464a5403db6918811399c1d"</span></span></code></pre>
