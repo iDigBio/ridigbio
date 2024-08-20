@@ -30,11 +30,13 @@ library(kableExtra)
 
 # Load libraries for visualizing geographic data
 library(leaflet)
+
+library(cowplot)
 ```
 
 ## Write a query to search for specimen records
 
-First, let's find all the specimen records for the data quality flag we are interested in. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf). In this example, we want to start by searching for specimens flagged with "rev_geocode_corrected."
+First, let's find all the specimen records for the data quality flag we are interested in. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/package=ridigbio/ridigbio.pdf). In this example, we want to start by searching for specimens flagged with "rev_geocode_corrected."
 
 ```{r}
 # Edit the fields (e.g. `flags`) and values (e.g. "rev_geocode_corrected") in
@@ -134,7 +136,7 @@ map <- df_rev_geocode_lat_sign[1:10,] %>%
 
 We can visualize this data on a map to better understand what the data quality flag is telling us. For example, in the map below you can see the effect of accidentally reversing the latitude on three example georeferenced specimen records.
 
-```{r echo = FALSE}
+```{r echo = FALSE, out.width = '100%'}
 map
 ```
 
@@ -178,8 +180,16 @@ percentFlagged <- sum(spmByColl$n)/totalInstSpm*100
 
 For example, we can ask how many specimen records from which collections at the Natural History Museum of Los Angeles (LACM) have been flagged as "rev_geocode_corrected" by iDigBio. *As an aside, although this graph highlights the number of specimen records with data quality issues, these represent only `r round(percentFlagged, 2)`% of the total specimen records published by LACM.*
 
-```{r echo = FALSE}
-graph_spmByColl
+```{r out.width="700px", echo = FALSE}
+graph_spmByColl <- graph_spmByColl +
+                   theme_minimal_grid() +
+                   theme(
+                       text = element_text(size = 22),
+                       axis.text = element_text(size = 22),
+                       plot.title = element_text(size = 22, face = "bold")
+                   )
+
+knitr::include_graphics(save_plot("plot.png", graph_spmByColl, base_height = 10, base_width = 24))
 ```
 
 We can also explore what *other* data quality flags these specimen records have been flagged with.
@@ -202,7 +212,7 @@ df_flagAssoc <- df_flagCoord %>%
   arrange(category, desc(n))
 
 # Visualize associated data quality flags
-ggplot(df_flagAssoc, aes(x = reorder(flags, -percent), y = percent, fill = category)) +
+graph_spmByColl <- ggplot(df_flagAssoc, aes(x = reorder(flags, -percent), y = percent, fill = category)) +
   geom_col() +
   theme(axis.title.x = element_text(face = "bold"),
         axis.text.x = element_text(angle = 75, hjust = 1),
@@ -214,4 +224,16 @@ ggplot(df_flagAssoc, aes(x = reorder(flags, -percent), y = percent, fill = categ
        y = "% specimen records",
        title = "LACM records flagged for geo-coordinate issues are also flagged for...",
        fill = "flag category")
+```
+```{r out.width="700px", echo = FALSE}
+graph_spmByColl <- graph_spmByColl +
+                   theme_minimal_grid() +
+                   theme(
+                       text = element_text(size = 22),
+                       axis.text = element_text(size = 22),
+                       axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+                       plot.title = element_text(size = 22, face = "bold")
+                   )
+
+knitr::include_graphics(save_plot("plot2.png", graph_spmByColl, base_height = 10, base_width = 24))
 ```

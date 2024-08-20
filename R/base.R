@@ -7,9 +7,9 @@
 ##' @author Francois Michonneau
 idig_url <- function(dev = FALSE) {
   if (dev) {
-    "http://beta-search.idigbio.org"
+    "https://beta-search.idigbio.org"
   } else {
-    "http://search.idigbio.org"
+    "https://search.idigbio.org"
   }
 }
 
@@ -134,4 +134,5 @@ ignore_unused_imports <- function() {
   leaflet::`%>%`()
   kableExtra::kable()
   tidyverse::tidyverse_logo()
+  cowplot::theme_minimal_grid()
 }

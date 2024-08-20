@@ -1,7 +1,7 @@
 Package: ridigbio
 Title: Interface to the iDigBio Data API
 Version: 0.3.9
-Date: 2024-7-02
+Date: 2024-8-19
 Encoding: UTF-8
 Authors@R: c(person("Francois", "Michonneau", comment="Original Author", role=c("aut", "cph"),
   email="francois.michonneau@gmail.com"),
@@ -22,7 +22,7 @@ Description: An interface to iDigBio's search API that allows downloading
   such as the metadata end points return lists of information. iDigBio is a US
   project focused on digitizing and serving museum specimen collections on the
   web. See <https://www.idigbio.org> for information on iDigBio.
-URL: https://github.com/iDigBio/ridigbio, http://idigbio.github.io/ridigbio/
+URL: https://github.com/iDigBio/ridigbio, https://idigbio.github.io/ridigbio/
 BugReports: https://github.com/iDigBio/ridigbio/issues
 Depends:
   R (>= 3.0.1)
@@ -33,7 +33,8 @@ Imports:
   jsonlite,
   leaflet,
   kableExtra,
-  tidyverse
+  tidyverse,
+  cowplot
 License: MIT + file LICENSE
 LazyData: true
 Suggests:

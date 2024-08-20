@@ -40,14 +40,14 @@ sudo apt install libcurl4
 ## Getting Started
 There are several articles that can help get you started:
 
-* [Introduction to ridigbio](http://idigbio.github.io/ridigbio/articles/BasicUsage.html)
-* [Record API Demo](http://idigbio.github.io/ridigbio/articles/RecordAPIDemo.html)
-* [Media API Demo](http://idigbio.github.io/ridigbio/articles/MediaAPIDemo.html)
-* [Fields in ridigibio](http://idigbio.github.io/ridigbio/articles/Fields.html)
-* [Tissue Samples Locator Demo](http://idigbio.github.io/ridigbio/articles/FindTissue.html)
-* [Identification of Modified Data](http://idigbio.github.io/ridigbio/articles/ModifiedDataID.html)
-* [Identification of Suspicious Coordinates](http://idigbio.github.io/ridigbio/articles/BadCoordinateID.html)
-* [Identification of Data Flags](http://idigbio.github.io/ridigbio/articles/IDDataFlags.html)
+* [Introduction to ridigbio](https://idigbio.github.io/ridigbio/articles/BasicUsage.html)
+* [Record API Demo](https://idigbio.github.io/ridigbio/articles/RecordAPIDemo.html)
+* [Media API Demo](https://idigbio.github.io/ridigbio/articles/MediaAPIDemo.html)
+* [Fields in ridigibio](https://idigbio.github.io/ridigbio/articles/Fields.html)
+* [Tissue Samples Locator Demo](https://idigbio.github.io/ridigbio/articles/FindTissue.html)
+* [Identification of Modified Data](https://idigbio.github.io/ridigbio/articles/ModifiedDataID.html)
+* [Identification of Suspicious Coordinates](https://idigbio.github.io/ridigbio/articles/BadCoordinateID.html)
+* [Identification of Data Flags](https://idigbio.github.io/ridigbio/articles/IDDataFlags.html)
 
 
 Most iDigBio users are interested in downloading occurrence records:

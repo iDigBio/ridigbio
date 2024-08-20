@@ -29,17 +29,17 @@
 ##' \item{dqs: Data quality score assigned by iDigBio.}   
 ##' \item{etag: Tag assigned by iDigBio.}         
 ##' \item{flags: Data quality flag assigned by iDigBio.}          
-##' \item{[format](http://purl.org/dc/terms/format) }          
+##' \item{[format](https://purl.org/dc/terms/format) }          
 ##' \item{hasSpecimen: TRUE or FALSE, indicates if there is an associated record for this media.}          
 ##' \item{[licenselogourl](https://ac.tdwg.org/termlist/#ac_licenseLogoURL)}          
 ##' \item{mediatype: Media object type.}          
-##' \item{[modified](http://purl.org/dc/terms/modified)}          
+##' \item{[modified](https://purl.org/dc/terms/modified)}          
 ##' \item{recordids: List of UUID for associated records.}          
 ##' \item{records: UUID for the associated record.}          
 ##' \item{recordset: Record set ID assigned by iDigBio.}          
-##' \item{[rights](http://purl.org/dc/terms/rights)}          
-##' \item{[tag](http://rs.tdwg.org/ac/terms/tag)}           
-##' \item{[type](http://purl.org/dc/terms/type)}          
+##' \item{[rights](https://purl.org/dc/terms/rights)}          
+##' \item{[tag](https://rs.tdwg.org/ac/terms/tag)}           
+##' \item{[type](https://purl.org/dc/terms/type)}          
 ##' \item{uuid: Unique identifier assigned by iDigBio.}          
 ##' \item{version: Media record version assigned by iDigBio.}          
 ##' \item{[webstatement](https://developer.adobe.com/xmp/docs/XMPNamespaces/xmpRights/)}          
