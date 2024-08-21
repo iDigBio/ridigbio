@@ -33,6 +33,7 @@ idig_version <- function(version = "v2") {
 ##' @return a list
 ##' @author Francois Michonneau
 idig_parse <- function(req) {
+  httr::config(http_version = 2)
   txt <- httr::content(req, as = "text")
   if (identical(txt, "")) stop("No output to parse", call. = FALSE)
   jsonlite::fromJSON(txt, simplifyVector = FALSE)
@@ -66,6 +67,7 @@ idig_check <- function(req) {
 ##' @return nothing. Stops if request contains an error.
 ##' @author Francois Michonneau
 idig_check_error <- function(req) {
+  httr::config(http_version = 2)
   cont <- httr::content(req)
   if (is.list(cont) && exists("error", cont)) {
     stop(paste("Error: ", cont$error, "\n", sep = ""))
@@ -82,6 +84,7 @@ idig_check_error <- function(req) {
 ##' @return the request (as a list)
 ##' @author Francois Michonneau
 idig_GET <- function(path, ...) {
+  httr::config(http_version = 2)
   req <- httr::GET(idig_url(), path = paste(idig_version(), path, sep = "/"), ...)
   idig_check(req)
   req
@@ -104,6 +107,7 @@ idig_POST <- function(path, body, ...) {
   # Manually encode so we can use auto_unbox=TRUE, see ticket
   # https://github.com/iDigBio/ridigbio/issues/3
   json <- jsonlite::toJSON(body, auto_unbox = TRUE)
+  httr::config(http_version = 2)
   req <- httr::POST(idig_url(),
     path = paste("v2", path, sep = "/"),
     body = json, httr::accept_json(),
