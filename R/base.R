@@ -7,9 +7,9 @@
 ##' @author Francois Michonneau
 idig_url <- function(dev = FALSE) {
   if (dev) {
-    "https://beta-search.idigbio.org"
+    "http://beta-search.idigbio.org"
   } else {
-    "https://search.idigbio.org"
+    "http://search.idigbio.org"
   }
 }
 
@@ -33,7 +33,7 @@ idig_version <- function(version = "v2") {
 ##' @return a list
 ##' @author Francois Michonneau
 idig_parse <- function(req) {
-  httr::config(http_version = 2)
+  #httr::config(http_version = 2)
   txt <- httr::content(req, as = "text")
   if (identical(txt, "")) stop("No output to parse", call. = FALSE)
   jsonlite::fromJSON(txt, simplifyVector = FALSE)
@@ -67,7 +67,7 @@ idig_check <- function(req) {
 ##' @return nothing. Stops if request contains an error.
 ##' @author Francois Michonneau
 idig_check_error <- function(req) {
-  httr::config(http_version = 2)
+  #httr::config(http_version = 2)
   cont <- httr::content(req)
   if (is.list(cont) && exists("error", cont)) {
     stop(paste("Error: ", cont$error, "\n", sep = ""))
