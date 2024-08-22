@@ -84,8 +84,10 @@ idig_check_error <- function(req) {
 ##' @return the request (as a list)
 ##' @author Francois Michonneau
 idig_GET <- function(path, ...) {
-  httr::config(http_version = 2)
-  req <- httr::GET(idig_url(), path = paste(idig_version(), path, sep = "/"), ...)
+  req <- httr::with_verbose(
+    httr::GET(idig_url(), path = paste(idig_version(), path, sep = "/"), ...),
+    info = TRUE, data_in = FALSE, data_out = FALSE, ssl = TRUE
+  )
   idig_check(req)
   req
 }
@@ -115,7 +117,7 @@ idig_POST <- function(path, body, ...) {
   )
   idig_check(req)
 
-  req
+  httr::with_verbose(req, info = TRUE)
 }
 
 ##' Stub function for validating parameters.
