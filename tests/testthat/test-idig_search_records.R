@@ -6,6 +6,8 @@ fields <- c("uuid", "genus", "specificepithet", "data.dwc:occurrenceID")
 
 test_that("basic search, full results works", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   df <- idig_search_records(rq = rq, limit = 6000)
 
   expect_that(df, is_a("data.frame"))
@@ -18,6 +20,8 @@ test_that("basic search, full results works", {
 
 test_that("limited results, custom fields works", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   df <- idig_search_records(rq = rq, fields = fields, limit = 10)
 
   expect_true(nrow(df) == 10)
@@ -29,6 +33,7 @@ test_that("limited results, custom fields works", {
 
 test_that("offset works", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
 
   df <- idig_search_records(rq = rq, fields = fields, limit = 2, offset = 0)
   second_uuid <- df[["uuid"]][[2]]
@@ -40,6 +45,8 @@ test_that("offset works", {
 
 test_that("sorting works", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   df <- idig_search_records(rq = rq, fields = fields, limit = 1)
 
   expect_true(substr(df[["uuid"]], 1, 2) == "00")
@@ -56,6 +63,7 @@ test_that("sorting works", {
 
 test_that("max items disabled is thrown for large queries", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
 
   expect_that(
     df <- idig_search_records(rq = list("country" = "united states")),
@@ -65,6 +73,7 @@ test_that("max items disabled is thrown for large queries", {
 
 test_that("max items disabled is thrown for windows past 100k", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
 
   expect_that(
     df <- idig_search_records(
@@ -77,6 +86,7 @@ test_that("max items disabled is thrown for windows past 100k", {
 
 test_that("can get the 100000th result", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
 
   df <- idig_search_records(
     rq = list("country" = "united states"),
@@ -87,6 +97,8 @@ test_that("can get the 100000th result", {
 
 test_that("all fields returns a lot of fields", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   df <- idig_search_records(rq = rq, fields = "all", limit = 10)
 
   expect_true(ncol(df) > 50)
@@ -94,6 +106,8 @@ test_that("all fields returns a lot of fields", {
 
 test_that("empty results return empty df with correct columns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   df <- idig_search_records(rq = list("uuid" = "nobodyhome"), fields = fields)
 
   expect_true(nrow(df) == 0)
@@ -102,6 +116,8 @@ test_that("empty results return empty df with correct columns", {
 
 test_that("geopoint and special fields are expanded or excluded as appropriate", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+  
   fields_special <- c("uuid", "geopoint", "mediarecords", "flags", "recordids")
   df <- idig_search_records(
     rq = list("uuid" = "f84faea8-82ac-4f71-b256-6b2be5d1b59d"),

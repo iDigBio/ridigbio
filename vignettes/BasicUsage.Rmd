@@ -29,18 +29,36 @@ install.packages("ridigbio")
 Before downloading any records, you must load the ridigbio package.
 
 ```{r message=FALSE, warning=FALSE}
-library(ridigbio) 
+library(ridigbio)
+```
+```{r echo = FALSE}
+
+verify_galax_records <- FALSE
+
+#Test that examples will run
+tryCatch({
+    # Your code that might throw an error
+    verify_galax_records <- idig_search_records(rq=list(scientificname="Galax urceolata"),
+      limit = 10
+    )
+}, error = function(e) {
+    # Code to run if an error occurs
+    cat("An error occurred during the idig_search_records call: ", e$message, "\n")
+    cat("Vignettes will not be fully generated. Please try again after resolving the issue.")
+    # Optionally, you can return NULL or an empty dataframe
+    verify_galax_records <- FALSE
+})
 ```
 
 ## Download Records
 To download records from the Search API, we will use the function `idig_search_records()`. 
 Here the `rq`, or record query, indicates we want to download all the records where the `scientificname` is equal to [<i>Galax urceolata</i>](https://en.wikipedia.org/wiki/Galax). 
 
-```{r}
+```{r eval=verify_galax_records}
 galax_records <- idig_search_records(rq=list(scientificname="Galax urceolata"))
 ```
 
-```{r}
+```{r eval=verify_galax_records}
 colnames(galax_records)
 ```
 
@@ -71,7 +89,7 @@ When fields are not specified, default columns include the following:
 
 In addition to `scientificname`, record query may be based on many other fields. For example, you can search for all members of the `family`[Diapensiaceae](https://en.wikipedia.org/wiki/Diapensiaceae): 
 
-```{r}
+```{r eval=verify_galax_records}
 diapensiaceae_records <- idig_search_records(rq=list(family="Diapensiaceae"), limit=1000)
 ```
 
@@ -82,7 +100,7 @@ diapensiaceae_records <- idig_search_records(rq=list(family="Diapensiaceae"), li
 
 The bounding box delimits the geographic extent. 
 
-```{r}
+```{r eval=verify_galax_records}
 rq_input <- list("scientificname"=list("type"="exists"),
                  "family"="Diapensiaceae", 
                  geopoint=list(
@@ -95,7 +113,7 @@ rq_input <- list("scientificname"=list("type"="exists"),
 
 Search using the input you just made
 
-```{r}
+```{r eval=verify_galax_records}
 diapensiaceae_records_USA <- idig_search_records(rq_input, limit=1000)
 ```
 
@@ -104,11 +122,11 @@ diapensiaceae_records_USA <- idig_search_records(rq_input, limit=1000)
 To download media records from the Media API, we will use the function `idig_search_media()`. 
 Here the `rq`, or record query, indicates we want to download all the records where the `scientificname` is equal to [<i>Galax urceolata</i>](https://en.wikipedia.org/wiki/Galax). 
 
-```{r}
+```{r eval=verify_galax_records}
 galax_media <- idig_search_media(rq=list(scientificname="Galax urceolata"))
 ```
 
-```{r}
+```{r eval=verify_galax_records}
 colnames(galax_media)
 ```
 
@@ -141,10 +159,10 @@ When fields are not specified, default columns include the following:
 
 ### More ways to search 
 
-The media search above retained `r nrow(galax_media)` rows, however some of these observations do not have information in the `accessuri` field. To only obtain records with `acessuri`, we indicate we only want records where `data.ac:accessURI` exist, by setting `mq`, or media query, as followed:
-```{r}
+The media search above retained ```{r eval=verify_galax_records} nrow(galax_media)``` rows, however some of these observations do not have information in the `accessuri` field. To only obtain records with `acessuri`, we indicate we only want records where `data.ac:accessURI` exist, by setting `mq`, or media query, as followed:
+```{r eval=verify_galax_records}
 galax_media2 <- idig_search_media(rq=list(scientificname="Galax urceolata"),
                                   mq=list("data.ac:accessURI"=list("type"="exists")))
 ```
 
-Now we have  `r nrow(galax_media2)` observations with `accessuri`!
+Now we have  ```{r eval=verify_galax_records} nrow(galax_media2)``` observations with `accessuri`!

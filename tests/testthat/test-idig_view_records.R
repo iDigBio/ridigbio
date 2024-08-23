@@ -4,6 +4,8 @@ rec_uuid <- "d4f6974f-a7d6-4bfb-b70c-4c815b516a0b"
 
 test_that("viewing a record returns right information", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+  
   rec <- idig_view_records(rec_uuid)
 
   expect_that(rec, is_a("list"))

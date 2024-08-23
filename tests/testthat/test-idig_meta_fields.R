@@ -2,6 +2,8 @@ context("test idig_meta_fields")
 
 test_that("records field list returns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   f <- idig_meta_fields()
 
   expect_that(f, is_a("list"))
@@ -12,6 +14,8 @@ test_that("records field list returns", {
 
 test_that("records indexed subset returns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   f <- idig_meta_fields(subset = "indexed")
 
   expect_null(f[["data"]])
@@ -21,6 +25,8 @@ test_that("records indexed subset returns", {
 
 test_that("records raw subset returns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   f <- idig_meta_fields(subset = "raw")
 
   expect_null(f[["uuid"]])
@@ -29,6 +35,8 @@ test_that("records raw subset returns", {
 
 test_that("media list returns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   f <- idig_meta_fields(type = "media")
 
   expect_that(f, is_a("list"))
@@ -39,6 +47,8 @@ test_that("media list returns", {
 
 test_that("media indexed subset returns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   f <- idig_meta_fields(type = "media", subset = "indexed")
 
   expect_null(f[["data"]])
@@ -48,6 +58,8 @@ test_that("media indexed subset returns", {
 
 test_that("media raw subset returns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+  
   f <- idig_meta_fields(type = "media", subset = "raw")
 
   expect_null(f[["uuid"]])
