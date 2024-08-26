@@ -36,6 +36,12 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
+      - name: Install specific version of curl (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install curl  # Adjust version as needed
+          brew link --force curl
+          
       - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
