@@ -15,7 +15,7 @@ tryCatch(
     error = function(e) {
         # Code to run if an error occurs
         cat("An error occurred during the idig_search_records call: ", e$message, "\n")
-        warning("Tests will not proceed as a result of error. Please try to fix the issue and try again.")
+        simpleError("Tests will not proceed as a result of error. Please try to fix the issue and try again.")
         # Optionally, you can return NULL or an empty dataframe
         verify_galax_records <- NULL
     }
