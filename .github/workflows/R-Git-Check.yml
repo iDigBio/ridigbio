@@ -52,10 +52,15 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      # Install specific version of r-curl from source
-      - name: Install r-curl 5.2.2 from source
+      # Install remotes package to handle versioned installations
+      - name: Install remotes package
         run: |
-          install.packages("curl", version = "5.2.2", repos = "https://cran.r-project.org", type = "source")
+          install.packages("remotes")
+
+      # Install r-curl 5.2.2 from CRAN Archive using remotes
+      - name: Install r-curl 5.2.2 from CRAN Archive
+        run: |
+          remotes::install_version("curl", version = "5.2.2", repos = "https://cran.r-project.org", type = "source")
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
