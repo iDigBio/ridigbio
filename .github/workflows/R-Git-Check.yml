@@ -61,12 +61,12 @@ jobs:
       # Install remotes package to handle versioned installations
       - name: Install remotes package
         run: |
-          R -e 'install.packages("remotes")'
+          R -e "install.packages('remotes')"
 
       # Install r-curl 5.2.2 from CRAN Archive using remotes
       - name: Install r-curl 5.2.2 from CRAN Archive
         run: |
-          R -e 'remotes::install_version("curl", "5.2.2")'
+          R -e "remotes::install_version('curl', '5.2.2')"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
