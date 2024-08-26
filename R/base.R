@@ -7,9 +7,9 @@
 ##' @author Francois Michonneau
 idig_url <- function(dev = FALSE) {
   if (dev) {
-    "http://beta-search.idigbio.org"
+    "https://beta-search.idigbio.org"
   } else {
-    "http://search.idigbio.org"
+    "https://search.idigbio.org"
   }
 }
 
@@ -47,14 +47,27 @@ idig_parse <- function(req) {
 ##' @return nothing. Stops if HTTP code is >= 400
 ##' @author Francois Michonneau
 idig_check <- function(req) {
-  if (req$status_code >= 400) {
-    msg <- substr(req, 1, 200)
-    stop("HTTP failure: ", req$status_code, "\n",
-      "Error message from API server: ", msg,
-      call. = FALSE
-    )
-  }
-  idig_check_error(req)
+  tryCatch(
+    {
+      if (req$status_code >= 400) {
+        msg <- substr(req, 1, 200)
+        stop("HTTP failure: ", req$status_code, "\n",
+          "Error message from API server: ", msg,
+          call. = FALSE
+        )
+      }
+      idig_check_error(req)
+    },
+    error = function(e) {
+      warning("Error during API request: ", e$message)
+      msg <- substr(req, 1, 200)
+      stop("HTTP failure: ", req$status_code, "\n",
+        "Error message from API server: ", msg,
+        call. = FALSE
+      )
+      idig_check_error(req)
+    }
+  )
 }
 
 ##' Checks for error messages that can be returned by the API in JSON.
