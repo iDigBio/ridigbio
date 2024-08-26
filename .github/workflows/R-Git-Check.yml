@@ -39,9 +39,9 @@ jobs:
       - name: Install specific version of curl (macOS)
         if: runner.os == 'macOS'
         run: |
-          brew install curl  # Adjust version as needed
+          brew reinstall curl  # Adjust version as needed
           brew link --force curl
-          
+
       - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
@@ -51,6 +51,11 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+
+      # Install specific version of r-curl from source
+      - name: Install r-curl 5.2.2 from source
+        run: |
+          install.packages("curl", version = "5.2.2", repos = "https://cran.r-project.org", type = "source")
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
