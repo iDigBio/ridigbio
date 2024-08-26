@@ -51,6 +51,11 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
+      
+      # Clear R package library to avoid using cached packages
+      - name: Clear R package library
+        run: |
+          R -e 'unlink(.libPaths(), recursive = TRUE)'
 
       # Install remotes package to handle versioned installations
       - name: Install remotes package
@@ -66,6 +71,7 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          cache-version: "no-cache"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
