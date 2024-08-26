@@ -55,7 +55,7 @@ jobs:
       # Clear R package library to avoid using cached packages
       - name: Clear R package library
         run: |
-          R -e 'unlink(.libPaths(), recursive = TRUE)'
+          R -e 'user_lib <- .libPaths()[1]; if (dir.exists(user_lib)) unlink(user_lib, recursive = TRUE)'
 
       # Install remotes package to handle versioned installations
       - name: Install remotes package
