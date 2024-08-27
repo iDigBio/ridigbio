@@ -157,9 +157,17 @@ purrr::walk2(.x = mediaurl_external,
 
 You should now have two folders, each with ten images downloaded from iDigBio and external servers, respectively. Note that we only downloaded ten images here for brevity's sake, but you can increase this using the `limit` argument in the first step. Here is an example of one of the images we downloaded:
 
-```{r eval=verify_records, include=FALSE}
+```{r eval=verify_records, echo = FALSE, results = 'asis'}
 exampleimgpath <- paste("jpgs_idigbio/",records$uuid[1],".jpg", sep = "")
+
+image_markdown <- "No image available."
+
+if(file.exists(exampleimgpath))
+{
+  image_markdown <- paste0("![Herbarium specimen of an _Acer_ species collected in the United States](", exampleimgpath, ")")
+}
+
+image_markdown
 ```
 
-![Herbarium specimen of an _Acer_ species collected in the United States](```{r eval=verify} as.character(exampleimgpath)```)
 
