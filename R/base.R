@@ -95,10 +95,7 @@ idig_check_error <- function(req) {
 ##' @return the request (as a list)
 ##' @author Francois Michonneau
 idig_GET <- function(path, ...) {
-  req <- httr::with_verbose(
-    httr::GET(idig_url(), path = paste(idig_version(), path, sep = "/"), ...),
-    info = TRUE, data_in = FALSE, data_out = FALSE, ssl = TRUE
-  )
+  req <- httr::GET(idig_url(), path = paste(idig_version(), path, sep = "/"), ...)
   idig_check(req)
   req
 }
