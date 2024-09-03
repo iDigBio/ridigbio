@@ -26,6 +26,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
+          - {os: macos-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
@@ -35,6 +36,12 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
+      - name: Install specific version of curl (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew reinstall curl  # Adjust version as needed
+          brew link --force curl
+
       - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
@@ -44,11 +51,24 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
-
+      
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::rcmdcheck
           needs: check
+          cache-version: "no-cache"
+
+      # Install remotes package to handle versioned installations
+      - name: Install remotes package
+        if: runner.os == 'macOS'
+        run: |
+          R -e "install.packages('remotes')"
+
+      # Install r-curl 5.2.2 from CRAN Archive using remotes
+      - name: Install r-curl 5.2.2 from CRAN Archive
+        if: runner.os == 'macOS'
+        run: |
+          R -e "remotes::install_version('curl', '5.2.2')"
 
       - uses: r-lib/actions/check-r-package@v2
         with:

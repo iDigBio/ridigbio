@@ -2,6 +2,7 @@ context("test idig_build_attrib")
 
 test_that("attribution dataframe built from results dataframe and item counts match", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
 
   testQuery <- idig_search_records(rq = list(family = "holothuriidae"))
   df <- idig_build_attrib(testQuery)
@@ -11,6 +12,7 @@ test_that("attribution dataframe built from results dataframe and item counts ma
 
 test_that("limited results, attribution counts match limit and result counts", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
 
   df <- idig_search_records(rq = list(genus = "acer"), limit = 10)
   tt <- idig_build_attrib(df)

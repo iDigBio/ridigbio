@@ -11,6 +11,8 @@ u <- "00d96710-77dd-492c-9d5c-095a8cf9ee5a"
 
 test_that("full results for rq searches return", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   df <- idig_search_media(rq = rq, limit = 6000)
 
   expect_that(df, is_a("data.frame"))
@@ -20,6 +22,8 @@ test_that("full results for rq searches return", {
 
 test_that("full results for rq & mq queries together return", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   df <- idig_search_media(rq = rq, mq = mq, limit = 6000)
 
   expect_that(df, is_a("data.frame"))
@@ -29,6 +33,8 @@ test_that("full results for rq & mq queries together return", {
 
 test_that("full results for mq queries return", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   df <- idig_search_media(mq = mq, limit = 6000)
   u <- "00003b7d-07fb-4c36-a81a-18f7cde49203"
   
@@ -41,6 +47,8 @@ test_that("full results for mq queries return", {
 
 test_that("limits and custom fields return", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+  
   df <- idig_search_media(mq = mq, fields = fields, limit = 10)
 
   expect_true(nrow(df) == 10)

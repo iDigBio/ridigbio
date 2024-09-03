@@ -3,6 +3,7 @@ context("test GET")
 
 test_that("list of all top-level fields returned in JSON", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
   getReq <- list(rq = jsonlite::toJSON(list(family = "holothuriidae")))
   r <- idig_GET("search/records", query = getReq)
 
@@ -16,6 +17,7 @@ context("test POST")
 
 test_that("list of all top-level fields returned in JSON", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
   fm <- list(rq = list(family = "holothuriidae"))
   r <- idig_POST("search/records", body = fm)
 
@@ -25,6 +27,7 @@ test_that("list of all top-level fields returned in JSON", {
 
 test_that("400 errors print messages", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
 
   expect_error(
     idig_search_records(rq = list("asdf" = "asdf")),

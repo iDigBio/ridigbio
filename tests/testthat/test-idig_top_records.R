@@ -8,6 +8,8 @@ scientificname <- "acer macrophyllum"
 
 test_that("default list of top 10 scientific names returns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   top <- idig_top_records()
 
   expect_that(top, is_a("list"))
@@ -20,6 +22,8 @@ test_that("default list of top 10 scientific names returns", {
 
 test_that("field and number of tops work", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   top <- idig_top_records(top_fields = c(field), count = count)
 
   expect_that(top, is_a("list"))
@@ -30,6 +34,8 @@ test_that("field and number of tops work", {
 
 test_that("record searches work", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   top <- idig_top_records(
     rq = list("genus" = genus), top_fields = c(field),
     count = count
@@ -44,6 +50,8 @@ test_that("record searches work", {
 
 test_that("multiple fields return nested results", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+  
   top <- idig_top_records(rq = list("genus" = genus), top_fields = c(
     field,
     "scientificname"

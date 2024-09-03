@@ -34,11 +34,30 @@ library(leaflet)
 library(cowplot)
 ```
 
+```{r echo = FALSE}
+
+verify_df_flagCoord <- FALSE
+
+#Test that examples will run
+tryCatch({
+    # Your code that might throw an error
+    verify_df_flagCoord <- idig_search_records(
+        rq = list(flags = "rev_geocode_corrected", institutioncode = "lacm"),
+        limit = 10
+    )
+}, error = function(e) {
+    # Code to run if an error occurs
+    cat("An error occurred during the idig_search_records call: ", e$message, "\n")
+    cat("Vignettes will not be fully generated. Please try again after resolving the issue.")
+    # Optionally, you can return NULL or an empty dataframe
+    verify_df_flagCoord <- FALSE
+})
+```
 ## Write a query to search for specimen records
 
 First, let's find all the specimen records for the data quality flag we are interested in. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/package=ridigbio/ridigbio.pdf). In this example, we want to start by searching for specimens flagged with "rev_geocode_corrected."
 
-```{r}
+```{r eval=verify_df_flagCoord}
 # Edit the fields (e.g. `flags`) and values (e.g. "rev_geocode_corrected") in
 # `list()` to adjust your query and the fields (e.g. `uuid`) in `fields` to
 # adjust the columns returned in your results
@@ -77,7 +96,7 @@ df_flagCoord <- idig_search_records(rq = list(flags = "rev_geocode_corrected",
 
 Here is what our query result data looks like:
 
-```{r echo = FALSE}
+```{r eval=verify_df_flagCoord, echo = FALSE}
 # Subset `df_flagCoord` to show example
 df_flagCoord[1:50,] %>% 
   select(-flags) %>% 
@@ -92,7 +111,7 @@ df_flagCoord[1:50,] %>%
 
 One example of a geographic coordinate data quality issue would be that the latitude/longitude has a reversed sign, e.g. the data provider gave the value *latitude* = "7.1789" but meant *latitude* = "-7.1789." In the map below we can see a few examples of specimen records published to iDigBio where this is the case. These data have been adjusted by iDigBio and this action is recorded with the data quality flag "rev_geocode_flip_lat_sign."
 
-```{r}
+```{r eval=verify_df_flagCoord}
 # Create function to allow subsetting the `df_flagCoord` dataset by other flags
 # found on these same records
 df_flagSubset <- function(subsetFlag) {
@@ -136,7 +155,7 @@ map <- df_rev_geocode_lat_sign[1:10,] %>%
 
 We can visualize this data on a map to better understand what the data quality flag is telling us. For example, in the map below you can see the effect of accidentally reversing the latitude on three example georeferenced specimen records.
 
-```{r echo = FALSE, out.width = '100%'}
+```{r eval=verify_df_flagCoord, echo = FALSE, out.width = '100%'}
 map
 ```
 
@@ -145,7 +164,7 @@ map
 
 The iDigBio API provides a means for an institution to examine data quality issues across collections, which sometimes is not possible internally when data in different collections are managed in different databases.
 
-```{r}
+```{r eval=verify_df_flagCoord}
 # Summarize flagged records by collection type
 spmByColl <- df_flagCoord %>% 
   group_by(collectioncode) %>% 
@@ -178,9 +197,9 @@ totalInstSpm <- idig_count_records(rq = list(institutioncode = "lacm"))
 percentFlagged <- sum(spmByColl$n)/totalInstSpm*100
 ```
 
-For example, we can ask how many specimen records from which collections at the Natural History Museum of Los Angeles (LACM) have been flagged as "rev_geocode_corrected" by iDigBio. *As an aside, although this graph highlights the number of specimen records with data quality issues, these represent only `r round(percentFlagged, 2)`% of the total specimen records published by LACM.*
+For example, we can ask how many specimen records from which collections at the Natural History Museum of Los Angeles (LACM) have been flagged as "rev_geocode_corrected" by iDigBio. *As an aside, although this graph highlights the number of specimen records with data quality issues, these represent only ```{r eval=verify_df_flagCoord} round(percentFlagged, 2)```% of the total specimen records published by LACM.*
 
-```{r out.width="700px", echo = FALSE}
+```{r eval=verify_df_flagCoord, out.width="700px", echo = FALSE}
 graph_spmByColl <- graph_spmByColl +
                    theme_minimal_grid() +
                    theme(
@@ -194,7 +213,7 @@ knitr::include_graphics(save_plot("plot.png", graph_spmByColl, base_height = 10,
 
 We can also explore what *other* data quality flags these specimen records have been flagged with.
 
-```{r}
+```{r eval=verify_df_flagCoord}
 # Collate `df_flagAssoc` to describe other data quality flags that are associated
 # with rev_geocode_corrected in `df_flagCoord`
 df_flagAssoc <- df_flagCoord %>% 
@@ -225,7 +244,7 @@ graph_spmByColl <- ggplot(df_flagAssoc, aes(x = reorder(flags, -percent), y = pe
        title = "LACM records flagged for geo-coordinate issues are also flagged for...",
        fill = "flag category")
 ```
-```{r out.width="700px", echo = FALSE}
+```{r eval=verify_df_flagCoord, out.width="700px", echo = FALSE}
 graph_spmByColl <- graph_spmByColl +
                    theme_minimal_grid() +
                    theme(

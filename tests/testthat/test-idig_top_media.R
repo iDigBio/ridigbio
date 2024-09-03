@@ -8,6 +8,8 @@ scientificname <- "acer macrophyllum"
 
 test_that("default list of top 10 scientific names returns", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   top <- idig_top_media()
 
   expect_that(top, is_a("list"))
@@ -21,6 +23,8 @@ test_that("default list of top 10 scientific names returns", {
 
 test_that("specifying field and number of tops works", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+
   top <- idig_top_media(top_fields = c(field), count = count)
 
   expect_that(top, is_a("list"))
@@ -35,6 +39,8 @@ test_that("specifying field and number of tops works", {
 
 test_that("searches work", {
   testthat::skip_on_cran()
+  testthat::skip_if_offline()
+  
   top <- idig_top_media(
     mq = list("dqs" = dqs), top_fields = c(field),
     count = count
