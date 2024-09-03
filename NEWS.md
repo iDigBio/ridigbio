@@ -1,3 +1,8 @@
+ridigbio 0.4.0
+===========
+### Enhancements
+* Offline build capability added
+
 ridigbio 0.3.9
 ===========
 
