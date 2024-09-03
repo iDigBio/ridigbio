@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ridigbio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +107,7 @@ to R with Biodiversity Data, <a href="https://www.doi.org/10.25334/84FC-TE88" cl
 <p>Before downloading any records, you must load the ridigbio
 package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/iDigBio/ridigbio" class="external-link">ridigbio</a></span><span class="op">)</span> </span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/iDigBio/ridigbio" class="external-link">ridigbio</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="download-records">Download Records<a class="anchor" aria-label="anchor" href="#download-records"></a>
@@ -378,15 +378,19 @@ downloads with Media downloads</td>
 <div class="section level3">
 <h3 id="more-ways-to-search-1">More ways to search<a class="anchor" aria-label="anchor" href="#more-ways-to-search-1"></a>
 </h3>
-<p>The media search above retained 342 rows, however some of these
-observations do not have information in the <code>accessuri</code>
-field. To only obtain records with <code>acessuri</code>, we indicate we
-only want records where <code>data.ac:accessURI</code> exist, by setting
-<code>mq</code>, or media query, as followed:</p>
+<p>The media search above retained
+<code>{r eval=verify_galax_records} nrow(galax_media)</code> rows,
+however some of these observations do not have information in the
+<code>accessuri</code> field. To only obtain records with
+<code>acessuri</code>, we indicate we only want records where
+<code>data.ac:accessURI</code> exist, by setting <code>mq</code>, or
+media query, as followed:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">galax_media2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/idig_search_media.html">idig_search_media</a></span><span class="op">(</span>rq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>scientificname<span class="op">=</span><span class="st">"Galax urceolata"</span><span class="op">)</span>,</span>
 <span>                                  mq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"data.ac:accessURI"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"type"</span><span class="op">=</span><span class="st">"exists"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Now we have 328 observations with <code>accessuri</code>!</p>
+<p>Now we have
+<code>{r eval=verify_galax_records} nrow(galax_media2)</code>
+observations with <code>accessuri</code>!</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
