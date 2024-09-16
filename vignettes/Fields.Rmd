@@ -74,27 +74,18 @@ In addition to the fields provided by data providers, the Search API contains fi
 
 ```{r eval=verify_record_fields}
 record_fields_index <- idig_meta_fields(type = "records", subset = "indexed")
-rfalli <- data.frame(matrix(ncol = 3, nrow = 0))
+rfalli <- data.frame(matrix(ncol = 2, nrow = 0))
+colnames(rfalli) <- c("Type", "FieldNameValue")
 
-  for(i in 1:length(record_fields_index)){
-    if(length(record_fields_index[[i]]) == 2){
-      rf <- data.frame(matrix(ncol = 3, nrow = 0))
-      rf[1, 1] <-  names(record_fields_index[i])
-      rf[1, 2] <-  (record_fields_index[[i]])$type
-      rf[1, 3] <-  (record_fields_index[[i]])$fieldName
-      rfalli <- rbind(rfalli, rf)
-    }else{
-     sub <- record_fields_index[[i]]
-      for(j in 1:length(sub)){
-        rf <- data.frame(matrix(ncol = 3, nrow = 0))
-        rf[1, 1] <-  names(sub[j])
-        rf[1, 2] <-  (sub[[j]])$type
-        rf[1, 3] <-  (sub[[j]])$fieldName
-        rfalli <- rbind(rfalli, rf)
-       }
-    }
-  }
-colnames(rfalli) <- c("name", "type", "fieldName")
+for(i in 1:length(record_fields_index)) {
+    rf <- data.frame(
+        Type = record_fields_index[[i]]$type,
+        FieldNameValue = record_fields_index[[i]]$fieldName,
+        stringsAsFactors = FALSE
+    )
+    rfalli <- rbind(rfalli, rf)
+}
+colnames(rfalli) <- c("type", "fieldName")
 nrow(rfalli)
 ```
 
