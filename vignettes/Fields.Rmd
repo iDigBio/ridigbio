@@ -1,6 +1,9 @@
 ---
 title: Fields in ridigbio
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette: 
+    md_extensions: 
+      - "-autolink_bare_uris"
 vignette: >
   %\VignetteIndexEntry{Fields in ridigbio}
   %\VignetteEngine{knitr::rmarkdown}
@@ -9,7 +12,11 @@ vignette: >
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 library(ridigbio)
+
+# Load library for making nice HTML output
+library(kableExtra)
 ```
+
 ```{r echo = FALSE}
 
 verify_record_fields <- FALSE
@@ -18,6 +25,22 @@ verify_record_fields <- FALSE
 tryCatch({
     # Your code that might throw an error
     verify_record_fields <- idig_meta_fields(type = "records", subset = "raw", limit = 10)
+    rfall <- data.frame(matrix(ncol = 2, nrow = 0))
+    colnames(rfall) <- c("Type", "FieldNameValue")
+
+    # Stricter schema verification
+    for(i in 1:length(verify_record_fields)) {
+        rf <- data.frame(
+            Type = verify_record_fields[[i]]$type,
+            FieldNameValue = verify_record_fields[[i]]$fieldName,
+            stringsAsFactors = FALSE
+        )
+        rfall <- rbind(rfall, rf)
+    }
+
+    if(nrow(rfall) <= 0)
+        verify_record_fields <- FALSE
+
 }, error = function(e) {
     # Code to run if an error occurs
     cat("An error occurred during the idig_search_records call: ", e$message, "\n")
@@ -26,22 +49,21 @@ tryCatch({
     verify_record_fields <- FALSE
 })
 ```
-There are many fields that can be obtained via the Search and Media API. This tutorial is meant to aid in identifying these fields. 
 
-## General Overview  
+There are many fields that can be obtained via the Search and Media API. This tutorial is meant to aid in identifying these fields.
+
+## General Overview
 
 In this demo we will cover how to:
 
-1. Identifying both raw and indexed record fields with `idig_meta_fields()`
-2. Downloading fields of interest with `idig_search_records()`
-3. Identifying both raw and indexed media record fields with ` idig_meta_fields()`
-4. Downloading fields of interest with `idig_search_media()`
+1.  Identifying both raw and indexed record fields with `idig_meta_fields()`
+2.  Downloading fields of interest with `idig_search_records()`
+3.  Identifying both raw and indexed media record fields with `idig_meta_fields()`
+4.  Downloading fields of interest with `idig_search_media()`
 
+## Search API Fields
 
-
-## Search API Fields 
-
-To identify the raw, or verbatim, fields available with the Search API, you can run the following: 
+To identify the raw, or verbatim, fields available with the Search API, you can run the following:
 
 ```{r eval=verify_record_fields}
 record_fields <- idig_meta_fields(type = "records", subset = "raw")
@@ -60,8 +82,7 @@ colnames(rfall) <- c("type", "fieldName")
 nrow(rfall)
 ```
 
-
-In addition to the fields provided by data providers, the Search API contains fields that have been indexed and potentially modified by iDigBio. To identify the indexed fields available with the Search API, you can run the following: 
+In addition to the fields provided by data providers, the Search API contains fields that have been indexed and potentially modified by iDigBio. To identify the indexed fields available with the Search API, you can run the following:
 
 ```{r eval=verify_record_fields}
 record_fields_index <- idig_meta_fields(type = "records", subset = "indexed")
@@ -81,31 +102,33 @@ nrow(rfalli)
 ```
 
 Note, these fields lists are different.
+
 ```{r eval=verify_record_fields}
 setequal(rfall, rfalli)
 ```
 
-However, they contain similar information. For example,  scientificName can be found in both the raw and index fields.
+However, they contain similar information. For example, scientificName can be found in both the raw and index fields.
+
 ```{r eval=verify_record_fields}
-rfall[238,]
+rfall[171,]
 ```
 
 ```{r eval=verify_record_fields}
 rfalli[69,]
 ```
 
-### Retain records with these fields 
- 
-To obtain records with these fields with the `idig_search_records()` function, you simply list the  `fields` arugument as equal to these fields. 
+### Retain records with these fields
+
+To obtain records with these fields with the `idig_search_records()` function, you simply list the `fields` arugument as equal to these fields.
 
 ```{r eval=verify_record_fields}
 out <- idig_search_records(rq=list(scientificname="Galax urceolata"), 
                            fields = rfall$fieldName)
 ```
 
-## Media Record API Fields  
+## Media Record API Fields
 
-To identify the raw, or verbatim, fields available with the Media Record API, you can run the following: 
+To identify the raw, or verbatim, fields available with the Media Record API, you can run the following:
 
 ```{r eval=verify_record_fields}
 media_fields <- idig_meta_fields(type = "media", subset = "raw")
@@ -124,7 +147,8 @@ colnames(mfall) <- c("type", "fieldName")
 nrow(mfall)
 ```
 
-Like the Search API, the Media Record API has fields that have been indexed and potentially modified by iDigBio. To identify the indexed fields available with the Media Record API, you can run the following: 
+Like the Search API, the Media Record API has fields that have been indexed and potentially modified by iDigBio. To identify the indexed fields available with the Media Record API, you can run the following:
+
 ```{r eval=verify_record_fields}
 media_fields_indexed <- idig_meta_fields(type = "media", subset = "indexed")
 mfalli <- data.frame(matrix(ncol = 2, nrow = 0))
@@ -142,17 +166,24 @@ colnames(mfalli) <- c("type", "fieldName")
 nrow(mfalli)
 ```
 
-Note, all index fields associated with the Media Record API are returned by default with the `idig_search_media()` function. 
+Note, all index fields associated with the Media Record API are returned by default with the `idig_search_media()` function.
+
 ```{r eval=verify_record_fields}
 mfalli$fieldName
 ```
 
+### Retain records with these fields
 
-### Retain records with these fields 
- 
-To obtain records with these fields with the `idig_search_media()` function, you simply list the  `fields` arugument as equal to these fields. 
+To obtain records with these fields with the `idig_search_media()` function, you simply list the `fields` argument as equal to these fields.
 
 ```{r eval=verify_record_fields}
 out <- idig_search_media(rq=list(scientificname="Galax urceolata"), 
-                           fields = mfalli$fieldName)
+                           fields = mfalli$fieldName) 
+
+out %>%
+kable() %>% 
+kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                font_size = 12,
+                fixed_thead = T) %>% 
+  scroll_box(width = "100%", height = "400px")
 ```
