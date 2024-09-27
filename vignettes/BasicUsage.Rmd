@@ -157,11 +157,11 @@ When fields are not specified, default columns include the following:
 
 ### More ways to search
 
-The media search above retained `r if(nrow(galax_media)) nrow(galax_media) else "N/A"` rows, however some of these observations do not have information in the `accessuri` field. To only obtain records with `acessuri`, we indicate we only want records where `data.ac:accessURI` exist, by setting `mq`, or media query, as followed:
+The media search above retained `r tryCatch({if(nrow(galax_media)) nrow(galax_media) else "N/A"}, error = function(e){cat("error in vignette: ", e$message)})` rows, however some of these observations do not have information in the `accessuri` field. To only obtain records with `acessuri`, we indicate we only want records where `data.ac:accessURI` exist, by setting `mq`, or media query, as followed:
 
 ```{r eval=verify_galax_records}
 galax_media2 <- idig_search_media(rq=list(scientificname="Galax urceolata"),
                                   mq=list("data.ac:accessURI"=list("type"="exists")))
 ```
 
-Now we have `r if(nrow(galax_media)) nrow(galax_media) else "N/A"` observations with `accessuri`!
+Now we have `r tryCatch({if(nrow(galax_media2)) nrow(galax_media2) else "N/A"}, error = function(e){cat("error in vignette: ", e$message)})` observations with `accessuri`!
