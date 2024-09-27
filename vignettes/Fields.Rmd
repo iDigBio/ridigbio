@@ -177,8 +177,7 @@ mfalli$fieldName
 To obtain records with these fields with the `idig_search_media()` function, you simply list the `fields` argument as equal to these fields.
 
 ```{r eval=verify_record_fields}
-out <- idig_search_media(rq=list(scientificname="Galax urceolata"), 
-                           fields = mfalli$fieldName) 
+out <- idig_search_media(rq=list(scientificname="Galax urceolata"), fields = mfalli$fieldName) 
 
 out %>%
 kable() %>% 

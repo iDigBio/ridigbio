@@ -9,13 +9,14 @@ vignette: >
 
 Code here written by [Erica Krimmel](https://orcid.org/0000-0003-3192-0080).
 
-## General Overview  
+## General Overview
+
 In this use case for the [iDigBio API](https://github.com/iDigBio/idigbio-search-api/wiki) we look at how to search for specimen records that have a specific data quality flag. See [here](https://github.com/iDigBio/idigbio-search-api/wiki/Data-Quality-Flags) for more information about iDigBio's data quality flags.
 
 In this demo we will cover how to:
 
-1. Write a query to search for specimens using `idig_search_records`
-2. Explore data quality flags 
+1.  Write a query to search for specimens using `idig_search_records`
+2.  Explore data quality flags
 
 ## Load Packages
 
@@ -46,6 +47,7 @@ tryCatch({
     verify_records <- FALSE
 })
 ```
+
 ## Write a query to search for specimen records
 
 First, let's find all the specimen records for the data quality flag we are interested in. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/package=ridigbio/ridigbio.pdf).

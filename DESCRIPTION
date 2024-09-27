@@ -1,7 +1,7 @@
 Package: ridigbio
 Title: Interface to the iDigBio Data API
-Version: 0.4.0
-Date: 2024-9-3
+Version: 0.4.1
+Date: 2024-9-27
 Encoding: UTF-8
 Authors@R: c(person("Francois", "Michonneau", comment="Original Author", role=c("aut", "cph"),
   email="francois.michonneau@gmail.com"),

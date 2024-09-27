@@ -1,3 +1,8 @@
+ridigbio 0.4.1
+===========
+### Fixes
+* Styling Fixes and Meta Fields fixes and tests 
+
 ridigbio 0.4.0
 ===========
 ### Enhancements
