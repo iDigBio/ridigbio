@@ -68,7 +68,7 @@ jobs:
       - name: Install r-curl 5.2.2 from CRAN Archive
         if: runner.os == 'macOS'
         run: |
-          R -e "remotes::install_version('curl', '5.2.2')"
+          R -e "remotes::install_cran('curl')"
 
       - uses: r-lib/actions/check-r-package@v2
         with:
