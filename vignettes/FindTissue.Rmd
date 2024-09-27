@@ -234,5 +234,3 @@ knitr::kable(collections) %>%
                          c("striped", "hover", "condensed", "responsive")) %>% 
   scroll_box(height = "400px")
 ```
-
-\`\`\`
