@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ridigbio</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,14 +119,15 @@ collected in the United States.</p>
 <span><span class="co"># to adjust your query and the fields (e.g. `uuid`) in `fields` to adjust the</span></span>
 <span><span class="co"># columns returned in your results; edit the number after `limit` to adjust the</span></span>
 <span><span class="co"># number of records you will retrieve images for</span></span>
-<span><span class="va">records</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/idig_search_media.html">idig_search_media</a></span><span class="op">(</span>rq <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>genus <span class="op">=</span> <span class="st">"acer"</span>,</span>
-<span>                                       country <span class="op">=</span> <span class="st">"united states"</span><span class="op">)</span>, </span>
-<span>            fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"uuid"</span>,</span>
-<span>                       <span class="st">"accessuri"</span>,</span>
-<span>                       <span class="st">"rights"</span>,</span>
-<span>                       <span class="st">"format"</span>,</span>
-<span>                       <span class="st">"records"</span><span class="op">)</span>,</span>
-<span>            limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">records</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/idig_search_media.html">idig_search_media</a></span><span class="op">(</span>rq <span class="op">=</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>genus <span class="op">=</span> <span class="st">"acer"</span>,</span>
+<span>       country <span class="op">=</span> <span class="st">"united states"</span><span class="op">)</span>, </span>
+<span>       fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"uuid"</span>,</span>
+<span>                  <span class="st">"accessuri"</span>,</span>
+<span>                  <span class="st">"rights"</span>,</span>
+<span>                  <span class="st">"format"</span>,</span>
+<span>                  <span class="st">"records"</span><span class="op">)</span>,</span>
+<span>                limit <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">records</span><span class="op">$</span><span class="va">accessuri</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html" class="external-link">if_else</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"^http://"</span>, <span class="st">""</span>, <span class="va">records</span><span class="op">$</span><span class="va">accessuri</span><span class="op">)</span>,</span>
@@ -391,7 +392,8 @@ go and download each media file. For clarity, we will place files in two
 different folders, based on whether we downloaded them from the iDigBio
 server or an external server. We will name each file based on its unique
 identifier.</p>
-<pre class="undefined"><code><span><span class="co"># Create new directories to save media files in</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create new directories to save media files in</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"jpgs_idigbio"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="st">"jpgs_external"</span><span class="op">)</span></span>
 <span></span>
@@ -418,13 +420,13 @@ identifier.</p>
 <span><span class="co"># Iterate through the action of downloading whatever file is at each</span></span>
 <span><span class="co"># external URL</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">walk2</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">mediaurl_external</span>,</span>
-<span>             .y <span class="op">=</span> <span class="va">mediapath_external</span>, <span class="va">possibly_download.file</span><span class="op">)</span></span></code></pre>
+<span>             .y <span class="op">=</span> <span class="va">mediapath_external</span>, <span class="va">possibly_download.file</span><span class="op">)</span></span></code></pre></div>
 <p>You should now have two folders, each with ten images downloaded from
 iDigBio and external servers, respectively. Note that we only downloaded
 ten images here for brevity’s sake, but you can increase this using the
 <code>limit</code> argument in the first step. Here is an example of one
 of the images we downloaded:</p>
-<p>[1] “<img src="jpgs_idigbio/0000b146-6fd2-4a6a-bf78-9e709cc995e9.jpg" alt="Herbarium specimen of an Acer species collected in the United States">”</p>
+<p>[1] “<img src="jpgs_idigbio%2F0000b146-6fd2-4a6a-bf78-9e709cc995e9.jpg" alt="Herbarium specimen of an Acer species collected in the United States">”</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -437,7 +439,7 @@ of the images we downloaded:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
