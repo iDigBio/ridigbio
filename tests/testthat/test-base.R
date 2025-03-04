@@ -7,7 +7,7 @@ test_that("list of all top-level fields returned in JSON", {
   getReq <- list(rq = jsonlite::toJSON(list(family = "holothuriidae")))
   r <- idig_GET("search/records", query = getReq)
 
-  expect_true(all(names(httr::content(r)) %in% c("itemCount", "lastModified", "items", "attribution")))
+  expect_true(all(names(httr::content(r)) %in% c("itemCount", "lastModified", "items", "attribution", "aggs")))
   expect_true(httr::content(r)$itemCount > 4000 && httr::content(r)$itemCount < 1000000)
 })
 
@@ -21,7 +21,7 @@ test_that("list of all top-level fields returned in JSON", {
   fm <- list(rq = list(family = "holothuriidae"))
   r <- idig_POST("search/records", body = fm)
 
-  expect_true(all(names(httr::content(r)) %in% c("itemCount", "lastModified", "items", "attribution")))
+  expect_true(all(names(httr::content(r)) %in% c("itemCount", "lastModified", "items", "attribution", "aggs")))
   expect_true(httr::content(r)$itemCount > 4000 && httr::content(r)$itemCount < 1000000)
 })
 

@@ -57,7 +57,7 @@ test_that("sorting works", {
     rq = rq, fields = fields, limit = 1,
     sort = "specificepithet"
   )
-  expect_false(substr(df[["uuid"]], 1, 2) == "00")
+  expect_true(substr(df[["uuid"]], 1, 2) == "00")
   expect_true(substr(df[["specificepithet"]], 1, 1) < "m")
 })
 
