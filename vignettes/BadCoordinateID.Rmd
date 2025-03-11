@@ -53,6 +53,7 @@ tryCatch({
     verify_df_flagCoord <- FALSE
 })
 ```
+
 ## Write a query to search for specimen records
 
 First, let's find all the specimen records for the data quality flag we are interested in. Do this using the `idig_search_records` function from the `ridigbio` package. You can learn more about this function from the [iDigBio API documentation](https://github.com/iDigBio/idigbio-search-api/wiki) and [ridigbio documentation](https://cran.r-project.org/package=ridigbio/ridigbio.pdf). In this example, we want to start by searching for specimens flagged with "rev_geocode_corrected."
@@ -159,7 +160,6 @@ We can visualize this data on a map to better understand what the data quality f
 map
 ```
 
-
 ## Summarize and explore data
 
 The iDigBio API provides a means for an institution to examine data quality issues across collections, which sometimes is not possible internally when data in different collections are managed in different databases.
@@ -197,7 +197,14 @@ totalInstSpm <- idig_count_records(rq = list(institutioncode = "lacm"))
 percentFlagged <- sum(spmByColl$n)/totalInstSpm*100
 ```
 
-For example, we can ask how many specimen records from which collections at the Natural History Museum of Los Angeles (LACM) have been flagged as "rev_geocode_corrected" by iDigBio. *As an aside, although this graph highlights the number of specimen records with data quality issues, these represent only ```{r eval=verify_df_flagCoord} round(percentFlagged, 2)```% of the total specimen records published by LACM.*
+For example, we can ask how many specimen records from which collections at the Natural History Museum of Los Angeles (LACM) have been flagged as "rev_geocode_corrected" by iDigBio. *As an aside, although this graph highlights the number of specimen records with data quality issues, these represent only:*
+
+```{r eval=verify_df_flagCoord}
+paste0(round(percentFlagged, 2), "%")
+```
+
+*of the total specimen records published by LACM.*
+
 
 ```{r eval=verify_df_flagCoord, out.width="700px", echo = FALSE}
 graph_spmByColl <- graph_spmByColl +
@@ -244,6 +251,7 @@ graph_spmByColl <- ggplot(df_flagAssoc, aes(x = reorder(flags, -percent), y = pe
        title = "LACM records flagged for geo-coordinate issues are also flagged for...",
        fill = "flag category")
 ```
+
 ```{r eval=verify_df_flagCoord, out.width="700px", echo = FALSE}
 graph_spmByColl <- graph_spmByColl +
                    theme_minimal_grid() +
