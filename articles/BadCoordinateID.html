@@ -2207,13 +2207,15 @@ databases.</p>
 collections at the Natural History Museum of Los Angeles (LACM) have
 been flagged as “rev_geocode_corrected” by iDigBio. <em>As an aside,
 although this graph highlights the number of specimen records with data
-quality issues, these represent only
-<code>{r eval=verify_df_flagCoord} round(percentFlagged, 2)</code>% of
-the total specimen records published by LACM.</em></p>
+quality issues, these represent only:</em></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">percentFlagged</span>, <span class="fl">2</span><span class="op">)</span>, <span class="st">"%"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "0.01%"</span></span></code></pre>
+<p><em>of the total specimen records published by LACM.</em></p>
 <p><img src="plot.png" width="700px"></p>
 <p>We can also explore what <em>other</em> data quality flags these
 specimen records have been flagged with.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Collate `df_flagAssoc` to describe other data quality flags that are associated</span></span>
 <span><span class="co"># with rev_geocode_corrected in `df_flagCoord`</span></span>
 <span><span class="va">df_flagAssoc</span> <span class="op">&lt;-</span> <span class="va">df_flagCoord</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
