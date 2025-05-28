@@ -74,7 +74,7 @@ records <- idig_search_records(rq = list(genus = c("manis",
                                   "data.dwc:preparations"))
 ```
 
-The query above returned `{r eval=verify_records} as.character(nrow(records))` records from the iDigBio Portal. Here is a preview of what our results look like:
+The query above returned `r tryCatch({if(nrow(records)) as.character(nrow(records)) else "N/A"}, error = function(e){cat("error in vignette: ", e$message)})` records from the iDigBio Portal. Here is a preview of what our results look like:
 
 ```{r eval=verify_records, echo = FALSE, results = 'asis'}
 knitr::kable(head(records)) %>% 
@@ -85,7 +85,7 @@ knitr::kable(head(records)) %>%
 
 ## Filter specimen records by preparation type
 
-These results include *all* specimen records from the genera of interest, but now we would like to narrow our search to include only specimens that may have cryo-preserved tissue available. We are looking in the [dwc:preparations](https://dwc.tdwg.org/terms/#dwc:preparations) field for this information, but there isn't a controlled vocabulary in use and so the data is not very standard. We can start by summarizing the distinct values present in this field for all `{r eval=verify_records} as.character(nrow(records))` records:
+These results include *all* specimen records from the genera of interest, but now we would like to narrow our search to include only specimens that may have cryo-preserved tissue available. We are looking in the [dwc:preparations](https://dwc.tdwg.org/terms/#dwc:preparations) field for this information, but there isn't a controlled vocabulary in use and so the data is not very standard. We can start by summarizing the distinct values present in this field for all `r tryCatch({if(nrow(records)) as.character(nrow(records)) else "N/A"}, error = function(e){cat("error in vignette: ", e$message)})` records:
 
 ```{r eval=verify_records}
 # List distinct values for the `preparation` field

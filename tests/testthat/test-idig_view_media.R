@@ -1,11 +1,10 @@
 context("test idig_view_media")
 
-med_uuid <- "e2d288dc-319e-4a13-b759-527021122bbc"
+med_uuid <- "fbd213eb-8b87-4064-a487-f429dd1810d2"
 
 test_that("viewing a media record returns right information", {
   testthat::skip_on_cran()
   testthat::skip_if_offline()
-  
   med <- idig_view_media(med_uuid)
 
   expect_that(med, is_a("list"))
