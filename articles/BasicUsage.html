@@ -378,7 +378,7 @@ downloads with Media downloads</td>
 <div class="section level3">
 <h3 id="more-ways-to-search-1">More ways to search<a class="anchor" aria-label="anchor" href="#more-ways-to-search-1"></a>
 </h3>
-<p>The media search above retained 664 rows, however some of these
+<p>The media search above retained 693 rows, however some of these
 observations do not have information in the <code>accessuri</code>
 field. To only obtain records with <code>acessuri</code>, we indicate we
 only want records where <code>data.ac:accessURI</code> exist, by setting
@@ -386,7 +386,7 @@ only want records where <code>data.ac:accessURI</code> exist, by setting
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">galax_media2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/idig_search_media.html">idig_search_media</a></span><span class="op">(</span>rq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>scientificname<span class="op">=</span><span class="st">"Galax urceolata"</span><span class="op">)</span>,</span>
 <span>                                  mq<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"data.ac:accessURI"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"type"</span><span class="op">=</span><span class="st">"exists"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Now we have 621 observations with <code>accessuri</code>!</p>
+<p>Now we have 650 observations with <code>accessuri</code>!</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -400,7 +400,7 @@ only want records where <code>data.ac:accessURI</code> exist, by setting
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

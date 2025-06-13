@@ -130,10 +130,8 @@ identified as being in one of the following genera: <em>Manis</em>,
 <span>                                  <span class="st">"data.dwc:collectionCode"</span>,</span>
 <span>                                  <span class="st">"catalognumber"</span>,</span>
 <span>                                  <span class="st">"data.dwc:preparations"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The query above returned
-<code>{r eval=verify_records} as.character(nrow(records))</code> records
-from the iDigBio Portal. Here is a preview of what our results look
-like:</p>
+<p>The query above returned 28092 records from the iDigBio Portal. Here
+is a preview of what our results look like:</p>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -374,9 +372,7 @@ specimens that may have cryo-preserved tissue available. We are looking
 in the <a href="https://dwc.tdwg.org/terms/#dwc:preparations" class="external-link">dwc:preparations</a>
 field for this information, but there isn’t a controlled vocabulary in
 use and so the data is not very standard. We can start by summarizing
-the distinct values present in this field for all
-<code>{r eval=verify_records} as.character(nrow(records))</code>
-records:</p>
+the distinct values present in this field for all 28092 records:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List distinct values for the `preparation` field</span></span>
 <span><span class="va">prepsummary</span> <span class="op">&lt;-</span> <span class="va">records</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -675,15 +671,15 @@ FLUID-ALCOHOL - 1
 </tr>
 <tr>
 <td style="text-align:left;">
-FLUID-ALCOHOL - 1&amp;#124;SKULL - 1
+FLUID-ALCOHOL - 1; SKULL - 1
 </td>
 <td style="text-align:right;">
-14
+1
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-FLUID-ALCOHOL - 1&amp;#124;TISSUE - 1
+FLUID-ALCOHOL - 1; TISSUE - 1
 </td>
 <td style="text-align:right;">
 13
@@ -1055,23 +1051,7 @@ SK - 1
 </tr>
 <tr>
 <td style="text-align:left;">
-SKELETON - 1&amp;#124;SKIN - 1&amp;#124;SKULL - 1
-</td>
-<td style="text-align:right;">
-4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SKELETON - 1&amp;#124;SKULL - 1
-</td>
-<td style="text-align:right;">
-31
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-SKIN - 1&amp;#124;SKULL - 1
+SKIN - 1; SKULL - 1
 </td>
 <td style="text-align:right;">
 11
@@ -1079,7 +1059,15 @@ SKIN - 1&amp;#124;SKULL - 1
 </tr>
 <tr>
 <td style="text-align:left;">
-SKIN - 1&amp;#124;SKULL - 1&amp;#124;TISSUE - 1
+SKIN - 1; SKULL - 1; SKELETON - 1
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SKIN - 1; SKULL - 1; TISSUE - 1
 </td>
 <td style="text-align:right;">
 1
@@ -1099,6 +1087,22 @@ SKULL - 1
 </td>
 <td style="text-align:right;">
 1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SKULL - 1; FLUID-ALCOHOL - 1
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SKULL - 1; SKELETON - 1
+</td>
+<td style="text-align:right;">
+31
 </td>
 </tr>
 <tr>
@@ -1775,38 +1779,6 @@ and mandible, with skin, frozen, not mounted
 </tr>
 <tr>
 <td style="text-align:left;">
-08b45ef6-437c-47e9-866d-3208fd8b0933
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220887
-</td>
-<td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 09022cd5-762e-4839-b457-23db983c19b0
 </td>
 <td style="text-align:left;">
@@ -1835,6 +1807,38 @@ Mammals
 </td>
 <td style="text-align:left;">
 voucher not available; tissue only
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+094cd4ae-4ebf-4ae3-8b18-023a45df8276
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220891
+</td>
+<td style="text-align:left;">
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -2191,38 +2195,6 @@ ethanol tissue
 </tr>
 <tr>
 <td style="text-align:left;">
-10b8a58d-22d3-4875-ae65-8735b1a2b9c8
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus lepidus lepidus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:231643
-</td>
-<td style="text-align:left;">
-heart, kidney (frozen); liver (frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 10d1a4f6-19c3-42f2-a8e5-ca1c183aa1d3
 </td>
 <td style="text-align:left;">
@@ -2283,6 +2255,38 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue tissue unspecified; ethanol; true; etoh complete
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+115c4925-6491-4960-898a-d5f22395083a
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+paguma
+</td>
+<td style="text-align:left;">
+paguma larvata
+</td>
+<td style="text-align:left;">
+vietnam
+</td>
+<td style="text-align:left;">
+1997
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:186576
+</td>
+<td style="text-align:left;">
+tissue (ethanol 95%; frozen); whole organism (ethanol)
 </td>
 </tr>
 <tr>
@@ -2673,6 +2677,71 @@ etoh complete; true; tissue unspecified; frozen; true
 </tr>
 <tr>
 <td style="text-align:left;">
+17ac7e96-09f3-4af1-b6d1-32b80cc0986b
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+paguma
+</td>
+<td style="text-align:left;">
+paguma larvata
+</td>
+<td style="text-align:left;">
+vietnam
+</td>
+<td style="text-align:left;">
+1997
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:186577
+</td>
+<td style="text-align:left;">
+skeleton; skin, study; skull; tissue (ethanol 95%; frozen)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+199ed94c-796e-4f65-9a4b-694b2ff4cded
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus clivosus
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220904
+</td>
+<td style="text-align:left;">
+embryo (ethanol 70%; formalin-fixed); skin, study; skull; tissue
+(dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 1a552d25-9bfa-430c-bd4e-c06c5c4e6022
 </td>
 <td style="text-align:left;">
@@ -2770,7 +2839,7 @@ etoh complete; true; tissue unspecified; frozen; true
 </tr>
 <tr>
 <td style="text-align:left;">
-1c5b93e7-888d-4859-8bf3-f1fd1db2b748
+1b8fec83-87a1-4aab-9db1-19b01cf05151
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -2794,42 +2863,10 @@ malawi
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220878
+mvz:mamm:220881
 </td>
 <td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1c6b3905-067b-44b2-9bb4-24041af2048a
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus affinis
-</td>
-<td style="text-align:left;">
-china
-</td>
-<td style="text-align:left;">
-1988
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:192692
-</td>
-<td style="text-align:left;">
-tissue (frozen)
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -2894,6 +2931,38 @@ TTU-M
 </td>
 <td style="text-align:left;">
 skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1de95957-52d2-4556-a3d0-4843b23f14fb
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus affinis
+</td>
+<td style="text-align:left;">
+china
+</td>
+<td style="text-align:left;">
+1988
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:192693
+</td>
+<td style="text-align:left;">
+tissue (frozen)
 </td>
 </tr>
 <tr>
@@ -2991,6 +3060,39 @@ mammalTissues
 </td>
 <td style="text-align:left;">
 other tissue
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1f4ad523-044d-45a7-9bff-45ff84b55de4
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220873
+</td>
+<td style="text-align:left;">
+carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
+(dmso/edta)
 </td>
 </tr>
 <tr>
@@ -3123,6 +3225,70 @@ etoh complete; true; tissue unspecified; frozen; true
 </tr>
 <tr>
 <td style="text-align:left;">
+22f884cc-e6fb-4a18-99a3-bada06c97e41
+</td>
+<td style="text-align:left;">
+09b18522-5643-478f-86e9-d2e34440d43e
+</td>
+<td style="text-align:left;">
+msb
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus lepidus
+</td>
+<td style="text-align:left;">
+india
+</td>
+<td style="text-align:left;">
+1984
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+msb:mamm:231647
+</td>
+<td style="text-align:left;">
+unknown (frozen)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2321491c-570c-484e-81b9-4872dcbb2ba3
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220880
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 245be12d-0d03-4041-afa2-e0b2ebbf4fb7
 </td>
 <td style="text-align:left;">
@@ -3187,6 +3353,38 @@ tissue; frozen; etoh; true
 </tr>
 <tr>
 <td style="text-align:left;">
+250ea58a-dfd0-457f-ab91-15e6f4ed605e
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220896
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 2537afad-b4b9-4afe-b52f-12ca6cc6f0dc
 </td>
 <td style="text-align:left;">
@@ -3214,7 +3412,7 @@ mammals
 174639
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -3246,7 +3444,7 @@ mammals
 174665
 </td>
 <td style="text-align:left;">
-skin - 1&amp;#124;skull - 1&amp;#124;tissue - 1
+skin - 1; skull - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -3279,6 +3477,38 @@ TTU-M
 </td>
 <td style="text-align:left;">
 whole fluid &amp;#124; tissue(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+25ef9dad-fd18-43b5-a93c-926a600fdb83
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus ferrumequinum
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:239249
+</td>
+<td style="text-align:left;">
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -3475,6 +3705,38 @@ tissue; frozen; skull; etoh; true
 </tr>
 <tr>
 <td style="text-align:left;">
+29dca11f-8930-4490-9568-8aa98d920a28
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus ferrumequinum
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:239251
+</td>
+<td style="text-align:left;">
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 2ac762ef-8a43-406f-8d99-75211d57be20
 </td>
 <td style="text-align:left;">
@@ -3571,6 +3833,38 @@ whole fluid &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
+2c563e5b-ff4a-48c4-9567-67ec79015d70
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220886
+</td>
+<td style="text-align:left;">
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 2c91d146-f2ea-46cc-b08c-3468cbd0c030
 </td>
 <td style="text-align:left;">
@@ -3598,7 +3892,7 @@ mammals
 174645
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -3636,6 +3930,38 @@ and mandible, with skin, frozen, not mounted
 </tr>
 <tr>
 <td style="text-align:left;">
+2cff011e-35bb-4013-a5d1-3c0cc3e77f1b
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+china
+</td>
+<td style="text-align:left;">
+1988
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:176505
+</td>
+<td style="text-align:left;">
+tissue (frozen); whole organism (ethanol)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 2cff6ccb-0afc-4b91-b70d-4cc981c34ec3
 </td>
 <td style="text-align:left;">
@@ -3663,7 +3989,7 @@ mammals
 174637
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -3760,6 +4086,38 @@ Mammals
 </td>
 <td style="text-align:left;">
 skin and skull, tissue 0088
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2dfb5f4a-b483-4332-80a7-db57f600f740
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220897
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -3893,6 +4251,38 @@ skin and skull, tissue 0129
 </tr>
 <tr>
 <td style="text-align:left;">
+2f3474ab-230f-4449-b182-b05ed367e1eb
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus affinis
+</td>
+<td style="text-align:left;">
+china
+</td>
+<td style="text-align:left;">
+1988
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:192691
+</td>
+<td style="text-align:left;">
+tissue (frozen)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 2f5c5038-9235-4dda-8aba-b90b37afc887
 </td>
 <td style="text-align:left;">
@@ -3989,6 +4379,39 @@ whole fluid &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
+30232600-d91e-45a6-81b2-b1bc1951a644
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220874
+</td>
+<td style="text-align:left;">
+carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
+(dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 3072662a-c27f-4e94-b991-3c56b37688c7
 </td>
 <td style="text-align:left;">
@@ -4016,7 +4439,7 @@ mammals
 174641
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -4149,7 +4572,7 @@ skull &amp;#124; fluid body &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-32075169-c26e-4162-92f2-29e372e20194
+31bcc958-d879-4ac7-a0c2-2abde8435491
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -4161,7 +4584,7 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus swinnyi
+rhinolophus blasii
 </td>
 <td style="text-align:left;">
 malawi
@@ -4173,10 +4596,10 @@ malawi
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220889
+mvz:mamm:220895
 </td>
 <td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
+skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -4502,38 +4925,6 @@ whole fluid &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-35759df2-e1ff-47b6-95d8-d4566495c056
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-paguma
-</td>
-<td style="text-align:left;">
-paguma larvata
-</td>
-<td style="text-align:left;">
-vietnam
-</td>
-<td style="text-align:left;">
-1997
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:186577
-</td>
-<td style="text-align:left;">
-skeleton; skin, study; skull; tissue (ethanol 95%; frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 3754a579-50c9-4d3c-bbc7-537838c55694
 </td>
 <td style="text-align:left;">
@@ -4562,38 +4953,6 @@ TTU-M
 </td>
 <td style="text-align:left;">
 skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-37b52d0a-c7e2-4716-a981-e35e70e9f37c
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus affinis
-</td>
-<td style="text-align:left;">
-china
-</td>
-<td style="text-align:left;">
-1988
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:192691
-</td>
-<td style="text-align:left;">
-tissue (frozen)
 </td>
 </tr>
 <tr>
@@ -4952,70 +5311,6 @@ skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-3b4c7c8c-129b-465e-92ef-37c46ada0b59
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220881
-</td>
-<td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-3b4d4102-9e4d-4da9-b6ac-f97f85f653e4
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus clivosus
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220900
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 3b9aeb88-4631-4f90-8fff-461381c1b6ca
 </td>
 <td style="text-align:left;">
@@ -5209,6 +5504,39 @@ frozen
 </tr>
 <tr>
 <td style="text-align:left;">
+3df4d24b-ceeb-4104-a8f5-123612ca6950
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus clivosus
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220902
+</td>
+<td style="text-align:left;">
+carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
+(dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 3e0dc20c-33db-4414-b5a3-af2ea0ec3cf9
 </td>
 <td style="text-align:left;">
@@ -5305,39 +5633,7 @@ tissue tissue unspecified; frozen; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
-406b5064-8776-432e-bf1e-03bb191146fa
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:231686
-</td>
-<td style="text-align:left;">
-unknown (frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-412c64ae-d03b-4211-9e9c-7c1bb71e598b
+40ffbf7a-9c00-4a9a-8abb-a65ce8920663
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -5349,22 +5645,22 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus blasii
+rhinolophus ferrumequinum
 </td>
 <td style="text-align:left;">
-malawi
+united states
 </td>
 <td style="text-align:left;">
-2007
+2006
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220890
+mvz:mamm:239247
 </td>
 <td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -5430,38 +5726,6 @@ KUM
 <td style="text-align:left;">
 etoh partial; true; skull complete; true; tissue unspecified; frozen;
 true
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-4387a147-a211-47f5-ae51-adf2d47bb1ee
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220880
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -5589,40 +5853,7 @@ mammals
 167651
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-46b4286c-1901-4868-a178-8fdd07491ef1
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220873
-</td>
-<td style="text-align:left;">
-carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
-(dmso/edta)
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -6300,38 +6531,6 @@ tissue; frozen; etoh; true
 </tr>
 <tr>
 <td style="text-align:left;">
-5135335c-356f-450a-a5d8-15cb2e5975c7
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220895
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 514b2443-55ad-483f-802e-a3e3c4037a51
 </td>
 <td style="text-align:left;">
@@ -6461,6 +6660,38 @@ complete
 </tr>
 <tr>
 <td style="text-align:left;">
+537da307-55fd-4263-b0e7-11c12244dcac
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220892
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 53b96f01-3e46-44e9-bc01-1b9fca01061c
 </td>
 <td style="text-align:left;">
@@ -6489,6 +6720,38 @@ TTU-M
 </td>
 <td style="text-align:left;">
 whole fluid &amp;#124; tissue(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+54b9e2ed-f0fe-4415-929f-6855851ab118
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220890
+</td>
+<td style="text-align:left;">
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -6526,6 +6789,38 @@ skull removed, frozen, not mounted, with skin
 </tr>
 <tr>
 <td style="text-align:left;">
+556d9bd2-cb1d-48d0-9236-a07caf924a9f
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220906
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 5776a469-d91d-4b00-8b58-5f98db695ed8
 </td>
 <td style="text-align:left;">
@@ -6554,38 +6849,6 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue; frozen; etoh; true
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-58618410-a0e1-48ff-93d0-be16655c056c
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus lepidus lepidus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:231641
-</td>
-<td style="text-align:left;">
-unknown (frozen)
 </td>
 </tr>
 <tr>
@@ -6878,6 +7141,38 @@ whole fluid &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
+5f688f6e-19ee-4d72-93c3-dd83425a126c
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220876
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 5fc9336b-6c79-46c0-90f5-eb74ff5db487
 </td>
 <td style="text-align:left;">
@@ -6906,38 +7201,6 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue tissue unspecified; frozen; true; etoh complete
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-5fccfd50-d66e-421c-b64b-c35e86b4acd5
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus ferrumequinum
-</td>
-<td style="text-align:left;">
-united states
-</td>
-<td style="text-align:left;">
-2006
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:239248
-</td>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol, 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -7006,38 +7269,6 @@ skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-60db7f12-0d35-481c-8e99-7144be38f1c0
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus swinnyi
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220884
-</td>
-<td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 61334e5c-c51a-4e1f-a1d2-65942c9865d7
 </td>
 <td style="text-align:left;">
@@ -7070,7 +7301,7 @@ skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-634f2d57-bad4-4993-a9e3-c73455d41d2c
+615110d4-50ca-44de-acdd-860416a800cf
 </td>
 <td style="text-align:left;">
 09b18522-5643-478f-86e9-d2e34440d43e
@@ -7082,22 +7313,54 @@ msb
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus
+rhinolophus lepidus
 </td>
 <td style="text-align:left;">
-indonesia
+india
 </td>
 <td style="text-align:left;">
-2000
+1984
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-msb:mamm:93100
+msb:mamm:231648
 </td>
 <td style="text-align:left;">
-liver (frozen); muscle (frozen); skull; whole organism (alcohol)
+unknown (frozen)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+618310f5-31d2-49e6-bef7-278d18fdcd55
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus ferrumequinum
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:239250
+</td>
+<td style="text-align:left;">
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -7134,7 +7397,7 @@ etoh partial; true; skull complete; true; tissue unspecified; frozen
 </tr>
 <tr>
 <td style="text-align:left;">
-636abcef-43ac-4b72-b3bc-94a44e3fd612
+637bee43-b1aa-410b-804e-edc7844ffd7e
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -7146,7 +7409,7 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus clivosus
+rhinolophus swinnyi
 </td>
 <td style="text-align:left;">
 malawi
@@ -7158,16 +7421,15 @@ malawi
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220899
+mvz:mamm:220884
 </td>
 <td style="text-align:left;">
-carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
-(dmso/edta)
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-643ad490-6090-4119-8de1-0103333d7809
+6404e0b7-1430-48a0-b4ba-ab76f842d730
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -7179,22 +7441,22 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus blasii
+rhinolophus ferrumequinum
 </td>
 <td style="text-align:left;">
-malawi
+united states
 </td>
 <td style="text-align:left;">
-2007
+2006
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220886
+mvz:mamm:239246
 </td>
 <td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -7292,38 +7554,6 @@ KUM
 </td>
 <td style="text-align:left;">
 etoh complete; true; tissue unspecified; frozen; true
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-669c13ef-9aa9-449c-b93b-ce408c25cb37
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus ferrumequinum
-</td>
-<td style="text-align:left;">
-united states
-</td>
-<td style="text-align:left;">
-2006
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:239250
-</td>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol, 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -8098,7 +8328,7 @@ tissue tissue unspecified; frozen; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
-724cff05-f742-4534-b8e6-f7a007b6da5b
+71b0b0e2-3e41-4366-b449-12b4db33c3a6
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -8110,7 +8340,7 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus blasii
+rhinolophus swinnyi
 </td>
 <td style="text-align:left;">
 malawi
@@ -8122,10 +8352,10 @@ malawi
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220879
+mvz:mamm:220889
 </td>
 <td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -8222,6 +8452,38 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue tissue unspecified; frozen; true; etoh complete
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+744051dd-4230-4e5e-a674-9f2c4ccf8df3
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:234393
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -8354,6 +8616,102 @@ voucher not available; tissue only
 </tr>
 <tr>
 <td style="text-align:left;">
+7763c428-3c5d-4bf3-9b48-eeee46b5807d
+</td>
+<td style="text-align:left;">
+09b18522-5643-478f-86e9-d2e34440d43e
+</td>
+<td style="text-align:left;">
+msb
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus lepidus
+</td>
+<td style="text-align:left;">
+india
+</td>
+<td style="text-align:left;">
+1984
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+msb:mamm:231641
+</td>
+<td style="text-align:left;">
+unknown (frozen)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7850694d-f85f-416f-9913-68a8895a45be
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220877
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7921c283-0fa0-43df-abfd-2ffb31e6c273
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220879
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 7973deaa-73eb-442f-9c68-89d1a5754b05
 </td>
 <td style="text-align:left;">
@@ -8381,7 +8739,39 @@ mammals
 174640
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7a8f1743-c8a2-425f-b64d-9f13d76843d9
+</td>
+<td style="text-align:left;">
+09b18522-5643-478f-86e9-d2e34440d43e
+</td>
+<td style="text-align:left;">
+msb
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus lepidus
+</td>
+<td style="text-align:left;">
+india
+</td>
+<td style="text-align:left;">
+1984
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+msb:mamm:231644
+</td>
+<td style="text-align:left;">
+unknown (frozen)
 </td>
 </tr>
 <tr>
@@ -8413,7 +8803,7 @@ mammals
 174646
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -8482,34 +8872,34 @@ tissue; frozen; etoh; true
 </tr>
 <tr>
 <td style="text-align:left;">
-7dfb58dc-6b6f-4d42-9f2b-1df471743c8f
+7f770d50-52f0-48ba-9ea7-d374c03a2952
 </td>
 <td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
+fcbcb214-cd62-4453-af56-b4b49161a261
 </td>
 <td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
+mvz
 </td>
 <td style="text-align:left;">
 rhinolophus
 </td>
 <td style="text-align:left;">
-indonesia
+rhinolophus clivosus
 </td>
 <td style="text-align:left;">
-2000
+malawi
+</td>
+<td style="text-align:left;">
+2007
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-msb:mamm:93099
+mvz:mamm:220898
 </td>
 <td style="text-align:left;">
-liver (frozen); muscle (frozen); skull; whole organism (alcohol)
+skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -8738,6 +9128,38 @@ tissue tissue unspecified; frozen; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
+81483fda-e91d-4acc-b45f-3a762f4d3e32
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus lobatus
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220875
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 825982cc-aa54-49df-b28e-a1d8f7bf0932
 </td>
 <td style="text-align:left;">
@@ -8782,7 +9204,7 @@ nmv
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus
+rhinolophus acuminatus
 </td>
 <td style="text-align:left;">
 indonesia
@@ -8867,38 +9289,6 @@ skeleton; skin, study; tissue (frozen)
 </tr>
 <tr>
 <td style="text-align:left;">
-855bb650-ea0e-4005-89ed-11a1c042b218
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus lepidus lepidus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:231647
-</td>
-<td style="text-align:left;">
-unknown (frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 87181db3-997b-4317-8be2-1b88911f78cb
 </td>
 <td style="text-align:left;">
@@ -8927,38 +9317,6 @@ mammalTissues
 </td>
 <td style="text-align:left;">
 other tissue
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-878d3221-2362-45f7-a104-fd2b7d4f691b
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus ferrumequinum
-</td>
-<td style="text-align:left;">
-united states
-</td>
-<td style="text-align:left;">
-2006
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:239253
-</td>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol, 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -9027,38 +9385,6 @@ ethanol tissue
 </tr>
 <tr>
 <td style="text-align:left;">
-8883ef1b-9001-40fa-8ac3-1113c897a7af
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220897
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 88b71adc-c58f-4d1f-8700-aa6c2cdf441e
 </td>
 <td style="text-align:left;">
@@ -9086,7 +9412,7 @@ mammals
 174643
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -9119,38 +9445,6 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue tissue unspecified; skeleton complete; skull complete
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-892a5f83-d234-4be2-a5b4-c3224a4bfcdf
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus clivosus
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220898
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -9412,7 +9706,7 @@ skin and skull, tissue 0087
 </tr>
 <tr>
 <td style="text-align:left;">
-8ca8f97d-1d31-4d01-92bd-bbec0a8527cc
+8c877bf0-dc7e-4813-860d-f891889ba3cb
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -9424,28 +9718,27 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus blasii
+rhinolophus affinis
 </td>
 <td style="text-align:left;">
-malawi
+china
 </td>
 <td style="text-align:left;">
-2007
+1988
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220874
+mvz:mamm:192694
 </td>
 <td style="text-align:left;">
-carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
-(dmso/edta)
+tissue (frozen)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-8da99b8b-7f97-479f-83b4-2cb3b6a6a39f
+8e13910f-b5e5-465b-913b-befdd9b7831b
 </td>
 <td style="text-align:left;">
 09b18522-5643-478f-86e9-d2e34440d43e
@@ -9457,55 +9750,22 @@ msb
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus celebensis
+rhinolophus lepidus
 </td>
 <td style="text-align:left;">
-indonesia
+india
 </td>
 <td style="text-align:left;">
-2000
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:93101
-</td>
-<td style="text-align:left;">
-liver (frozen); muscle (frozen); skull; whole organism (alcohol)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-8dfa3c56-0a29-4f89-870a-d8729a4f384e
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus clivosus
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
+1984
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220904
+msb:mamm:231625
 </td>
 <td style="text-align:left;">
-embryo (ethanol, 70%; formalin-fixed); skin, study; skull; tissue
-(dmso/edta)
+unknown (frozen)
 </td>
 </tr>
 <tr>
@@ -9606,38 +9866,6 @@ etoh complete; true; tissue unspecified; frozen; true
 </tr>
 <tr>
 <td style="text-align:left;">
-8f049f7f-aeb8-4f35-9196-f887653440ca
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus lepidus lepidus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:231645
-</td>
-<td style="text-align:left;">
-unknown (frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 8f51379f-2566-4225-bdad-e6419c3e5d12
 </td>
 <td style="text-align:left;">
@@ -9702,7 +9930,7 @@ voucher not available; tissue only
 </tr>
 <tr>
 <td style="text-align:left;">
-90da6582-b8bf-458d-a612-e3fa8d3fc1bf
+90aac160-0de4-4f34-86e7-d187f5d6896f
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -9714,22 +9942,22 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus rouxi sinicus
+rhinolophus ferrumequinum
 </td>
 <td style="text-align:left;">
-china
+united states
 </td>
 <td style="text-align:left;">
-1988
+2006
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:176505
+mvz:mamm:239245
 </td>
 <td style="text-align:left;">
-tissue (frozen); whole organism (ethanol)
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -9766,7 +9994,7 @@ whole fluid &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-912dec11-b696-4ba6-9b48-811153b0f26c
+9185c7bb-f12b-4c8a-b9ff-38a955f8ab89
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -9778,54 +10006,22 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus ferrumequinum
+rhinolophus blasii
 </td>
 <td style="text-align:left;">
-united states
+malawi
 </td>
 <td style="text-align:left;">
-2006
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:239249
-</td>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol, 70%; formalin-fixed)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-92fac605-de17-4dcb-978b-aa0fe8c72d32
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus lepidus lepidus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
+2007
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-msb:mamm:231625
+mvz:mamm:220887
 </td>
 <td style="text-align:left;">
-unknown (frozen)
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -10086,6 +10282,38 @@ tissue tissue unspecified; frozen; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
+9d189922-7ea4-4828-a0b8-f80b10cb74e8
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus ferrumequinum
+</td>
+<td style="text-align:left;">
+italy
+</td>
+<td style="text-align:left;">
+1979
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:159212
+</td>
+<td style="text-align:left;">
+tissue (frozen); whole organism (ethanol)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 9d24f720-7eba-4bfe-8449-82cec28ca996
 </td>
 <td style="text-align:left;">
@@ -10146,38 +10374,6 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue tissue unspecified; ethanol; true; etoh complete
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-9db16950-7c65-42fb-bf9e-e1496ec1c541
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus ferrumequinum
-</td>
-<td style="text-align:left;">
-united states
-</td>
-<td style="text-align:left;">
-2006
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:239247
-</td>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -10338,6 +10534,38 @@ TTU-M
 </td>
 <td style="text-align:left;">
 skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+a1f28c86-0a5e-40da-b5b4-3d39c850d8a9
+</td>
+<td style="text-align:left;">
+09b18522-5643-478f-86e9-d2e34440d43e
+</td>
+<td style="text-align:left;">
+msb
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus lepidus
+</td>
+<td style="text-align:left;">
+india
+</td>
+<td style="text-align:left;">
+1984
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+msb:mamm:231646
+</td>
+<td style="text-align:left;">
+unknown (frozen)
 </td>
 </tr>
 <tr>
@@ -10529,7 +10757,7 @@ mammals
 174642
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -10726,6 +10954,38 @@ skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
+a72e72d6-cc1c-41c8-a316-0d4cfc76a963
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:234392
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 a8355760-2ba5-4a83-b70b-1b60c3a7f606
 </td>
 <td style="text-align:left;">
@@ -10790,39 +11050,7 @@ tissue tissue unspecified; ethanol; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
-a8a1d864-8508-4519-9de3-002e0304705f
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus lepidus lepidus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:231650
-</td>
-<td style="text-align:left;">
-heart, kidney (frozen); liver (frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-a8ce3e3d-aae8-4aa3-bbed-d394140bf10d
+a8ddec27-fc18-41d2-b738-f908a982c848
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -10834,22 +11062,22 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus ferrumequinum
+rhinolophus blasii
 </td>
 <td style="text-align:left;">
-united states
+malawi
 </td>
 <td style="text-align:left;">
-2006
+2007
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:239251
+mvz:mamm:220885
 </td>
 <td style="text-align:left;">
-tissue (frozen); whole organism (ethanol, 70%; formalin-fixed)
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -10914,39 +11142,6 @@ TTU-M
 </td>
 <td style="text-align:left;">
 skull &amp;#124; fluid body &amp;#124; tissue(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-aabcb986-2a01-4c29-b4bd-2572cc2db7b3
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus clivosus
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220902
-</td>
-<td style="text-align:left;">
-carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
-(dmso/edta)
 </td>
 </tr>
 <tr>
@@ -11106,7 +11301,7 @@ mammals
 174635
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -11239,34 +11434,34 @@ etoh complete; true; tissue unspecified; frozen; true
 </tr>
 <tr>
 <td style="text-align:left;">
-aeb3d775-d197-4db9-acf2-b4a2bd402af3
+af935933-8767-4d6c-ac57-1c4555b3ba3a
 </td>
 <td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
+09b18522-5643-478f-86e9-d2e34440d43e
 </td>
 <td style="text-align:left;">
-mvz
+msb
 </td>
 <td style="text-align:left;">
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus blasii
+rhinolophus lepidus
 </td>
 <td style="text-align:left;">
-malawi
+india
 </td>
 <td style="text-align:left;">
-2007
+1984
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220893
+msb:mamm:231649
 </td>
 <td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
+unknown (frozen)
 </td>
 </tr>
 <tr>
@@ -11300,6 +11495,38 @@ m-275697
 <td style="text-align:left;">
 fluid, tissue, skull, body with skull removed, unknown tissue, cranium
 and mandible, with skin, frozen, not mounted
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+b025bf5e-47be-47f9-8241-2dc86b36cb02
+</td>
+<td style="text-align:left;">
+09b18522-5643-478f-86e9-d2e34440d43e
+</td>
+<td style="text-align:left;">
+msb
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus lepidus
+</td>
+<td style="text-align:left;">
+india
+</td>
+<td style="text-align:left;">
+1984
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+msb:mamm:231643
+</td>
+<td style="text-align:left;">
+heart, kidney (frozen); liver (frozen)
 </td>
 </tr>
 <tr>
@@ -11364,6 +11591,38 @@ TTU-M
 </td>
 <td style="text-align:left;">
 skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+b14220c5-d165-4ea9-ab90-8d74efd98ea9
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220878
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -11528,38 +11787,6 @@ etoh complete; true; tissue unspecified; frozen
 </tr>
 <tr>
 <td style="text-align:left;">
-b5e66978-ce38-437c-a41a-9d0cafbbc59c
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus lepidus lepidus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:231648
-</td>
-<td style="text-align:left;">
-unknown (frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 b7ba000a-aebc-469d-a8af-da02fb284dd9
 </td>
 <td style="text-align:left;">
@@ -11684,6 +11911,38 @@ KUM
 </td>
 <td style="text-align:left;">
 etoh complete; true; tissue unspecified; frozen; true
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ba4f5899-2f1e-4065-9b00-5e7217bb8937
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus ferrumequinum
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:239253
+</td>
+<td style="text-align:left;">
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -12137,7 +12396,7 @@ etoh complete; true; tissue unspecified; frozen; true
 </tr>
 <tr>
 <td style="text-align:left;">
-bf598162-9024-44af-90de-e6478fac3acb
+bea75401-55e0-4789-bea6-3f77f0c1d169
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -12149,22 +12408,23 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus affinis
+rhinolophus clivosus
 </td>
 <td style="text-align:left;">
-china
+malawi
 </td>
 <td style="text-align:left;">
-1988
+2007
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:192693
+mvz:mamm:220899
 </td>
 <td style="text-align:left;">
-tissue (frozen)
+carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
+(dmso/edta)
 </td>
 </tr>
 <tr>
@@ -12265,38 +12525,6 @@ frozen, with skin, not mounted
 </tr>
 <tr>
 <td style="text-align:left;">
-c127d5ef-cbe5-4895-b412-eb2f294adabe
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220896
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 c169e4e2-7a2c-43db-a340-9626a2e5e1e0
 </td>
 <td style="text-align:left;">
@@ -12325,38 +12553,6 @@ TTU-M
 </td>
 <td style="text-align:left;">
 skull &amp;#124; fluid body &amp;#124; tissue(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-c1938177-defa-4e70-8a3d-48d2ee045e08
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220876
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -12426,70 +12622,6 @@ tissue tissue unspecified; frozen; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
-c2ef937a-449c-4cbc-8240-8f387d0459a9
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220877
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-c386b3cf-ba1f-494e-9dcf-c17c53ac3e92
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220885
-</td>
-<td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 c39ab921-2f1a-437d-867a-863eddf81ad8
 </td>
 <td style="text-align:left;">
@@ -12550,38 +12682,6 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue tissue unspecified; ethanol; true; etoh complete
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-c43d643a-839e-4160-920b-067267a6082c
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus clivosus
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220903
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -12651,38 +12751,6 @@ unknown tissue, not mounted, with skin, frozen
 </tr>
 <tr>
 <td style="text-align:left;">
-c5a6d6c5-9898-4f72-a9d5-6b009dc84a62
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus megaphyllus
-</td>
-<td style="text-align:left;">
-australia
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:182546
-</td>
-<td style="text-align:left;">
-skin, study; tissue (frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 c60f85d2-abee-46f2-8867-775b440f507a
 </td>
 <td style="text-align:left;">
@@ -12747,6 +12815,38 @@ tissue tissue unspecified; ethanol; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
+c64ff800-a267-45df-8736-2be88295c030
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus swinnyi
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220883
+</td>
+<td style="text-align:left;">
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 c6c7773e-c1c3-49b5-bb9a-a15bf199940e
 </td>
 <td style="text-align:left;">
@@ -12759,7 +12859,7 @@ nmv
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus
+rhinolophus acuminatus
 </td>
 <td style="text-align:left;">
 indonesia
@@ -12904,6 +13004,70 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue tissue unspecified; etoh complete
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cab2046d-198a-4360-bb69-2693d963dcf2
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus ferrumequinum
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:239252
+</td>
+<td style="text-align:left;">
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cab3a8a3-89dd-4dfa-ab67-2465afa92eaf
+</td>
+<td style="text-align:left;">
+09b18522-5643-478f-86e9-d2e34440d43e
+</td>
+<td style="text-align:left;">
+msb
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus lepidus
+</td>
+<td style="text-align:left;">
+india
+</td>
+<td style="text-align:left;">
+1984
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+msb:mamm:231645
+</td>
+<td style="text-align:left;">
+unknown (frozen)
 </td>
 </tr>
 <tr>
@@ -13261,38 +13425,6 @@ complete
 </tr>
 <tr>
 <td style="text-align:left;">
-ceff78ce-e3d9-434c-b439-ad01bde3a93e
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus clivosus
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220905
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 cf73c1c5-ee78-4c92-8fb1-277a93f3d269
 </td>
 <td style="text-align:left;">
@@ -13320,7 +13452,7 @@ mammals
 174638
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -13518,34 +13650,34 @@ tissue&amp;#124;frozen&amp;#124;ethanol
 </tr>
 <tr>
 <td style="text-align:left;">
-d21bc86f-aaa7-45a1-8017-3337c2448920
+d37b8177-f501-4010-baf7-c91e0d78d0f1
 </td>
 <td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
+09b18522-5643-478f-86e9-d2e34440d43e
 </td>
 <td style="text-align:left;">
-mvz
+msb
 </td>
 <td style="text-align:left;">
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus blasii
+rhinolophus
 </td>
 <td style="text-align:left;">
-malawi
+indonesia
 </td>
 <td style="text-align:left;">
-2007
+2000
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220888
+msb:mamm:93100
 </td>
 <td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
+liver (frozen); muscle (frozen); skull; whole organism (alcohol)
 </td>
 </tr>
 <tr>
@@ -13582,38 +13714,6 @@ whole fluid &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-d4a22966-5ddc-443a-a17c-b0a9e179c153
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus ferrumequinum
-</td>
-<td style="text-align:left;">
-united states
-</td>
-<td style="text-align:left;">
-2006
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:239245
-</td>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 d50040de-7651-487a-968a-9c9fe67030f5
 </td>
 <td style="text-align:left;">
@@ -13642,38 +13742,6 @@ TTU-M
 </td>
 <td style="text-align:left;">
 whole fluid &amp;#124; tissue(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-d6047bba-721a-42b6-a882-c398c9332441
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220891
-</td>
-<td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -14000,70 +14068,6 @@ ethanol tissue
 </tr>
 <tr>
 <td style="text-align:left;">
-dacaf9cc-b1d9-42aa-aef5-d5ee30f21f15
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220894
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-daf3ffaa-c8af-4a46-b894-3d01ae892e8e
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus clivosus
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220901
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 db03947d-59f5-425d-a08b-4ecb263d0e7c
 </td>
 <td style="text-align:left;">
@@ -14096,7 +14100,7 @@ tissue; frozen; etoh; true
 </tr>
 <tr>
 <td style="text-align:left;">
-dc0f2621-f9ee-4240-9bae-074c8233d735
+db319590-574e-4e7e-b40b-7e63b8eb6935
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -14105,25 +14109,89 @@ fcbcb214-cd62-4453-af56-b4b49161a261
 mvz
 </td>
 <td style="text-align:left;">
-paguma
+rhinolophus
 </td>
 <td style="text-align:left;">
-paguma larvata
+rhinolophus clivosus
 </td>
 <td style="text-align:left;">
-vietnam
+malawi
 </td>
 <td style="text-align:left;">
-1997
+2007
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:186576
+mvz:mamm:220905
 </td>
 <td style="text-align:left;">
-tissue (ethanol 95%; frozen); whole organism (ethanol)
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+db39e41a-2e74-4c29-9716-511136059726
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus swinnyi
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220882
+</td>
+<td style="text-align:left;">
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dde2e81d-a091-4e78-a744-c5682db0d2c0
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus clivosus
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220901
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -14193,70 +14261,6 @@ skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-de577e72-375a-4dc2-9775-00055fda3c41
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus ferrumequinum
-</td>
-<td style="text-align:left;">
-italy
-</td>
-<td style="text-align:left;">
-1979
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:159212
-</td>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-de7df185-45f2-44a5-8ebc-9e121a1786fb
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:234393
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 de84431b-047d-45a2-ad53-48d6461a451f
 </td>
 <td style="text-align:left;">
@@ -14285,38 +14289,6 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue unspecified; frozen; etoh complete; true
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-dec32acf-58bb-49f7-b852-30229aa3b135
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus swinnyi
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220883
-</td>
-<td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -14354,39 +14326,7 @@ complete
 </tr>
 <tr>
 <td style="text-align:left;">
-dfc6027a-0f0d-44f6-8ebe-6b47d5882356
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus blasii
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:234392
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-e0ae29a2-ba02-494d-b99c-a5dc60dd0891
+dffb8065-5240-4522-b8da-e98d670a56a7
 </td>
 <td style="text-align:left;">
 09b18522-5643-478f-86e9-d2e34440d43e
@@ -14398,22 +14338,22 @@ msb
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus lepidus lepidus
+rhinolophus
 </td>
 <td style="text-align:left;">
-india
+indonesia
 </td>
 <td style="text-align:left;">
-1984
+2000
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-msb:mamm:231649
+msb:mamm:93099
 </td>
 <td style="text-align:left;">
-unknown (frozen)
+liver (frozen); muscle (frozen); skull; whole organism (alcohol)
 </td>
 </tr>
 <tr>
@@ -14482,6 +14422,38 @@ whole fluid &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
+e15c48f6-4783-4071-a7ee-2f2b0c3c613b
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus clivosus
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220900
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 e2222e7d-ea01-4960-ac11-b99d072ecac6
 </td>
 <td style="text-align:left;">
@@ -14546,7 +14518,7 @@ fluid, tissue, whole body, unknown tissue, with skin, frozen
 </tr>
 <tr>
 <td style="text-align:left;">
-e56f734d-4d27-425a-a12a-ee1424aad758
+e4754956-76bc-4c1b-b5fa-5c80444bc206
 </td>
 <td style="text-align:left;">
 09b18522-5643-478f-86e9-d2e34440d43e
@@ -14558,7 +14530,7 @@ msb
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus lepidus lepidus
+rhinolophus
 </td>
 <td style="text-align:left;">
 india
@@ -14570,7 +14542,7 @@ india
 Mamm
 </td>
 <td style="text-align:left;">
-msb:mamm:231644
+msb:mamm:231686
 </td>
 <td style="text-align:left;">
 unknown (frozen)
@@ -14607,6 +14579,38 @@ z27957
 <td style="text-align:left;">
 tissue&amp;#124;frozen&amp;#124;ethanol
 70%&amp;#124;liver&amp;#124;-80°c
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+e654c561-7bee-419d-837a-9b573507bb43
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220893
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
 </td>
 </tr>
 <tr>
@@ -14767,7 +14771,7 @@ mammals
 174644
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -14800,6 +14804,38 @@ KUM
 </td>
 <td style="text-align:left;">
 tissue tissue unspecified; ethanol; true; etoh complete
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+e8535310-acad-4e0a-ac89-47d700519575
+</td>
+<td style="text-align:left;">
+09b18522-5643-478f-86e9-d2e34440d43e
+</td>
+<td style="text-align:left;">
+msb
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus lepidus
+</td>
+<td style="text-align:left;">
+india
+</td>
+<td style="text-align:left;">
+1984
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+msb:mamm:231650
+</td>
+<td style="text-align:left;">
+heart, kidney (frozen); liver (frozen)
 </td>
 </tr>
 <tr>
@@ -14901,34 +14937,34 @@ skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
 </tr>
 <tr>
 <td style="text-align:left;">
-e9a916a8-c4ee-490a-9091-ad78489c2f3e
+e91d8aad-ac45-4344-b802-6833f2244f22
 </td>
 <td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
+09b18522-5643-478f-86e9-d2e34440d43e
 </td>
 <td style="text-align:left;">
-mvz
+msb
 </td>
 <td style="text-align:left;">
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus swinnyi
+rhinolophus celebensis
 </td>
 <td style="text-align:left;">
-malawi
+indonesia
 </td>
 <td style="text-align:left;">
-2007
+2000
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220882
+msb:mamm:93101
 </td>
 <td style="text-align:left;">
-tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
+liver (frozen); muscle (frozen); skull; whole organism (alcohol)
 </td>
 </tr>
 <tr>
@@ -15190,39 +15226,7 @@ voucher not available; tissue only
 </tr>
 <tr>
 <td style="text-align:left;">
-ef14d5e8-73d7-4af7-99da-909e20d93559
-</td>
-<td style="text-align:left;">
-09b18522-5643-478f-86e9-d2e34440d43e
-</td>
-<td style="text-align:left;">
-msb
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus lepidus lepidus
-</td>
-<td style="text-align:left;">
-india
-</td>
-<td style="text-align:left;">
-1984
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-msb:mamm:231646
-</td>
-<td style="text-align:left;">
-unknown (frozen)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ef63d772-785a-42f8-a57c-23807d1693fe
+edcd5530-45d5-4346-b1fe-b2e563da8485
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -15234,7 +15238,7 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus lobatus
+rhinolophus clivosus
 </td>
 <td style="text-align:left;">
 malawi
@@ -15246,7 +15250,39 @@ malawi
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:220875
+mvz:mamm:220903
+</td>
+<td style="text-align:left;">
+skin, study; skull; tissue (dmso/edta)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ee0786a7-e339-4e9a-9315-a1eb17107fcd
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220894
 </td>
 <td style="text-align:left;">
 skin, study; skull; tissue (dmso/edta)
@@ -15481,6 +15517,38 @@ skull removed, frozen, not mounted, with skin
 </tr>
 <tr>
 <td style="text-align:left;">
+f36aa592-188b-4e61-b437-669bfbac6582
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus affinis
+</td>
+<td style="text-align:left;">
+china
+</td>
+<td style="text-align:left;">
+1988
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:192692
+</td>
+<td style="text-align:left;">
+tissue (frozen)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 f386ec8c-fc81-443d-ac68-388e3b751721
 </td>
 <td style="text-align:left;">
@@ -15545,38 +15613,6 @@ tissue tissue unspecified; frozen; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
-f42e4dcc-8121-4ed7-b205-68551027d745
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-malawi
-</td>
-<td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220906
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 f4d0f67d-11aa-45e1-90d3-2c6a9b70bb8b
 </td>
 <td style="text-align:left;">
@@ -15604,7 +15640,7 @@ mammals
 167652
 </td>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 </tr>
 <tr>
@@ -15675,38 +15711,6 @@ and mandible, with skin, frozen, not mounted
 </tr>
 <tr>
 <td style="text-align:left;">
-f569fa5d-b28e-429a-8ed2-3acb7b521758
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus ferrumequinum
-</td>
-<td style="text-align:left;">
-united states
-</td>
-<td style="text-align:left;">
-2006
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:239246
-</td>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 f5825061-c946-4559-be5f-f79b71089745
 </td>
 <td style="text-align:left;">
@@ -15735,38 +15739,6 @@ TTU-M
 </td>
 <td style="text-align:left;">
 skin &amp;#124; skull &amp;#124; skeleton &amp;#124; tissue(s)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-f5cf6576-4923-4781-93f9-031922294805
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus affinis
-</td>
-<td style="text-align:left;">
-china
-</td>
-<td style="text-align:left;">
-1988
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:192694
-</td>
-<td style="text-align:left;">
-tissue (frozen)
 </td>
 </tr>
 <tr>
@@ -15803,7 +15775,7 @@ ethanol tissue
 </tr>
 <tr>
 <td style="text-align:left;">
-f63dfe62-3a44-4d03-a0c7-c5cecf84269e
+f6d891e7-77bd-4d0c-b49b-5d435d870133
 </td>
 <td style="text-align:left;">
 fcbcb214-cd62-4453-af56-b4b49161a261
@@ -15815,54 +15787,22 @@ mvz
 rhinolophus
 </td>
 <td style="text-align:left;">
-rhinolophus blasii
+rhinolophus megaphyllus
 </td>
 <td style="text-align:left;">
-malawi
+australia
 </td>
 <td style="text-align:left;">
-2007
-</td>
-<td style="text-align:left;">
-Mamm
-</td>
-<td style="text-align:left;">
-mvz:mamm:220892
-</td>
-<td style="text-align:left;">
-skin, study; skull; tissue (dmso/edta)
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-f757e579-72de-4daf-9616-dfdf18be99bc
-</td>
-<td style="text-align:left;">
-fcbcb214-cd62-4453-af56-b4b49161a261
-</td>
-<td style="text-align:left;">
-mvz
-</td>
-<td style="text-align:left;">
-rhinolophus
-</td>
-<td style="text-align:left;">
-rhinolophus ferrumequinum
-</td>
-<td style="text-align:left;">
-united states
-</td>
-<td style="text-align:left;">
-2006
+1984
 </td>
 <td style="text-align:left;">
 Mamm
 </td>
 <td style="text-align:left;">
-mvz:mamm:239252
+mvz:mamm:182546
 </td>
 <td style="text-align:left;">
-tissue (frozen); whole organism (ethanol, 70%; formalin-fixed)
+skin, study; tissue (frozen)
 </td>
 </tr>
 <tr>
@@ -15931,6 +15871,38 @@ tissue tissue unspecified; frozen; true; etoh complete
 </tr>
 <tr>
 <td style="text-align:left;">
+fa11bac9-eedc-4b80-9720-8ff6de0cd41f
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus ferrumequinum
+</td>
+<td style="text-align:left;">
+united states
+</td>
+<td style="text-align:left;">
+2006
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:239248
+</td>
+<td style="text-align:left;">
+tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 fa9fecc6-8394-43d0-bb80-abec4688fa6d
 </td>
 <td style="text-align:left;">
@@ -15991,6 +15963,38 @@ KUM
 </td>
 <td style="text-align:left;">
 etoh complete; true; tissue unspecified; frozen; true
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fc2f10b8-8f36-49e6-9e54-b61b4a350c79
+</td>
+<td style="text-align:left;">
+fcbcb214-cd62-4453-af56-b4b49161a261
+</td>
+<td style="text-align:left;">
+mvz
+</td>
+<td style="text-align:left;">
+rhinolophus
+</td>
+<td style="text-align:left;">
+rhinolophus blasii
+</td>
+<td style="text-align:left;">
+malawi
+</td>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+mvz:mamm:220888
+</td>
+<td style="text-align:left;">
+tissue (dmso/edta); whole organism (ethanol 70%; formalin-fixed)
 </td>
 </tr>
 <tr>
@@ -16189,7 +16193,7 @@ carcass (ethanol 70%; formalin-fixed); skin, study; skull; tissue
 </tr>
 <tr>
 <td style="text-align:left;">
-embryo (ethanol, 70%; formalin-fixed); skin, study; skull; tissue
+embryo (ethanol 70%; formalin-fixed); skin, study; skull; tissue
 (dmso/edta)
 </td>
 <td style="text-align:right;">
@@ -16273,7 +16277,7 @@ fluid, tissue, whole body, unknown tissue, with skin, frozen
 </tr>
 <tr>
 <td style="text-align:left;">
-fluid-alcohol - 1&amp;#124;tissue - 1
+fluid-alcohol - 1; tissue - 1
 </td>
 <td style="text-align:right;">
 13
@@ -16401,7 +16405,7 @@ skin (dry); tissue (dry) sample
 </tr>
 <tr>
 <td style="text-align:left;">
-skin - 1&amp;#124;skull - 1&amp;#124;tissue - 1
+skin - 1; skull - 1; tissue - 1
 </td>
 <td style="text-align:right;">
 1
@@ -16599,7 +16603,7 @@ tissue (frozen)
 tissue (frozen); whole organism (ethanol 70%; formalin-fixed)
 </td>
 <td style="text-align:right;">
-3
+9
 </td>
 </tr>
 <tr>
@@ -16608,14 +16612,6 @@ tissue (frozen); whole organism (ethanol)
 </td>
 <td style="text-align:right;">
 2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-tissue (frozen); whole organism (ethanol, 70%; formalin-fixed)
-</td>
-<td style="text-align:right;">
-6
 </td>
 </tr>
 <tr>
@@ -17310,7 +17306,7 @@ Biodiversity Informatics Manager
 Biodiversity Informatics Manager
 </td>
 <td style="text-align:left;">
-Acting Director of Collections Operations
+Director of Collections Operations
 </td>
 <td style="text-align:left;">
 Senior Database Manager
@@ -17942,19 +17938,13 @@ NA
 MSB Mammal Collection (Arctos)
 </td>
 <td style="text-align:left;">
-<a href="https://www.msb.unm.edu/mammals" class="external-link uri">https://www.msb.unm.edu/mammals</a>
+<a href="https://www.msb.unm.edu/mammals" class="external-link uri">https://www.msb.unm.edu/mammals</a> <a href="https://ipt.vertnet.org/archive.do?r=msb_mamm" class="external-link uri">https://ipt.vertnet.org/archive.do?r=msb_mamm</a>
 </td>
 <td style="text-align:left;">
 Joseph Cook
 </td>
 <td style="text-align:left;">
-Laura Russell
-</td>
-<td style="text-align:left;">
 David Bloom
-</td>
-<td style="text-align:left;">
-John Wieczorek
 </td>
 <td style="text-align:left;">
 Dusty McDonald
@@ -17978,16 +17968,16 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 Curator of Mammals
 </td>
 <td style="text-align:left;">
-VertNet Programmer
-</td>
-<td style="text-align:left;">
 VertNet Coordinator
-</td>
-<td style="text-align:left;">
-Information Architect
 </td>
 <td style="text-align:left;">
 Arctos Database Programmer
@@ -18011,22 +18001,28 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 <a href="mailto:cookjose@unm.edu" class="email">cookjose@unm.edu</a>
 </td>
 <td style="text-align:left;">
-<a href="mailto:larussell@vertnet.org" class="email">larussell@vertnet.org</a>
-</td>
-<td style="text-align:left;">
 <a href="mailto:dbloom@vertnet.org" class="email">dbloom@vertnet.org</a>
-</td>
-<td style="text-align:left;">
-<a href="mailto:tuco@berkeley.edu" class="email">tuco@berkeley.edu</a>
 </td>
 <td style="text-align:left;">
 <a href="mailto:dlmcdonald@alaska.edu" class="email">dlmcdonald@alaska.edu</a>
 </td>
 <td style="text-align:left;">
 <a href="mailto:jldunnum@unm.edu" class="email">jldunnum@unm.edu</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18055,19 +18051,13 @@ fcbcb214-cd62-4453-af56-b4b49161a261
 MVZ Mammal Collection (Arctos)
 </td>
 <td style="text-align:left;">
-<a href="https://mvz.berkeley.edu/Mammal_Collection.html" class="external-link uri">https://mvz.berkeley.edu/Mammal_Collection.html</a>
+<a href="https://mvz.berkeley.edu/Mammal_Collection.html" class="external-link uri">https://mvz.berkeley.edu/Mammal_Collection.html</a> <a href="https://ipt.vertnet.org/archive.do?r=mvz_mammal" class="external-link uri">https://ipt.vertnet.org/archive.do?r=mvz_mammal</a>
 </td>
 <td style="text-align:left;">
 Chris Conroy
 </td>
 <td style="text-align:left;">
-Laura Russell
-</td>
-<td style="text-align:left;">
 David Bloom
-</td>
-<td style="text-align:left;">
-John Wieczorek
 </td>
 <td style="text-align:left;">
 Dusty McDonald
@@ -18091,16 +18081,16 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 Staff Curator of Mammals
 </td>
 <td style="text-align:left;">
-VertNet Programmer
-</td>
-<td style="text-align:left;">
 VertNet Coordinator
-</td>
-<td style="text-align:left;">
-Information Architect
 </td>
 <td style="text-align:left;">
 Arctos Database Programmer
@@ -18124,16 +18114,16 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 <a href="mailto:ondatra@berkeley.edu" class="email">ondatra@berkeley.edu</a>
 </td>
 <td style="text-align:left;">
-<a href="mailto:larussell@vertnet.org" class="email">larussell@vertnet.org</a>
-</td>
-<td style="text-align:left;">
 <a href="mailto:dbloom@vertnet.org" class="email">dbloom@vertnet.org</a>
-</td>
-<td style="text-align:left;">
-<a href="mailto:tuco@berkeley.edu" class="email">tuco@berkeley.edu</a>
 </td>
 <td style="text-align:left;">
 <a href="mailto:dlmcdonald@alaska.edu" class="email">dlmcdonald@alaska.edu</a>
@@ -18143,6 +18133,12 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:patton@berkeley.edu" class="email">patton@berkeley.edu</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18852,7 +18848,7 @@ NA
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
