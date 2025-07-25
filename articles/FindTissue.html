@@ -130,7 +130,7 @@ identified as being in one of the following genera: <em>Manis</em>,
 <span>                                  <span class="st">"data.dwc:collectionCode"</span>,</span>
 <span>                                  <span class="st">"catalognumber"</span>,</span>
 <span>                                  <span class="st">"data.dwc:preparations"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The query above returned 28092 records from the iDigBio Portal. Here
+<p>The query above returned 28289 records from the iDigBio Portal. Here
 is a preview of what our results look like:</p>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
@@ -372,7 +372,7 @@ specimens that may have cryo-preserved tissue available. We are looking
 in the <a href="https://dwc.tdwg.org/terms/#dwc:preparations" class="external-link">dwc:preparations</a>
 field for this information, but there isn’t a controlled vocabulary in
 use and so the data is not very standard. We can start by summarizing
-the distinct values present in this field for all 28092 records:</p>
+the distinct values present in this field for all 28289 records:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List distinct values for the `preparation` field</span></span>
 <span><span class="va">prepsummary</span> <span class="op">&lt;-</span> <span class="va">records</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -522,6 +522,14 @@ Bone sample; SK
 </td>
 <td style="text-align:right;">
 43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bone sample; Skin
+</td>
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
@@ -1217,16 +1225,16 @@ Skull
 </h3>
 <p>Based on the distinct values above, it seems like we can use the
 search terms “froze,” “freeze,” and “tissue” to narrow our results. We
-do this in the code below.</p>
+do this in the code below and now we have:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Normalize values in `data.dwc:preparations` to be all lowercase; then</span></span>
 <span><span class="co"># filter rows that include our search terms</span></span>
 <span><span class="va">recordsfiltered</span> <span class="op">&lt;-</span> <span class="va">records</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>`data.dwc:preparations` <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_lower</a></span><span class="op">(</span><span class="va">`data.dwc:preparations`</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">'freeze|froze|tissue'</span>, <span class="va">`data.dwc:preparations`</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Now we have
-<code>{r eval=verify_records} as.character(nrow(recordsfiltered))</code>
-records, all of which are displayed in the table here:</p>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">'freeze|froze|tissue'</span>, <span class="va">`data.dwc:preparations`</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">recordsfiltered</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "464"</span></span></code></pre>
+<p>records, all of which are displayed in the table here:</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
 <table class="table table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -16834,7 +16842,7 @@ whole fluid &amp;#124; tissue(s)
 examine the physical specimens or inquire about getting tissue samples,
 we would need to contact each institution. We can figure out who to
 contact using our results.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Count how many records in the data were contributed by each recordset</span></span>
 <span><span class="va">recordtally</span> <span class="op">&lt;-</span> <span class="va">recordsfiltered</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">recordset</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -16955,12 +16963,6 @@ contact_name_8
 contact_name_9
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-contact_name_10
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-contact_name_11
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 contact_role_1
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -16988,12 +16990,6 @@ contact_role_8
 contact_role_9
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-contact_role_10
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-contact_role_11
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 contact_email_1
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
@@ -17019,12 +17015,6 @@ contact_email_8
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 contact_email_9
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-contact_email_10
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-contact_email_11
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 n
@@ -17069,12 +17059,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Data Manager
 </td>
 <td style="text-align:left;">
@@ -17102,12 +17086,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:trombone@amnh.org" class="email">trombone@amnh.org</a>
 </td>
 <td style="text-align:left;">
@@ -17118,12 +17096,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:tuco@berkeley.edu" class="email">tuco@berkeley.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -17181,12 +17153,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Database Technician
 </td>
 <td style="text-align:left;">
@@ -17214,12 +17180,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:bradm@rom.on.ca" class="email">bradm@rom.on.ca</a>
 </td>
 <td style="text-align:left;">
@@ -17230,12 +17190,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:susanw@rom.on.ca" class="email">susanw@rom.on.ca</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -17294,12 +17248,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Biodiversity Informatics Manager
 </td>
 <td style="text-align:left;">
@@ -17327,12 +17275,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:bdim@oeb.harvard.edu" class="email">bdim@oeb.harvard.edu</a>
 </td>
 <td style="text-align:left;">
@@ -17343,12 +17285,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:bhaley@oeb.harvard.edu" class="email">bhaley@oeb.harvard.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -17407,12 +17343,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Bioinformatics Manager
 </td>
 <td style="text-align:left;">
@@ -17420,12 +17350,6 @@ Collection Manager
 </td>
 <td style="text-align:left;">
 Curator
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -17472,12 +17396,6 @@ NA
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 159
 </td>
@@ -17490,7 +17408,7 @@ NA
 LACM Vertebrate Collection
 </td>
 <td style="text-align:left;">
-<a href="https://nhm.org/" class="external-link uri">https://nhm.org/</a>
+<a href="https://nhm.org/" class="external-link uri">https://nhm.org/</a> <a href="https://ipt.vertnet.org/archive.do?r=lacm_verts" class="external-link uri">https://ipt.vertnet.org/archive.do?r=lacm_verts</a>
 </td>
 <td style="text-align:left;">
 William Mertz
@@ -17505,9 +17423,6 @@ Todd Clardy
 Shannen Robson
 </td>
 <td style="text-align:left;">
-Young Ha Suh
-</td>
-<td style="text-align:left;">
 Neftali Camacho
 </td>
 <td style="text-align:left;">
@@ -17515,9 +17430,6 @@ David Bloom
 </td>
 <td style="text-align:left;">
 John Wieczorek
-</td>
-<td style="text-align:left;">
-Kimball Garrett
 </td>
 <td style="text-align:left;">
 Neftali Camacho
@@ -17541,16 +17453,10 @@ Collections Manager
 Collections Manager
 </td>
 <td style="text-align:left;">
-Collections Manager
-</td>
-<td style="text-align:left;">
 VertNet Coordinator
 </td>
 <td style="text-align:left;">
 Information Architect
-</td>
-<td style="text-align:left;">
-Collection Manager - Birds
 </td>
 <td style="text-align:left;">
 Collections Manager - Herpetology
@@ -17571,9 +17477,6 @@ Collections Manager - Mammalogy
 <a href="mailto:srobson@nhm.org" class="email">srobson@nhm.org</a>
 </td>
 <td style="text-align:left;">
-<a href="mailto:ysuh@nhm.org" class="email">ysuh@nhm.org</a>
-</td>
-<td style="text-align:left;">
 <a href="mailto:ncamacho@nhm.org" class="email">ncamacho@nhm.org</a>
 </td>
 <td style="text-align:left;">
@@ -17581,9 +17484,6 @@ Collections Manager - Mammalogy
 </td>
 <td style="text-align:left;">
 <a href="mailto:tuco@berkeley.edu" class="email">tuco@berkeley.edu</a>
-</td>
-<td style="text-align:left;">
-<a href="mailto:kgarrett@nhm.org" class="email">kgarrett@nhm.org</a>
 </td>
 <td style="text-align:left;">
 <a href="mailto:ncamacho@nhm.org" class="email">ncamacho@nhm.org</a>
@@ -17659,25 +17559,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:info@ala.org.au" class="email">info@ala.org.au</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -17771,25 +17653,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:info@ala.org.au" class="email">info@ala.org.au</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -17861,22 +17725,10 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Administrative, Technical point of contact
 </td>
 <td style="text-align:left;">
 Administrative Point of Contact
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -17904,12 +17756,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:robert.bradley@ttu.edu" class="email">robert.bradley@ttu.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -17968,12 +17814,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Curator of Mammals
 </td>
 <td style="text-align:left;">
@@ -18001,12 +17841,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:cookjose@unm.edu" class="email">cookjose@unm.edu</a>
 </td>
 <td style="text-align:left;">
@@ -18017,12 +17851,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:jldunnum@unm.edu" class="email">jldunnum@unm.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18081,12 +17909,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Staff Curator of Mammals
 </td>
 <td style="text-align:left;">
@@ -18114,12 +17936,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:ondatra@berkeley.edu" class="email">ondatra@berkeley.edu</a>
 </td>
 <td style="text-align:left;">
@@ -18133,12 +17949,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:patton@berkeley.edu" class="email">patton@berkeley.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18221,28 +18031,10 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:ummz-mammals-data@umich.edu" class="email">ummz-mammals-data@umich.edu</a>
 </td>
 <td style="text-align:left;">
 <a href="mailto:lsa-it-infra-ipt-admins@umich.edu" class="email">lsa-it-infra-ipt-admins@umich.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18307,12 +18099,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Collection Manager
 </td>
 <td style="text-align:left;">
@@ -18340,12 +18126,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:jebrad@uw.edu" class="email">jebrad@uw.edu</a>
 </td>
 <td style="text-align:left;">
@@ -18356,12 +18136,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:dlmcdonald@alaska.edu" class="email">dlmcdonald@alaska.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18419,12 +18193,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Head, Computer Systems Office
 </td>
 <td style="text-align:left;">
@@ -18452,22 +18220,10 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:lawrence.gall@yale.edu" class="email">lawrence.gall@yale.edu</a>
 </td>
 <td style="text-align:left;">
 <a href="mailto:kristof.zyskowski@yale.edu" class="email">kristof.zyskowski@yale.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18532,12 +18288,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Collections Manager
 </td>
 <td style="text-align:left;">
@@ -18565,12 +18315,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:ddittma@lsu.edu" class="email">ddittma@lsu.edu</a>
 </td>
 <td style="text-align:left;">
@@ -18581,12 +18325,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:tuco@berkeley.edu" class="email">tuco@berkeley.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18645,12 +18383,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Curator
 </td>
 <td style="text-align:left;">
@@ -18678,12 +18410,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:esselstyn@lsu.edu" class="email">esselstyn@lsu.edu</a>
 </td>
 <td style="text-align:left;">
@@ -18694,12 +18420,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:tuco@berkeley.edu" class="email">tuco@berkeley.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
@@ -18758,12 +18478,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 Curator of Mammals
 </td>
 <td style="text-align:left;">
@@ -18791,12 +18505,6 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 <a href="mailto:leolson@alaska.edu" class="email">leolson@alaska.edu</a>
 </td>
 <td style="text-align:left;">
@@ -18816,12 +18524,6 @@ NA
 </td>
 <td style="text-align:left;">
 <a href="mailto:kbhildebrandt@alaska.edu" class="email">kbhildebrandt@alaska.edu</a>
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
 </td>
 <td style="text-align:left;">
 NA
