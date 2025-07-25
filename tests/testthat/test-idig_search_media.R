@@ -36,7 +36,7 @@ test_that("full results for mq queries return", {
   testthat::skip_if_offline()
 
   df <- idig_search_media(mq = mq, limit = 6000)
-  u <- "00003b7d-07fb-4c36-a81a-18f7cde49203"
+  u <- "00001244-7d13-4bc0-beff-f7f271632c98"
   
   expect_that(df, is_a("data.frame"))
   expect_true(nrow(df) > 5000)
