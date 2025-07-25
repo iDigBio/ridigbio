@@ -103,7 +103,7 @@ knitr::kable(prepsummary) %>%
 
 ### Select values to filter on and apply filter
 
-Based on the distinct values above, it seems like we can use the search terms "froze," "freeze," and "tissue" to narrow our results. We do this in the code below.
+Based on the distinct values above, it seems like we can use the search terms "froze," "freeze," and "tissue" to narrow our results. We do this in the code below and now we have:
 
 ```{r eval=verify_records}
 # Normalize values in `data.dwc:preparations` to be all lowercase; then
@@ -111,9 +111,10 @@ Based on the distinct values above, it seems like we can use the search terms "f
 recordsfiltered <- records %>% 
   mutate(`data.dwc:preparations` = str_to_lower(`data.dwc:preparations`)) %>% 
   filter(grepl('freeze|froze|tissue', `data.dwc:preparations`))
+as.character(nrow(recordsfiltered))
 ```
 
-Now we have `{r eval=verify_records} as.character(nrow(recordsfiltered))` records, all of which are displayed in the table here:
+records, all of which are displayed in the table here:
 
 ```{r eval=verify_records, echo = FALSE, results = 'asis'}
 knitr::kable(recordsfiltered) %>% 
